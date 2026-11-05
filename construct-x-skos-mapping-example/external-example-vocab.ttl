@@ -1,0 +1,14 @@
+@prefix ext: <https://example.org/vocab/site-logistics#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://example.org/vocab/site-logistics>
+    a owl:Ontology, skos:ConceptScheme ;
+    dcterms:title "Example External Site Logistics Vocabulary"@en .
+
+ext:LoadingArea a skos:Concept ; skos:prefLabel "Loading Area"@en .
+ext:MaterialHandlingArea a skos:Concept ; skos:prefLabel "Material Handling Area"@en .
+ext:StorageArea a skos:Concept ; skos:prefLabel "Storage Area"@en .
+ext:TemporaryStorageArea a skos:Concept ; skos:prefLabel "Temporary Storage Area"@en .
+ext:ProductionArea a skos:Concept ; skos:prefLabel "Production Area"@en .

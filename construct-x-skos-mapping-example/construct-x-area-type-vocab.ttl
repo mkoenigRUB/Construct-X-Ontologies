@@ -1,0 +1,43 @@
+@prefix conx-area: <https://www.construct-x.org/vocab/construction-site/area-type#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://www.construct-x.org/vocab/construction-site/area-type>
+    a owl:Ontology, skos:ConceptScheme ;
+    dcterms:title "Construct-X Construction Site Area Type Vocabulary"@en .
+
+conx-area:LoadingZone
+    a skos:Concept ;
+    skos:inScheme <https://www.construct-x.org/vocab/construction-site/area-type> ;
+    skos:prefLabel "Loading Zone"@en ;
+    skos:prefLabel "Ladezone"@de ;
+    skos:altLabel "Entladezone"@de ;
+    skos:altLabel "Be- und Entladebereich"@de ;
+    skos:definition "Area used for loading or unloading goods on a construction site."@en .
+
+conx-area:StorageArea
+    a skos:Concept ;
+    skos:inScheme <https://www.construct-x.org/vocab/construction-site/area-type> ;
+    skos:prefLabel "Storage Area"@en ;
+    skos:prefLabel "Lager"@de ;
+    skos:altLabel "Lagerfläche"@de .
+
+conx-area:IntermediateStorageArea
+    a skos:Concept ;
+    skos:inScheme <https://www.construct-x.org/vocab/construction-site/area-type> ;
+    skos:prefLabel "Intermediate Storage Area"@en ;
+    skos:prefLabel "Zwischenlager"@de ;
+    skos:broader conx-area:StorageArea .
+
+conx-area:EquipmentSetupArea
+    a skos:Concept ;
+    skos:inScheme <https://www.construct-x.org/vocab/construction-site/area-type> ;
+    skos:prefLabel "Equipment Setup Area"@en ;
+    skos:prefLabel "Aufstellfläche"@de .
+
+conx-area:WorkArea
+    a skos:Concept ;
+    skos:inScheme <https://www.construct-x.org/vocab/construction-site/area-type> ;
+    skos:prefLabel "Work Area"@en ;
+    skos:prefLabel "Arbeitsbereich"@de .

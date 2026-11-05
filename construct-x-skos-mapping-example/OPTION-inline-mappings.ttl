@@ -1,0 +1,15 @@
+@prefix conx-area: <https://www.construct-x.org/vocab/construction-site/area-type#> .
+@prefix ext: <https://example.org/vocab/site-logistics#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Technisch gültige Alternative:
+# Mapping direkt am Construct-X-Concept.
+# Nachteil: stärkere Kopplung des Core-Vokabulars an externe Vokabulare.
+
+conx-area:LoadingZone
+    skos:exactMatch ext:LoadingArea ;
+    skos:relatedMatch ext:MaterialHandlingArea .
+
+conx-area:StorageArea
+    skos:exactMatch ext:StorageArea ;
+    skos:narrowMatch ext:TemporaryStorageArea .

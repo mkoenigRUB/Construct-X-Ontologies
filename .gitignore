@@ -1,0 +1,19 @@
+# Python (SHACL-Venv)
+.venv/
+__pycache__/
+
+# Maven (z. B. contexts/validation/target)
+target/
+
+# Altlasten (bleiben lokal, werden nicht versioniert)
+*.zip
+*.bak
+
+# Nicht Teil des Ontologie-Pakets (lokal belassen)
+design/
+prompts/
+opencode.json
+third-party-skills.md
+AGENTS.md
+SESSION-LOG-*.md
+STATUS-reverse-converters.md

@@ -1,0 +1,33 @@
+@prefix conx-area: <https://www.construct-x.org/vocab/construction-site/area-type#> .
+@prefix ext: <https://example.org/vocab/site-logistics#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<https://www.construct-x.org/mapping/construction-site/area-type/example-external>
+    a owl:Ontology ;
+    dcterms:title "Construct-X Area Type Mapping to Example External Vocabulary"@en .
+
+# Praktisch gleiche Bedeutung
+conx-area:LoadingZone
+    skos:exactMatch ext:LoadingArea .
+
+# Sehr ähnlich, aber nicht vollständig identisch
+conx-area:WorkArea
+    skos:closeMatch ext:ProductionArea .
+
+# Externer Begriff ist allgemeiner
+conx-area:EquipmentSetupArea
+    skos:broadMatch ext:MaterialHandlingArea .
+
+# Externer Begriff ist spezieller
+conx-area:StorageArea
+    skos:narrowMatch ext:TemporaryStorageArea .
+
+# Fachlich verwandt
+conx-area:LoadingZone
+    skos:relatedMatch ext:MaterialHandlingArea .
+
+# Noch ein exactMatch-Beispiel
+conx-area:StorageArea
+    skos:exactMatch ext:StorageArea .

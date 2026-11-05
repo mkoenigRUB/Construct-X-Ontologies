@@ -1,0 +1,77 @@
+{
+  "@context": "../../construct-x-context.jsonld",
+  "@graph": [
+    {
+      "@id": "https://data.construct-x.org/project/X/schedule/SCH-01",
+      "@type": "conx-cs:ConstructionSchedule",
+      "scheduleType": "https://www.construct-x.org/vocab/construction-schedule/schedule-type#RoughNetwork",
+      "hasActivity": "https://data.construct-x.org/project/X/schedule/ACT-01",
+      "conx-cs:plannedStart": { "@value": "2026-01-05T08:00:00", "@type": "xsd:dateTime" },
+      "conx-cs:plannedFinish": { "@value": "2026-06-30T17:00:00", "@type": "xsd:dateTime" },
+      "conx-cs:description": "Test-Network Rohbau",
+      "conx-cs:hierarchyCode": "SCH-01"
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/schedule/ACT-01",
+      "@type": "conx-cs:Activity",
+      "conx-cs:hasStatus": { "@id": "conx-status:InProgress" },
+      "conx-cs:plannedStart": { "@value": "2026-01-06T08:00:00", "@type": "xsd:dateTime" },
+      "conx-cs:plannedFinish": { "@value": "2026-02-20T17:00:00", "@type": "xsd:dateTime" },
+      "earliestStart": { "@value": "2026-01-06T08:00:00", "@type": "xsd:dateTime" },
+      "isClassifiedByWBSNode": "https://data.construct-x.org/project/X/wbs/WBS-001"
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/delivery/LOAD-001",
+      "@type": "conx-del:LogisticsLoad",
+      "conx-del:hasStatus": { "@id": "conx-drs:InProgress" },
+      "conx-del:plannedStart": { "@value": "2026-03-01T08:00:00", "@type": "xsd:dateTime" },
+      "conx-del:quantity": { "@value": "125.5", "@type": "xsd:decimal" },
+      "conx-del:unitCode": { "@id": "unit:m3" }
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/gaeb/POS-001",
+      "@type": "conx-gaeb:BoQItem",
+      "conx-gaeb:quantity": { "@value": "125.5", "@type": "xsd:decimal" },
+      "conx-gaeb:unitCode": { "@id": "unit:m3" },
+      "conx-gaeb:identifier": "POS-001"
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/progress/CPR-001",
+      "@type": "conx-cpr:ConstructionProgressReport",
+      "activityStatus": "https://www.construct-x.org/vocab/construction-schedule/activity-status#Completed",
+      "conx-cpr:actualStart": { "@value": "2026-01-06T09:00:00", "@type": "xsd:dateTime" },
+      "conx-cpr:actualFinish": { "@value": "2026-02-21T16:00:00", "@type": "xsd:dateTime" }
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/asset/BA-001",
+      "@type": "conx-ba:BuiltAsset",
+      "conx-ba:hierarchyCode": "BA-001",
+      "conx-ba:hasSpatialStructureType": { "@id": "conx-bst:Storey" }
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/site/SITE-001",
+      "@type": "conx-site:ConstructionSite",
+      "conx-site:name": "Bauort Musterprojekt",
+      "conx-site:description": "Test-Bauort"
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/site/GEOM-001",
+      "geo:hasGeometry": [{ "@id": "https://example.org/geom/1" }]
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/notification/NC-001",
+      "@type": "conx-nc:NotificationContent",
+      "taskStatus": "https://www.construct-x.org/vocab/notification-content/task-status#Cancelled",
+      "taskType": "https://www.construct-x.org/vocab/notification-content/task-type#DetailedScheduling",
+      "notificationType": "https://www.construct-x.org/vocab/notification-content/notification-type#TaskRequested",
+      "seeAlso": "https://data.construct-x.org/project/X/schedule/SCH-01"
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/wbs/WBS-001",
+      "conx-sbl:isClassifiedByCBSNode": { "@id": "https://data.construct-x.org/project/X/cbs/CBS-001" },
+      "conx-sbdl:isRepresentedByLBSNode": { "@id": "conx-de-lbs:Storey" },
+      "conx-babl:isRepresentedByLBSNode": { "@id": "conx-de-lbs:Storey" },
+      "conx-babl:isClassifiedByCBSNode": { "@id": "https://data.construct-x.org/project/X/cbs/CBS-001" }
+    }
+  ]
+}

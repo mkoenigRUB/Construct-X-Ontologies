@@ -1,0 +1,87 @@
+graph LR
+    classDef cs fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef bs fill:#fbefff,stroke:#8250df,color:#422457
+    classDef boq fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef cpr fill:#ffeff7,stroke:#bf3989,color:#82505a
+    classDef site fill:#cffafe,stroke:#0e7490,color:#155e75
+    classDef del fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef ba fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+    classDef link fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+
+    subgraph SCHEDULE["Construction Schedule (conx-cs)"]
+        CS["ConstructionSchedule"]:::cs
+        ACT["Activity"]:::cs
+    end
+
+    subgraph BREAKDOWN["Breakdown Structure (conx-bs)"]
+        WBS["WorkBreakdownStructure"]:::bs
+        LBS["LocationBreakdownStructure"]:::bs
+        SBS["SystemBreakdownStructure"]:::bs
+        CBS["CostBreakdownStructure"]:::bs
+        WBSN["WBSNode"]:::bs
+        LBSN["LBSNode"]:::bs
+        SBSN["SBSNode"]:::bs
+        CBSN["CBSNode"]:::bs
+    end
+
+    subgraph BOQ["GAEB BoQ (conx-gaeb)"]
+        BOQ["BillOfQuantities"]:::boq
+        QS["QuantitySplit"]:::boq
+    end
+
+    subgraph PROGRESS["Progress Report (conx-cpr)"]
+        PR["ConstructionProgressReport"]:::cpr
+    end
+
+    subgraph SITE["Construction Site (conx-site)"]
+        SA["SiteArea"]:::site
+        TP["TransferPoint"]:::site
+        AA["AreaAllocation"]:::site
+    end
+
+    subgraph DELIVERY["Construction Delivery (conx-del)"]
+        LR["LogisticsRequirement"]:::del
+        LO["LogisticsOperation"]:::del
+        LI["LogisticsLoadItem"]:::del
+    end
+
+    subgraph BUILTASSET["Built Asset (conx-ba)"]
+        BA["BuiltAsset"]:::ba
+        SSE["SpatialStructureElement"]:::ba
+    end
+
+    %% schedule-breakdown-link (conx-sbl)
+    CS -- "usesWorkBreakdownStructure" --> WBS
+    CS -- "usesLocationBreakdownStructure" --> LBS
+    CS -- "usesSystemBreakdownStructure" --> SBS
+    CS -- "usesCostBreakdownStructure" --> CBS
+    ACT -- "isClassifiedByWBSNode" --> WBSN
+    ACT -- "isPerformedIn" --> LBSN
+    ACT -- "isClassifiedBySBSNode" --> SBSN
+    ACT -- "isClassifiedByCBSNode" --> CBSN
+
+    %% schedule-boq-link (conx-sbq)
+    CS -- "usesBillOfQuantities" --> BOQ
+    QS -- "isAssignedToActivity" --> ACT
+
+    %% schedule-progress-report-link (conx-sprl)
+    PR -- "reportsOnActivity" --> ACT
+
+    %% site-breakdown-link (conx-sbdl)
+    SA -- "isRepresentedByLBSNode" --> LBSN
+
+    %% delivery-site-link (conx-dsl)
+    LO -- "usesTransferPoint" --> TP
+
+    %% delivery-boq-link (conx-dbl)
+    LI -- "fulfillsQuantitySplit" --> QS
+
+    %% schedule-delivery-link (conx-sdl)
+    LR -- "supportsActivity" --> ACT
+
+    %% schedule-site-link (conx-ssl)
+    AA -- "allocatedForActivity" --> ACT
+    SA -- "hasAreaAllocation" --> AA
+
+    %% site-built-asset-link (conx-sbal)
+    SA -- "isLocatedInSpatialStructureElement" --> SSE

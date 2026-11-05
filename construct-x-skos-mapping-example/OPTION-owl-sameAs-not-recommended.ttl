@@ -1,0 +1,10 @@
+@prefix conx-area: <https://www.construct-x.org/vocab/construction-site/area-type#> .
+@prefix ext: <https://example.org/vocab/site-logistics#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Für normale Vokabular-Mappings NICHT empfohlen:
+#
+# conx-area:LoadingZone owl:sameAs ext:LoadingArea .
+#
+# owl:sameAs bedeutet vollständige logische Identität beider RDF-Ressourcen.
+# Für fachliche Vokabular-Entsprechungen ist skos:exactMatch normalerweise geeigneter.

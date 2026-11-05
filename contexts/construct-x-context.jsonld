@@ -1,0 +1,712 @@
+{
+  "@id": "https://www.construct-x.org/context/construct-x/0.1.0",
+  "@context": {
+    "@version": 1.1,
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "vann": "http://purl.org/vocab/vann/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "qudt": "https://qudt.org/vocab/qudt/",
+    "unit": "https://qudt.org/vocab/unit/",
+    "qk": "https://qudt.org/vocab/quantitykind/",
+    "sys": "https://qudt.org/vocab/system/",
+    "conx-cs": "https://www.construct-x.org/ontology/construction-schedule#",
+    "conx-bs": "https://www.construct-x.org/ontology/breakdown-structure#",
+    "conx-gaeb": "https://www.construct-x.org/ontology/gaeb-boq#",
+    "conx-site": "https://www.construct-x.org/ontology/construction-site#",
+    "conx-del": "https://www.construct-x.org/ontology/construction-delivery#",
+    "conx-cpr": "https://www.construct-x.org/ontology/construction-progress-report#",
+    "conx-ba": "https://www.construct-x.org/ontology/built-asset#",
+    "conx-nc": "https://www.construct-x.org/ontology/notification-content#",
+    "conx-sbl": "https://www.construct-x.org/ontology/schedule-breakdown-link#",
+    "conx-sbq": "https://www.construct-x.org/ontology/schedule-boq-link#",
+    "conx-sprl": "https://www.construct-x.org/ontology/schedule-progress-report-link#",
+    "conx-sdl": "https://www.construct-x.org/ontology/schedule-delivery-link#",
+    "conx-ssl": "https://www.construct-x.org/ontology/schedule-site-link#",
+    "conx-sbdl": "https://www.construct-x.org/ontology/site-breakdown-link#",
+    "conx-sbal": "https://www.construct-x.org/ontology/site-built-asset-link#",
+    "conx-dbl": "https://www.construct-x.org/ontology/delivery-boq-link#",
+    "conx-dsl": "https://www.construct-x.org/ontology/delivery-site-link#",
+    "conx-babl": "https://www.construct-x.org/ontology/built-asset-breakdown-link#",
+    "conx-st": "https://www.construct-x.org/vocab/construction-schedule/schedule-type#",
+    "conx-status": "https://www.construct-x.org/vocab/construction-schedule/activity-status#",
+    "conx-prt": "https://www.construct-x.org/vocab/construction-schedule/precedence-relationship-type#",
+    "conx-de-wbs": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#",
+    "conx-de-lbs": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#",
+    "conx-de-sbs": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#",
+    "conx-de-cbs": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#",
+    "conx-pct": "https://www.construct-x.org/vocab/boq-price-component-type#",
+    "conx-area": "https://www.construct-x.org/vocab/construction-site/area-type#",
+    "conx-eq": "https://www.construct-x.org/vocab/construction-site/equipment-type#",
+    "conx-fac": "https://www.construct-x.org/vocab/construction-site/facility-type#",
+    "conx-util": "https://www.construct-x.org/vocab/construction-site/utility-type#",
+    "conx-aas": "https://www.construct-x.org/vocab/construction-site/area-allocation-status#",
+    "conx-dot": "https://www.construct-x.org/vocab/construction-delivery/operation-type#",
+    "conx-drs": "https://www.construct-x.org/vocab/construction-delivery/requirement-status#",
+    "conx-nt": "https://www.construct-x.org/vocab/notification-content/notification-type#",
+    "conx-sr": "https://www.construct-x.org/vocab/notification-content/subject-role#",
+    "conx-ts": "https://www.construct-x.org/vocab/notification-content/task-status#",
+    "conx-tt": "https://www.construct-x.org/vocab/notification-content/task-type#",
+    "conx-bat": "https://www.construct-x.org/vocab/built-asset/asset-type#",
+    "conx-bst": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#",
+    "Activity": "https://www.construct-x.org/ontology/construction-schedule#Activity",
+    "ConstructionSchedule": "https://www.construct-x.org/ontology/construction-schedule#ConstructionSchedule",
+    "Milestone": "https://www.construct-x.org/ontology/construction-schedule#Milestone",
+    "PrecedenceRelationship": "https://www.construct-x.org/ontology/construction-schedule#PrecedenceRelationship",
+    "earliestFinish": "https://www.construct-x.org/ontology/construction-schedule#earliestFinish",
+    "earliestStart": "https://www.construct-x.org/ontology/construction-schedule#earliestStart",
+    "hasActivity": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#hasActivity",
+      "@type": "@id"
+    },
+    "hasMilestone": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#hasMilestone",
+      "@type": "@id"
+    },
+    "hasPredecessor": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#hasPredecessor",
+      "@type": "@id"
+    },
+    "hasSubActivity": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#hasSubActivity",
+      "@type": "@id"
+    },
+    "hasSuccessor": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#hasSuccessor",
+      "@type": "@id"
+    },
+    "isSubActivityOf": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#isSubActivityOf",
+      "@type": "@id"
+    },
+    "lag": "https://www.construct-x.org/ontology/construction-schedule#lag",
+    "latestFinish": "https://www.construct-x.org/ontology/construction-schedule#latestFinish",
+    "latestStart": "https://www.construct-x.org/ontology/construction-schedule#latestStart",
+    "relationshipType": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#relationshipType",
+      "@type": "@id"
+    },
+    "scheduleType": {
+      "@id": "https://www.construct-x.org/ontology/construction-schedule#scheduleType",
+      "@type": "@id"
+    },
+    "Area": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Area",
+    "Assembly": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Assembly",
+    "AssemblyType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#AssemblyType",
+    "Axis": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Axis",
+    "BreakdownNode": "https://www.construct-x.org/ontology/breakdown-structure#BreakdownNode",
+    "BreakdownStructure": "https://www.construct-x.org/ontology/breakdown-structure#BreakdownStructure",
+    "BuildingComponent": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#BuildingComponent",
+    "BuildingComponentType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#BuildingComponentType",
+    "CBSNode": "https://www.construct-x.org/ontology/breakdown-structure#CBSNode",
+    "CBSNodeTypeScheme": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CBSNodeTypeScheme",
+    "ComponentType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#ComponentType",
+    "ConstructionMethod": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#ConstructionMethod",
+    "ConstructionSection": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#ConstructionSection",
+    "CostBreakdownStructure": "https://www.construct-x.org/ontology/breakdown-structure#CostBreakdownStructure",
+    "CostGroup100": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup100",
+    "CostGroup200": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup200",
+    "CostGroup300": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup300",
+    "CostGroup400": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup400",
+    "CostGroup500": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup500",
+    "CostGroup600": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup600",
+    "CostGroup700": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup700",
+    "CostGroup800": "https://www.construct-x.org/vocab/breakdown-structure/de-cbs-node-type#CostGroup800",
+    "DirectionalCarriageway": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#DirectionalCarriageway",
+    "ElementType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#ElementType",
+    "LBSNode": "https://www.construct-x.org/ontology/breakdown-structure#LBSNode",
+    "LBSNodeTypeScheme": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#LBSNodeTypeScheme",
+    "Lane": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Lane",
+    "LocationBreakdownStructure": "https://www.construct-x.org/ontology/breakdown-structure#LocationBreakdownStructure",
+    "MaterialGroup": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#MaterialGroup",
+    "Phase": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#Phase",
+    "Process": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#Process",
+    "ProcessStep": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#ProcessStep",
+    "Room": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Room",
+    "SBSNode": "https://www.construct-x.org/ontology/breakdown-structure#SBSNode",
+    "SBSNodeTypeScheme": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#SBSNodeTypeScheme",
+    "Structure": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Structure",
+    "StructurePart": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#StructurePart",
+    "StructureType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#StructureType",
+    "Subarea": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Subarea",
+    "Subphase": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#Subphase",
+    "System": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#System",
+    "SystemBreakdownStructure": "https://www.construct-x.org/ontology/breakdown-structure#SystemBreakdownStructure",
+    "SystemType": "https://www.construct-x.org/vocab/breakdown-structure/de-sbs-node-type#SystemType",
+    "Trade": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#Trade",
+    "TransverseAxis": "https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#TransverseAxis",
+    "WBSNode": "https://www.construct-x.org/ontology/breakdown-structure#WBSNode",
+    "WBSNodeTypeScheme": "https://www.construct-x.org/vocab/breakdown-structure/de-wbs-node-type#WBSNodeTypeScheme",
+    "WorkBreakdownStructure": "https://www.construct-x.org/ontology/breakdown-structure#WorkBreakdownStructure",
+    "code": "https://www.construct-x.org/ontology/breakdown-structure#code",
+    "hasNode": {
+      "@id": "https://www.construct-x.org/ontology/breakdown-structure#hasNode",
+      "@type": "@id"
+    },
+    "hasRootNode": {
+      "@id": "https://www.construct-x.org/ontology/breakdown-structure#hasRootNode",
+      "@type": "@id"
+    },
+    "hasSubNode": {
+      "@id": "https://www.construct-x.org/ontology/breakdown-structure#hasSubNode",
+      "@type": "@id"
+    },
+    "isSubNodeOf": {
+      "@id": "https://www.construct-x.org/ontology/breakdown-structure#isSubNodeOf",
+      "@type": "@id"
+    },
+    "level": "https://www.construct-x.org/ontology/breakdown-structure#level",
+    "nodeType": {
+      "@id": "https://www.construct-x.org/ontology/breakdown-structure#nodeType",
+      "@type": "@id"
+    },
+    "BillOfQuantities": "https://www.construct-x.org/ontology/gaeb-boq#BillOfQuantities",
+    "BoQComponent": "https://www.construct-x.org/ontology/gaeb-boq#BoQComponent",
+    "BoQItem": "https://www.construct-x.org/ontology/gaeb-boq#BoQItem",
+    "BoQSection": "https://www.construct-x.org/ontology/gaeb-boq#BoQSection",
+    "CatalogAssignableEntity": "https://www.construct-x.org/ontology/gaeb-boq#CatalogAssignableEntity",
+    "CatalogAssignment": "https://www.construct-x.org/ontology/gaeb-boq#CatalogAssignment",
+    "Equipment": "https://www.construct-x.org/vocab/boq-price-component-type#Equipment",
+    "ExternalObjectReference": "https://www.construct-x.org/ontology/gaeb-boq#ExternalObjectReference",
+    "IdentifiedEntity": "https://www.construct-x.org/ontology/gaeb-boq#IdentifiedEntity",
+    "Labor": "https://www.construct-x.org/vocab/boq-price-component-type#Labor",
+    "Materials": "https://www.construct-x.org/vocab/boq-price-component-type#Materials",
+    "Other": "https://www.construct-x.org/vocab/boq-price-component-type#Other",
+    "QuantifiedEntity": "https://www.construct-x.org/ontology/gaeb-boq#QuantifiedEntity",
+    "QuantitySplit": "https://www.construct-x.org/ontology/gaeb-boq#QuantitySplit",
+    "UnitPriceComponent": "https://www.construct-x.org/ontology/gaeb-boq#UnitPriceComponent",
+    "Unknown": "https://www.construct-x.org/vocab/boq-price-component-type#Unknown",
+    "amount": "https://www.construct-x.org/ontology/gaeb-boq#amount",
+    "belongsToSection": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#belongsToSection",
+      "@type": "@id"
+    },
+    "boq-price-component-type": "https://www.construct-x.org/vocab/boq-price-component-type",
+    "catalogIdentifier": "https://www.construct-x.org/ontology/gaeb-boq#catalogIdentifier",
+    "currencyCode": "https://www.construct-x.org/ontology/gaeb-boq#currencyCode",
+    "externalIdentifier": "https://www.construct-x.org/ontology/gaeb-boq#externalIdentifier",
+    "hasCatalogAssignment": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasCatalogAssignment",
+      "@type": "@id"
+    },
+    "hasDirectItem": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasDirectItem",
+      "@type": "@id"
+    },
+    "hasItem": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasItem",
+      "@type": "@id"
+    },
+    "hasPriceComponentType": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasPriceComponentType",
+      "@type": "@id"
+    },
+    "hasQuantitySplit": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasQuantitySplit",
+      "@type": "@id"
+    },
+    "hasRootSection": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasRootSection",
+      "@type": "@id"
+    },
+    "hasSubSection": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasSubSection",
+      "@type": "@id"
+    },
+    "hasUnitPriceComponent": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#hasUnitPriceComponent",
+      "@type": "@id"
+    },
+    "hierarchyLevelName": "https://www.construct-x.org/ontology/gaeb-boq#hierarchyLevelName",
+    "isAssignmentOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isAssignmentOf",
+      "@type": "@id"
+    },
+    "isContainedIn": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isContainedIn",
+      "@type": "@id"
+    },
+    "isDirectItemOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isDirectItemOf",
+      "@type": "@id"
+    },
+    "isQuantitySplitOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isQuantitySplitOf",
+      "@type": "@id"
+    },
+    "isRootSectionOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isRootSectionOf",
+      "@type": "@id"
+    },
+    "isSectionContainedIn": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isSectionContainedIn",
+      "@type": "@id"
+    },
+    "isSubSectionOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isSubSectionOf",
+      "@type": "@id"
+    },
+    "isUnitPriceComponentOf": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#isUnitPriceComponentOf",
+      "@type": "@id"
+    },
+    "levelNumber": "https://www.construct-x.org/ontology/gaeb-boq#levelNumber",
+    "longText": "https://www.construct-x.org/ontology/gaeb-boq#longText",
+    "objectType": "https://www.construct-x.org/ontology/gaeb-boq#objectType",
+    "ordinalIndex": "https://www.construct-x.org/ontology/gaeb-boq#ordinalIndex",
+    "ordinalNumber": "https://www.construct-x.org/ontology/gaeb-boq#ordinalNumber",
+    "positionCounter": "https://www.construct-x.org/ontology/gaeb-boq#positionCounter",
+    "referencesExternalObject": {
+      "@id": "https://www.construct-x.org/ontology/gaeb-boq#referencesExternalObject",
+      "@type": "@id"
+    },
+    "shortText": "https://www.construct-x.org/ontology/gaeb-boq#shortText",
+    "sourceSystem": "https://www.construct-x.org/ontology/gaeb-boq#sourceSystem",
+    "splitsAreExhaustive": "https://www.construct-x.org/ontology/gaeb-boq#splitsAreExhaustive",
+    "totalAmount": "https://www.construct-x.org/ontology/gaeb-boq#totalAmount",
+    "unitPrice": "https://www.construct-x.org/ontology/gaeb-boq#unitPrice",
+    "ConstructionProgressReport": "https://www.construct-x.org/ontology/construction-progress-report#ConstructionProgressReport",
+    "activityStatus": {
+      "@id": "https://www.construct-x.org/ontology/construction-progress-report#activityStatus",
+      "@type": "@id"
+    },
+    "completionPercentage": "https://www.construct-x.org/ontology/construction-progress-report#completionPercentage",
+    "forecastFinish": "https://www.construct-x.org/ontology/construction-progress-report#forecastFinish",
+    "recordedAt": "https://www.construct-x.org/ontology/construction-progress-report#recordedAt",
+    "Actual": "https://www.construct-x.org/vocab/construction-site/area-allocation-status#Actual",
+    "AreaAllocation": "https://www.construct-x.org/ontology/construction-site#AreaAllocation",
+    "ConstructionField": "https://www.construct-x.org/ontology/construction-site#ConstructionField",
+    "ConstructionLift": "https://www.construct-x.org/vocab/construction-site/equipment-type#ConstructionLift",
+    "ConstructionLogisticsArea": "https://www.construct-x.org/ontology/construction-site#ConstructionLogisticsArea",
+    "ConstructionPath": "https://www.construct-x.org/vocab/construction-site/area-type#ConstructionPath",
+    "ConstructionRoad": "https://www.construct-x.org/vocab/construction-site/area-type#ConstructionRoad",
+    "ConstructionSite": "https://www.construct-x.org/ontology/construction-site#ConstructionSite",
+    "ContainerSystem": "https://www.construct-x.org/vocab/construction-site/facility-type#ContainerSystem",
+    "Crane": "https://www.construct-x.org/vocab/construction-site/equipment-type#Crane",
+    "EquipmentSetupArea": "https://www.construct-x.org/vocab/construction-site/area-type#EquipmentSetupArea",
+    "EscapeRoute": "https://www.construct-x.org/vocab/construction-site/area-type#EscapeRoute",
+    "Forklift": "https://www.construct-x.org/vocab/construction-site/equipment-type#Forklift",
+    "GreenArea": "https://www.construct-x.org/vocab/construction-site/area-type#GreenArea",
+    "IndustrialTruck": "https://www.construct-x.org/vocab/construction-site/equipment-type#IndustrialTruck",
+    "IntermediateStorageArea": "https://www.construct-x.org/vocab/construction-site/area-type#IntermediateStorageArea",
+    "LiftingEquipment": "https://www.construct-x.org/vocab/construction-site/equipment-type#LiftingEquipment",
+    "LoadingZone": "https://www.construct-x.org/vocab/construction-site/area-type#LoadingZone",
+    "LocalCoordinateSystem": "https://www.construct-x.org/ontology/construction-site#LocalCoordinateSystem",
+    "MaterialContainer": "https://www.construct-x.org/vocab/construction-site/facility-type#MaterialContainer",
+    "OfficeContainer": "https://www.construct-x.org/vocab/construction-site/facility-type#OfficeContainer",
+    "ParkingArea": "https://www.construct-x.org/vocab/construction-site/area-type#ParkingArea",
+    "Planned": "https://www.construct-x.org/vocab/construction-site/area-allocation-status#Planned",
+    "PreStagingArea": "https://www.construct-x.org/vocab/construction-site/area-type#PreStagingArea",
+    "Released": "https://www.construct-x.org/vocab/construction-site/area-allocation-status#Released",
+    "RestrictedZone": "https://www.construct-x.org/vocab/construction-site/area-type#RestrictedZone",
+    "SanitaryContainer": "https://www.construct-x.org/vocab/construction-site/facility-type#SanitaryContainer",
+    "SiteAccess": "https://www.construct-x.org/vocab/construction-site/area-type#SiteAccess",
+    "SiteArea": "https://www.construct-x.org/ontology/construction-site#SiteArea",
+    "SiteElectricity": "https://www.construct-x.org/vocab/construction-site/utility-type#SiteElectricity",
+    "SiteEquipment": "https://www.construct-x.org/ontology/construction-site#SiteEquipment",
+    "SiteInstallation": "https://www.construct-x.org/ontology/construction-site#SiteInstallation",
+    "SiteWater": "https://www.construct-x.org/vocab/construction-site/utility-type#SiteWater",
+    "StorageAid": "https://www.construct-x.org/vocab/construction-site/equipment-type#StorageAid",
+    "StorageArea": "https://www.construct-x.org/vocab/construction-site/area-type#StorageArea",
+    "TemporarySiteFacility": "https://www.construct-x.org/ontology/construction-site#TemporarySiteFacility",
+    "TrafficRoute": "https://www.construct-x.org/vocab/construction-site/area-type#TrafficRoute",
+    "TransferPoint": "https://www.construct-x.org/ontology/construction-site#TransferPoint",
+    "UtilitySupply": "https://www.construct-x.org/ontology/construction-site#UtilitySupply",
+    "WaitingZone": "https://www.construct-x.org/vocab/construction-site/area-type#WaitingZone",
+    "WorkArea": "https://www.construct-x.org/vocab/construction-site/area-type#WorkArea",
+    "allocatedArea": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#allocatedArea",
+      "@type": "@id"
+    },
+    "allocationStatus": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#allocationStatus",
+      "@type": "@id"
+    },
+    "allocationType": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#allocationType",
+      "@type": "@id"
+    },
+    "area-allocation-status": "https://www.construct-x.org/vocab/construction-site/area-allocation-status",
+    "area-type": "https://www.construct-x.org/vocab/construction-site/area-type",
+    "crsIdentifier": "https://www.construct-x.org/ontology/construction-site#crsIdentifier",
+    "equipment-type": "https://www.construct-x.org/vocab/construction-site/equipment-type",
+    "facility-type": "https://www.construct-x.org/vocab/construction-site/facility-type",
+    "hasAreaAllocation": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasAreaAllocation",
+      "@type": "@id"
+    },
+    "hasAreaType": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasAreaType",
+      "@type": "@id"
+    },
+    "hasConstructionField": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasConstructionField",
+      "@type": "@id"
+    },
+    "hasConstructionSite": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasConstructionSite",
+      "@type": "@id"
+    },
+    "hasEquipmentType": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasEquipmentType",
+      "@type": "@id"
+    },
+    "hasExternalSiteArea": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasExternalSiteArea",
+      "@type": "@id"
+    },
+    "hasFacilityType": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasFacilityType",
+      "@type": "@id"
+    },
+    "hasLocalCoordinateSystem": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasLocalCoordinateSystem",
+      "@type": "@id"
+    },
+    "hasRestrictedZone": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasRestrictedZone",
+      "@type": "@id"
+    },
+    "hasSiteArea": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasSiteArea",
+      "@type": "@id"
+    },
+    "hasSiteInstallation": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasSiteInstallation",
+      "@type": "@id"
+    },
+    "hasUtilityType": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#hasUtilityType",
+      "@type": "@id"
+    },
+    "isConstructionFieldOf": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#isConstructionFieldOf",
+      "@type": "@id"
+    },
+    "isLocatedInArea": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#isLocatedInArea",
+      "@type": "@id"
+    },
+    "isSiteAreaOf": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#isSiteAreaOf",
+      "@type": "@id"
+    },
+    "referencePoint": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#referencePoint",
+      "@type": "@id"
+    },
+    "requiresUtility": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#requiresUtility",
+      "@type": "@id"
+    },
+    "rotationToGridNorth": "https://www.construct-x.org/ontology/construction-site#rotationToGridNorth",
+    "usesSiteArea": {
+      "@id": "https://www.construct-x.org/ontology/construction-site#usesSiteArea",
+      "@type": "@id"
+    },
+    "utility-type": "https://www.construct-x.org/vocab/construction-site/utility-type",
+    "validFrom": "https://www.construct-x.org/ontology/construction-site#validFrom",
+    "validTo": "https://www.construct-x.org/ontology/construction-site#validTo",
+    "Arrival": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Arrival",
+    "CheckIn": "https://www.construct-x.org/vocab/construction-delivery/operation-type#CheckIn",
+    "Confirmed": "https://www.construct-x.org/vocab/construction-delivery/requirement-status#Confirmed",
+    "DeliveryNote": "https://www.construct-x.org/ontology/construction-delivery#DeliveryNote",
+    "Handover": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Handover",
+    "InternalTransport": "https://www.construct-x.org/vocab/construction-delivery/operation-type#InternalTransport",
+    "Lifting": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Lifting",
+    "Loading": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Loading",
+    "LogisticsLoad": "https://www.construct-x.org/ontology/construction-delivery#LogisticsLoad",
+    "LogisticsLoadItem": "https://www.construct-x.org/ontology/construction-delivery#LogisticsLoadItem",
+    "LogisticsOperation": "https://www.construct-x.org/ontology/construction-delivery#LogisticsOperation",
+    "LogisticsRequirement": "https://www.construct-x.org/ontology/construction-delivery#LogisticsRequirement",
+    "Requested": "https://www.construct-x.org/vocab/construction-delivery/requirement-status#Requested",
+    "Scheduled": "https://www.construct-x.org/vocab/construction-delivery/requirement-status#Scheduled",
+    "Unloading": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Unloading",
+    "Waiting": "https://www.construct-x.org/vocab/construction-delivery/operation-type#Waiting",
+    "documentsLoad": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#documentsLoad",
+      "@type": "@id"
+    },
+    "handlesLoad": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#handlesLoad",
+      "@type": "@id"
+    },
+    "hasDeliveryNote": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#hasDeliveryNote",
+      "@type": "@id"
+    },
+    "hasLoadItem": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#hasLoadItem",
+      "@type": "@id"
+    },
+    "hasLogisticsOperation": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#hasLogisticsOperation",
+      "@type": "@id"
+    },
+    "isLoadItemOf": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#isLoadItemOf",
+      "@type": "@id"
+    },
+    "isOperationOf": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#isOperationOf",
+      "@type": "@id"
+    },
+    "issuedAt": "https://www.construct-x.org/ontology/construction-delivery#issuedAt",
+    "operation-type": "https://www.construct-x.org/vocab/construction-delivery/operation-type",
+    "operationType": {
+      "@id": "https://www.construct-x.org/ontology/construction-delivery#operationType",
+      "@type": "@id"
+    },
+    "requestedFinish": "https://www.construct-x.org/ontology/construction-delivery#requestedFinish",
+    "requestedStart": "https://www.construct-x.org/ontology/construction-delivery#requestedStart",
+    "requirement-status": "https://www.construct-x.org/vocab/construction-delivery/requirement-status",
+    "Bridge": "https://www.construct-x.org/vocab/built-asset/asset-type#Bridge",
+    "Building": "https://www.construct-x.org/vocab/built-asset/asset-type#Building",
+    "BuiltAsset": "https://www.construct-x.org/ontology/built-asset#BuiltAsset",
+    "Component": "https://www.construct-x.org/ontology/built-asset#Component",
+    "MarineFacility": "https://www.construct-x.org/vocab/built-asset/asset-type#MarineFacility",
+    "OtherInfrastructure": "https://www.construct-x.org/vocab/built-asset/asset-type#OtherInfrastructure",
+    "Part": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#Part",
+    "Railway": "https://www.construct-x.org/vocab/built-asset/asset-type#Railway",
+    "Road": "https://www.construct-x.org/vocab/built-asset/asset-type#Road",
+    "Section": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#Section",
+    "Segment": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#Segment",
+    "Space": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#Space",
+    "SpatialStructureElement": "https://www.construct-x.org/ontology/built-asset#SpatialStructureElement",
+    "TechnicalSystem": "https://www.construct-x.org/ontology/built-asset#TechnicalSystem",
+    "Tunnel": "https://www.construct-x.org/vocab/built-asset/asset-type#Tunnel",
+    "Zone": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type#Zone",
+    "asset-type": "https://www.construct-x.org/vocab/built-asset/asset-type",
+    "hasAssetType": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasAssetType",
+      "@type": "@id"
+    },
+    "hasPhysicalComponent": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasPhysicalComponent",
+      "@type": "@id"
+    },
+    "hasSpatialStructureElement": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSpatialStructureElement",
+      "@type": "@id"
+    },
+    "hasSpatialStructureType": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSpatialStructureType",
+      "@type": "@id"
+    },
+    "hasSubComponent": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSubComponent",
+      "@type": "@id"
+    },
+    "hasSubSpatialStructureElement": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSubSpatialStructureElement",
+      "@type": "@id"
+    },
+    "hasSubSystem": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSubSystem",
+      "@type": "@id"
+    },
+    "hasSystemComponent": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasSystemComponent",
+      "@type": "@id"
+    },
+    "hasTechnicalSystem": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#hasTechnicalSystem",
+      "@type": "@id"
+    },
+    "isLocatedIn": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isLocatedIn",
+      "@type": "@id"
+    },
+    "isPhysicalComponentOf": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isPhysicalComponentOf",
+      "@type": "@id"
+    },
+    "isSpatialStructureElementOf": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isSpatialStructureElementOf",
+      "@type": "@id"
+    },
+    "isSubComponentOf": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isSubComponentOf",
+      "@type": "@id"
+    },
+    "isSubSpatialStructureElementOf": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isSubSpatialStructureElementOf",
+      "@type": "@id"
+    },
+    "isSubSystemOf": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#isSubSystemOf",
+      "@type": "@id"
+    },
+    "servesBuiltAsset": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#servesBuiltAsset",
+      "@type": "@id"
+    },
+    "servesSpatialStructureElement": {
+      "@id": "https://www.construct-x.org/ontology/built-asset#servesSpatialStructureElement",
+      "@type": "@id"
+    },
+    "spatial-structure-type": "https://www.construct-x.org/vocab/built-asset/spatial-structure-type",
+    "Accepted": "https://www.construct-x.org/vocab/notification-content/task-status#Accepted",
+    "ContextOnly": "https://www.construct-x.org/vocab/notification-content/subject-role#ContextOnly",
+    "DataAvailable": "https://www.construct-x.org/vocab/notification-content/notification-type#DataAvailable",
+    "DataDeleted": "https://www.construct-x.org/vocab/notification-content/notification-type#DataDeleted",
+    "DataUpdated": "https://www.construct-x.org/vocab/notification-content/notification-type#DataUpdated",
+    "DetailedScheduling": "https://www.construct-x.org/vocab/notification-content/task-type#DetailedScheduling",
+    "NotificationContent": "https://www.construct-x.org/ontology/notification-content#NotificationContent",
+    "NotificationTypeScheme": "https://www.construct-x.org/vocab/notification-content/notification-type#NotificationTypeScheme",
+    "PriceCalculation": "https://www.construct-x.org/vocab/notification-content/task-type#PriceCalculation",
+    "ProgressReporting": "https://www.construct-x.org/vocab/notification-content/task-type#ProgressReporting",
+    "Rejected": "https://www.construct-x.org/vocab/notification-content/task-status#Rejected",
+    "ResultAvailable": "https://www.construct-x.org/vocab/notification-content/notification-type#ResultAvailable",
+    "SubjectAssignment": "https://www.construct-x.org/ontology/notification-content#SubjectAssignment",
+    "SubjectRoleScheme": "https://www.construct-x.org/vocab/notification-content/subject-role#SubjectRoleScheme",
+    "Target": "https://www.construct-x.org/vocab/notification-content/subject-role#Target",
+    "TaskRequested": "https://www.construct-x.org/vocab/notification-content/notification-type#TaskRequested",
+    "TaskStatusChanged": "https://www.construct-x.org/vocab/notification-content/notification-type#TaskStatusChanged",
+    "TaskStatusScheme": "https://www.construct-x.org/vocab/notification-content/task-status#TaskStatusScheme",
+    "TaskTypeScheme": "https://www.construct-x.org/vocab/notification-content/task-type#TaskTypeScheme",
+    "assignedResource": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#assignedResource",
+      "@type": "@id"
+    },
+    "contextResource": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#contextResource",
+      "@type": "@id"
+    },
+    "hasResult": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#hasResult",
+      "@type": "@id"
+    },
+    "hasSubjectAssignment": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#hasSubjectAssignment",
+      "@type": "@id"
+    },
+    "notificationType": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#notificationType",
+      "@type": "@id"
+    },
+    "subjectRole": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#subjectRole",
+      "@type": "@id"
+    },
+    "taskStatus": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#taskStatus",
+      "@type": "@id"
+    },
+    "taskType": {
+      "@id": "https://www.construct-x.org/ontology/notification-content#taskType",
+      "@type": "@id"
+    },
+    "isClassifiedBySBSNode": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#isClassifiedBySBSNode",
+      "@type": "@id"
+    },
+    "isClassifiedByWBSNode": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#isClassifiedByWBSNode",
+      "@type": "@id"
+    },
+    "isPerformedIn": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#isPerformedIn",
+      "@type": "@id"
+    },
+    "usesBreakdownStructure": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#usesBreakdownStructure",
+      "@type": "@id"
+    },
+    "usesCostBreakdownStructure": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#usesCostBreakdownStructure",
+      "@type": "@id"
+    },
+    "usesLocationBreakdownStructure": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#usesLocationBreakdownStructure",
+      "@type": "@id"
+    },
+    "usesSystemBreakdownStructure": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#usesSystemBreakdownStructure",
+      "@type": "@id"
+    },
+    "usesWorkBreakdownStructure": {
+      "@id": "https://www.construct-x.org/ontology/schedule-breakdown-link#usesWorkBreakdownStructure",
+      "@type": "@id"
+    },
+    "isAssignedToActivity": {
+      "@id": "https://www.construct-x.org/ontology/schedule-boq-link#isAssignedToActivity",
+      "@type": "@id"
+    },
+    "usesBillOfQuantities": {
+      "@id": "https://www.construct-x.org/ontology/schedule-boq-link#usesBillOfQuantities",
+      "@type": "@id"
+    },
+    "reportsOnActivity": {
+      "@id": "https://www.construct-x.org/ontology/schedule-progress-report-link#reportsOnActivity",
+      "@type": "@id"
+    },
+    "representsSiteArea": {
+      "@id": "https://www.construct-x.org/ontology/site-breakdown-link#representsSiteArea",
+      "@type": "@id"
+    },
+    "usesTransferPoint": {
+      "@id": "https://www.construct-x.org/ontology/delivery-site-link#usesTransferPoint",
+      "@type": "@id"
+    },
+    "fulfillsQuantitySplit": {
+      "@id": "https://www.construct-x.org/ontology/delivery-boq-link#fulfillsQuantitySplit",
+      "@type": "@id"
+    },
+    "requiresLogisticsRequirement": {
+      "@id": "https://www.construct-x.org/ontology/schedule-delivery-link#requiresLogisticsRequirement",
+      "@type": "@id"
+    },
+    "supportsActivity": {
+      "@id": "https://www.construct-x.org/ontology/schedule-delivery-link#supportsActivity",
+      "@type": "@id"
+    },
+    "allocatedForActivity": {
+      "@id": "https://www.construct-x.org/ontology/schedule-site-link#allocatedForActivity",
+      "@type": "@id"
+    },
+    "requiresAreaAllocation": {
+      "@id": "https://www.construct-x.org/ontology/schedule-site-link#requiresAreaAllocation",
+      "@type": "@id"
+    },
+    "containsBuiltAsset": {
+      "@id": "https://www.construct-x.org/ontology/site-built-asset-link#containsBuiltAsset",
+      "@type": "@id"
+    },
+    "containsSiteArea": {
+      "@id": "https://www.construct-x.org/ontology/site-built-asset-link#containsSiteArea",
+      "@type": "@id"
+    },
+    "isLocatedInConstructionField": {
+      "@id": "https://www.construct-x.org/ontology/site-built-asset-link#isLocatedInConstructionField",
+      "@type": "@id"
+    },
+    "isLocatedInSpatialStructureElement": {
+      "@id": "https://www.construct-x.org/ontology/site-built-asset-link#isLocatedInSpatialStructureElement",
+      "@type": "@id"
+    },
+    "isRepresentedBySBSNode": {
+      "@id": "https://www.construct-x.org/ontology/built-asset-breakdown-link#isRepresentedBySBSNode",
+      "@type": "@id"
+    },
+    "representsSpatialStructureElement": {
+      "@id": "https://www.construct-x.org/ontology/built-asset-breakdown-link#representsSpatialStructureElement",
+      "@type": "@id"
+    },
+    "representsTechnicalSystem": {
+      "@id": "https://www.construct-x.org/ontology/built-asset-breakdown-link#representsTechnicalSystem",
+      "@type": "@id"
+    },
+    "seeAlso": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+      "@type": "@id"
+    }
+  }
+}

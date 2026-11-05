@@ -1,0 +1,692 @@
+{
+  "id": "https://data.general-contractor.example/project/PROJECT-X/exchange/package/PCS-001",
+  "identifier": "PCS-001",
+  "semanticModel": {
+    "type": "PlanningContext",
+    "conformsTo": [
+      "https://www.construct-x.org/shapes/construction-schedule/precedence-relationship-type/0.1.0",
+      "https://www.construct-x.org/shapes/construction-schedule/schedule-type/0.1.0",
+      "https://www.construct-x.org/shapes/construction-site/area-allocation/0.1.0",
+      "https://www.construct-x.org/shapes/construction-site/vocabularies/0.1.0",
+      "https://www.construct-x.org/shapes/construction-schedule/core/0.5.0",
+      "https://www.construct-x.org/ontology/schedule-site-link/0.1.0",
+      "https://www.construct-x.org/shapes/gaeb-boq/core/0.5.0",
+      "https://www.construct-x.org/ontology/breakdown-structure/0.7.0",
+      "https://www.construct-x.org/ontology/schedule-boq-link/0.2.1",
+      "https://www.construct-x.org/ontology/site-breakdown-link/0.1.0",
+      "https://data.construct-x-demo.example/extension/technical-context/0.1.0",
+      "https://data.construct-x-demo.example/extension/technical-context/shapes/0.1.0",
+      "https://www.construct-x.org/ontology/gaeb-boq/0.5.0",
+      "https://www.construct-x.org/ontology/construction-schedule/0.5.0",
+      "https://www.construct-x.org/ontology/construction-site/0.2.0",
+      "https://www.construct-x.org/shapes/construction-site/site-logistics/0.1.0",
+      "https://www.construct-x.org/shapes/schedule-boq-link/core/0.2.1",
+      "https://www.construct-x.org/shapes/construction-schedule/activity-status/0.1.0",
+      "https://www.construct-x.org/shapes/schedule-site-link/core/0.1.0",
+      "https://www.construct-x.org/shapes/schedule-breakdown-link/core/0.6.0",
+      "https://www.construct-x.org/ontology/schedule-breakdown-link/0.6.0",
+      "https://www.construct-x.org/shapes/site-breakdown-link/core/0.1.0",
+      "https://www.construct-x.org/shapes/breakdown-structure/core/0.7.0"
+    ]
+  },
+  "content": {
+    "entities": [
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/LIFT-SETUP-01",
+        "type": "conx-site:SiteArea",
+        "conx-site:hasAreaAllocation": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-LIFT-SETUP",
+        "conx-site:hasAreaType": "conx-area:EquipmentSetupArea",
+        "conx-site:identifier": "LIFT-SETUP-01",
+        "conx-site:isSiteAreaOf": "https://data.general-contractor.example/project/PROJECT-X/site/field/FIELD-BUILDING",
+        "conx-site:name": "Aufstellfläche Bauaufzug",
+        "rdfs:label": {
+          "value": "Aufstellfläche Bauaufzug",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/servedLevels",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "servedLevels",
+        "rdf:value": "EG; 1. OG; 2. OG; 3. OG; 4. OG; 5. OG",
+        "rdfs:label": {
+          "value": "Bediente Ebenen",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/boq/catalog-assignment/CA-STLB-01",
+        "type": "conx-gaeb:CatalogAssignment",
+        "conx-gaeb:catalogIdentifier": "STLB-Bau",
+        "conx-gaeb:identifier": "CA-STLB-01",
+        "conx-gaeb:isAssignmentOf": "https://data.general-contractor.example/project/PROJECT-X/boq/item/03.02.010",
+        "conx-gaeb:name": "STLB-Bau-Referenz Doppelboden",
+        "conx-gaeb:referencesExternalObject": "https://data.general-contractor.example/project/PROJECT-X/boq/external-reference/STLB-REF-01"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/distanceToLift",
+        "type": "cxext:Attribute",
+        "dcterms:description": {
+          "value": "Synthetischer planerischer Abstand zwischen Außenlagerfläche und Bauaufzug; mit der Demonstratorgeometrie konsistent.",
+          "language": "de"
+        },
+        "dcterms:identifier": "distanceToLift",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "25.0",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Entfernung zum Bauaufzug",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/boq/split/QS-03.02.010-A100",
+        "type": "conx-gaeb:QuantitySplit",
+        "conx-gaeb:identifier": "QS-03.02.010-A100",
+        "conx-gaeb:isQuantitySplitOf": "https://data.general-contractor.example/project/PROJECT-X/boq/item/03.02.010",
+        "conx-gaeb:name": "Menge Doppelboden für Aktivität A100",
+        "conx-gaeb:quantity": {
+          "value": "300.0",
+          "datatype": "xsd:decimal"
+        },
+        "conx-gaeb:unitCode": "m2",
+        "conx-sbq:isAssignedToActivity": "https://data.general-contractor.example/project/PROJECT-X/activity/A100"
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/manufacturer",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "manufacturer",
+        "rdf:value": "Beispielhersteller (Demonstratorwert)",
+        "rdfs:label": {
+          "value": "Hersteller",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/exchange/package/PCS-001",
+        "type": "dcat:Dataset",
+        "dcterms:conformsTo": [
+          "https://www.construct-x.org/shapes/construction-schedule/precedence-relationship-type/0.1.0",
+          "https://www.construct-x.org/shapes/construction-schedule/schedule-type/0.1.0",
+          "https://www.construct-x.org/shapes/construction-site/area-allocation/0.1.0",
+          "https://www.construct-x.org/shapes/construction-site/vocabularies/0.1.0",
+          "https://www.construct-x.org/shapes/construction-schedule/core/0.5.0",
+          "https://www.construct-x.org/ontology/schedule-site-link/0.1.0",
+          "https://www.construct-x.org/shapes/gaeb-boq/core/0.5.0",
+          "https://www.construct-x.org/ontology/breakdown-structure/0.7.0",
+          "https://www.construct-x.org/ontology/schedule-boq-link/0.2.1",
+          "https://www.construct-x.org/ontology/site-breakdown-link/0.1.0",
+          "https://data.construct-x-demo.example/extension/technical-context/0.1.0",
+          "https://data.construct-x-demo.example/extension/technical-context/shapes/0.1.0",
+          "https://www.construct-x.org/ontology/gaeb-boq/0.5.0",
+          "https://www.construct-x.org/ontology/construction-schedule/0.5.0",
+          "https://www.construct-x.org/ontology/construction-site/0.2.0",
+          "https://www.construct-x.org/shapes/construction-site/site-logistics/0.1.0",
+          "https://www.construct-x.org/shapes/schedule-boq-link/core/0.2.1",
+          "https://www.construct-x.org/shapes/construction-schedule/activity-status/0.1.0",
+          "https://www.construct-x.org/shapes/schedule-site-link/core/0.1.0",
+          "https://www.construct-x.org/shapes/schedule-breakdown-link/core/0.6.0",
+          "https://www.construct-x.org/ontology/schedule-breakdown-link/0.6.0",
+          "https://www.construct-x.org/shapes/site-breakdown-link/core/0.1.0",
+          "https://www.construct-x.org/shapes/breakdown-structure/core/0.7.0"
+        ],
+        "dcterms:description": {
+          "value": "Semantischer Planungskontext für die Feinterminplanung der Aktivität A100 mit Vorgängerinformation, WBS/LBS-Kontext, LV-Menge sowie zeitbezogenen Baustellenflächen und Bauaufzug.",
+          "language": "de"
+        },
+        "dcterms:identifier": "PCS-001",
+        "dcterms:title": {
+          "value": "Planning Context – Feinterminplanung Doppelboden",
+          "language": "de"
+        },
+        "prov:generatedAtTime": {
+          "value": "2026-10-29T14:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "prov:wasDerivedFrom": "https://data.general-contractor.example/project/PROJECT-X/schedule/SCH-01"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site/logistics-area/CLA-01",
+        "type": "conx-site:ConstructionLogisticsArea",
+        "conx-site:hasConstructionSite": "https://data.general-contractor.example/project/PROJECT-X/site/CS-01",
+        "conx-site:hasExternalSiteArea": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01",
+        "conx-site:identifier": "CLA-01",
+        "conx-site:name": "Baulogistikareal Project-X",
+        "rdfs:label": {
+          "value": "Baulogistikareal Project-X",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/serialNumber",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "serialNumber",
+        "rdf:value": "DEMO-LIFT-01",
+        "rdfs:label": {
+          "value": "Seriennummer",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/clearDoorWidth",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "clearDoorWidth",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "1.30",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Lichte Türbreite",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/weatherProtection",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "weatherProtection",
+        "rdf:value": "nicht überdacht",
+        "rdfs:label": {
+          "value": "Witterungsschutz",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/liftingSpeed",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "liftingSpeed",
+        "rdf:value": "24 m/min",
+        "rdfs:label": {
+          "value": "Fördergeschwindigkeit",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG",
+        "type": "conx-bs:LBSNode",
+        "conx-bs:identifier": "LBS-05OG",
+        "conx-bs:isSubNodeOf": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-BUILDING",
+        "conx-bs:name": "5. Obergeschoss"
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/passengerTransport",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "passengerTransport",
+        "rdf:value": true,
+        "rdfs:label": {
+          "value": "Personenbeförderung zulässig",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/usableStorageArea",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "usableStorageArea",
+        "qudt:unit": "unit:M2",
+        "rdf:value": {
+          "value": "50.0",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Nutzbare Lagerfläche",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/WBS-01",
+        "type": "conx-bs:WorkBreakdownStructure",
+        "conx-bs:hasNode": [
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-DOPPELBODEN",
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-AUSBAU",
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-TGA-BODENHOHLRAUM"
+        ],
+        "conx-bs:hasRootNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-AUSBAU",
+        "conx-bs:identifier": "WBS-01",
+        "conx-bs:name": "Arbeitsgliederung Project-X"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/boq/item/03.02.010",
+        "type": "conx-gaeb:BoQItem",
+        "conx-gaeb:hasCatalogAssignment": "https://data.general-contractor.example/project/PROJECT-X/boq/catalog-assignment/CA-STLB-01",
+        "conx-gaeb:hasQuantitySplit": "https://data.general-contractor.example/project/PROJECT-X/boq/split/QS-03.02.010-A100",
+        "conx-gaeb:identifier": "03.02.010",
+        "conx-gaeb:isDirectItemOf": "https://data.general-contractor.example/project/PROJECT-X/boq/BOQ-01",
+        "conx-gaeb:longText": {
+          "value": "Doppelboden nach DIN EN 12825 im Raster 600 x 600 mm, Gesamtbauhöhe über 200 bis 300 mm, Elementklasse 1. Feuerwiderstand F 30 nach DIN 4102-2 aus dem Bodenhohlraum zum Schutz des darüberliegenden Raums. Unterkonstruktion aus Einzelstützen aus verzinktem Stahl, auf Beton befestigt. Doppelbodenplatten aus Holzwerkstoff mit Oberbelag aus Velours.",
+          "language": "de"
+        },
+        "conx-gaeb:name": "Doppelboden liefern und einbauen",
+        "conx-gaeb:ordinalNumber": "03.02.010",
+        "conx-gaeb:quantity": {
+          "value": "300.0",
+          "datatype": "xsd:decimal"
+        },
+        "conx-gaeb:shortText": "Doppelboden Bau-H 200-300 mm Kl.1 F30 Einzelstützen, UK Stahl verzinkt, Holzwerkstoffplatte, Velours",
+        "conx-gaeb:splitsAreExhaustive": true,
+        "conx-gaeb:unitCode": "m2",
+        "dcterms:source": "Demonstratortext; inhaltlich an STLB-Bau/Trockenbauarbeiten/Doppelböden angelehnt, kein wörtlicher STLB-Bau-Originaltext."
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/WORK-05OG",
+        "type": "conx-site:SiteArea",
+        "conx-sbdl:isRepresentedByLBSNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG",
+        "conx-site:hasAreaAllocation": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-WORK",
+        "conx-site:hasAreaType": "conx-area:WorkArea",
+        "conx-site:identifier": "WORK-05OG",
+        "conx-site:isSiteAreaOf": "https://data.general-contractor.example/project/PROJECT-X/site/field/FIELD-BUILDING",
+        "conx-site:name": "Arbeitsbereich Doppelboden – 5. OG",
+        "rdfs:label": {
+          "value": "Arbeitsbereich Doppelboden – 5. OG",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/clearDoorHeight",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "clearDoorHeight",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "2.00",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Lichte Türhöhe",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/schedule/SCH-01",
+        "type": "conx-cs:ConstructionSchedule",
+        "conx-cs:hasActivity": [
+          "https://data.general-contractor.example/project/PROJECT-X/activity/A090",
+          "https://data.general-contractor.example/project/PROJECT-X/activity/A100"
+        ],
+        "conx-cs:identifier": "SCH-01",
+        "conx-cs:name": "Rahmenterminplan Project-X",
+        "conx-cs:scheduleType": "conx-st:FrameNetwork",
+        "conx-sbl:usesLocationBreakdownStructure": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/LBS-01",
+        "conx-sbl:usesWorkBreakdownStructure": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/WBS-01",
+        "conx-sbq:usesBillOfQuantities": "https://data.general-contractor.example/project/PROJECT-X/boq/BOQ-01"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/palletTruckAccess",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "palletTruckAccess",
+        "rdf:value": true,
+        "rdfs:label": {
+          "value": "Hubwagen-Zugang",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site/field/FIELD-BUILDING",
+        "type": "conx-site:ConstructionField",
+        "conx-site:hasSiteArea": [
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/WORK-05OG",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/LIFT-SETUP-01"
+        ],
+        "conx-site:identifier": "FIELD-BUILDING",
+        "conx-site:isConstructionFieldOf": "https://data.general-contractor.example/project/PROJECT-X/site/CS-01",
+        "conx-site:name": "Baufeld Gebäude",
+        "rdfs:label": {
+          "value": "Baufeld Gebäude",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/model",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "model",
+        "rdf:value": "CL-1500 (Demonstratorwert)",
+        "rdfs:label": {
+          "value": "Modell / Typ",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/maximumLiftHeight",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "maximumLiftHeight",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "50.0",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Maximale Förderhöhe",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/platformWidth",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "platformWidth",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "1.45",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Nutzbare Plattformbreite",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-WORK",
+        "type": "conx-site:AreaAllocation",
+        "conx-site:allocatedArea": "https://data.general-contractor.example/project/PROJECT-X/site-area/WORK-05OG",
+        "conx-site:allocationStatus": "conx-aas:Released",
+        "conx-site:allocationType": "conx-area:WorkArea",
+        "conx-site:identifier": "ALLOC-A100-WORK",
+        "conx-site:name": "Arbeitsbereich für A100",
+        "conx-site:validFrom": {
+          "value": "2027-03-08T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-site:validTo": {
+          "value": "2027-03-19T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-ssl:allocatedForActivity": "https://data.general-contractor.example/project/PROJECT-X/activity/A100"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01",
+        "type": "conx-site:SiteArea",
+        "conx-site:description": "Externe Lagerfläche für die Zwischenlagerung von Doppelbodenmaterial.",
+        "conx-site:hasAreaAllocation": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-STORAGE",
+        "conx-site:hasAreaType": "conx-area:StorageArea",
+        "conx-site:identifier": "STORAGE-EXT-01",
+        "conx-site:name": "Außenlagerfläche für Doppelbodenmaterial",
+        "cxext:hasAttribute": [
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/weatherProtection",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/surfaceCondition",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/truckAccess",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/usableStorageArea",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/palletTruckAccess",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/distanceToLift",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/usagePurpose"
+        ],
+        "dcterms:description": {
+          "value": "Externe Lagerfläche für die Zwischenlagerung von Doppelbodenmaterial.",
+          "language": "de"
+        },
+        "dcterms:provenance": {
+          "value": "Flächenparameter sind synthetische Demonstratorwerte und keine Vermessungs- oder Bestandsdaten.",
+          "language": "de"
+        },
+        "rdfs:label": {
+          "value": "Außenlagerfläche für Doppelbodenmaterial",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/truckAccess",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "truckAccess",
+        "rdf:value": true,
+        "rdfs:label": {
+          "value": "Lkw-Zugang",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/LBS-01",
+        "type": "conx-bs:LocationBreakdownStructure",
+        "conx-bs:hasNode": [
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG",
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-BUILDING"
+        ],
+        "conx-bs:hasRootNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-BUILDING",
+        "conx-bs:identifier": "LBS-01",
+        "conx-bs:name": "Räumliche Gliederung Project-X"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-LIFT-SETUP",
+        "type": "conx-site:AreaAllocation",
+        "conx-site:allocatedArea": "https://data.general-contractor.example/project/PROJECT-X/site-area/LIFT-SETUP-01",
+        "conx-site:allocationStatus": "conx-aas:Released",
+        "conx-site:allocationType": "conx-area:EquipmentSetupArea",
+        "conx-site:identifier": "ALLOC-A100-LIFT-SETUP",
+        "conx-site:name": "Aufstellfläche Bauaufzug für A100",
+        "conx-site:validFrom": {
+          "value": "2027-03-08T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-site:validTo": {
+          "value": "2027-03-19T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-ssl:allocatedForActivity": "https://data.general-contractor.example/project/PROJECT-X/activity/A100"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/boq/BOQ-01",
+        "type": "conx-gaeb:BillOfQuantities",
+        "conx-gaeb:hasDirectItem": "https://data.general-contractor.example/project/PROJECT-X/boq/item/03.02.010",
+        "conx-gaeb:identifier": "BOQ-01",
+        "conx-gaeb:name": "Leistungsverzeichnis Ausbau"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/activity/A090",
+        "type": "conx-cs:Activity",
+        "conx-cs:description": "Vorgängeraktivität; ausschließlich als Kontextinformation für die Feinterminplanung.",
+        "conx-cs:hasStatus": "conx-status:Planned",
+        "conx-cs:identifier": "A090",
+        "conx-cs:name": "TGA-Rohinstallation im Bodenhohlraum abschließen",
+        "conx-cs:plannedFinish": {
+          "value": "2027-03-05T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-cs:plannedStart": {
+          "value": "2027-03-01T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-sbl:isClassifiedByWBSNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-TGA-BODENHOHLRAUM",
+        "conx-sbl:isPerformedIn": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-AUSBAU",
+        "type": "conx-bs:WBSNode",
+        "conx-bs:hasSubNode": [
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-TGA-BODENHOHLRAUM",
+          "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-DOPPELBODEN"
+        ],
+        "conx-bs:identifier": "WBS-AUSBAU",
+        "conx-bs:name": "Ausbau"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/surfaceCondition",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "surfaceCondition",
+        "rdf:value": "befestigt und eben",
+        "rdfs:label": {
+          "value": "Untergrund",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/activity/A100",
+        "type": "conx-cs:Activity",
+        "conx-cs:description": "Rahmenaktivität, die durch den Nachunternehmer feinterminlich detailliert werden soll.",
+        "conx-cs:hasStatus": "conx-status:Planned",
+        "conx-cs:identifier": "A100",
+        "conx-cs:name": "Einbau eines Doppelbodens",
+        "conx-cs:plannedFinish": {
+          "value": "2027-03-19T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-cs:plannedStart": {
+          "value": "2027-03-08T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-sbl:isClassifiedByWBSNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-DOPPELBODEN",
+        "conx-sbl:isPerformedIn": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG",
+        "conx-ssl:requiresAreaAllocation": [
+          "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-LIFT-SETUP",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-STORAGE",
+          "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-WORK"
+        ]
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01",
+        "type": [
+          "conx-site:SiteEquipment",
+          "conx-site:SiteInstallation"
+        ],
+        "conx-site:description": "Bauaufzug für die Feinterminplanung und Ausführung der Doppelbodenarbeiten.",
+        "conx-site:hasEquipmentType": "conx-eq:ConstructionLift",
+        "conx-site:identifier": "LIFT-01",
+        "conx-site:name": "Bauaufzug 1",
+        "conx-site:usesSiteArea": "https://data.general-contractor.example/project/PROJECT-X/site-area/LIFT-SETUP-01",
+        "cxext:availableFrom": {
+          "value": "2027-03-08T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "cxext:availableUntil": {
+          "value": "2027-03-19T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "cxext:hasAttribute": [
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/platformLength",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/clearDoorWidth",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/servedLevels",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/platformWidth",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/clearDoorHeight",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/loadCapacity",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/maximumLiftHeight",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/passengerTransport",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/manufacturer",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/liftingSpeed",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/serialNumber",
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/model"
+        ],
+        "dcterms:description": {
+          "value": "Bauaufzug, der für die Feinterminplanung und Ausführung der Doppelbodenarbeiten genutzt werden kann.",
+          "language": "de"
+        },
+        "dcterms:provenance": {
+          "value": "Technische Kennwerte sind synthetische Demonstratorwerte und keine Hersteller- oder Bestandsdaten.",
+          "language": "de"
+        },
+        "rdfs:label": {
+          "value": "Bauaufzug 1",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-DOPPELBODEN",
+        "type": "conx-bs:WBSNode",
+        "conx-bs:identifier": "WBS-DOPPELBODEN",
+        "conx-bs:isSubNodeOf": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-AUSBAU",
+        "conx-bs:name": "Doppelbodenarbeiten"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area-allocation/ALLOC-A100-STORAGE",
+        "type": "conx-site:AreaAllocation",
+        "conx-site:allocatedArea": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01",
+        "conx-site:allocationStatus": "conx-aas:Released",
+        "conx-site:allocationType": "conx-area:StorageArea",
+        "conx-site:identifier": "ALLOC-A100-STORAGE",
+        "conx-site:name": "Außenlagerfläche für A100",
+        "conx-site:validFrom": {
+          "value": "2027-03-08T07:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-site:validTo": {
+          "value": "2027-03-19T16:00:00+01:00",
+          "datatype": "xsd:dateTime"
+        },
+        "conx-ssl:allocatedForActivity": "https://data.general-contractor.example/project/PROJECT-X/activity/A100"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-TGA-BODENHOHLRAUM",
+        "type": "conx-bs:WBSNode",
+        "conx-bs:identifier": "WBS-TGA-BODENHOHLRAUM",
+        "conx-bs:isSubNodeOf": "https://data.general-contractor.example/project/PROJECT-X/breakdown/wbs/node/WBS-AUSBAU",
+        "conx-bs:name": "TGA-Rohinstallation Bodenhohlraum"
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/loadCapacity",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "loadCapacity",
+        "qudt:unit": "unit:KiloGM",
+        "rdf:value": {
+          "value": "1500.0",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Nutzlast",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/boq/external-reference/STLB-REF-01",
+        "type": "conx-gaeb:ExternalObjectReference",
+        "conx-gaeb:externalIdentifier": "DEMO-STLB-DOPPELBODEN",
+        "conx-gaeb:identifier": "STLB-REF-01",
+        "conx-gaeb:name": "STLB-Bau Doppelboden – Demonstratorreferenz",
+        "conx-gaeb:objectType": "Leistungsbeschreibung",
+        "conx-gaeb:sourceSystem": "STLB-Bau",
+        "dcterms:description": {
+          "value": "Demonstratorreferenz auf STLB-Bau. Es wird bewusst keine offizielle STLB-Bau-Schlüsselnummer behauptet, da im bereitgestellten GAEB-BoQ-Paket keine konkrete STLB-Bau-Schlüsselnummer für diese Doppelbodenleistung enthalten ist.",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site/CS-01",
+        "type": "conx-site:ConstructionSite",
+        "conx-site:hasConstructionField": "https://data.general-contractor.example/project/PROJECT-X/site/field/FIELD-BUILDING",
+        "conx-site:hasSiteInstallation": [
+          "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01"
+        ],
+        "conx-site:identifier": "CS-01",
+        "conx-site:name": "Baustelle Project-X",
+        "rdfs:label": {
+          "value": "Baustelle Project-X",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-BUILDING",
+        "type": "conx-bs:LBSNode",
+        "conx-bs:hasSubNode": "https://data.general-contractor.example/project/PROJECT-X/breakdown/lbs/node/LBS-05OG",
+        "conx-bs:identifier": "LBS-BUILDING",
+        "conx-bs:name": "Gebäude"
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/precedence/PR-090-100",
+        "type": "conx-cs:PrecedenceRelationship",
+        "conx-cs:hasPredecessor": "https://data.general-contractor.example/project/PROJECT-X/activity/A090",
+        "conx-cs:hasSuccessor": "https://data.general-contractor.example/project/PROJECT-X/activity/A100",
+        "conx-cs:identifier": "PR-090-100",
+        "conx-cs:name": "A090 vor A100",
+        "conx-cs:relationshipType": "conx-prt:FinishToStart"
+      },
+      {
+        "id": "https://data.logistics-provider.example/project/PROJECT-X/equipment/LIFT-01/property/platformLength",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "platformLength",
+        "qudt:unit": "unit:M",
+        "rdf:value": {
+          "value": "3.20",
+          "datatype": "xsd:decimal"
+        },
+        "rdfs:label": {
+          "value": "Nutzbare Plattformlänge",
+          "language": "de"
+        }
+      },
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/site-area/STORAGE-EXT-01/property/usagePurpose",
+        "type": "cxext:Attribute",
+        "dcterms:identifier": "usagePurpose",
+        "rdf:value": "Zwischenlagerung von Doppelbodenmaterial",
+        "rdfs:label": {
+          "value": "Nutzungszweck",
+          "language": "de"
+        }
+      }
+    ]
+  }
+}

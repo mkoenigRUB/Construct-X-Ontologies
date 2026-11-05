@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construct-X Ontologies — Dokumentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --panel: #ffffff;
+    --ink: #1f2328;
+    --muted: #57606a;
+    --accent: #0969da;
+    --accent-soft: #ddf4ff;
+    --border: #d0d7de;
+    --code-bg: #f6f8fa;
+    --ok: #1a7f37;
+    --ok-soft: #dafbe1;
+    --warn: #9a6700;
+    --warn-soft: #fff8c5;
+    --cs: #0969da;   /* schedule */
+    --bs: #8250df;   /* breakdown */
+    --boq: #1a7f37;  /* boq */
+    --cpr: #bf3989;  /* progress */
+    --link: #9a6700; /* links */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 100%);
+    color: #fff;
+    padding: 2.2rem 2rem 1.8rem;
+  }
+  header h1 { margin: 0 0 .4rem; font-size: 1.9rem; }
+  header p { margin: .2rem 0; color: #c9d7e6; max-width: 900px; }
+  .badges { margin-top: .8rem; }
+  .badge {
+    display: inline-block; padding: .15rem .6rem; margin-right: .4rem;
+    border-radius: 999px; font-size: .78rem; font-weight: 600;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25);
+  }
+  .layout { display: flex; max-width: 1400px; margin: 0 auto; }
+  nav {
+    width: 250px; flex-shrink: 0; padding: 1.5rem 1rem;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    border-right: 1px solid var(--border); background: var(--panel);
+  }
+  nav h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 1rem 0 .4rem; }
+  nav a {
+    display: block; padding: .3rem .6rem; border-radius: 6px;
+    color: var(--ink); text-decoration: none; font-size: .9rem;
+  }
+  nav a:hover { background: var(--accent-soft); color: var(--accent); }
+  main { flex: 1; padding: 1.5rem 2rem 4rem; min-width: 0; }
+  section {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem 1.6rem; margin-bottom: 1.6rem;
+  }
+  h2 { margin-top: 0; font-size: 1.4rem; border-bottom: 2px solid var(--border); padding-bottom: .4rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.4rem; }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0; font-size: .88rem; }
+  th, td { border: 1px solid var(--border); padding: .45rem .6rem; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); }
+  tr:nth-child(even) td { background: #fafbfc; }
+  code {
+    font-family: "Cascadia Code", Consolas, "SF Mono", monospace;
+    font-size: .85em; background: var(--code-bg);
+    padding: .1em .35em; border-radius: 4px;
+  }
+  pre {
+    background: #0d1b2a; color: #e6edf3; padding: 1rem 1.2rem;
+    border-radius: 8px; overflow-x: auto; font-size: .82rem; line-height: 1.5;
+  }
+  pre code { background: none; color: inherit; padding: 0; }
+  .mermaid { background: #fff; text-align: center; margin: 1rem 0; overflow-x: auto; }
+  .note {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-size: .92rem;
+  }
+  .ok {
+    border-left: 4px solid var(--ok); background: var(--ok-soft);
+    padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-size: .92rem;
+  }
+  .warn {
+    border-left: 4px solid var(--warn); background: var(--warn-soft);
+    padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-size: .92rem;
+  }
+  .tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: .1rem .5rem; border-radius: 4px; color: #fff; vertical-align: middle; }
+  .tag.cs { background: var(--cs); } .tag.bs { background: var(--bs); }
+  .tag.boq { background: var(--boq); } .tag.cpr { background: var(--cpr); }
+  .tag.site { background: #0e7490; } .tag.del { background: #b45309; } .tag.ba { background: #b91c1c; } .tag.nc { background: #6d28d9; }
+  .tag.link { background: var(--link); } .tag.vocab { background: #57606a; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 900px) { .layout { flex-direction: column; } nav { width: 100%; height: auto; position: static; } .grid2 { grid-template-columns: 1fr; } }
+  .ns { font-size: .8rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Construct-X Ontologies</h1>
+  <p>Integriertes Draft-Paket: acht Domänen-Ontologien, zehn Link-Ontologien und einundzwanzig SKOS-Vokabulare
+     für Bauablaufpläne, Gliederungsstrukturen, Leistungsverzeichnisse, Baufortschrittsmeldungen,
+     Baustellen und Baustellenanlieferungen.</p>
+  <div class="badges">
+    <span class="badge">Stand: 2026-11-04</span>
+    <span class="badge">83 Turtle-Dateien</span>
+    <span class="badge">Validierung: PASS</span>
+    <span class="badge">Lizenz: CC-BY-4.0</span>
+  </div>
+</header>
+
+<div class="layout">
+<nav>
+  <h2>Inhalt</h2>
+  <a href="#uebersicht">1. Einleitung</a>
+  <a href="#architektur">2. Architektur &amp; Linking Rule</a>
+  <a href="#integrationslogik">3. Integrationslogik</a>
+  <a href="#schedule">4. Construction Schedule</a>
+  <a href="#breakdown">5. Breakdown Structure</a>
+  <a href="#boq">6. GAEB BoQ</a>
+  <a href="#progress">7. Progress Report</a>
+  <a href="#site">8. Construction Site</a>
+  <a href="#delivery">9. Construction Delivery</a>
+  <a href="#built-asset">10. Built Asset</a>
+  <a href="#notification">11. Notification Content</a>
+  <a href="#links">12. Link-Ontologien</a>
+  <a href="#vocab">13. Vokabulare</a>
+  <a href="#beispiele">14. Beispiele (Turtle)</a>
+  <a href="#converter">15. GAEB-Converter</a>
+  <a href="#usecase">16. Use Case</a>
+  <a href="#validierung">17. Validierung</a>
+  <a href="#jsonld">18. JSON-LD-Kontext</a>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+
+<!-- ============================================================ -->
+<section id="uebersicht">
+  <h2>1. Einleitung</h2>
+
+  <p>Für Construct-X wurde ein Verbund von <strong>Domänenontologien</strong> entwickelt, die die
+     zentralen Fachsichten eines Bauvorhabens maschinenlesbar und domänenübergreifend
+     verknüpfbar beschreiben: den Bauablaufplan (Terminplan), die Gliederungsstrukturen
+     (WBS/LBS/SBS/CBS), das Leistungsverzeichnis (GAEB BoQ), die Baufortschrittsmeldungen,
+     die Baustelle als Produktionsumgebung, die Baustellenanlieferungen (Logistik) sowie das
+     Bauwerk. Ziel ist, dass Daten aus den verschiedenen Fachsystemen —
+     Terminplanung, Kalkulation, Baustellenlogistik, Fortschrittssteuerung — über einen
+     gemeinsamen, semantisch definierten Datenkern ausgetauscht und zusammengeführt werden
+     können, ohne dass eine Fachsicht in eine andere „hineinkompiliert" wird.</p>
+
+  <p>Das vorliegende Paket ist ein <strong>integriertes Draft-Paket</strong>: Es konsolidiert
+     die aktuellen Stand der einzelnen Ontologien, ihre Verknüpfungsontologien und die
+     kontrollierten Wertebereiche (SKOS-Vokabulare) an einem Ort und stellt sie mit
+     Beispieldaten, SHACL-Profilen und einer durchgängigen Validierung bereit. Die
+     Versionsnummern (alle <code>0.x.y</code>) spiegeln den Draft-Status wider; sie sind
+     bewusst konservativ gehalten, da die Ontologien noch nicht freigegeben sind.</p>
+
+  <h3>Aufbau des Pakets</h3>
+  <p>Das Paket folgt einem strikten Modularitätsprinzip (ausführlich in
+     <a href="#architektur">Sektion 2</a>):</p>
+  <ul>
+    <li><strong>Domänen-Ontologien</strong> — jede Fachsicht ist eine eigenständige,
+      unabhängig wiederverwendbare OWL-Ontologie. Domänen importieren einander
+      <em>nie</em>.</li>
+    <li><strong>Link-Ontologien</strong> — alle domänenübergreifenden Beziehungen
+      (ObjectProperties zwischen Klassen verschiedener Domänen) leben ausschließlich in
+      dedizierten Link-Ontologien, die die beteiligten Quellontologien in exakten
+      Versionen importieren. So bleiben die Fachsichten entkoppelt und können separat
+      versioniert und validiert werden.</li>
+    <li><strong>SKOS-Vokabulare</strong> — kontrollierte Wertebereiche (z. B. Flächentypen,
+      Vorgangsstatus, Knotentypen) sind <code>skos:ConceptScheme</code>s. Sie werden nicht
+      von den Domänen importiert, sondern über optionale SHACL-Profile als
+      Wertebereichsrestriktion eingebunden.</li>
+    <li><strong>SHACL-Profile</strong> — fachliche und strukturelle Validierungsregeln
+      (Pflichtfelder, Wertebereiche, fachliche Konsistenzregeln) pro Domäne und pro
+      Link-Ontologie.</li>
+    <li><strong>Beispieldaten</strong> — je Domäne ein <code>*-example.ttl</code> sowie ein
+      integriertes Link-Beispiel, die die SHACL-Validierung bestehen.</li>
+  </ul>
+
+  <h3>Wie diese Dokumentation zu lesen ist</h3>
+  <p><strong>Sektion 3 (Integrationslogik) ist der rote Faden</strong> — sie erklärt, wie
+      die Ontologien zusammenhängen und was sich durchgängig modellieren lässt, und sollte
+      vor dem Eintauchen in die einzelnen Domänen gelesen werden. Die Sektionen 4–11
+      beschreiben die einzelnen Domänen-Ontologien (T-Box, ObjectProperties, Datentypen,
+      SHACL-Profile, A-Box-Beispiel). Sektion 12 fasst die Link-Ontologien zusammen,
+      Sektion 13 dokumentiert die SKOS-Vokabulare, ihre Nutzung (Bindung über
+      SHACL-Profile, Referenzierung in Daten) sowie die Regeln für Synonyme und
+      externe Vokabular-Mappings. Sektion 14 zeigt die Beispieldaten als Turtle,
+      Sektion 15 die Validierungsergebnisse. Die T-Box-Diagramme zeigen das Schema
+      (Klassen und Properties), die A-Box-Diagramme konkrete Instanzen.</p>
+
+  <h3>Manifest — Domänen-Ontologien</h3>
+  <table>
+    <tr><th>Ontologie</th><th>Präfix</th><th>Namespace</th><th>Version</th><th>Inhalt</th></tr>
+    <tr><td><span class="tag cs">CS</span> Construction Schedule</td><td><code>conx-cs</code></td>
+        <td class="ns">…/ontology/construction-schedule#</td><td>0.5.0</td>
+        <td>Bauablaufplan, Vorgänge, Meilensteine, Anordnungsbeziehungen, Termine</td></tr>
+    <tr><td><span class="tag bs">BS</span> Breakdown Structure</td><td><code>conx-bs</code></td>
+        <td class="ns">…/ontology/breakdown-structure#</td><td>0.7.0</td>
+        <td>WBS, LBS, SBS, CBS mit Knotenhierarchien</td></tr>
+    <tr><td><span class="tag boq">BOQ</span> GAEB BoQ</td><td><code>conx-gaeb</code></td>
+        <td class="ns">…/ontology/gaeb-boq#</td><td>0.5.0</td>
+        <td>Leistungsverzeichnis, Bereiche, Positionen, Mengensplits, Einheitspreisanteile</td></tr>
+    <tr><td><span class="tag cpr">CPR</span> Progress Report</td><td><code>conx-cpr</code></td>
+        <td class="ns">…/ontology/construction-progress-report#</td><td>0.1.0</td>
+        <td>Baufortschrittsmeldungen (Status, Fertigstellungsgrad, Ist-/Prognose-Termine)</td></tr>
+    <tr><td><span class="tag site">SITE</span> Construction Site</td><td><code>conx-site</code></td>
+        <td class="ns">…/ontology/construction-site#</td><td>0.2.0</td>
+        <td>Baustelle als Produktionsumgebung: Baulogistikareal, Baufelder, Flächen, Übergabepunkte, Einrichtungen, Geräte, Medienversorgung, lokales Koordinatensystem, zeitlich veränderliche Flächenbelegung (AreaAllocation)</td></tr>
+    <tr><td><span class="tag del">DEL</span> Construction Delivery</td><td><code>conx-del</code></td>
+        <td class="ns">…/ontology/construction-delivery#</td><td>0.1.0</td>
+        <td>Baustellenanlieferungen: Logistikanforderungen, Logistikvorgänge, Ladungen, Ladungspositionen, Lieferscheine</td></tr>
+    <tr><td><span class="tag ba">BA</span> Built Asset</td><td><code>conx-ba</code></td>
+        <td class="ns">…/ontology/built-asset#</td><td>0.1.0</td>
+        <td>Bauwerke: räumliche Strukturelemente, technische Systeme, physische Komponenten</td></tr>
+    <tr><td><span class="tag nc">NC</span> Notification Content</td><td><code>conx-nc</code></td>
+        <td class="ns">…/ontology/notification-content#</td><td>0.1.1</td>
+        <td>Fachinhalt von Benachrichtigungen: Typ, Aufgabentyp/-status, Objektzuordnungen, Kontext- und Ergebnisressourcen</td></tr>
+  </table>
+
+  <h3>Manifest — Link-Ontologien</h3>
+  <table>
+    <tr><th>Link-Ontologie</th><th>Präfix</th><th>Version</th><th>Verbindet</th></tr>
+    <tr><td><span class="tag link">LINK</span> schedule-breakdown-link</td><td><code>conx-sbl</code></td><td>0.6.0</td><td>Construction Schedule ↔ Breakdown Structure (WBS/LBS/SBS/CBS)</td></tr>
+    <tr><td><span class="tag link">LINK</span> schedule-boq-link</td><td><code>conx-sbq</code></td><td>0.2.1</td><td>Construction Schedule ↔ GAEB BoQ</td></tr>
+    <tr><td><span class="tag link">LINK</span> schedule-progress-report-link</td><td><code>conx-sprl</code></td><td>0.1.0</td><td>Construction Schedule ↔ Progress Report</td></tr>
+    <tr><td><span class="tag link">LINK</span> site-breakdown-link</td><td><code>conx-sbdl</code></td><td>0.1.0</td><td>Construction Site ↔ Breakdown Structure (SiteArea ↔ LBSNode)</td></tr>
+    <tr><td><span class="tag link">LINK</span> delivery-site-link</td><td><code>conx-dsl</code></td><td>0.1.0</td><td>Construction Delivery ↔ Construction Site (LogisticsOperation ↔ TransferPoint)</td></tr>
+    <tr><td><span class="tag link">LINK</span> delivery-boq-link</td><td><code>conx-dbl</code></td><td>0.1.0</td><td>Construction Delivery ↔ GAEB BoQ (LogisticsLoadItem ↔ QuantitySplit)</td></tr>
+    <tr><td><span class="tag link">LINK</span> schedule-delivery-link</td><td><code>conx-sdl</code></td><td>0.1.0</td><td>Construction Schedule ↔ Construction Delivery (LogisticsRequirement ↔ Activity)</td></tr>
+    <tr><td><span class="tag link">LINK</span> schedule-site-link</td><td><code>conx-ssl</code></td><td>0.1.0</td><td>Construction Schedule ↔ Construction Site (AreaAllocation ↔ Activity)</td></tr>
+    <tr><td><span class="tag link">LINK</span> site-built-asset-link</td><td><code>conx-sbal</code></td><td>0.1.0</td><td>Construction Site ↔ Built Asset (ConstructionField ↔ BuiltAsset, SiteArea ↔ SpatialStructureElement)</td></tr>
+    <tr><td><span class="tag link">LINK</span> built-asset-breakdown-link</td><td><code>conx-babl</code></td><td>0.1.0</td><td>Built Asset ↔ Breakdown Structure (SpatialStructureElement ↔ LBSNode, TechnicalSystem ↔ SBSNode, BuiltAsset/TechnicalSystem/Component ↔ CBSNode)</td></tr>
+  </table>
+
+  <h3>Manifest — Vokabulare (SKOS)</h3>
+  <table>
+    <tr><th>Vokabular</th><th>Präfix</th><th>Version</th><th>Begriffe</th></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> schedule-type</td><td><code>conx-st</code></td><td>0.1.0</td><td>RoughNetwork, DetailedNetwork, TotalNetwork, FrameNetwork, PartialNetwork, MilestoneNetwork, StandardNetwork</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> activity-status</td><td><code>conx-status</code></td><td>0.1.2</td><td>Planned, InProgress, Completed, Cancelled</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> precedence-relationship-type</td><td><code>conx-prt</code></td><td>0.1.0</td><td>FinishToStart, StartToStart, FinishToFinish, StartToFinish</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> de-wbs-node-type</td><td><code>conx-de-wbs</code></td><td>0.1.0</td><td>deutsche WBS-Knotentypen</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> de-lbs-node-type</td><td><code>conx-de-lbs</code></td><td>0.1.0</td><td>deutsche LBS-Knotentypen</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> de-sbs-node-type</td><td><code>conx-de-sbs</code></td><td>0.1.0</td><td>deutsche SBS-Knotentypen</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> de-cbs-node-type</td><td><code>conx-de-cbs</code></td><td>0.1.0</td><td>deutsche CBS-Knotentypen (z. B. Kostengruppen)</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> boq-price-component-type</td><td><code>conx-pct</code></td><td>0.1.0</td><td>Labor, Materials, Equipment, Other, Unknown</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> site area-type</td><td><code>conx-area</code></td><td>0.1.0</td><td>Wartezone, Vorstaubereich, Zufahrt, Ladezone, Lager, Arbeitsbereich, Sperrzone, …</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> site equipment-type</td><td><code>conx-eq</code></td><td>0.1.0</td><td>Hebezeug, Kran, Bauaufzug, Flurförderer, Gabelstapler, Lagerhilfsmittel</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> site facility-type</td><td><code>conx-fac</code></td><td>0.1.0</td><td>Containeranlage, Bürocontainer, Sanitärcontainer, Materialcontainer</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> site utility-type</td><td><code>conx-util</code></td><td>0.1.0</td><td>Baustrom, Bauwasser</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> site area-allocation-status</td><td><code>conx-aas</code></td><td>0.1.0</td><td>Geplant (Planned), Ist (Actual), Freigegeben (Released)</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> delivery operation-type</td><td><code>conx-dot</code></td><td>0.1.0</td><td>Ankunft, Warten, Check-In, Beladen, Entladen, Transport, Heben, Übergabe</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> delivery requirement-status</td><td><code>conx-drs</code></td><td>0.1.0</td><td>Angefragt, Bestätigt, Terminiert, In Bearbeitung, Abgeschlossen, Abgebrochen</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> built-asset asset-type</td><td><code>conx-bat</code></td><td>0.1.0</td><td>Gebäude, Brücke, Tunnel, Straße, …</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> built-asset spatial-structure-type</td><td><code>conx-bst</code></td><td>0.1.0</td><td>Etage, Raum, Geschoss, Abschnitt, …</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> notification-type</td><td><code>conx-nt</code></td><td>0.1.0</td><td>DataAvailable, DataUpdated, DataDeleted, TaskRequested, TaskStatusChanged, ResultAvailable</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> task-type</td><td><code>conx-tt</code></td><td>0.1.0</td><td>DetailedScheduling, ProgressReporting, PriceCalculation</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> task-status</td><td><code>conx-ts</code></td><td>0.1.0</td><td>Accepted, InProgress, Completed, Rejected, Cancelled</td></tr>
+    <tr><td><span class="tag vocab">VOCAB</span> subject-role</td><td><code>conx-sr</code></td><td>0.1.0</td><td>Target, ContextOnly</td></tr>
+  </table>
+  <p class="ns">Basis-Namespace: <code>https://www.construct-x.org/</code> — Ontologien unter <code>/ontology/…</code>, Vokabulare unter <code>/vocab/…</code>.</p>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="architektur">
+  <h2>2. Architektur &amp; Linking Rule</h2>
+  <p>Grundprinzip (siehe <code>ONTOLOGY-LINKING-RULE.md</code>): Beziehungen zwischen Klassen
+     <strong>verschiedener</strong> Domänen-Ontologien werden <strong>nie</strong> in einer der
+     Quellontologien definiert, sondern ausschließlich in einer separaten Link-Ontologie.
+     Die Construction Schedule ist die <strong>primäre Integrationsachse</strong> für Breakdown, BoQ und
+     Progress Report; die Construction Delivery ist über drei Link-Ontologien an Schedule, Site und BoQ
+     angebunden, die Construction Site über eine Link-Ontologie an die LBS.</p>
+
+  <div class="mermaid">
+graph TB
+    subgraph DOMAINS["Domänen-Ontologien (unabhängig)"]
+        CS["<b>Construction Schedule</b><br/>0.5.0"]:::cs
+        BS["<b>Breakdown Structure</b><br/>0.7.0"]:::bs
+        BOQ["<b>GAEB BoQ</b><br/>0.5.0"]:::boq
+        CPR["<b>Progress Report</b><br/>0.1.0"]:::cpr
+        SITE["<b>Construction Site</b><br/>0.2.0"]:::site
+        DEL["<b>Construction Delivery</b><br/>0.1.0"]:::del
+        BA["<b>Built Asset</b><br/>0.1.0"]:::ba
+    end
+    subgraph LINKS["Link-Ontologien (Cross-Domain-Properties)"]
+        SBL["schedule-breakdown-link<br/>0.6.0"]:::link
+        SBQ["schedule-boq-link<br/>0.2.1"]:::link
+        SPRL["schedule-progress-report-link<br/>0.1.0"]:::link
+        SBDL["site-breakdown-link<br/>0.1.0"]:::link
+        DSL["delivery-site-link<br/>0.1.0"]:::link
+        DBL["delivery-boq-link<br/>0.1.0"]:::link
+        SDL["schedule-delivery-link<br/>0.1.0"]:::link
+        SSL["schedule-site-link<br/>0.1.0"]:::link
+        SBAL["site-built-asset-link<br/>0.1.0"]:::link
+    end
+    CS -- "importiert" --> SBL
+    BS -- "importiert" --> SBL
+    CS -- "importiert" --> SBQ
+    BOQ -- "importiert" --> SBQ
+    CS -- "importiert" --> SPRL
+    CPR -- "importiert" --> SPRL
+    SITE -- "importiert" --> SBDL
+    BS -- "importiert" --> SBDL
+    DEL -- "importiert" --> DSL
+    SITE -- "importiert" --> DSL
+    DEL -- "importiert" --> DBL
+    BOQ -- "importiert" --> DBL
+    CS -- "importiert" --> SDL
+    DEL -- "importiert" --> SDL
+    CS -- "importiert" --> SSL
+    SITE -- "importiert" --> SSL
+    SITE -- "importiert" --> SBAL
+    BA -- "importiert" --> SBAL
+    classDef cs fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef bs fill:#fbefff,stroke:#8250df,color:#422457
+    classDef boq fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef cpr fill:#ffeff7,stroke:#bf3989,color:#82505a
+    classDef site fill:#cffafe,stroke:#0e7490,color:#155e75
+    classDef del fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef ba fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+    classDef link fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+  </div>
+
+  <div class="note">
+    <strong>Architektur-Regeln (automatisiert geprüft):</strong>
+    <ol style="margin:.4rem 0 0 1.2rem; padding:0;">
+      <li>Keine Domänen-Ontologie importiert eine andere Domänen-Ontologie.</li>
+      <li>Keine ObjectProperty in einer Domänen-Ontologie hat Domain dort und Range in einer anderen Construct-X-Domäne.</li>
+      <li>Cross-Domain-ObjectProperties existieren nur in Link-Ontologien.</li>
+      <li>Link-Ontologien importieren die <em>exakten</em> freigegebenen Versionen ihrer Quellontologien.</li>
+      <li>Geteilte Vokabulare (z. B. Activity Status) sind erlaubt — Vokabulare sind keine Domänen-Ontologien.</li>
+    </ol>
+  </div>
+
+  <h3>Integrationsachse: Activity</h3>
+  <p>Der <code>Activity</code>-Knoten der Schedule ist der zentrale Verknüpfungspunkt:
+     er wird über Link-Ontologien an Breakdown-Knoten, BoQ-Mengensplits und Fortschrittsmeldungen angebunden.</p>
+
+  <div class="mermaid">
+graph LR
+    ACT["<b>Activity</b><br/>(conx-cs)"]:::cs
+    WBS["WBSNode"]:::bs
+    LBS["LBSNode"]:::bs
+    SBS["SBSNode"]:::bs
+    CBS["CBSNode"]:::bs
+    QS["QuantitySplit"]:::boq
+    PR["ConstructionProgressReport"]:::cpr
+    ACT -- "isClassifiedByWBSNode" --> WBS
+    ACT -- "isPerformedIn" --> LBS
+    ACT -- "isClassifiedBySBSNode" --> SBS
+    ACT -- "isClassifiedByCBSNode" --> CBS
+    QS -- "isAssignedToActivity" --> ACT
+    PR -- "reportsOnActivity" --> ACT
+    classDef cs fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef bs fill:#fbefff,stroke:#8250df,color:#422457
+    classDef boq fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef cpr fill:#ffeff7,stroke:#bf3989,color:#82505a
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="integrationslogik">
+  <h2>3. Integrationslogik &amp; durchgängige Modellierung</h2>
+
+  <p>Die einzelnen Ontologien sind bewusst <em>unabhängig</em> gehalten (Linking Rule).
+     Ihre Durchgängigkeit entsteht nicht durch gemeinsame Klassen, sondern durch ein
+     zentrales Integrationsprinzip und die Link-Ontologien, die die Fachsichten an
+     einen gemeinsamen Anker koppeln.</p>
+
+  <h3>Prinzip: Die <code>Activity</code> als Integrations-Hub</h3>
+  <p>Der Terminplanvorgang (<code>conx-cs:Activity</code>) ist der <strong>primäre
+     Integrationsanker</strong>. Fast jede Fachsicht wird über die <code>Activity</code>
+     erreichbar — entweder direkt (Breakdown, BoQ, Progress Report) oder über eine
+     Zwischenschicht (Delivery über <code>LogisticsRequirement</code>, Site über
+     <code>AreaAllocation</code>). Dadurch bleibt jede Domäne wiederverwendbar, während
+     die <code>Activity</code> als „Faden" durch das gesamte Modell läuft.</p>
+
+  <div class="mermaid">
+graph TB
+    ACT["<b>Activity</b><br/>(Integrations-Hub)"]:::hub
+    WBS["WBSNode<br/>(Was / Gliederung)"]:::dim
+    LBS["LBSNode<br/>(Wo / Ort)"]:::dim
+    QS["QuantitySplit<br/>(Wie viel / Menge)"]:::dim
+    PR["ProgressReport<br/>(Wie läuft es)"]:::dim
+    REQ["LogisticsRequirement<br/>(Wie versorgt)"]:::dim
+    AA["AreaAllocation<br/>(Wo + Wann / Fläche)"]:::dim
+    ACT -- "isClassifiedByWBSNode" --> WBS
+    ACT -- "isPerformedIn" --> LBS
+    QS -- "isAssignedToActivity" --> ACT
+    PR -- "reportsOnActivity" --> ACT
+    REQ -- "supportsActivity" --> ACT
+    AA -- "allocatedForActivity" --> ACT
+    classDef hub fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+    classDef dim fill:#ddf4ff,stroke:#0969da,color:#0a3069
+  </div>
+
+  <h3>Die sechs Dimensionen</h3>
+  <p>Über die <code>Activity</code> lassen sich sechs fachliche Dimensionen eines
+     Bauvorhabens durchgängig abfragen:</p>
+  <table>
+    <tr><th>Dimension</th><th>Fachfrage</th><th>Ontologie / Link</th><th>Pfad über die Activity</th></tr>
+    <tr><td><strong>Was</strong></td><td>Welche Leistung / Gliederung?</td><td>Breakdown (WBS)</td><td><code>Activity → isClassifiedByWBSNode → WBSNode</code></td></tr>
+    <tr><td><strong>Wo</strong></td><td>Wo wird ausgeführt?</td><td>Breakdown (LBS) + Site</td><td><code>Activity → isPerformedIn → LBSNode</code>; <code>SiteArea → isRepresentedByLBSNode → LBSNode</code></td></tr>
+    <tr><td><strong>Wann</strong></td><td>Wann (Zeitplan)?</td><td>Schedule</td><td><code>Activity.plannedStart / plannedFinish</code></td></tr>
+    <tr><td><strong>Wie viel</strong></td><td>Welche Menge / Kosten?</td><td>GAEB BoQ</td><td><code>QuantitySplit → isAssignedToActivity → Activity</code></td></tr>
+    <tr><td><strong>Wie versorgt</strong></td><td>Wie wird Material/Logistik gestellt?</td><td>Delivery</td><td><code>LogisticsRequirement → supportsActivity → Activity</code></td></tr>
+    <tr><td><strong>Wie läuft es</strong></td><td>Wie ist der Fortschritt?</td><td>Progress Report</td><td><code>ConstructionProgressReport → reportsOnActivity → Activity</code></td></tr>
+  </table>
+  <p class="ns">Zusätzlich koppelt <code>schedule-site-link</code> die <em>zeitlich veränderliche
+     Flächenbelegung</em> an die <code>Activity</code> (<code>AreaAllocation → allocatedForActivity</code>),
+     <code>site-built-asset-link</code> verbindet die temporäre Baustellensicht mit der
+     dauerhaften Bauwerksstruktur und <code>built-asset-breakdown-link</code> koppelt
+     diese an die projektbezogene LBS/SBS/CBS-Gliederung. Quer zu allen Fachsichten liegt die
+     <a href="#notification">Notification-Content-Ontologie</a>: Sie beschreibt
+     den fachlichen Inhalt der Kommunikation (z. B. &#8222;Feinterminplanung für
+     Vorgang A100 angefordert&#8220;) und referenziert über
+     <code>contextResource</code> / <code>assignedResource</code> die fachlichen
+     Datensätze — transportneutral, ohne Routing-Metadaten.</p>
+
+  <h3>Durchgängiges Beispiel: „Doppelboden 5. OG"</h3>
+  <p>Ein einzelner Vorgang — die Montage des Doppelbodens im 5. Obergeschoss —
+     verbindet alle Sichten:</p>
+  <div class="mermaid">
+graph LR
+    ACT["<b>Activity</b><br/>Doppelboden 5. OG montieren"]:::hub
+    WBS["WBSNode<br/>1.2.3.5<br/>TGA / Doppelboden"]:::bs
+    LBS["LBSNode<br/>5. OG / Technikraum"]:::bs
+    QS["QuantitySplit<br/>125,5 m³<br/>LV-Position 01"]:::boq
+    PR["ProgressReport<br/>Fortschritt 40 %<br/>Ist-Finish 15.11."]:::cpr
+    REQ["LogisticsRequirement<br/>Anlieferung Doppelboden-Module"]:::del
+    AA["AreaAllocation<br/>Ladezone Kran<br/>11.01.–11.15. (Ist)"]:::site
+    BA["SpatialStructureElement<br/>5. Obergeschoss"]:::ba
+    ACT -- "isClassifiedByWBSNode" --> WBS
+    ACT -- "isPerformedIn" --> LBS
+    QS -- "isAssignedToActivity" --> ACT
+    PR -- "reportsOnActivity" --> ACT
+    REQ -- "supportsActivity" --> ACT
+    AA -- "allocatedForActivity" --> ACT
+    LBS -. "repräsentiert" .- BA
+    classDef hub fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+    classDef bs fill:#fbefff,stroke:#8250df,color:#422457
+    classDef boq fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef cpr fill:#ffeff7,stroke:#bf3989,color:#82505a
+    classDef del fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef site fill:#cffafe,stroke:#0e7490,color:#155e75
+    classDef ba fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+  </div>
+  <p>Ausgehend von der <code>Activity</code> lässt sich so in einem Zug ableiten:
+     <em>was</em> gemacht wird (WBS 1.2.3.5), <em>wo</em> (5. OG / Technikraum),
+     <em>wann</em> (geplante Termine), <em>wie viel</em> (125,5 m³ aus LV-Position 01),
+     <em>wie versorgt</em> (Anlieferung der Module), <em>wie läuft es</em> (40 % fertig)
+     und <em>welche Fläche</em> im Belegungszeitraum benötigt wird (Ladezone Kran,
+     11.01.–11.15.).</p>
+
+  <h3>Grenzen — was (noch) nicht durchgängig modelliert ist</h3>
+  <div class="note">
+    <ul>
+      <li><strong>Keine Ressourcenplanung:</strong> Es gibt keine Ontologie für
+        Arbeitskräfte, Geräte-Einsatzpläne oder Kapazitäten. Geräte werden nur als
+        <code>SiteEquipment</code> (statisch) abgebildet, nicht als zeitlich geplante Ressource.</li>
+      <li><strong>Keine Kosten-/Budget-Durchgängigkeit:</strong> Kosten hängen am
+        <code>QuantitySplit</code> (BoQ) und an CBS-Knoten, aber es gibt keine
+        durchgängige Ist-/Soll-Kostenverfolgung über die <code>Activity</code>.</li>
+      <li><strong>Keine Qualitäts-/Abnahmeprozesse:</strong> Prüfpläne, Abnahmen und
+        Mängel sind nicht modelliert.</li>
+      <li><strong>Keine Sicherheits-/Gefährdungsbeurteilung:</strong> Sperrzonen werden
+        nur als <code>SiteArea</code> (Flächentyp) erfasst, nicht als zeitlich wirksame
+        Sicherheitsmaßnahme.</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="schedule">
+  <h2>4. <span class="tag cs">CS</span> Construction Schedule <span class="ns">v0.5.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/construction-schedule#</code> · Quelle: DIN 69900:2009-01</p>
+
+  <h3>T-Box (Schema)</h3>
+  <p class="ns">Klassen und Eigenschaften der Ontologie. Gestrichelte Kanten = <code>rdfs:subClassOf</code>,
+     durchgezogene Kanten = ObjectProperties.</p>
+  <div class="mermaid">
+graph TD
+    CS["<b>ConstructionSchedule</b><br/><i>owl:Class</i>"]:::cls
+    ACT["<b>Activity</b><br/><i>owl:Class</i>"]:::cls
+    MS["<b>Milestone</b><br/><i>owl:Class</i>"]:::cls
+    PR["<b>PrecedenceRelationship</b><br/><i>owl:Class</i>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    MS -. "rdfs:subClassOf" .-> ACT
+    CS -- "hasActivity" --> ACT
+    CS -- "hasMilestone (Subproperty)" --> MS
+    CS -- "scheduleType" --> SKOS
+    ACT -- "hasSubActivity / isSubActivityOf" --> ACT
+    ACT -- "hasStatus" --> SKOS
+    PR -- "hasPredecessor" --> ACT
+    PR -- "hasSuccessor" --> ACT
+    PR -- "relationshipType" --> SKOS
+    classDef cls fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+
+  <h3>ObjectProperties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
+    <tr><td><code>scheduleType</code></td><td>ConstructionSchedule</td><td>skos:Concept</td><td>—</td><td>Typ des Terminplans; mehrere Werte erlaubt</td></tr>
+    <tr><td><code>hasActivity</code></td><td>ConstructionSchedule</td><td>Activity</td><td>—</td><td>Ordnet dem Plan einen Vorgang zu</td></tr>
+    <tr><td><code>hasMilestone</code></td><td>ConstructionSchedule</td><td>Milestone</td><td>Subproperty von <code>hasActivity</code></td><td>Expliziter Meilenstein</td></tr>
+    <tr><td><code>hasStatus</code></td><td>Activity</td><td>skos:Concept</td><td>Functional</td><td>Aktueller Ausführungsstatus</td></tr>
+    <tr><td><code>isSubActivityOf</code></td><td>Activity</td><td>Activity</td><td>Functional, Irreflexive, Inverse von <code>hasSubActivity</code></td><td>Direkter übergeordneter Vorgang</td></tr>
+    <tr><td><code>hasSubActivity</code></td><td>Activity</td><td>Activity</td><td>—</td><td>Direkter untergeordneter Vorgang</td></tr>
+    <tr><td><code>hasPredecessor</code></td><td>PrecedenceRelationship</td><td>Activity</td><td>—</td><td>Vorgänger</td></tr>
+    <tr><td><code>hasSuccessor</code></td><td>PrecedenceRelationship</td><td>Activity</td><td>—</td><td>Nachfolger</td></tr>
+    <tr><td><code>relationshipType</code></td><td>PrecedenceRelationship</td><td>skos:Concept</td><td>—</td><td>Typ der Anordnungsbeziehung (FS/SS/FF/SF)</td></tr>
+  </table>
+
+  <h3>DatatypeProperties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Datentyp</th><th>Beschreibung</th></tr>
+    <tr><td><code>identifier</code></td><td>alle Kernklassen</td><td>xsd:string</td><td>Fachliche Kennung</td></tr>
+    <tr><td><code>name</code></td><td>alle Kernklassen</td><td>xsd:string</td><td>Bezeichnung</td></tr>
+    <tr><td><code>hierarchyCode</code></td><td>Activity</td><td>xsd:string</td><td>Kennung der Position in der Planhierarchie (z. B. „01.01“)</td></tr>
+    <tr><td><code>description</code></td><td>Activity</td><td>xsd:string</td><td>Kurzbeschreibung</td></tr>
+    <tr><td><code>plannedStart</code> / <code>plannedFinish</code></td><td>Activity</td><td>xsd:dateTime</td><td>Geplante Termine</td></tr>
+    <tr><td><code>earliestStart</code> / <code>earliestFinish</code></td><td>Activity</td><td>xsd:dateTime</td><td>Früheste Termine (CPM)</td></tr>
+    <tr><td><code>latestStart</code> / <code>latestFinish</code></td><td>Activity</td><td>xsd:dateTime</td><td>Späteste Termine (CPM)</td></tr>
+    <tr><td><code>lag</code></td><td>PrecedenceRelationship</td><td>xsd:duration</td><td>Zeitabstand (z. B. <code>P3D</code>)</td></tr>
+  </table>
+
+  <div class="note"><strong>Milestone-Regel:</strong> Für Meilensteine gilt <code>plannedStart = plannedFinish</code> — in den Core-Shapes als SHACL-Constraint abgebildet.</div>
+
+  <p class="ns">Die drei Vokabulare <code>schedule-type</code>, <code>activity-status</code> und
+     <code>precedence-relationship-type</code> werden über optionale SHACL-Profile
+     eingebunden — Begriffe, Bindung und Nutzung:
+     <a href="#vocab-schedule">Sektion 13, Construction Schedule</a>.</p>
+
+  <h3>A-Box (Instanzen): Netzplan-Ausschnitt</h3>
+  <div class="mermaid">
+graph TD
+    SCH["<b>ex:schedule-SCH-01</b><br/>a conx-cs:ConstructionSchedule<br/>identifier SCH-01 · name Rohbauterminplan<br/>scheduleType conx-st:DetailedNetwork"]:::inst
+    A100["<b>ex:formwork</b><br/>a conx-cs:Activity<br/>A100 · 01.01 · Install Formwork<br/>status Completed<br/>07.09.–11.09.2026"]:::inst
+    A110["<b>ex:reinforcement</b><br/>a conx-cs:Activity<br/>A110 · 01.02 · Install Reinforcement<br/>status Planned<br/>14.09.–18.09.2026"]:::inst
+    REL["<b>ex:rel-01</b><br/>a conx-cs:PrecedenceRelationship<br/>REL-01 · FinishToStart · lag P0D"]:::rel
+    SCH -- hasActivity --> A100
+    SCH -- hasActivity --> A110
+    REL -- hasPredecessor --> A100
+    REL -- hasSuccessor --> A110
+    classDef inst fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef rel fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="breakdown">
+  <h2>5. <span class="tag bs">BS</span> Breakdown Structure <span class="ns">v0.7.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/breakdown-structure#</code></p>
+
+  <h3>T-Box (Schema)</h3>
+  <p class="ns">Klassen und Eigenschaften der Ontologie. Gestrichelte Kanten = <code>rdfs:subClassOf</code>,
+     durchgezogene Kanten = ObjectProperties.</p>
+  <div class="mermaid">
+graph TD
+    BS["<b>BreakdownStructure</b><br/><i>owl:Class</i>"]:::cls
+    BN["<b>BreakdownNode</b><br/><i>owl:Class</i>"]:::cls
+    WBS["<b>WorkBreakdownStructure</b>"]:::cls
+    LBS["<b>LocationBreakdownStructure</b>"]:::cls
+    SBS["<b>SystemBreakdownStructure</b>"]:::cls
+    CBS["<b>CostBreakdownStructure</b>"]:::cls
+    WBSN["<b>WBSNode</b>"]:::cls
+    LBSN["<b>LBSNode</b>"]:::cls
+    SBSN["<b>SBSNode</b>"]:::cls
+    CBSN["<b>CBSNode</b>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    WBS -. "rdfs:subClassOf" .-> BS
+    LBS -. "rdfs:subClassOf" .-> BS
+    SBS -. "rdfs:subClassOf" .-> BS
+    CBS -. "rdfs:subClassOf" .-> BS
+    WBSN -. "rdfs:subClassOf" .-> BN
+    LBSN -. "rdfs:subClassOf" .-> BN
+    SBSN -. "rdfs:subClassOf" .-> BN
+    CBSN -. "rdfs:subClassOf" .-> BN
+    BS -- "hasNode" --> BN
+    BS -- "hasRootNode (Subproperty)" --> BN
+    BN -- "hasSubNode / isSubNodeOf" --> BN
+    BN -- "nodeType" --> SKOS
+    classDef cls fill:#fbefff,stroke:#8250df,color:#422457
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+  <div class="note">Die vier Strukturtypen sind <code>owl:AllDisjointClasses</code>, ebenso die vier Knotentypen.
+     Jeder Knoten hat <strong>maximal einen</strong> direkten Elternknoten (<code>isSubNodeOf</code> ist Functional).</div>
+
+  <h3>Properties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
+    <tr><td><code>hasNode</code></td><td>BreakdownStructure</td><td>BreakdownNode</td><td>—</td><td>Struktur enthält Knoten</td></tr>
+    <tr><td><code>hasRootNode</code></td><td>BreakdownStructure</td><td>BreakdownNode</td><td>Subproperty von <code>hasNode</code></td><td>Wurzelknoten (ohne Eltern)</td></tr>
+    <tr><td><code>isSubNodeOf</code></td><td>BreakdownNode</td><td>BreakdownNode</td><td>Functional, Irreflexive, Inverse von <code>hasSubNode</code></td><td>Direkter Elternknoten</td></tr>
+    <tr><td><code>hasSubNode</code></td><td>BreakdownNode</td><td>BreakdownNode</td><td>—</td><td>Direkter Unterknoten</td></tr>
+    <tr><td><code>nodeType</code></td><td>BreakdownNode</td><td>skos:Concept</td><td>—</td><td>Fachlicher Knotentyp (z. B. Geschoss, Gewerk, Kostengruppe 300)</td></tr>
+    <tr><td><code>identifier</code> / <code>name</code> / <code>code</code></td><td>Struktur + Knoten</td><td>xsd:string</td><td>identifier: Functional</td><td>Kennung, Bezeichnung, Kurzcode</td></tr>
+    <tr><td><code>level</code></td><td>BreakdownNode</td><td>xsd:nonNegativeInteger</td><td>Functional</td><td>Hierarchietiefe (Wurzel = 0)</td></tr>
+  </table>
+
+  <p class="ns">Die vier Deutschland-spezifischen Knotentyp-Vokabulare für <code>nodeType</code>
+     (de-wbs/lbs/sbs/cbs-node-type) sind ausschließlich in
+     <a href="#vocab-node-types">Sektion 13 (Vokabulare)</a> dokumentiert —
+     dort auch Begriffe, Quellen und die SHACL-Bindung.</p>
+
+  <h3>A-Box (Instanzen): WBS-Hierarchie</h3>
+  <div class="mermaid">
+graph TD
+    W01["<b>ex:wbs-01</b><br/>a conx-bs:WorkBreakdownStructure<br/>WBS-01 · Projektstruktur"]:::inst
+    W1["<b>ex:wbs-1</b><br/>a conx-bs:WBSNode<br/>WBS-1 · Rohbau<br/>code 01 · level 0"]:::inst
+    W11["<b>ex:wbs-1-1</b><br/>a conx-bs:WBSNode<br/>WBS-1.1 · Decken<br/>code 01.01 · level 1"]:::inst
+    W01 -- hasRootNode --> W1
+    W1 -- hasSubNode --> W11
+    classDef inst fill:#fbefff,stroke:#8250df,color:#422457
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="boq">
+  <h2>6. <span class="tag boq">BOQ</span> GAEB BoQ <span class="ns">v0.5.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/gaeb-boq#</code> · Quelle: GAEB DA XML 3.3</p>
+
+  <h3>T-Box (Schema)</h3>
+  <p class="ns">Klassen und Eigenschaften der Ontologie. Gestrichelte Kanten = <code>rdfs:subClassOf</code>,
+     durchgezogene Kanten = ObjectProperties.</p>
+  <div class="mermaid">
+graph TD
+    IE["<b>IdentifiedEntity</b><br/><i>abstrakt</i>"]:::abs
+    BC["<b>BoQComponent</b><br/><i>abstrakt</i>"]:::abs
+    QE["<b>QuantifiedEntity</b><br/><i>abstrakt</i>"]:::abs
+    CAE["<b>CatalogAssignableEntity</b><br/><i>abstrakt</i>"]:::abs
+    BOQ["<b>BillOfQuantities</b>"]:::cls
+    SEC["<b>BoQSection</b>"]:::cls
+    ITEM["<b>BoQItem</b>"]:::cls
+    SPLIT["<b>QuantitySplit</b>"]:::cls
+    CAT["<b>CatalogAssignment</b>"]:::cls
+    EXT["<b>ExternalObjectReference</b>"]:::cls
+    UPC["<b>UnitPriceComponent</b>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    BC -. "rdfs:subClassOf" .-> IE
+    QE -. "rdfs:subClassOf" .-> IE
+    CAE -. "rdfs:subClassOf" .-> IE
+    BOQ -. "rdfs:subClassOf" .-> IE
+    CAT -. "rdfs:subClassOf" .-> IE
+    EXT -. "rdfs:subClassOf" .-> IE
+    UPC -. "rdfs:subClassOf" .-> IE
+    SEC -. "rdfs:subClassOf" .-> BC
+    ITEM -. "rdfs:subClassOf" .-> BC
+    ITEM -. "rdfs:subClassOf" .-> QE
+    ITEM -. "rdfs:subClassOf" .-> CAE
+    SPLIT -. "rdfs:subClassOf" .-> QE
+    SPLIT -. "rdfs:subClassOf" .-> CAE
+    BOQ -- "hasRootSection" --> SEC
+    SEC -- "hasSubSection" --> SEC
+    SEC -- "hasDirectItem" --> ITEM
+    ITEM -- "hasQuantitySplit" --> SPLIT
+    ITEM -- "hasUnitPriceComponent" --> UPC
+    ITEM -- "hasCatalogAssignment" --> CAT
+    CAT -- "referencesExternalObject" --> EXT
+    UPC -- "hasPriceComponentType" --> SKOS
+    classDef cls fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef abs fill:#f6f8fa,stroke:#57606a,color:#1f2328,stroke-dasharray: 5 5
+    classDef ext fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+  </div>
+  <div class="note">Die sieben konkreten Klassen sind <code>owl:AllDisjointClasses</code>.
+     Eine <code>BoQItem</code> liegt entweder <strong>direkt</strong> im LV oder in <strong>genau einem</strong> Bereich.</div>
+
+  <h3>Properties (Auswahl)</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Beschreibung</th></tr>
+    <tr><td><code>hasRootSection</code> / <code>isRootSectionOf</code></td><td>BillOfQuantities ↔ BoQSection</td><td>—</td><td>Oberster Bereich des LV</td></tr>
+    <tr><td><code>hasSubSection</code> / <code>isSubSectionOf</code></td><td>BoQSection</td><td>BoQSection</td><td>Unterbereich (hierarchisch)</td></tr>
+    <tr><td><code>hasDirectItem</code> / <code>isDirectItemOf</code></td><td>BoQSection</td><td>BoQItem</td><td>Position direkt im Bereich</td></tr>
+    <tr><td><code>hasItem</code> / <code>belongsToSection</code></td><td>BoQSection</td><td>BoQItem</td><td>Transitive Gesamtheit / direkte Zugehörigkeit</td></tr>
+    <tr><td><code>isContainedIn</code> / <code>isSectionContainedIn</code></td><td>BoQItem / BoQSection</td><td>BillOfQuantities</td><td>Zugehörigkeit zum LV</td></tr>
+    <tr><td><code>hasQuantitySplit</code> / <code>isQuantitySplitOf</code></td><td>BoQItem</td><td>QuantitySplit</td><td>Mengensplit einer Position</td></tr>
+    <tr><td><code>hasUnitPriceComponent</code> / <code>isUnitPriceComponentOf</code></td><td>BoQItem</td><td>UnitPriceComponent</td><td>Einheitspreisanteil</td></tr>
+    <tr><td><code>hasPriceComponentType</code></td><td>UnitPriceComponent</td><td>skos:Concept</td><td>Typ des Anteils (Labor, Materials, …); Vokabular <code>boq-price-component-type</code>, Begriffe und Bindung: <a href="#vocab-boq">Sektion 13, GAEB BoQ</a></td></tr>
+    <tr><td><code>hasCatalogAssignment</code> / <code>isAssignmentOf</code></td><td>CatalogAssignableEntity</td><td>CatalogAssignment</td><td>Katalogzuordnung</td></tr>
+    <tr><td><code>referencesExternalObject</code></td><td>CatalogAssignment</td><td>ExternalObjectReference</td><td>Externe Objektreferenz</td></tr>
+    <tr><td><code>quantity</code> / <code>unitCode</code></td><td>QuantifiedEntity</td><td>decimal / string</td><td>Menge und Einheit</td></tr>
+    <tr><td><code>unitPrice</code> / <code>totalAmount</code></td><td>BoQItem</td><td>decimal</td><td>Einheitspreis / Gesamtbetrag</td></tr>
+    <tr><td><code>amount</code></td><td>UnitPriceComponent</td><td>decimal</td><td>Monetärer Anteil</td></tr>
+    <tr><td><code>currencyCode</code></td><td>BillOfQuantities</td><td>string</td><td>Währung (z. B. EUR)</td></tr>
+  </table>
+
+  <h3>A-Box (Instanzen): LV-Ausschnitt mit Einheitspreisaufbau</h3>
+  <div class="mermaid">
+graph TD
+    BOQ["<b>ex:boq-01</b><br/>a conx-gaeb:BillOfQuantities<br/>BOQ-01 · Rohbau LV · EUR"]:::inst
+    SEC["<b>ex:section-01</b><br/>a conx-gaeb:BoQSection<br/>SEC-01 · Betonarbeiten · level 1"]:::inst
+    ITEM["<b>ex:item-0010</b><br/>a conx-gaeb:BoQItem<br/>ITEM-0010 · Stahlbetondecke C30/37<br/>125,500 m³ · EP 185,50 € · ges. 23.280,25 €"]:::inst
+    PL["<b>ex:price-labor</b><br/>a conx-gaeb:UnitPriceComponent<br/>PRICE-01 · 90,00 €<br/>Typ conx-pct:Labor"]:::pct
+    PM["<b>ex:price-materials</b><br/>a conx-gaeb:UnitPriceComponent<br/>PRICE-02 · 95,50 €<br/>Typ conx-pct:Materials"]:::pct
+    BOQ -- hasRootSection --> SEC
+    SEC -- hasDirectItem --> ITEM
+    ITEM -- hasUnitPriceComponent --> PL
+    ITEM -- hasUnitPriceComponent --> PM
+    classDef inst fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef pct fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="progress">
+  <h2>7. <span class="tag cpr">CPR</span> Construction Progress Report <span class="ns">v0.1.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/construction-progress-report#</code></p>
+
+  <p>Zeitpunktbezogene Meldung über den Fortschrittsstand eines Bauvorgangs.
+     Die Beziehung zum <code>Activity</code> liegt in der Link-Ontologie
+     <code>schedule-progress-report-link</code> (<code>reportsOnActivity</code>).</p>
+
+  <h3>Properties</h3>
+  <table>
+    <tr><th>Property</th><th>Datentyp / Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
+    <tr><td><code>identifier</code></td><td>xsd:string</td><td>Functional, Pflicht (SHACL)</td><td>Fachliche Kennung der Meldung</td></tr>
+    <tr><td><code>recordedAt</code></td><td>xsd:dateTime</td><td>Functional, Pflicht (SHACL)</td><td>Erfassungszeitpunkt</td></tr>
+    <tr><td><code>activityStatus</code></td><td>skos:Concept</td><td>Functional</td><td>Status des Vorgangs zum Erfassungszeitpunkt; optionales SHACL-Profil bindet das Activity-Status-Vokabular (geteilt mit Construction Schedule; Begriffe und Bindung: <a href="#vocab-progress">Sektion 13, Progress Report</a>)</td></tr>
+    <tr><td><code>completionPercentage</code></td><td>xsd:decimal</td><td>Functional, 0–100</td><td>Fertigstellungsgrad</td></tr>
+    <tr><td><code>actualStart</code></td><td>xsd:dateTime</td><td>Functional</td><td>Tatsächlicher Start</td></tr>
+    <tr><td><code>actualFinish</code></td><td>xsd:dateTime</td><td>Functional</td><td>Tatsächliches Ende</td></tr>
+    <tr><td><code>forecastFinish</code></td><td>xsd:dateTime</td><td>Functional</td><td>Prognostiziertes Ende (nur ohne <code>actualFinish</code>)</td></tr>
+  </table>
+
+  <h3>A-Box (Instanzen): Fortschrittsmeldung</h3>
+  <div class="mermaid">
+graph LR
+    PR["<b>ex:progress-report-A100</b><br/>a conx-cpr:ConstructionProgressReport<br/>recordedAt 12.09.2026<br/>completionPercentage 65 %<br/>activityStatus conx-status:InProgress<br/>actualStart 07.09.2026 · forecastFinish 15.09.2026"]:::inst
+    ACT["<b>ex:activity-A100</b><br/>a conx-cs:Activity"]:::inst
+    PR -- "reportsOnActivity (conx-sprl)" --> ACT
+    classDef inst fill:#ffeff7,stroke:#bf3989,color:#82505a
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="site">
+  <h2>8. <span class="tag site">SITE</span> Construction Site <span class="ns">v0.2.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/construction-site#</code> · Quelle: Construct-X working document „Ontologien &amp; Standards für Baustellen“, 22 Oct 2026</p>
+
+  <p>Die Ontologie beschreibt die Baustelle als organisatorische und räumliche Produktionsumgebung:
+     Baulogistikareal (auch mit Flächen außerhalb der Baustellengrenze), Baufelder, operative
+     Baustellenflächen mit kontrolliertem Flächentyp, Übergabepunkte, Baustelleneinrichtungen
+     (Geräte, temporäre Einrichtungen, Medienversorgung) sowie ein lokales Koordinatensystem
+     (GeoSPARQL-Referenz).</p>
+
+  <p>Die Klasse <code>AreaAllocation</code> beschreibt die zeitlich begrenzte Belegung einer
+     <code>SiteArea</code> für einen bestimmten Flächentyp. Während <code>SiteArea.hasAreaType</code>
+     den <em>standardmäßigen</em>, zeitunabhängigen Flächentyp einer Fläche abbildet, erlaubt
+     <code>AreaAllocation</code> über die Datentyp-Properties <code>validFrom</code>/<code>validTo</code>
+     und den kontrollierten Status (<code>area-allocation-status</code>: Geplant/Ist/Freigegeben)
+     die Darstellung, dass dieselbe Fläche in aufeinanderfolgenden Intervallen unterschiedlich genutzt
+     wird (z. B. Ladezone → Zwischenlager). Über die Link-Ontologie <code>schedule-site-link</code>
+     wird eine Belegung einem Terminplanvorgang zugeordnet.</p>
+
+  <h3>T-Box (Schema)</h3>
+  <div class="mermaid">
+graph TD
+    CLA["<b>ConstructionLogisticsArea</b><br/><i>owl:Class</i>"]:::cls
+    SITE["<b>ConstructionSite</b><br/><i>owl:Class</i>"]:::cls
+    FIELD["<b>ConstructionField</b><br/><i>owl:Class</i>"]:::cls
+    AREA["<b>SiteArea</b><br/><i>owl:Class</i>"]:::cls
+    TP["<b>TransferPoint</b><br/><i>owl:Class</i>"]:::cls
+    LCS["<b>LocalCoordinateSystem</b><br/><i>owl:Class</i>"]:::cls
+    INST["<b>SiteInstallation</b><br/><i>owl:Class</i>"]:::cls
+    EQ["<b>SiteEquipment</b><br/><i>owl:Class</i>"]:::cls
+    FAC["<b>TemporarySiteFacility</b><br/><i>owl:Class</i>"]:::cls
+    UTIL["<b>UtilitySupply</b><br/><i>owl:Class</i>"]:::cls
+    ALLOC["<b>AreaAllocation</b><br/><i>owl:Class</i>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    GEO["geo:Geometry"]:::ext
+    EQ -. "rdfs:subClassOf" .-> INST
+    FAC -. "rdfs:subClassOf" .-> INST
+    UTIL -. "rdfs:subClassOf" .-> INST
+    CLA -- "hasConstructionSite" --> SITE
+    CLA -- "hasExternalSiteArea" --> AREA
+    SITE -- "hasConstructionField" --> FIELD
+    SITE -- "hasLocalCoordinateSystem" --> LCS
+    SITE -- "hasSiteInstallation" --> INST
+    FIELD -- "hasSiteArea" --> AREA
+    TP -- "isLocatedInArea" --> AREA
+    INST -- "usesSiteArea" --> AREA
+    INST -- "requiresUtility" --> UTIL
+    EQ -- "hasRestrictedZone" --> AREA
+    AREA -- "hasAreaType" --> SKOS
+    EQ -- "hasEquipmentType" --> SKOS
+    FAC -- "hasFacilityType" --> SKOS
+    UTIL -- "hasUtilityType" --> SKOS
+    LCS -- "referencePoint" --> GEO
+    AREA -- "hasAreaAllocation" --> ALLOC
+    ALLOC -- "allocatedArea" --> AREA
+    ALLOC -- "allocationType" --> SKOS
+    ALLOC -- "allocationStatus" --> SKOS
+    classDef cls fill:#cffafe,stroke:#0e7490,color:#155e75
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+
+  <h3>ObjectProperties (Auswahl)</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
+    <tr><td><code>hasConstructionSite</code></td><td>ConstructionLogisticsArea</td><td>ConstructionSite</td><td>—</td><td>Baustelle innerhalb des Baulogistikareals</td></tr>
+    <tr><td><code>hasExternalSiteArea</code></td><td>ConstructionLogisticsArea</td><td>SiteArea</td><td>—</td><td>Flächen außerhalb der Baustellengrenze (z. B. Wartezone)</td></tr>
+    <tr><td><code>hasConstructionField</code> / <code>isConstructionFieldOf</code></td><td>ConstructionSite ↔ ConstructionField</td><td>—</td><td>Inverse, Functional (Richtung Feld)</td><td>Baufelder der Baustelle</td></tr>
+    <tr><td><code>hasSiteArea</code> / <code>isSiteAreaOf</code></td><td>ConstructionField ↔ SiteArea</td><td>—</td><td>Inverse, Functional (Richtung Fläche)</td><td>Flächen eines Baufelds</td></tr>
+    <tr><td><code>hasLocalCoordinateSystem</code></td><td>ConstructionSite</td><td>LocalCoordinateSystem</td><td>Functional</td><td>Lokales Koordinatensystem (Fixpunkt, CRS, Rotation zu Gitternord)</td></tr>
+    <tr><td><code>hasAreaType</code></td><td>SiteArea</td><td>skos:Concept</td><td>Functional</td><td>Kontrollierter Flächentyp</td></tr>
+    <tr><td><code>isLocatedInArea</code></td><td>TransferPoint</td><td>SiteArea</td><td>Functional</td><td>Fläche, in der der Übergabepunkt liegt</td></tr>
+    <tr><td><code>hasSiteInstallation</code></td><td>ConstructionSite</td><td>SiteInstallation</td><td>—</td><td>Einrichtungen der Baustelle</td></tr>
+    <tr><td><code>usesSiteArea</code></td><td>SiteInstallation</td><td>SiteArea</td><td>—</td><td>Fläche, die die Einrichtung nutzt</td></tr>
+    <tr><td><code>requiresUtility</code></td><td>SiteInstallation</td><td>UtilitySupply</td><td>—</td><td>Benötigte Medienversorgung</td></tr>
+    <tr><td><code>hasRestrictedZone</code></td><td>SiteEquipment</td><td>SiteArea</td><td>—</td><td>Sperrzone des Geräts (z. B. Kran)</td></tr>
+    <tr><td><code>hasEquipmentType</code> / <code>hasFacilityType</code> / <code>hasUtilityType</code></td><td>SiteEquipment / TemporarySiteFacility / UtilitySupply</td><td>skos:Concept</td><td>Functional</td><td>Kontrollierte Typzuordnung</td></tr>
+    <tr><td><code>referencePoint</code></td><td>LocalCoordinateSystem</td><td>geo:Geometry</td><td>Functional</td><td>Fixpunkt des lokalen Koordinatensystems</td></tr>
+    <tr><td><code>hasAreaAllocation</code> / <code>allocatedArea</code></td><td>SiteArea ↔ AreaAllocation</td><td>—</td><td>Inverse</td><td>Zeitlich begrenzte Belegungen einer Fläche (0.2.0)</td></tr>
+    <tr><td><code>allocationType</code></td><td>AreaAllocation</td><td>skos:Concept</td><td>Functional</td><td>Flächentyp während des Belegungszeitraums (0.2.0)</td></tr>
+    <tr><td><code>allocationStatus</code></td><td>AreaAllocation</td><td>skos:Concept</td><td>Functional</td><td>Status: Geplant / Ist / Freigegeben (0.2.0)</td></tr>
+  </table>
+
+  <h3>DatatypeProperties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Datentyp</th><th>Beschreibung</th></tr>
+    <tr><td><code>identifier</code> / <code>name</code> / <code>description</code></td><td>alle Kernklassen</td><td>xsd:string</td><td>Kennung, Bezeichnung, Beschreibung</td></tr>
+    <tr><td><code>crsIdentifier</code></td><td>LocalCoordinateSystem</td><td>xsd:string</td><td>Kennung des externen Koordinatenreferenzsystems (z. B. EPSG:25832)</td></tr>
+    <tr><td><code>rotationToGridNorth</code></td><td>LocalCoordinateSystem</td><td>xsd:decimal</td><td>Rotation zu Gitternord in Grad</td></tr>
+    <tr><td><code>validFrom</code> / <code>validTo</code></td><td>AreaAllocation</td><td>xsd:dateTime</td><td>Beginn bzw. Ende des Belegungszeitraums (0.2.0)</td></tr>
+  </table>
+
+  <div class="note"><strong>SHACL-Profile:</strong> <code>core</code> (Pflichtfelder, Geometrie-Pflicht für SiteArea),
+     <code>vocabularies</code> (Bindung der vier Site-Vokabulare; Begriffe und Bindung:
+     <a href="#vocab-site">Sektion 13, Construction Site</a>),
+     <code>site-logistics</code>
+     (fachliche Regeln: Übergabepunkt nur in Ladezone/Lager/Arbeitsbereich/Stellfläche; Kran benötigt genau eine
+     Aufstellfläche, genau eine Sperrzone und Baustrom; Bauaufzug und Container analog; Lagerhilfsmittel benötigen Stellfläche)
+     und <code>area-allocation</code> (0.2.0: <code>validFrom ≤ validTo</code> sowie Konfliktregel, die sich
+     überschneidende Belegungen derselben <code>SiteArea</code> meldet).</div>
+
+  <h3>A-Box (Instanzen): Baustellenausschnitt</h3>
+  <div class="mermaid">
+graph TD
+    CLA["<b>ex:logistics-area-01</b><br/>a conx-site:ConstructionLogisticsArea<br/>CLA-01 · Baulogistikareal Projekt Alpha"]:::inst
+    SITE["<b>ex:site-01</b><br/>a conx-site:ConstructionSite<br/>SITE-01 · Baustelle Projekt Alpha"]:::inst
+    FIELD["<b>ex:field-01</b><br/>a conx-site:ConstructionField<br/>FIELD-01 · Baufeld A"]:::inst
+    LOAD["<b>ex:loading-area-01</b><br/>a conx-site:SiteArea<br/>AREA-LOAD-01 · Ladezone Kran<br/>hasAreaType conx-area:LoadingZone"]:::inst
+    TP["<b>ex:transfer-point-01</b><br/>a conx-site:TransferPoint<br/>TP-01 · Übergabepunkt Ladezone Kran"]:::inst
+    CRANE["<b>ex:crane-01</b><br/>a conx-site:SiteEquipment, SiteInstallation<br/>EQ-CRANE-01 · Turmdrehkran 1<br/>hasEquipmentType conx-eq:Crane"]:::inst
+    UTIL["<b>ex:site-electricity-01</b><br/>a conx-site:UtilitySupply, SiteInstallation<br/>UTIL-E-01 · Baustromversorgung"]:::inst
+    ALLOC1["<b>ex:alloc-loading-01</b><br/>a conx-site:AreaAllocation<br/>ALLOC-LOAD-01 · Ladezone Kran — Entladebetrieb<br/>validFrom 2026-11-01 · validTo 2026-11-15<br/>allocationStatus conx-aas:Actual"]:::inst
+    ALLOC2["<b>ex:alloc-loading-02</b><br/>a conx-site:AreaAllocation<br/>ALLOC-LOAD-02 · Ladezone Kran — Zwischenlager<br/>validFrom 2026-11-16 · validTo 2026-11-30<br/>allocationStatus conx-aas:Planned"]:::inst
+    CLA -- hasConstructionSite --> SITE
+    SITE -- hasConstructionField --> FIELD
+    FIELD -- hasSiteArea --> LOAD
+    TP -- isLocatedInArea --> LOAD
+    SITE -- hasSiteInstallation --> CRANE
+    SITE -- hasSiteInstallation --> UTIL
+    CRANE -- usesSiteArea --> LOAD
+    CRANE -- requiresUtility --> UTIL
+    LOAD -- hasAreaAllocation --> ALLOC1
+    LOAD -- hasAreaAllocation --> ALLOC2
+    ALLOC1 -- allocatedArea --> LOAD
+    ALLOC2 -- allocatedArea --> LOAD
+    classDef inst fill:#cffafe,stroke:#0e7490,color:#155e75
+  </div>
+  <p class="ns">Die beiden <code>AreaAllocation</code>-Instanzen belegen dieselbe Ladezone in
+     aufeinanderfolgenden, sich nicht überschneidenden Intervallen — die SHACL-Konfliktregel
+     (<code>area-allocation</code>) ist damit erfüllt.</p>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="delivery">
+  <h2>9. <span class="tag del">DEL</span> Construction Delivery <span class="ns">v0.1.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/construction-delivery#</code> · Quelle: Construct-X working document „Ontologien &amp; Standards für Baustellen“, 22 Oct 2026</p>
+
+  <p>Die Ontologie beschreibt den Baustellenanlieferungsprozess: Logistikanforderungen mit Status,
+     daraus abgeleitete Logistikvorgänge mit kontrolliertem Vorgangstyp, behandelte Ladungen mit
+     mengenmäßigen Ladungspositionen sowie dokumentierende Lieferscheine. Räumliche Übergabepunkte,
+     Terminplanvorgänge und LV-Mengen werden über die Link-Ontologien
+     <code>delivery-site-link</code>, <code>schedule-delivery-link</code> und <code>delivery-boq-link</code> angebunden.</p>
+
+  <h3>T-Box (Schema)</h3>
+  <div class="mermaid">
+graph TD
+    REQ["<b>LogisticsRequirement</b><br/><i>owl:Class</i>"]:::cls
+    OP["<b>LogisticsOperation</b><br/><i>owl:Class</i>"]:::cls
+    LOAD["<b>LogisticsLoad</b><br/><i>owl:Class</i>"]:::cls
+    ITEM["<b>LogisticsLoadItem</b><br/><i>owl:Class</i>"]:::cls
+    DN["<b>DeliveryNote</b><br/><i>owl:Class</i>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    REQ -- "hasStatus" --> SKOS
+    REQ -- "hasLogisticsOperation" --> OP
+    OP -- "isOperationOf" --> REQ
+    OP -- "operationType" --> SKOS
+    OP -- "handlesLoad" --> LOAD
+    OP -- "hasDeliveryNote" --> DN
+    LOAD -- "hasLoadItem" --> ITEM
+    ITEM -- "isLoadItemOf" --> LOAD
+    DN -- "documentsLoad" --> LOAD
+    classDef cls fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+
+  <h3>Properties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
+    <tr><td><code>hasStatus</code></td><td>LogisticsRequirement</td><td>skos:Concept</td><td>Functional</td><td>Status der Anforderung (Vokabular <code>requirement-status</code>)</td></tr>
+    <tr><td><code>hasLogisticsOperation</code> / <code>isOperationOf</code></td><td>LogisticsRequirement ↔ LogisticsOperation</td><td>—</td><td>Inverse, Functional (Richtung Vorgang)</td><td>Operative Schritte der Anforderung</td></tr>
+    <tr><td><code>operationType</code></td><td>LogisticsOperation</td><td>skos:Concept</td><td>Functional</td><td>Vorgangstyp (Vokabular <code>operation-type</code>)</td></tr>
+    <tr><td><code>handlesLoad</code></td><td>LogisticsOperation</td><td>LogisticsLoad</td><td>—</td><td>Von dem Vorgang behandelte Ladung</td></tr>
+    <tr><td><code>hasLoadItem</code> / <code>isLoadItemOf</code></td><td>LogisticsLoad ↔ LogisticsLoadItem</td><td>—</td><td>Inverse, Functional (Richtung Position)</td><td>Mengenmäßige Positionen der Ladung</td></tr>
+    <tr><td><code>hasDeliveryNote</code></td><td>LogisticsOperation</td><td>DeliveryNote</td><td>—</td><td>Dokumentierender Lieferschein</td></tr>
+    <tr><td><code>documentsLoad</code></td><td>DeliveryNote</td><td>LogisticsLoad</td><td>—</td><td>Vom Lieferschein dokumentierte Ladung</td></tr>
+  </table>
+
+  <h3>DatatypeProperties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Datentyp</th><th>Beschreibung</th></tr>
+    <tr><td><code>identifier</code> / <code>name</code> / <code>description</code></td><td>alle Kernklassen</td><td>xsd:string</td><td>Kennung, Bezeichnung, Beschreibung</td></tr>
+    <tr><td><code>requestedStart</code> / <code>requestedFinish</code></td><td>LogisticsRequirement</td><td>xsd:dateTime</td><td>Gewünschter Zeitrahmen der Anforderung</td></tr>
+    <tr><td><code>plannedStart</code> / <code>plannedFinish</code></td><td>LogisticsOperation</td><td>xsd:dateTime</td><td>Geplante Termine des Vorgangs</td></tr>
+    <tr><td><code>actualStart</code> / <code>actualFinish</code></td><td>LogisticsOperation</td><td>xsd:dateTime</td><td>Tatsächliche Termine des Vorgangs</td></tr>
+    <tr><td><code>quantity</code> / <code>unitCode</code></td><td>LogisticsLoadItem</td><td>decimal / string</td><td>Menge und Mengeneinheit</td></tr>
+    <tr><td><code>issuedAt</code></td><td>DeliveryNote</td><td>xsd:dateTime</td><td>Ausstellungszeitpunkt</td></tr>
+  </table>
+
+  <div class="note"><strong>SHACL-Profile:</strong> <code>core</code> (Pflichtfelder, Zeitkonsistenz
+     <code>requestedStart ≤ requestedFinish</code>, <code>plannedStart ≤ plannedFinish</code>,
+     <code>actualStart ≤ actualFinish</code>, Menge ≥ 0) und <code>vocabularies</code>
+     (Bindung der Vokabulare <code>requirement-status</code> und <code>operation-type</code>;
+     Begriffe und Bindung:
+     <a href="#vocab-delivery">Sektion 13, Construction Delivery</a>).</div>
+
+  <h3>A-Box (Instanzen): Anlieferung mit drei Logistikvorgängen</h3>
+  <div class="mermaid">
+graph TD
+    REQ["<b>ex:req-001</b><br/>a conx-del:LogisticsRequirement<br/>REQ-001 · Doppelboden 5. OG anliefern<br/>hasStatus conx-drs:Scheduled"]:::inst
+    ARR["<b>ex:op-arrival-001</b><br/>a conx-del:LogisticsOperation<br/>OP-ARR-001 · Ankunft und Warten<br/>operationType conx-dot:Arrival"]:::inst
+    UNL["<b>ex:op-unload-001</b><br/>a conx-del:LogisticsOperation<br/>OP-UNLOAD-001 · Entladen in Ladezone<br/>operationType conx-dot:Unloading"]:::inst
+    HO["<b>ex:op-handover-001</b><br/>a conx-del:LogisticsOperation<br/>OP-HO-001 · Übergabe der Ladung<br/>operationType conx-dot:Handover"]:::inst
+    LOAD["<b>ex:load-001</b><br/>a conx-del:LogisticsLoad<br/>LOAD-001 · Doppelbodenlieferung"]:::inst
+    ITEM["<b>ex:item-001</b><br/>a conx-del:LogisticsLoadItem<br/>LOADITEM-001 · Doppelbodenelemente<br/>120 PCE"]:::inst
+    DN["<b>ex:delivery-note-001</b><br/>a conx-del:DeliveryNote<br/>DN-2026-1103-001"]:::inst
+    REQ -- hasLogisticsOperation --> ARR
+    REQ -- hasLogisticsOperation --> UNL
+    REQ -- hasLogisticsOperation --> HO
+    ARR -- handlesLoad --> LOAD
+    UNL -- handlesLoad --> LOAD
+    HO -- handlesLoad --> LOAD
+    UNL -- hasDeliveryNote --> DN
+    DN -- documentsLoad --> LOAD
+    LOAD -- hasLoadItem --> ITEM
+    classDef inst fill:#fef3c7,stroke:#b45309,color:#78350f
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="built-asset">
+  <h2>10. <span class="tag ba">BA</span> Built Asset <span class="ns">v0.1.0</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/built-asset#</code></p>
+
+  <p>Die Ontologie beschreibt Bauwerke des Hoch- und Infrastrukturbaus — im
+     Gegensatz zur temporären Baustellensicht der Construction Site. Ein <code>BuiltAsset</code>
+     (Gebäude, Brücke, Tunnel, Straße) gliedert sich in räumliche Strukturelemente
+     (<code>SpatialStructureElement</code>, z. B. Etage, Raum), technische Systeme
+     (<code>TechnicalSystem</code>) und physische Komponenten (<code>Component</code>).
+     Kosten-, Projekt- und Baustellensichten werden über die Link-Ontologien angebunden
+     (<code>site-built-asset-link</code> für die temporäre Baustellensicht,
+     <code>built-asset-breakdown-link</code> für die projektbezogenen
+     LBS/SBS/CBS-Gliederungen).</p>
+
+  <h3>T-Box (Schema)</h3>
+  <div class="mermaid">
+graph TD
+    BA["<b>BuiltAsset</b><br/><i>owl:Class</i>"]:::cls
+    SSE["<b>SpatialStructureElement</b><br/><i>owl:Class</i>"]:::cls
+    SYS["<b>TechnicalSystem</b><br/><i>owl:Class</i>"]:::cls
+    COMP["<b>Component</b><br/><i>owl:Class</i>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    GEO["geo:Geometry"]:::ext
+    BA -- "hasSpatialStructureElement" --> SSE
+    SSE -- "hasSubSpatialStructureElement" --> SSE
+    BA -- "hasTechnicalSystem" --> SYS
+    SYS -- "hasSystemComponent" --> COMP
+    BA -- "hasPhysicalComponent" --> COMP
+    COMP -- "isLocatedIn" --> SSE
+    SYS -- "servesBuiltAsset" --> BA
+    BA -- "hasAssetType" --> SKOS
+    SSE -- "hasSpatialStructureType" --> SKOS
+    BA -- "geo:hasGeometry" --> GEO
+    classDef cls fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+
+  <div class="note"><strong>SHACL-Profile:</strong> <code>core</code> (Pflichtfelder identifier/name,
+     Hierarchie-Regeln für räumliche Strukturelemente) und <code>vocabularies</code>
+     (Bindung der Vokabulare <code>asset-type</code> und <code>spatial-structure-type</code>;
+     Begriffe und Bindung:
+     <a href="#vocab-built-asset">Sektion 13, Built Asset</a>).</div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="notification">
+  <h2>11. <span class="tag nc">NC</span> Notification Content <span class="ns">v0.1.1</span></h2>
+  <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/notification-content#</code></p>
+
+  <p>Die Ontologie beschreibt den <strong>fachinhaltlichen Teil einer
+     Benachrichtigung</strong>, wie sie zwischen Construct-X-Partnern im Datenraum
+     ausgetauscht wird (z. B. GU &#8594; NU: &#8222;Feinterminplanung angefordert&#8220;).
+     Sie ist bewusst <em>transportneutral</em>: Routing- und Transport-Metadaten wie
+     <code>messageId</code>, Sender/Empfänger, Zeitstempel und
+     <code>relatedMessageId</code> werden <strong>nicht</strong> modelliert, sondern
+     verbleiben im externen Notification-Header (z. B. Industry Core / Tractus-X).
+     Eine <code>NotificationContent</code> trägt einen <code>notificationType</code>
+     (z. B. <code>TaskRequested</code>, <code>DataAvailable</code>,
+     <code>ResultAvailable</code>) und — je nach Typ — einen
+     <code>taskType</code>, einen <code>taskStatus</code>, eine
+     <code>contextResource</code> (Verweis auf den fachlichen Datensatz) und über
+     <code>hasSubjectAssignment</code> eine oder mehrere
+     <code>SubjectAssignment</code>-Objekte, die ein referenziertes
+     <code>assignedResource</code> mit einer Rolle (<code>subjectRole</code>: Target /
+     ContextOnly) versehen.</p>
+
+  <h3>T-Box (Schema)</h3>
+  <div class="mermaid">
+graph TD
+    NC["<b>NotificationContent</b><br/><i>owl:Class</i>"]:::cls
+    SA["<b>SubjectAssignment</b><br/><i>owl:Class</i>"]:::cls
+    SKOS["skos:Concept"]:::ext
+    IRI["IRI (owl:Thing)"]:::ext
+    NC -- "notificationType" --> SKOS
+    NC -- "taskType" --> SKOS
+    NC -- "taskStatus" --> SKOS
+    NC -- "contextResource" --> IRI
+    NC -- "hasResult" --> IRI
+    NC -- "hasSubjectAssignment" --> SA
+    SA -- "subjectRole" --> SKOS
+    SA -- "assignedResource" --> IRI
+    classDef cls fill:#ede9fe,stroke:#6d28d9,color:#4c1d95
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+
+  <h3>ObjectProperties</h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>notificationType</code></td><td>NotificationContent</td><td>skos:Concept</td><td>Functional, Pflicht</td></tr>
+    <tr><td><code>taskType</code></td><td>NotificationContent</td><td>skos:Concept</td><td>Functional (optional)</td></tr>
+    <tr><td><code>taskStatus</code></td><td>NotificationContent</td><td>skos:Concept</td><td>Functional (optional)</td></tr>
+    <tr><td><code>contextResource</code></td><td>NotificationContent</td><td>IRI</td><td>Functional (optional)</td></tr>
+    <tr><td><code>hasResult</code></td><td>NotificationContent</td><td>IRI</td><td>—</td></tr>
+    <tr><td><code>hasSubjectAssignment</code></td><td>NotificationContent</td><td>SubjectAssignment</td><td>— (mehrere)</td></tr>
+    <tr><td><code>subjectRole</code></td><td>SubjectAssignment</td><td>skos:Concept</td><td>Functional, Pflicht</td></tr>
+    <tr><td><code>assignedResource</code></td><td>SubjectAssignment</td><td>IRI</td><td>Functional, Pflicht</td></tr>
+  </table>
+
+  <div class="note"><strong>SHACL-Profil:</strong> <code>core</code> — Pflichtfelder
+     (<code>notificationType</code> sowie je nach Typ <code>taskType</code>/
+     <code>taskStatus</code>), geschlossene Wertebereiche der vier Vokabulare
+     (<a href="#vocab-notification">Sektion 13, Notification Content</a>) sowie
+     fachliche SPARQL-Regeln, z. B. &#8222;<code>TaskRequested</code> muss genau einen
+     <code>taskType</code> und mindestens ein Target referenzieren&#8220; und
+     &#8222;<code>DetailedScheduling</code> muss genau eine
+     <code>contextResource</code> haben&#8220;. Referenzbeispiel:
+     <code>examples/…/notification/doppelboden-task-request.json</code>.</div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="links">
+  <h2>12. <span class="tag link">LINK</span> Link-Ontologien</h2>
+
+  <h3>schedule-breakdown-link <span class="ns">v0.6.0 · conx-sbl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>usesBreakdownStructure</code></td><td>ConstructionSchedule</td><td>BreakdownStructure</td><td>—</td></tr>
+    <tr><td><code>usesWorkBreakdownStructure</code></td><td>ConstructionSchedule</td><td>WorkBreakdownStructure</td><td>Functional, Subproperty</td></tr>
+    <tr><td><code>usesLocationBreakdownStructure</code></td><td>ConstructionSchedule</td><td>LocationBreakdownStructure</td><td>Functional, Subproperty</td></tr>
+    <tr><td><code>usesSystemBreakdownStructure</code></td><td>ConstructionSchedule</td><td>SystemBreakdownStructure</td><td>Functional, Subproperty</td></tr>
+    <tr><td><code>usesCostBreakdownStructure</code></td><td>ConstructionSchedule</td><td>CostBreakdownStructure</td><td>Functional, Subproperty</td></tr>
+    <tr><td><code>isClassifiedByWBSNode</code></td><td>Activity</td><td>WBSNode</td><td>Functional</td></tr>
+    <tr><td><code>isPerformedIn</code></td><td>Activity</td><td>LBSNode</td><td>— (mehrere Orte möglich)</td></tr>
+    <tr><td><code>isClassifiedBySBSNode</code></td><td>Activity</td><td>SBSNode</td><td>Functional</td></tr>
+    <tr><td><code>isClassifiedByCBSNode</code></td><td>Activity</td><td>CBSNode</td><td>Functional</td></tr>
+  </table>
+
+  <h3>schedule-boq-link <span class="ns">v0.2.1 · conx-sbq</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>usesBillOfQuantities</code></td><td>ConstructionSchedule</td><td>BillOfQuantities</td><td>—</td></tr>
+    <tr><td><code>isAssignedToActivity</code></td><td>QuantitySplit</td><td>Activity</td><td>Functional (feingranulare Zuordnung über Mengensplits)</td></tr>
+  </table>
+
+  <h3>schedule-progress-report-link <span class="ns">v0.1.0 · conx-sprl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>reportsOnActivity</code></td><td>ConstructionProgressReport</td><td>Activity</td><td>Functional (jede Meldung bezieht sich auf genau einen Vorgang; ein Vorgang kann mehrere Meldungen haben)</td></tr>
+  </table>
+
+  <h3>site-breakdown-link <span class="ns">v0.1.0 · conx-sbdl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>isRepresentedByLBSNode</code></td><td>SiteArea</td><td>LBSNode</td><td>Inverse von <code>representsSiteArea</code> (Fläche wird durch LBS-Knoten repräsentiert)</td></tr>
+    <tr><td><code>representsSiteArea</code></td><td>LBSNode</td><td>SiteArea</td><td>—</td></tr>
+  </table>
+
+  <h3>delivery-site-link <span class="ns">v0.1.0 · conx-dsl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>usesTransferPoint</code></td><td>LogisticsOperation</td><td>TransferPoint</td><td>Functional (genau ein Übergabepunkt pro Logistikvorgang)</td></tr>
+  </table>
+
+  <h3>delivery-boq-link <span class="ns">v0.1.0 · conx-dbl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>fulfillsQuantitySplit</code></td><td>LogisticsLoadItem</td><td>QuantitySplit</td><td>Functional (Ladungsposition erfüllt genau einen Mengensplit, ganz oder teilweise)</td></tr>
+  </table>
+
+  <h3>schedule-delivery-link <span class="ns">v0.1.0 · conx-sdl</span></h3>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>supportsActivity</code></td><td>LogisticsRequirement</td><td>Activity</td><td>Inverse von <code>requiresLogisticsRequirement</code> (Anforderung unterstützt Vorgang)</td></tr>
+    <tr><td><code>requiresLogisticsRequirement</code></td><td>Activity</td><td>LogisticsRequirement</td><td>— (ein Vorgang kann mehrere Anforderungen benötigen)</td></tr>
+  </table>
+
+  <h3>schedule-site-link <span class="ns">v0.1.0 · conx-ssl</span></h3>
+  <p>Verbindet eine zeitlich begrenzte Flächenbelegung (<code>AreaAllocation</code>) mit dem
+     Terminplanvorgang, für den die Fläche belegt ist (0.2.0-Feature der Site-Ontologie).</p>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>allocatedForActivity</code></td><td>AreaAllocation</td><td>Activity</td><td>Inverse von <code>requiresAreaAllocation</code> (Belegung ist für Vorgang)</td></tr>
+    <tr><td><code>requiresAreaAllocation</code></td><td>Activity</td><td>AreaAllocation</td><td>— (ein Vorgang kann mehrere Belegungen benötigen)</td></tr>
+  </table>
+
+  <h3>site-built-asset-link <span class="ns">v0.1.0 · conx-sbal</span></h3>
+  <p>Verbindet die temporäre Baustellensicht mit der dauerhaften Bauwerksstruktur: ein Baufeld
+     mit dem Bauwerk darin sowie eine Baustellenfläche mit dem räumlichen Strukturelement, in dem sie liegt.</p>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>containsBuiltAsset</code></td><td>ConstructionField</td><td>BuiltAsset</td><td>Inverse von <code>isLocatedInConstructionField</code></td></tr>
+    <tr><td><code>isLocatedInConstructionField</code></td><td>BuiltAsset</td><td>ConstructionField</td><td>—</td></tr>
+    <tr><td><code>isLocatedInSpatialStructureElement</code></td><td>SiteArea</td><td>SpatialStructureElement</td><td>Inverse von <code>containsSiteArea</code></td></tr>
+    <tr><td><code>containsSiteArea</code></td><td>SpatialStructureElement</td><td>SiteArea</td><td>—</td></tr>
+  </table>
+
+  <h3>built-asset-breakdown-link <span class="ns">v0.1.0 · conx-babl</span></h3>
+  <p>Verbindet die intrinsische Bauwerksstruktur mit den projektbezogenen
+     Gliederungsstrukturen: ein räumliches Strukturelement mit dem LBS-Knoten,
+     ein technisches System mit dem SBS-Knoten und ein Bauwerk/System/Komponente
+     mit dem CBS-Knoten, der es im Kostenplan abbildet.</p>
+  <table>
+    <tr><th>Property</th><th>Domain</th><th>Range</th><th>Merkmale</th></tr>
+    <tr><td><code>isRepresentedByLBSNode</code></td><td>SpatialStructureElement</td><td>LBSNode</td><td>Inverse von <code>representsSpatialStructureElement</code></td></tr>
+    <tr><td><code>representsSpatialStructureElement</code></td><td>LBSNode</td><td>SpatialStructureElement</td><td>—</td></tr>
+    <tr><td><code>isRepresentedBySBSNode</code></td><td>TechnicalSystem</td><td>SBSNode</td><td>Inverse von <code>representsTechnicalSystem</code></td></tr>
+    <tr><td><code>representsTechnicalSystem</code></td><td>SBSNode</td><td>TechnicalSystem</td><td>—</td></tr>
+    <tr><td><code>isClassifiedByCBSNode</code></td><td>BuiltAsset / TechnicalSystem / Component</td><td>CBSNode</td><td>— (Kosten-Zuordnung, kein Inverse)</td></tr>
+  </table>
+
+  <h3>A-Box (Instanzen): vollständige Verknüpfung eines Vorgangs</h3>
+  <div class="mermaid">
+graph TB
+    SCH["<b>ex:schedule-01</b><br/>a conx-cs:ConstructionSchedule"]:::cs
+    A100["<b>ex:activity-A100</b><br/>a conx-cs:Activity"]:::cs
+    WBS01["<b>ex:wbs-01</b><br/>a conx-bs:WorkBreakdownStructure"]:::bs
+    LBS01["<b>ex:lbs-01</b><br/>a conx-bs:LocationBreakdownStructure"]:::bs
+    SBS01["<b>ex:sbs-01</b><br/>a conx-bs:SystemBreakdownStructure"]:::bs
+    CBS01["<b>ex:cbs-01</b><br/>a conx-bs:CostBreakdownStructure"]:::bs
+    W120["<b>ex:wbs-120</b><br/>a conx-bs:WBSNode"]:::bs
+    LBSeg["<b>ex:lbs-eg</b><br/>a conx-bs:LBSNode"]:::bs
+    SBS10["<b>ex:sbs-10</b><br/>a conx-bs:SBSNode"]:::bs
+    CBS300["<b>ex:cbs-300</b><br/>a conx-bs:CBSNode"]:::bs
+    BOQ01["<b>ex:boq-01</b><br/>a conx-gaeb:BillOfQuantities"]:::boq
+    SPLIT["<b>ex:split-001</b><br/>a conx-gaeb:QuantitySplit"]:::boq
+    PR["<b>ex:progress-report-A100</b><br/>a conx-cpr:ConstructionProgressReport"]:::cpr
+    SCH -- usesWorkBreakdownStructure --> WBS01
+    SCH -- usesLocationBreakdownStructure --> LBS01
+    SCH -- usesSystemBreakdownStructure --> SBS01
+    SCH -- usesCostBreakdownStructure --> CBS01
+    SCH -- usesBillOfQuantities --> BOQ01
+    SCH -- hasActivity --> A100
+    A100 -- isClassifiedByWBSNode --> W120
+    A100 -- isPerformedIn --> LBSeg
+    A100 -- isClassifiedBySBSNode --> SBS10
+    A100 -- isClassifiedByCBSNode --> CBS300
+    SPLIT -- isAssignedToActivity --> A100
+    PR -- reportsOnActivity --> A100
+    classDef cs fill:#ddf4ff,stroke:#0969da,color:#0a3069
+    classDef bs fill:#fbefff,stroke:#8250df,color:#422457
+    classDef boq fill:#dafbe1,stroke:#1a7f37,color:#0a3622
+    classDef cpr fill:#ffeff7,stroke:#bf3989,color:#82505a
+  </div>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="vocab">
+  <h2>13. <span class="tag vocab">VOCAB</span> SKOS-Vokabulare</h2>
+  <p>Alle Vokabulare sind <code>skos:ConceptScheme</code>s mit <code>skos:Concept</code>-Instanzen.
+     Sie werden <strong>nicht</strong> von den Domänen-Ontologien importiert, sondern über
+     <strong>optionale SHACL-Profile</strong> als Wertebereichsrestriktion eingebunden
+     (z. B. <code>sh:in</code> oder <code>sh:class</code> + <code>sh:in</code> auf dem Vokabular).</p>
+
+  <p>Diese Sektion gliedert sich in vier Teile: einen <strong>Überblick</strong> über
+     alle einundzwanzig Vokabulare und ihre Zuordnung zu den Ontologien, die
+     <strong>Vokabulare nach Domäne</strong> (jeweils mit kurzer Erläuterung,
+     Ontologie-Bezug und Begriffsliste), die
+     <a href="#vocab-nutzung">Nutzung der Vokabulare</a>
+     (Bindung über SHACL-Profile, Referenzierung in den Daten) und die
+     <a href="#vocab-mapping">Regeln für SKOS-Mapping</a> — Identität, Synonyme und
+     externe Verknüpfung, einschließlich der empfohlenen Modellierungsreihenfolge
+     und der Begründung, warum <code>owl:sameAs</code> nicht verwendet wird.</p>
+
+  <h3>Überblick: Vokabulare und ihre Zuordnung zu den Ontologien</h3>
+  <p>Jedes Vokabular kontrolliert den Wertebereich einer oder mehrerer
+     <code>skos:Concept</code>-Properties einer Domänen-Ontologie. Die Tabelle zeigt
+     die vollständige Zuordnung; die Details folgen domänenweise:</p>
+  <table>
+    <tr><th>Vokabular</th><th>Präfix</th><th>Domäne</th><th>Property</th><th>SHACL-Profil</th><th>Bindung</th></tr>
+    <tr><td>schedule-type</td><td><code>conx-st</code></td><td rowspan="3">Construction Schedule</td><td><code>scheduleType</code></td><td><code>construction-schedule-shapes-schedule-type</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>activity-status</td><td><code>conx-status</code></td><td><code>hasStatus</code> (Activity)</td><td><code>construction-schedule-shapes-activity-status</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>precedence-relationship-type</td><td><code>conx-prt</code></td><td><code>relationshipType</code></td><td><code>construction-schedule-shapes-precedence-relationship-type</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>de-wbs-node-type</td><td><code>conx-de-wbs</code></td><td rowspan="4">Breakdown Structure</td><td rowspan="4"><code>nodeType</code> (WBS/LBS/SBS/CBS)</td><td rowspan="4"><code>breakdown-structure-shapes-node-types</code></td><td rowspan="4"><code>sh:nodeKind sh:IRI</code> (offen)</td></tr>
+    <tr><td>de-lbs-node-type</td><td><code>conx-de-lbs</code></td></tr>
+    <tr><td>de-sbs-node-type</td><td><code>conx-de-sbs</code></td></tr>
+    <tr><td>de-cbs-node-type</td><td><code>conx-de-cbs</code></td></tr>
+    <tr><td>boq-price-component-type</td><td><code>conx-pct</code></td><td>GAEB BoQ</td><td><code>hasPriceComponentType</code></td><td><code>gaeb-boq-shapes-price-component-type</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>activity-status (geteilt)</td><td><code>conx-status</code></td><td>Progress Report</td><td><code>activityStatus</code></td><td><code>construction-progress-report-shapes-activity-status</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>site area-type</td><td><code>conx-area</code></td><td rowspan="5">Construction Site</td><td><code>hasAreaType</code>, <code>allocationType</code></td><td><code>construction-site-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>site equipment-type</td><td><code>conx-eq</code></td><td><code>hasEquipmentType</code></td><td><code>construction-site-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>site facility-type</td><td><code>conx-fac</code></td><td><code>hasFacilityType</code></td><td><code>construction-site-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>site utility-type</td><td><code>conx-util</code></td><td><code>hasUtilityType</code></td><td><code>construction-site-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>site area-allocation-status</td><td><code>conx-aas</code></td><td><code>allocationStatus</code></td><td><code>construction-site-shapes-area-allocation</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>delivery operation-type</td><td><code>conx-dot</code></td><td rowspan="2">Construction Delivery</td><td><code>operationType</code></td><td><code>construction-delivery-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>delivery requirement-status</td><td><code>conx-drs</code></td><td><code>hasStatus</code> (LogisticsRequirement)</td><td><code>construction-delivery-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>built-asset asset-type</td><td><code>conx-bat</code></td><td rowspan="2">Built Asset</td><td><code>hasAssetType</code></td><td><code>built-asset-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>built-asset spatial-structure-type</td><td><code>conx-bst</code></td><td><code>hasSpatialStructureType</code></td><td><code>built-asset-shapes-vocabularies</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>notification-type</td><td><code>conx-nt</code></td><td rowspan="4">Notification Content</td><td><code>notificationType</code></td><td><code>notification-content-shapes</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>task-type</td><td><code>conx-tt</code></td><td><code>taskType</code></td><td><code>notification-content-shapes</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>task-status</td><td><code>conx-ts</code></td><td><code>taskStatus</code></td><td><code>notification-content-shapes</code></td><td><code>sh:in</code></td></tr>
+    <tr><td>subject-role</td><td><code>conx-sr</code></td><td><code>subjectRole</code></td><td><code>notification-content-shapes</code></td><td><code>sh:in</code></td></tr>
+  </table>
+
+  <h3 id="vocab-schedule">Construction Schedule</h3>
+  <p>Die Terminplanung kontrolliert drei Aspekte über Vokabulare: den
+     <strong>Typ des Plans</strong>, den <strong>Ausführungsstatus der Vorgänge</strong>
+     und den <strong>Typ der Anordnungsbeziehungen</strong>. Alle drei Properties
+     haben in der Ontologie den Range <code>skos:Concept</code> und werden über
+     optionale SHACL-Profile mit geschlossener Liste (<code>sh:in</code>) an die
+     Vokabulare gebunden.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>schedule-type <span class="ns">v0.1.0 · conx-st</span></h3>
+      <p class="ns">Kontrolliert <code>ConstructionSchedule.scheduleType</code> — die
+         Planart nach DIN 69900 (Grobnetz, Detailnetz, …). Mehrere Werte pro
+         Plan sind erlaubt (z. B. ein Plan, der zugleich Rahmen- und
+         Meilensteinplan ist).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>RoughNetwork</code></td><td>Grobnetzplan</td></tr>
+        <tr><td><code>DetailedNetwork</code></td><td>Detaillierter Netzplan</td></tr>
+        <tr><td><code>TotalNetwork</code></td><td>Gesamtnetzplan</td></tr>
+        <tr><td><code>FrameNetwork</code></td><td>Rahmennetzplan</td></tr>
+        <tr><td><code>PartialNetwork</code></td><td>Teilnetzplan</td></tr>
+        <tr><td><code>MilestoneNetwork</code></td><td>Meilensteinplan</td></tr>
+        <tr><td><code>StandardNetwork</code></td><td>Standardnetzplan</td></tr>
+      </table>
+      <h3>activity-status <span class="ns">v0.1.2 · conx-status · geteilt mit Progress Report</span></h3>
+      <p class="ns">Kontrolliert <code>Activity.hasStatus</code> — den aktuellen
+         Ausführungsstatus eines Vorgangs. Das Vokabular wird zusätzlich von der
+         Progress-Report-Ontologie genutzt (<code>activityStatus</code>, siehe
+         <a href="#vocab-progress">unten</a>); es ist damit das einzige
+         domänenübergreifend geteilte Vokabular des Pakets.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Planned</code></td><td>Geplant</td></tr>
+        <tr><td><code>InProgress</code></td><td>In Ausführung</td></tr>
+        <tr><td><code>Completed</code></td><td>Abgeschlossen</td></tr>
+        <tr><td><code>Cancelled</code></td><td>Storniert</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>precedence-relationship-type <span class="ns">v0.1.0 · conx-prt</span></h3>
+      <p class="ns">Kontrolliert
+         <code>PrecedenceRelationship.relationshipType</code> — die vier
+         Anordnungsbeziehungstypen der Netzplantechnik (DIN 69900).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>FinishToStart</code></td><td>Ende–Anfang (FS)</td></tr>
+        <tr><td><code>StartToStart</code></td><td>Anfang–Anfang (SS)</td></tr>
+        <tr><td><code>FinishToFinish</code></td><td>Ende–Ende (FF)</td></tr>
+        <tr><td><code>StartToFinish</code></td><td>Anfang–Ende (SF)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 id="vocab-breakdown">Breakdown Structure</h3>
+  <p>Die vier Deutschland-spezifischen Knotentyp-Vokabulare kontrollieren
+     <code>BreakdownNode.nodeType</code> — den fachlichen Typ eines Knotens in
+     WBS, LBS, SBS und CBS (z. B. Gewerk für WBS, Geschoss für LBS,
+     Kostengruppe 300 für CBS). Die Begriffe sind Auszüge aus deutschen
+     Klassifikationen (GR51–GR54, DIN 276) und tragen die
+     <code>skos:notation</code> der Quelle. Anders als die übrigen Vokabulare
+     ist die SHACL-Bindung hier <strong>offen</strong>
+     (<code>sh:nodeKind sh:IRI</code>): Das Profil
+     <code>breakdown-structure-shapes-node-types</code> importiert die vier
+     deutschen Vokabulare, erlaubt aber auch Concepts aus anderen
+     Knotentyp-Vokabularen (z. B. für andere Länder).</p>
+
+  <div class="grid2">
+    <div>
+      <h3 id="vocab-node-types">de-wbs-node-type <span class="ns">v0.1.0 · conx-de-wbs</span></h3>
+      <p class="ns">Quelle: Klassifikationsauszug GR54 / M284–M290</p>
+      <table>
+        <tr><th>Begriff</th><th>Notation</th><th>Bedeutung</th></tr>
+        <tr><td><code>Phase</code></td><td>M284</td><td>Phase</td></tr>
+        <tr><td><code>Subphase</code></td><td>M285</td><td>Teilphase</td></tr>
+        <tr><td><code>Trade</code></td><td>M286</td><td>Gewerk</td></tr>
+        <tr><td><code>ConstructionMethod</code></td><td>M287</td><td>Bauweise</td></tr>
+        <tr><td><code>MaterialGroup</code></td><td>M288</td><td>Materialgruppe</td></tr>
+        <tr><td><code>Process</code></td><td>M289</td><td>Prozess</td></tr>
+        <tr><td><code>ProcessStep</code></td><td>M290</td><td>Prozessschritt</td></tr>
+      </table>
+      <h3>de-sbs-node-type <span class="ns">v0.1.0 · conx-de-sbs</span></h3>
+      <p class="ns">Quelle: Klassifikationsauszug GR52 / M264–M269</p>
+      <table>
+        <tr><th>Begriff</th><th>Notation</th><th>Bedeutung</th></tr>
+        <tr><td><code>SystemType</code></td><td>M264</td><td>Systemtyp</td></tr>
+        <tr><td><code>StructureType</code></td><td>M265</td><td>Bauwerkstyp</td></tr>
+        <tr><td><code>AssemblyType</code></td><td>M266</td><td>Baugruppentyp</td></tr>
+        <tr><td><code>BuildingComponentType</code></td><td>M267</td><td>Bauteiltyp</td></tr>
+        <tr><td><code>ElementType</code></td><td>M268</td><td>Elementtyp</td></tr>
+        <tr><td><code>ComponentType</code></td><td>M269</td><td>Komponententyp</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>de-lbs-node-type <span class="ns">v0.1.0 · conx-de-lbs</span></h3>
+      <p class="ns">Quelle: Klassifikationsauszug GR51 / M270–M283</p>
+      <table>
+        <tr><th>Begriff</th><th>Notation</th><th>Bedeutung</th></tr>
+        <tr><td><code>ConstructionSection</code></td><td>M270</td><td>Bauabschnitt</td></tr>
+        <tr><td><code>Axis</code></td><td>M271</td><td>Achse</td></tr>
+        <tr><td><code>System</code></td><td>M272</td><td>System</td></tr>
+        <tr><td><code>Structure</code></td><td>M273</td><td>Bauwerk</td></tr>
+        <tr><td><code>Assembly</code></td><td>M274</td><td>Baugruppe</td></tr>
+        <tr><td><code>BuildingComponent</code></td><td>M275</td><td>Bauteil</td></tr>
+        <tr><td><code>TransverseAxis</code></td><td>M276</td><td>Querachse</td></tr>
+        <tr><td><code>DirectionalCarriageway</code></td><td>M277</td><td>Richtungsfahrbahn</td></tr>
+        <tr><td><code>Lane</code></td><td>M278</td><td>Fahrstreifen</td></tr>
+        <tr><td><code>StructurePart</code></td><td>M279</td><td>Teilbauwerk</td></tr>
+        <tr><td><code>Storey</code></td><td>M280</td><td>Geschoss</td></tr>
+        <tr><td><code>Area</code></td><td>M281</td><td>Bereich</td></tr>
+        <tr><td><code>Subarea</code></td><td>M282</td><td>Teilbereich</td></tr>
+        <tr><td><code>Room</code></td><td>M283</td><td>Raum</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h3>de-cbs-node-type <span class="ns">v0.1.0 · conx-de-cbs</span></h3>
+      <p class="ns">Quelle: DIN 276:2018-12, 5.1 (Kostengruppen 1. Ebene)</p>
+      <table>
+        <tr><th>Begriff</th><th>Notation</th><th>Bedeutung</th></tr>
+        <tr><td><code>CostGroup100</code></td><td>100</td><td>Grundstück</td></tr>
+        <tr><td><code>CostGroup200</code></td><td>200</td><td>Vorbereitende Maßnahmen</td></tr>
+        <tr><td><code>CostGroup300</code></td><td>300</td><td>Bauwerk — Baukonstruktionen</td></tr>
+        <tr><td><code>CostGroup400</code></td><td>400</td><td>Bauwerk — Technische Anlagen</td></tr>
+        <tr><td><code>CostGroup500</code></td><td>500</td><td>Außenanlagen und Freiflächen</td></tr>
+        <tr><td><code>CostGroup600</code></td><td>600</td><td>Ausstattung und Kunstwerke</td></tr>
+        <tr><td><code>CostGroup700</code></td><td>700</td><td>Baunebenkosten</td></tr>
+        <tr><td><code>CostGroup800</code></td><td>800</td><td>Finanzierung</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 id="vocab-boq">GAEB BoQ</h3>
+  <p>Das Vokabular kontrolliert
+     <code>UnitPriceComponent.hasPriceComponentType</code> — die Art des
+     Einheitspreisanteils (Löhne, Stoffe, Geräte, …) im Einheitspreisaufbau
+     einer LV-Position.</p>
+  <h3>boq-price-component-type <span class="ns">v0.1.0 · conx-pct</span></h3>
+  <table>
+    <tr><th>Begriff</th><th>Bedeutung</th></tr>
+    <tr><td><code>Labor</code></td><td>Löhne</td></tr>
+    <tr><td><code>Materials</code></td><td>Stoffe</td></tr>
+    <tr><td><code>Equipment</code></td><td>Geräte</td></tr>
+    <tr><td><code>Other</code></td><td>Sonstiges</td></tr>
+    <tr><td><code>Unknown</code></td><td>Unbekannt</td></tr>
+  </table>
+
+  <h3 id="vocab-progress">Construction Progress Report</h3>
+  <p>Die Fortschrittsmeldung nutzt das <strong>geteilte</strong>
+     <code>activity-status</code>-Vokabular (Begriffe siehe
+     <a href="#vocab-schedule">Construction Schedule</a>) über
+     <code>ConstructionProgressReport.activityStatus</code> — den Status des
+     Vorgangs zum Erfassungszeitpunkt der Meldung. Die gemeinsame Nutzung
+     desselben Vokabulars stellt sicher, dass Plan-Status und
+     Meldungs-Status dieselben Werte verwenden und damit direkt vergleichbar
+     sind.</p>
+
+  <h3 id="vocab-site">Construction Site</h3>
+  <p>Die Baustellensicht kontrolliert fünf Aspekte über Vokabulare: den
+     <strong>Flächentyp</strong> (auch als <code>allocationType</code> bei der
+     zeitlich veränderlichen Flächenbelegung), den
+     <strong>Gerätetyp</strong>, den <strong>Einrichtungstyp</strong>, den
+     <strong>Medientyp</strong> und den <strong>Status der
+     Flächenbelegung</strong>. Alle sind über das SHACL-Profil
+     <code>construction-site-shapes-vocabularies</code> (bzw.
+     <code>construction-site-shapes-area-allocation</code> für den
+     Belegungsstatus) mit geschlossener Liste gebunden.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>site area-type <span class="ns">v0.1.0 · conx-area</span></h3>
+      <p class="ns">Kontrolliert <code>SiteArea.hasAreaType</code> und
+         <code>AreaAllocation.allocationType</code> — den kontrollierten
+         Flächentyp operativer Baustellenflächen.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>WaitingZone</code></td><td>Wartezone</td></tr>
+        <tr><td><code>PreStagingArea</code></td><td>Vorstaubereich</td></tr>
+        <tr><td><code>SiteAccess</code></td><td>Zufahrt</td></tr>
+        <tr><td><code>ConstructionRoad</code></td><td>Baustraße</td></tr>
+        <tr><td><code>TrafficRoute</code></td><td>Verkehrsweg</td></tr>
+        <tr><td><code>EscapeRoute</code></td><td>Fluchtweg</td></tr>
+        <tr><td><code>LoadingZone</code></td><td>Ladezone</td></tr>
+        <tr><td><code>EquipmentSetupArea</code></td><td>Aufstellfläche</td></tr>
+        <tr><td><code>ParkingArea</code></td><td>Stellfläche</td></tr>
+        <tr><td><code>ConstructionPath</code></td><td>Bauweg</td></tr>
+        <tr><td><code>StorageArea</code></td><td>Lager</td></tr>
+        <tr><td><code>IntermediateStorageArea</code></td><td>Zwischenlager</td></tr>
+        <tr><td><code>WorkArea</code></td><td>Arbeitsbereich</td></tr>
+        <tr><td><code>RestrictedZone</code></td><td>Sperrzone</td></tr>
+        <tr><td><code>GreenArea</code></td><td>Grünfläche</td></tr>
+      </table>
+      <h3>site equipment-type <span class="ns">v0.1.0 · conx-eq</span></h3>
+      <p class="ns">Kontrolliert <code>SiteEquipment.hasEquipmentType</code> — die
+         Typzuordnung von Baustellengeräten (Kran, Bauaufzug, …). Die
+         SHACL-Logistikregeln (z. B. Kran benötigt Aufstellfläche und Sperrzone)
+         beziehen sich auf diese Typen.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>LiftingEquipment</code></td><td>Hebezeug (Oberbegriff)</td></tr>
+        <tr><td><code>Crane</code></td><td>Kran</td></tr>
+        <tr><td><code>ConstructionLift</code></td><td>Bauaufzug</td></tr>
+        <tr><td><code>IndustrialTruck</code></td><td>Flurförderer (Oberbegriff)</td></tr>
+        <tr><td><code>Forklift</code></td><td>Gabelstapler</td></tr>
+        <tr><td><code>StorageAid</code></td><td>Lagerhilfsmittel</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>site facility-type <span class="ns">v0.1.0 · conx-fac</span></h3>
+      <p class="ns">Kontrolliert
+         <code>TemporarySiteFacility.hasFacilityType</code> — die Typzuordnung
+         temporärer Baustelleneinrichtungen (Containeranlagen).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>ContainerSystem</code></td><td>Containeranlage</td></tr>
+        <tr><td><code>OfficeContainer</code></td><td>Bürocontainer</td></tr>
+        <tr><td><code>SanitaryContainer</code></td><td>Sanitärcontainer</td></tr>
+        <tr><td><code>MaterialContainer</code></td><td>Materialcontainer</td></tr>
+      </table>
+      <h3>site utility-type <span class="ns">v0.1.0 · conx-util</span></h3>
+      <p class="ns">Kontrolliert
+         <code>UtilitySupply.hasUtilityType</code> — die Art der
+         Medienversorgung (Baustrom, Bauwasser).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>SiteElectricity</code></td><td>Baustrom</td></tr>
+        <tr><td><code>SiteWater</code></td><td>Bauwasser</td></tr>
+      </table>
+      <h3>site area-allocation-status <span class="ns">v0.1.0 · conx-aas</span></h3>
+      <p class="ns">Kontrolliert
+         <code>AreaAllocation.allocationStatus</code> — den Planungsstatus der
+         zeitlich begrenzten Flächenbelegung (0.2.0).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Planned</code></td><td>Geplant</td></tr>
+        <tr><td><code>Actual</code></td><td>Tatsächlich (Ist)</td></tr>
+        <tr><td><code>Released</code></td><td>Freigegeben</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 id="vocab-delivery">Construction Delivery</h3>
+  <p>Die Anlieferungssicht kontrolliert zwei Aspekte über Vokabulare: den
+     <strong>Vorgangstyp</strong> der Logistikvorgänge (Ankunft, Entladen,
+     Übergabe, …) und den <strong>Status</strong> der Logistikanforderungen
+     (Angefragt → Bestätigt → Terminiert → …). Beide sind über das SHACL-Profil
+     <code>construction-delivery-shapes-vocabularies</code> mit geschlossener
+     Liste gebunden.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>delivery operation-type <span class="ns">v0.1.0 · conx-dot</span></h3>
+      <p class="ns">Kontrolliert
+         <code>LogisticsOperation.operationType</code> — den kontrollierten
+         Typ eines Logistikvorgangs im Anlieferungsprozess.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Arrival</code></td><td>Ankunft</td></tr>
+        <tr><td><code>Waiting</code></td><td>Warten</td></tr>
+        <tr><td><code>CheckIn</code></td><td>Einfahrt / Anmeldung</td></tr>
+        <tr><td><code>Loading</code></td><td>Beladen</td></tr>
+        <tr><td><code>Unloading</code></td><td>Entladen</td></tr>
+        <tr><td><code>InternalTransport</code></td><td>Baustelleninterner Transport</td></tr>
+        <tr><td><code>Lifting</code></td><td>Heben</td></tr>
+        <tr><td><code>Handover</code></td><td>Übergabe</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>delivery requirement-status <span class="ns">v0.1.0 · conx-drs</span></h3>
+      <p class="ns">Kontrolliert
+         <code>LogisticsRequirement.hasStatus</code> — den Bearbeitungsstatus
+         einer Logistikanforderung über ihren Lebenszyklus.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Requested</code></td><td>Angefragt</td></tr>
+        <tr><td><code>Confirmed</code></td><td>Bestätigt</td></tr>
+        <tr><td><code>Scheduled</code></td><td>Terminiert</td></tr>
+        <tr><td><code>InProgress</code></td><td>In Bearbeitung</td></tr>
+        <tr><td><code>Completed</code></td><td>Abgeschlossen</td></tr>
+        <tr><td><code>Cancelled</code></td><td>Abgebrochen</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 id="vocab-built-asset">Built Asset</h3>
+  <p>Die Bauwerkssicht kontrolliert zwei Aspekte über Vokabulare: den
+     <strong>Bauwerkstyp</strong> (Gebäude, Brücke, …) und den
+     <strong>räumlichen Strukturtyp</strong> der Strukturelemente (Geschoss,
+     Raum, …). Beide sind über das SHACL-Profil
+     <code>built-asset-shapes-vocabularies</code> mit geschlossener Liste
+     gebunden.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>built-asset asset-type <span class="ns">v0.1.0 · conx-bat</span></h3>
+      <p class="ns">Kontrolliert <code>BuiltAsset.hasAssetType</code> — die
+         Bauart des Bauwerks (Hochbau, Brücke, Tunnel, …).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Building</code></td><td>Gebäude</td></tr>
+        <tr><td><code>Bridge</code></td><td>Brücke</td></tr>
+        <tr><td><code>Tunnel</code></td><td>Tunnel</td></tr>
+        <tr><td><code>Road</code></td><td>Straße</td></tr>
+        <tr><td><code>Railway</code></td><td>Eisenbahnanlage</td></tr>
+        <tr><td><code>MarineFacility</code></td><td>Wasserbauwerk</td></tr>
+        <tr><td><code>OtherInfrastructure</code></td><td>Sonstiges Infrastrukturbauwerk</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>built-asset spatial-structure-type <span class="ns">v0.1.0 · conx-bst</span></h3>
+      <p class="ns">Kontrolliert
+         <code>SpatialStructureElement.hasSpatialStructureType</code> — den
+         Typ des räumlichen Strukturelements (Geschoss, Raum, Abschnitt, …).</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Storey</code></td><td>Geschoss</td></tr>
+        <tr><td><code>Space</code></td><td>Raum</td></tr>
+        <tr><td><code>Section</code></td><td>Abschnitt</td></tr>
+        <tr><td><code>Segment</code></td><td>Segment</td></tr>
+        <tr><td><code>Zone</code></td><td>Zone</td></tr>
+        <tr><td><code>Part</code></td><td>Bauwerksteil</td></tr>
+      </table>
+    </div>
+  </div>
+
+    <h3 id="vocab-notification">Notification Content</h3>
+  <p>Die Benachrichtigungssicht kontrolliert vier Aspekte über Vokabulare: den
+     <strong>Benachrichtigungstyp</strong>, den <strong>Aufgabentyp</strong>, den
+     <strong>Auftragsstatus</strong> und die <strong>Objektrolle</strong>. Alle vier
+     Properties haben in der Ontologie den Range <code>skos:Concept</code> und werden
+     über das Core-SHACL-Profil mit geschlossener Liste (<code>sh:in</code>) an die
+     Vokabulare gebunden.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>notification-type <span class="ns">v0.1.0 · conx-nt</span></h3>
+      <p class="ns">Kontrolliert <code>NotificationContent.notificationType</code> —
+         die fachliche Bedeutung der Benachrichtigung.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>DataAvailable</code></td><td>Daten verfügbar</td></tr>
+        <tr><td><code>DataUpdated</code></td><td>Daten aktualisiert</td></tr>
+        <tr><td><code>DataDeleted</code></td><td>Daten gelöscht</td></tr>
+        <tr><td><code>TaskRequested</code></td><td>Aufgabe angefordert</td></tr>
+        <tr><td><code>TaskStatusChanged</code></td><td>Auftragsstatus geändert</td></tr>
+        <tr><td><code>ResultAvailable</code></td><td>Ergebnis verfügbar</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>task-type <span class="ns">v0.1.0 · conx-tt</span></h3>
+      <p class="ns">Kontrolliert <code>NotificationContent.taskType</code> — den
+         angeforderten Aufgabentyp.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>DetailedScheduling</code></td><td>Feinterminplanung</td></tr>
+        <tr><td><code>ProgressReporting</code></td><td>Baufortschritt melden</td></tr>
+        <tr><td><code>PriceCalculation</code></td><td>Preis kalkulieren</td></tr>
+      </table>
+      <h3>subject-role <span class="ns">v0.1.0 · conx-sr</span></h3>
+      <p class="ns">Kontrolliert <code>SubjectAssignment.subjectRole</code> — die
+         Rolle des referenzierten Objekts.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Target</code></td><td>Zielobjekt</td></tr>
+        <tr><td><code>ContextOnly</code></td><td>nur Kontextinformation</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="grid2">
+    <div>
+      <h3>task-status <span class="ns">v0.1.0 · conx-ts</span></h3>
+      <p class="ns">Kontrolliert <code>NotificationContent.taskStatus</code> — den
+         mitgeteilten Bearbeitungsstatus.</p>
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><code>Accepted</code></td><td>angenommen</td></tr>
+        <tr><td><code>InProgress</code></td><td>in Bearbeitung</td></tr>
+        <tr><td><code>Completed</code></td><td>abgeschlossen</td></tr>
+        <tr><td><code>Rejected</code></td><td>abgelehnt</td></tr>
+        <tr><td><code>Cancelled</code></td><td>abgebrochen</td></tr>
+      </table>
+    </div>
+  </div>
+
+    <h3 id="vocab-nutzung">Nutzung der Vokabulare</h3>
+  <p>Vokabulare werden in Construct-X auf zwei Ebenen genutzt: als
+     <strong>Wertebereichsrestriktion</strong> (SHACL) und als
+     <strong>Referenz in den Daten</strong> (A-Box).</p>
+
+  <h4>Bindung über optionale SHACL-Profile</h4>
+  <p>Die Domänen-Ontologien deklarieren die typisierten Properties (Range
+     <code>skos:Concept</code>) und bleiben damit unabhängig von konkreten
+     Vokabularen. Die eigentliche Bindung an ein bestimmtes Vokabular erfolgt
+     ausschließlich über die optionalen SHACL-Profile. Es gibt zwei
+     Bindungsmuster:</p>
+  <ul>
+    <li><strong>Geschlossene Liste</strong> (<code>sh:in</code>): Der Property-Wert
+      muss einer der explizit aufgeführten Concepts sein. Wird verwendet, wenn das
+      Vokabular vollständig und stabil ist (z. B. Flächentypen, Vorgangstypen,
+      Statuswerte).</li>
+    <li><strong>Offene IRI-Bindung</strong> (<code>sh:nodeKind sh:IRI</code>): Der
+      Wert muss eine IRI sein, es wird aber kein bestimmtes Vokabular erzwungen.
+      Wird verwendet, wenn der Wertebereich bewusst offen bleibt — so beim
+      <code>nodeType</code>-Profil, das die vier deutschen Knotentyp-Vokabulare
+      importiert, aber auch Concepts aus anderen (z. B. nationalen)
+      Knotentyp-Vokabularen zulässt.</li>
+  </ul>
+  <p>Die Profile sind <strong>optional</strong>: Daten ohne Vokabular-Bindung
+     bestehen die Core-Shapes, solange die Property-Werte IRIs sind. Die
+     Vokabular-Profile werden zusätzlich geladen, wenn kontrollierte
+     Wertebereiche erzwungen werden sollen.</p>
+
+  <p>Die vollständige Zuordnung Property → Vokabular → SHACL-Profil →
+     Bindungstyp steht in der <a href="#vocab">Übersichtstabelle</a> am
+     Anfang dieser Sektion; die domänenbezogenen Erläuterungen zeigen jeweils,
+     welche Property welches Vokabular kontrolliert.</p>
+
+  <div class="note"><strong>Geteilte Vokabulare:</strong> Das
+     <code>activity-status</code>-Vokabular wird von zwei Domänen genutzt
+     (Construction Schedule: <code>Activity.hasStatus</code>, Progress Report:
+     <code>activityStatus</code>). Vokabulare sind die einzigen Artefakte, die
+     zwischen Domänen geteilt werden — sie sind keine Domänen-Ontologien und
+     verletzen damit nicht die Modularitätsregeln (Sektion 2).</div>
+
+  <h4>Referenzierung in den Daten</h4>
+  <p>In der A-Box wird ein Vokabularwert ausschließlich über seine
+     <strong>IRI</strong> referenziert — nie über Label oder Notation:</p>
+  <pre><code>ex:loading-area-01
+    a conx-site:SiteArea ;
+    conx-site:hasAreaType conx-area:LoadingZone .   # IRI, nicht "Ladezone"</code></pre>
+  <p>Labels (<code>skos:prefLabel</code>, <code>skos:altLabel</code>) und
+     Notationen (<code>skos:notation</code>, z. B. <code>M286</code> oder
+     <code>300</code>) dienen der menschlichen Lesbarkeit und dem Abgleich mit
+     Klassifikationen; maschinell entscheidend ist immer die IRI. Für die
+     Anzeige in Anwendungen lassen sich die Labels per SPARQL auflösen
+     (siehe unten, „Beispiel-SPARQL-Abfragen“).</p>
+
+  <h3 id="vocab-mapping">SKOS-Mapping: Identität, Synonyme &amp; externe Verknüpfung</h3>
+
+  <h4>Warum ist das wichtig?</h4>
+  <p>In der Praxis verwenden verschiedene Systeme, Normen und Organisationen
+     <strong>unterschiedliche Begriffe für dieselbe Sache</strong>. Ein Beispiel:
+     Construct-X nennt eine Fläche „Ladezone", ein externes Logistik-Vokabular
+     „Loading Area", ein anderes „Entladebereich". Ohne eine klare Regel, wie diese
+     Begriffe zueinander stehen, entsteht bei jedem Datenaustausch ein manuelles
+     Abgleichsproblem.</p>
+  <p>SKOS (Simple Knowledge Organization System) bietet dafür ein durchdachtes
+     Vokabular von Properties, die drei verschiedene Ebenen sauber trennen:</p>
+  <ol>
+    <li><strong>Identität</strong> — <em>Was</em> ist das Concept? (Antwort: seine IRI)</li>
+    <li><strong>Terminologie</strong> — <em>Wie</em> nennen wir es? (Labels, Synonyme, Hierarchie)</li>
+    <li><strong>Interoperabilität</strong> — <em>Wie</em> hängt es mit Begriffen aus
+      anderen Vokabularen zusammen? (Mapping-Properties)</li>
+  </ol>
+
+  <h4>1. Identität: Die IRI ist das Concept</h4>
+  <p>Ein <code>skos:Concept</code> wird <strong>ausschließlich durch seine IRI</strong>
+     eindeutig identifiziert. Labels sind nur sprachliche Bezeichnungen — sie können
+     beliebig viele sein, in beliebigen Sprachen, und ändern nichts an der Identität.</p>
+  <pre><code># Dasselbe Concept, drei Bezeichnungen:
+conx-area:LoadingZone
+    a skos:Concept ;
+    skos:prefLabel "Loading Zone"@en ;
+    skos:prefLabel "Ladezone"@de ;
+    skos:altLabel "Entladezone"@de ;
+    skos:altLabel "Be- und Entladebereich"@de .</code></pre>
+  <p>Alle vier Labels beziehen sich auf <strong>einen einzigen</strong> Concept mit der IRI
+     <code>https://www.construct-x.org/vocab/construction-site/area-type#LoadingZone</code>.
+     Wenn ein anderes System „Entladezone" verwendet, muss es nicht dieselbe IRI
+     verwenden — es genügt, die semantische Beziehung über ein Mapping herzustellen.</p>
+
+  <h4>2. Terminologie: Labels und Hierarchie innerhalb eines Vokabulars</h4>
+  <table>
+    <tr><th>Property</th><th>Bedeutung</th><th>Beispiel</th></tr>
+    <tr><td><code>skos:prefLabel</code></td>
+        <td>Bevorzugte Bezeichnung in einer Sprache (max. eine pro Sprache)</td>
+        <td><code>"Ladezone"@de</code></td></tr>
+    <tr><td><code>skos:altLabel</code></td>
+        <td>Alternative Bezeichnung / Synonym (beliebig viele)</td>
+        <td><code>"Entladezone"@de</code>, <code>"Be- und Entladebereich"@de</code></td></tr>
+    <tr><td><code>skos:broader</code></td>
+        <td>Oberbegriff <em>im selben Vokabular</em></td>
+        <td><code>IntermediateStorageArea → broader → StorageArea</code></td></tr>
+    <tr><td><code>skos:narrower</code></td>
+        <td>Unterbegriff <em>im selben Vokabular</em> (inverse von broader)</td>
+        <td><code>StorageArea → narrower → IntermediateStorageArea</code></td></tr>
+  </table>
+  <p>Die Hierarchie <code>StorageArea → IntermediateStorageArea</code> bedeutet:
+     „Zwischenlager" ist eine <em>Art</em> von „Lager". Für die Modellierung genügt
+     in der Regel eine Richtung (<code>broader</code>); die inverse Richtung
+     (<code>narrower</code>) wird von Reasonern abgeleitet.</p>
+
+  <h4>3. Interoperabilität: Mapping zwischen verschiedenen Vokabularen</h4>
+  <p>Wenn ein externes Vokabular (z. B. ein Branchenstandard, ein Normenwerk oder ein
+     firmeninternes System) einen Begriff verwendet, der dem Construct-X-Begriff
+     <em>semantisch entspricht</em>, wird diese Beziehung über eine der fünf
+     SKOS-Mapping-Properties ausgedrückt. Die beiden Concepts behalten dabei ihre
+     <strong>eigenen IRIs</strong> — sie werden nicht zusammengeführt.</p>
+  <table>
+    <tr><th>Property</th><th>Bedeutung</th><th>Typischer Einsatz</th></tr>
+    <tr><td><code>skos:exactMatch</code></td>
+        <td>Beide Concepts können im fachlichen Kontext als äquivalent behandelt werden</td>
+        <td>Zwei Vokabulare verwenden unterschiedliche IRIs für denselben Begriff</td></tr>
+    <tr><td><code>skos:closeMatch</code></td>
+        <td>Sehr ähnlich, aber nicht vollständig deckungsgleich</td>
+        <td>Bedeutungsumfang oder Anwendungsbereich unterscheiden sich leicht</td></tr>
+    <tr><td><code>skos:broadMatch</code></td>
+        <td>Das andere Concept ist <em>allgemeiner</em> (Oberbegriff)</td>
+        <td><code>EquipmentSetupArea</code> ist eine Art von <code>MaterialHandlingArea</code></td></tr>
+    <tr><td><code>skos:narrowMatch</code></td>
+        <td>Das andere Concept ist <em>spezieller</em> (Unterbegriff)</td>
+        <td><code>TemporaryStorageArea</code> ist eine Art von <code>StorageArea</code></td></tr>
+    <tr><td><code>skos:relatedMatch</code></td>
+        <td>Fachlich verwandt, aber weder synonym noch hierarchisch</td>
+        <td><code>LoadingZone</code> und <code>MaterialHandlingArea</code> gehören zusammen</td></tr>
+  </table>
+
+  <div class="note"><strong>Wichtige Unterscheidung:</strong>
+     <code>skos:broader</code>/<code>skos:narrower</code> beschreiben Hierarchien
+     <em>innerhalb</em> eines Vokabulars. <code>skos:broadMatch</code>/<code>skos:narrowMatch</code>
+     beschreiben Hierarchien <em>zwischen</em> zwei verschiedenen Vokabularen.
+     Verwechslung ist häufig und führt zu semantischen Fehlern.</div>
+
+  <h4>Empfohlene Construct-X-Struktur: separates Mapping-Artefakt</h4>
+  <p>Externe Mappings stehen <strong>nicht</strong> im Core-Vokabular, sondern in einer
+     separat versionierten Mapping-Datei. Das hat folgende Vorteile:</p>
+  <ul>
+    <li>Das Core-Vokabular bleibt <strong>unabhängig</strong> von externen Standards.</li>
+    <li>Mappings sind <strong>separat versionierbar</strong> — ein Mapping-Update
+      erfordert keine neue Version des Core-Vokabulars.</li>
+    <li>Mehrere externe Vokabulare können <strong>parallel</strong> angebunden werden
+      (z. B. ein nationaler Standard, ein Branchenstandard, ein firmeninternes System).</li>
+    <li>Mappingfehler oder -änderungen <strong>verändern nicht</strong> das
+      Construct-X-Core-Vokabular.</li>
+    <li>Nationale oder organisationsspezifische Mappings sind möglich, ohne das
+      globale Vokabular zu beeinflussen.</li>
+  </ul>
+  <div class="mermaid">
+graph LR
+    subgraph CORE["Construct-X Core-Vokabular (stabil)"]
+        CX["conx-area:LoadingZone<br/>prefLabel 'Ladezone'@de<br/>altLabel 'Entladezone'@de"]:::cls
+    end
+    subgraph MAP["Mapping-Artefakt (separat versioniert)"]
+        M["conx-area:LoadingZone<br/>skos:exactMatch ext:LoadingArea"]:::link
+    end
+    subgraph EXT["Externes Vokabular"]
+        EX["ext:LoadingArea<br/>(example.org)"]:::ext
+    end
+    CX -. "skos:exactMatch" .-> EX
+    M -. "dokumentiert" .-> CX
+    classDef cls fill:#cffafe,stroke:#0e7490,color:#155e75
+    classDef link fill:#fff8c5,stroke:#9a6700,color:#4d2d00
+    classDef ext fill:#f6f8fa,stroke:#57606a,color:#1f2328
+  </div>
+  <p>Die empfohlene Verzeichnisstruktur im Paket:</p>
+  <pre><code>construction-site/
+└── vocab/
+    └── area-type.ttl              ← Core-Vokabular (stabil, ohne externe Mappings)
+
+mappings/
+└── construction-site/
+    ├── area-type-to-standard-A.ttl   ← Mapping zu externem Standard A
+    ├── area-type-to-standard-B.ttl   ← Mapping zu externem Standard B
+    └── area-type-to-company-C.ttl    ← Mapping zu firmeninternem System C</code></pre>
+
+  <h4>Beispiel (aus <code>construct-x-area-type-mappings.ttl</code>)</h4>
+  <pre><code># Praktisch gleiche Bedeutung (äquivalent)
+conx-area:LoadingZone
+    skos:exactMatch ext:LoadingArea .
+
+# Sehr ähnlich, aber nicht vollständig identisch
+conx-area:WorkArea
+    skos:closeMatch ext:ProductionArea .
+
+# Externer Begriff ist allgemeiner (Oberbegriff)
+conx-area:EquipmentSetupArea
+    skos:broadMatch ext:MaterialHandlingArea .
+
+# Externer Begriff ist spezieller (Unterbegriff)
+conx-area:StorageArea
+    skos:narrowMatch ext:TemporaryStorageArea .
+
+# Fachlich verwandt, aber weder synonym noch hierarchisch
+conx-area:LoadingZone
+    skos:relatedMatch ext:MaterialHandlingArea .</code></pre>
+
+  <h4>Beispiel-SPARQL-Abfragen</h4>
+  <p>Mit den SKOS-Properties lassen sich nützliche Abfragen formulieren:</p>
+  <pre><code># Alle deutschen Bezeichnungen eines Concepts
+SELECT ?label
+WHERE {
+  conx-area:LoadingZone
+      (skos:prefLabel|skos:altLabel) ?label .
+  FILTER (lang(?label) = "de")
+}
+
+# Alle exakt gemappten externen Concepts
+SELECT ?externalConcept
+WHERE {
+  conx-area:LoadingZone
+      skos:exactMatch ?externalConcept .
+}
+
+# Alle Unterbegriffe von StorageArea (transitiv)
+SELECT ?concept
+WHERE {
+  ?concept skos:broader+ conx-area:StorageArea .
+}</code></pre>
+
+  <h4>Warum nicht <code>owl:sameAs</code>?</h4>
+  <p><code>owl:sameAs</code> bedeutet <strong>vollständige logische Identität</strong> beider
+     RDF-Ressourcen: Jeder Tripel, der für die eine IRI gilt, gilt automatisch auch für
+     die andere. Das ist <em>stärker</em> als <code>skos:exactMatch</code>, das nur eine
+     fachliche Äquivalenz im vorgesehenen Kontext ausdrückt.</p>
+  <p>Für Vokabular-Mappings ist <code>owl:sameAs</code> problematisch, weil:</p>
+  <ul>
+    <li>es <strong>transitiv</strong> ist: Wenn A sameAs B und B sameAs C, dann ist
+      automatisch A sameAs C — auch wenn fachlich A und C unterschiedlich sind.</li>
+    <li>es <strong>symmetrisch</strong> ist: Die Beziehung gilt in beide Richtungen,
+      auch wenn das externe Vokabular andere Annahmen macht.</li>
+    <li>es das Core-Vokabular <strong>logisch an das externe Vokabular koppelt</strong>:
+      Jede Änderung im externen Vokabular wirkt sich auf das Construct-X-Vokabular aus.</li>
+  </ul>
+  <p><code>owl:sameAs</code> nur verwenden, wenn tatsächlich <em>dieselbe</em>
+     RDF-Ressource unter zwei IRIs bezeichnet wird (z. B. ein Alias für dieselbe
+     IRI). Für alle anderen Fälle: <code>skos:exactMatch</code>.</p>
+
+  <div class="note"><strong>Zentrale Construct-X-Regel:</strong>
+     <em>Concepts in kontrollierten Construct-X-Vokabularen MÜSSEN durch stabile IRIs
+     identifiziert werden. Vorzugsbezeichnungen SOLLTEN mit <code>skos:prefLabel</code>,
+     Synonyme mit <code>skos:altLabel</code>, interne Hierarchien mit
+     <code>skos:broader</code>/<code>skos:narrower</code> und semantische Entsprechungen zu
+     externen Vokabularen mit den SKOS-Mapping-Properties modelliert werden. Externe Mappings
+     SOLLTEN als separat versionierte Mapping-Artefakte gepflegt werden.
+     <code>owl:sameAs</code> SOLLTE nicht für gewöhnliche Vokabularabgleiche verwendet werden.</em></div>
+
+  <h4>Modellierungsreihenfolge</h4>
+  <p>Beim Aufbau eines Vokabulars und seiner Mappings wird folgende Reihenfolge
+     empfohlen:</p>
+  <ol>
+    <li><strong>Stabile IRI</strong> festlegen (Namespace + LocalName)</li>
+    <li><strong><code>prefLabel</code></strong> in den relevanten Sprachen setzen</li>
+    <li><strong><code>altLabel</code></strong> für Synonyme und alternative Bezeichnungen</li>
+    <li><strong><code>broader</code>/<code>narrower</code></strong> für interne Hierarchien</li>
+    <li><strong>Separate Mapping-Datei</strong> für externe Vokabulare anlegen</li>
+    <li><strong>Mapping-Properties</strong> (<code>exactMatch</code>, <code>closeMatch</code>,
+      <code>broadMatch</code>, <code>narrowMatch</code>, <code>relatedMatch</code>) je nach
+      fachlicher Beziehung wählen</li>
+  </ol>
+  <p>Damit bleiben <strong>Identität, Terminologie und externe Interoperabilität
+     sauber getrennt</strong> — jede Ebene kann unabhängig gepflegt und versioniert werden.</p>
+
+  <p class="ns">Vollständige Dokumentation mit allen Modellierungsoptionen:
+     <code>construct-x-skos-mapping-example/SKOS-MAPPING-DOCUMENTATION.md</code>.
+     Alle fünf TTL-Dateien des Beispiel-Pakets bestehen die Turtle-Parseprüfung.</p>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="beispiele">
+  <h2>14. Beispiele (Turtle)</h2>
+  <p>Alle Beispiele liegen als <code>*-example.ttl</code> in den jeweiligen Ordnern und
+     bestehen die SHACL-Validierung gegen die Core-Shapes (mit Ontologie-Kontext).</p>
+
+  <h3>Construction Schedule</h3>
+  <pre><code>@prefix conx-cs:     &lt;https://www.construct-x.org/ontology/construction-schedule#&gt; .
+@prefix conx-st:     &lt;https://www.construct-x.org/vocab/construction-schedule/schedule-type#&gt; .
+@prefix conx-status: &lt;https://www.construct-x.org/vocab/construction-schedule/activity-status#&gt; .
+@prefix conx-prt:    &lt;https://www.construct-x.org/vocab/construction-schedule/precedence-relationship-type#&gt; .
+@prefix ex:          &lt;https://data.example.com/project/alpha/&gt; .
+@prefix xsd:         &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+ex:schedule-SCH-01
+    a conx-cs:ConstructionSchedule ;
+    conx-cs:identifier "SCH-01" ;
+    conx-cs:name "Rohbauterminplan" ;
+    conx-cs:scheduleType conx-st:DetailedNetwork ;
+    conx-cs:hasActivity ex:formwork, ex:reinforcement .
+
+ex:formwork
+    a conx-cs:Activity ;
+    conx-cs:identifier "A100" ;
+    conx-cs:hierarchyCode "01.01" ;
+    conx-cs:name "Install Formwork" ;
+    conx-cs:description "Install slab formwork." ;
+    conx-cs:hasStatus conx-status:Completed ;
+    conx-cs:plannedStart "2026-09-07T07:00:00+02:00"^^xsd:dateTime ;
+    conx-cs:plannedFinish "2026-09-11T16:00:00+02:00"^^xsd:dateTime .
+
+ex:reinforcement
+    a conx-cs:Activity ;
+    conx-cs:identifier "A110" ;
+    conx-cs:hierarchyCode "01.02" ;
+    conx-cs:name "Install Reinforcement" ;
+    conx-cs:hasStatus conx-status:Planned ;
+    conx-cs:plannedStart "2026-09-14T07:00:00+02:00"^^xsd:dateTime ;
+    conx-cs:plannedFinish "2026-09-18T16:00:00+02:00"^^xsd:dateTime .
+
+ex:rel-01
+    a conx-cs:PrecedenceRelationship ;
+    conx-cs:identifier "REL-01" ;
+    conx-cs:hasPredecessor ex:formwork ;
+    conx-cs:hasSuccessor ex:reinforcement ;
+    conx-cs:relationshipType conx-prt:FinishToStart ;
+    conx-cs:lag "P0D"^^xsd:duration .</code></pre>
+
+  <h3>Breakdown Structure (WBS)</h3>
+  <pre><code>@prefix conx-bs: &lt;https://www.construct-x.org/ontology/breakdown-structure#&gt; .
+@prefix ex:      &lt;https://data.example.com/project/alpha/&gt; .
+@prefix xsd:     &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+ex:wbs-01 a conx-bs:WorkBreakdownStructure ;
+    conx-bs:identifier "WBS-01" ;
+    conx-bs:name "Projektstruktur" ;
+    conx-bs:hasNode ex:wbs-1, ex:wbs-1-1 ;
+    conx-bs:hasRootNode ex:wbs-1 .
+
+ex:wbs-1 a conx-bs:WBSNode ;
+    conx-bs:identifier "WBS-1" ;
+    conx-bs:name "Rohbau" ;
+    conx-bs:code "01" ;
+    conx-bs:level "0"^^xsd:nonNegativeInteger ;
+    conx-bs:hasSubNode ex:wbs-1-1 .
+
+ex:wbs-1-1 a conx-bs:WBSNode ;
+    conx-bs:identifier "WBS-1.1" ;
+    conx-bs:name "Decken" ;
+    conx-bs:code "01.01" ;
+    conx-bs:level "1"^^xsd:nonNegativeInteger ;
+    conx-bs:isSubNodeOf ex:wbs-1 .</code></pre>
+
+  <h3>GAEB BoQ (mit Einheitspreisaufbau)</h3>
+  <pre><code>@prefix conx-gaeb: &lt;https://www.construct-x.org/ontology/gaeb-boq#&gt; .
+@prefix conx-pct:  &lt;https://www.construct-x.org/vocab/boq-price-component-type#&gt; .
+@prefix ex:        &lt;https://data.example.com/project/alpha/&gt; .
+@prefix xsd:       &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+ex:boq-01 a conx-gaeb:BillOfQuantities ;
+    conx-gaeb:identifier "BOQ-01" ;
+    conx-gaeb:name "Rohbau Leistungsverzeichnis" ;
+    conx-gaeb:currencyCode "EUR" ;
+    conx-gaeb:hasRootSection ex:section-01 .
+
+ex:section-01 a conx-gaeb:BoQSection ;
+    conx-gaeb:identifier "SEC-01" ;
+    conx-gaeb:name "Betonarbeiten" ;
+    conx-gaeb:ordinalNumber "01" ;
+    conx-gaeb:levelNumber "1"^^xsd:positiveInteger ;
+    conx-gaeb:isRootSectionOf ex:boq-01 ;
+    conx-gaeb:hasItem ex:item-0010 .
+
+ex:item-0010 a conx-gaeb:BoQItem ;
+    conx-gaeb:identifier "ITEM-0010" ;
+    conx-gaeb:ordinalNumber "01.0010" ;
+    conx-gaeb:shortText "Stahlbetondecke C30/37 herstellen" ;
+    conx-gaeb:quantity "125.500"^^xsd:decimal ;
+    conx-gaeb:unitCode "m3" ;
+    conx-gaeb:unitPrice "185.50"^^xsd:decimal ;
+    conx-gaeb:totalAmount "23280.25"^^xsd:decimal ;
+    conx-gaeb:belongsToSection ex:section-01 ;
+    conx-gaeb:hasUnitPriceComponent ex:price-labor, ex:price-materials .
+
+ex:price-labor a conx-gaeb:UnitPriceComponent ;
+    conx-gaeb:identifier "PRICE-01" ;
+    conx-gaeb:amount "90.00"^^xsd:decimal ;
+    conx-gaeb:hasPriceComponentType conx-pct:Labor ;
+    conx-gaeb:isUnitPriceComponentOf ex:item-0010 .
+
+ex:price-materials a conx-gaeb:UnitPriceComponent ;
+    conx-gaeb:identifier "PRICE-02" ;
+    conx-gaeb:amount "95.50"^^xsd:decimal ;
+    conx-gaeb:hasPriceComponentType conx-pct:Materials ;
+    conx-gaeb:isUnitPriceComponentOf ex:item-0010 .</code></pre>
+
+  <h3>Link-Ontologien (integriertes Beispiel)</h3>
+  <pre><code>@prefix conx-cs:   &lt;https://www.construct-x.org/ontology/construction-schedule#&gt; .
+@prefix conx-bs:   &lt;https://www.construct-x.org/ontology/breakdown-structure#&gt; .
+@prefix conx-gaeb: &lt;https://www.construct-x.org/ontology/gaeb-boq#&gt; .
+@prefix conx-cpr:  &lt;https://www.construct-x.org/ontology/construction-progress-report#&gt; .
+@prefix conx-site: &lt;https://www.construct-x.org/ontology/construction-site#&gt; .
+@prefix conx-del:  &lt;https://www.construct-x.org/ontology/construction-delivery#&gt; .
+@prefix conx-sbl:  &lt;https://www.construct-x.org/ontology/schedule-breakdown-link#&gt; .
+@prefix conx-sbq:  &lt;https://www.construct-x.org/ontology/schedule-boq-link#&gt; .
+@prefix conx-sprl: &lt;https://www.construct-x.org/ontology/schedule-progress-report-link#&gt; .
+@prefix conx-sbdl: &lt;https://www.construct-x.org/ontology/site-breakdown-link#&gt; .
+@prefix conx-dsl:  &lt;https://www.construct-x.org/ontology/delivery-site-link#&gt; .
+@prefix conx-dbl:  &lt;https://www.construct-x.org/ontology/delivery-boq-link#&gt; .
+@prefix conx-sdl:  &lt;https://www.construct-x.org/ontology/schedule-delivery-link#&gt; .
+@prefix conx-ssl:  &lt;https://www.construct-x.org/ontology/schedule-site-link#&gt; .
+@prefix ex:        &lt;https://data.example.com/project/alpha/&gt; .
+
+ex:schedule-01 a conx-cs:ConstructionSchedule ;
+    conx-sbl:usesWorkBreakdownStructure ex:wbs-01 ;
+    conx-sbl:usesLocationBreakdownStructure ex:lbs-01 ;
+    conx-sbl:usesSystemBreakdownStructure ex:sbs-01 ;
+    conx-sbl:usesCostBreakdownStructure ex:cbs-01 ;
+    conx-sbq:usesBillOfQuantities ex:boq-01 .
+
+ex:activity-A100 a conx-cs:Activity ;
+    conx-sbl:isClassifiedByWBSNode ex:wbs-120 ;
+    conx-sbl:isPerformedIn ex:lbs-eg ;
+    conx-sbl:isClassifiedBySBSNode ex:sbs-10 ;
+    conx-sbl:isClassifiedByCBSNode ex:cbs-300 .
+
+ex:split-001 a conx-gaeb:QuantitySplit ;
+    conx-sbq:isAssignedToActivity ex:activity-A100 .
+
+ex:progress-report-A100 a conx-cpr:ConstructionProgressReport ;
+    conx-sprl:reportsOnActivity ex:activity-A100 .
+
+# Site ↔ Breakdown: Ladezone wird durch LBS-Knoten repräsentiert
+ex:loading-area-01 a conx-site:SiteArea ;
+    conx-sbdl:isRepresentedByLBSNode ex:lbs-loading-zone .
+
+# Delivery ↔ Site: Logistikvorgang nutzt Übergabepunkt
+ex:op-unload-001 a conx-del:LogisticsOperation ;
+    conx-dsl:usesTransferPoint ex:transfer-point-01 .
+
+# Delivery ↔ BoQ: Ladungsposition erfüllt Mengensplit
+ex:item-001 a conx-del:LogisticsLoadItem ;
+    conx-dbl:fulfillsQuantitySplit ex:split-raised-floor-01 .
+
+# Schedule ↔ Delivery: Logistikanforderung unterstützt Vorgang
+ex:req-001 a conx-del:LogisticsRequirement ;
+    conx-sdl:supportsActivity ex:activity-install-raised-floor .
+
+# Schedule ↔ Site: zeitlich begrenzte Flächenbelegung wird dem Vorgang zugeordnet
+ex:alloc-loading-01 a conx-site:AreaAllocation ;
+    conx-ssl:allocatedForActivity ex:activity-install-raised-floor .
+
+# Referenzierte Knoten mit ihrer Klasse (für SHACL-Validierung):
+ex:wbs-01 a conx-bs:WorkBreakdownStructure .
+ex:lbs-01 a conx-bs:LocationBreakdownStructure .
+ex:sbs-01 a conx-bs:SystemBreakdownStructure .
+ex:cbs-01 a conx-bs:CostBreakdownStructure .
+ex:wbs-120 a conx-bs:WBSNode .
+ex:lbs-eg  a conx-bs:LBSNode .
+ex:sbs-10  a conx-bs:SBSNode .
+ex:cbs-300 a conx-bs:CBSNode .
+ex:boq-01  a conx-gaeb:BillOfQuantities .
+ex:lbs-loading-zone a conx-bs:LBSNode .
+ex:transfer-point-01 a conx-site:TransferPoint .
+ex:activity-install-raised-floor a conx-cs:Activity .
+ex:split-raised-floor-01 a conx-gaeb:QuantitySplit .</code></pre>
+
+  <h3>Notification Content</h3>
+  <pre><code>@prefix conx-nc: &lt;https://www.construct-x.org/ontology/notification-content#&gt; .
+@prefix conx-nt:  &lt;https://www.construct-x.org/vocab/notification-content/notification-type#&gt; .
+@prefix conx-tt:  &lt;https://www.construct-x.org/vocab/notification-content/task-type#&gt; .
+@prefix conx-sr:  &lt;https://www.construct-x.org/vocab/notification-content/subject-role#&gt; .
+@prefix ex:       &lt;https://data.example.com/project/alpha/nc/&gt; .
+
+ex:nc-detail-001
+    a conx-nc:NotificationContent ;
+    conx-nc:notificationType conx-nt:TaskRequested ;
+    conx-nc:taskType conx-tt:DetailedScheduling ;
+    conx-nc:contextResource ex:pcs-001 ;
+    conx-nc:hasSubjectAssignment ex:sa-a100 .
+
+ex:sa-a100
+    a conx-nc:SubjectAssignment ;
+    conx-nc:assignedResource ex:a100 ;
+    conx-nc:subjectRole conx-sr:Target .</code></pre>
+</section>
+
+
+<!-- ============================================================ -->
+<section id="converter">
+  <h2>15. GAEB-Converter (Java)</h2>
+  <p>Der Converter <code>Converter/</code> (Maven-Multimodul, Java 17, Apache Jena 4.10, Spring Boot 3.2.5)
+  wandelt GAEB DA XML 3.3 (Datenaustauschphasen X80–X87) in Construct-X GAEB-BoQ-Turtle um.
+  Er ist der erste der in der <a href="#usecase">Use-Case-Gesamtübersicht</a> skizzierten
+  wiederverwendbaren Converter-Services.</p>
+
+  <h3>Modul <code>core</code> (Bibliothek)</h3>
+  <table>
+    <tr><th>Komponente</th><th>Aufgabe</th></tr>
+    <tr><td><code>GaebXmlValidator</code></td><td>Validierung des Eingabe-XMLs gegen die offiziellen GAEB XSD-Schemata (X80–X87, Lib 3.3, 2021-05); strukturierte Fehlerliste</td></tr>
+    <tr><td><code>GaebBoqConverter</code></td><td>Transformation GAEB XML → Turtle gemäß <code>gaeb-boq</code> 0.5.0 (Positionen, Einheitspreise, Preisanteile, Mengensplits)</td></tr>
+    <tr><td><code>IriFactory</code> / <code>ConxNamespaces</code></td><td>Gemeinsame IRI-Konventionen und Namensräume</td></tr>
+    <tr><td><code>GaebConverterCli</code></td><td>Kommandozeilen-Einstiegspunkt (Datei → TTL)</td></tr>
+  </table>
+
+  <h3>Modul <code>web</code> (REST-Dienst)</h3>
+  <table>
+    <tr><th>Endpoint</th><th>Beschreibung</th></tr>
+    <tr><td><code>GET /api/v1/health</code></td><td>Liveness-Probe</td></tr>
+    <tr><td><code>GET /api/v1/converters</code></td><td>Liste der verfügbaren Converter</td></tr>
+    <tr><td><code>POST /api/v1/convert/gaeb-boq</code></td><td>GAEB-XML-Upload (Multipart) → TTL-Download; vorherige XSD-Validierung (422 bei Fehlern)</td></tr>
+    <tr><td><code>POST /api/v1/validate/gaeb-boq</code></td><td>Nur XSD-Validierung, strukturiertes Fehlerreport</td></tr>
+    <tr><td><code>GET /api/v1/sample/gaeb-boq</code></td><td>Begleitetes Beispiel-XML (X80) zum Testen</td></tr>
+  </table>
+  <p>Zusätzlich wird ein statisches Frontend (Upload, Validierung, Ergebnis-Anzeige) ausgeliefert.
+  Start: <code>java -jar web/target/construct-x-converters-web.jar</code>.</p>
+
+  <h3>Tests (2026-10-28, <code>mvn clean verify</code>)</h3>
+  <div class="ok"><strong>BUILD SUCCESS</strong> — Core: 13/13 Tests (Converter 8, SHACL-Validierung 2, XSD-Validator 3), Web: 7/7 Tests (REST-API).</div>
+</section>
+
+<!-- ============================================================ -->
+
+<section id="usecase">
+  <h2>16. Use Case: Ontologien im Datenraum</h2>
+  <p>Im Verzeichnis <code>usecase/</code> ist ein durchgängiges Anwendungsszenario dokumentiert,
+  das zeigt, wie die Ontologien den organisationsübergreifenden Datenaustausch ermöglichen:</p>
+  <ul>
+    <li><strong>Beispiel Use Case</strong> (<code>Beispiel Use Case für die Nutzung der Ontologien.md</code>):
+        Generalunternehmer → Nachunternehmer → Baulogistikdienstleister. Der GU stellt Rahmentermine,
+        Arbeits-/Ortsstrukturen und Baustellenressourcen bereit; der NU detailliert die Planung
+        (Fein-/Taktplanung) und gibt sie zurück. Drei Grundprinzipien: gemeinsame Semantik,
+        gezielte Datenbereitstellung, kontrollierte Datennutzung.</li>
+    <li><strong>Gesamtübersicht der Komponenten</strong> (<code>Gesamtübersicht der zu entwickelnden Komponenten.md</code>):
+        Drei Ebenen — (1) gemeinsame Construct-X-Komponenten (Ontologien, Vokabulare, SHACL,
+        JSON-LD-Kontexte, IRI-/Provenance-Konventionen, SDK), (2) wiederverwendbare Converter-Services
+        (GAEB, MS Project, Primavera, Metronom, IFC, …), (3) unternehmensspezifische Fach- und
+        Integrationsdienste. Die Datenraumtechnik (Identität, Katalog, Policies, Agreements, Transfer)
+        wird durch vorhandene Datenraumkomponenten bereitgestellt.</li>
+    <li><strong>Interaktive Übersicht</strong> (<code>index.html</code>): HTML-Version des Szenarios.</li>
+  </ul>
+  <p>Der <a href="#converter">GAEB-Converter</a> ist die erste konkrete Umsetzung der Ebene 2.</p>
+</section>
+
+<!-- ============================================================ -->
+
+<section id="validierung">
+  <h2>17. Validierung</h2>
+  <div class="ok">
+    <strong>Status: PASS (2026-11-04)</strong> — geprüft mit rdflib 6.3.2 + pySHACL 0.28.1 (dediziertes venv; rdflib 7.6.0 / pySHACL 0.40.1 finden 0 Shapes).
+  </div>
+  <table>
+    <tr><th>Prüfung</th><th>Ergebnis</th></tr>
+    <tr><td>Turtle-Parsing aller 83 Dateien</td><td>✅ keine Fehler</td></tr>
+    <tr><td>RDF/XML-Parsing aller 39 Dateien</td><td>✅ keine Fehler</td></tr>
+    <tr><td>SHACL: Delivery-Beispiel vs. Core + Vokabular-Shapes</td><td>✅ 0 Verletzungen</td></tr>
+    <tr><td>SHACL: Site-Beispiel vs. Core + Vokabular + Site-Logistics + Area-Allocation-Shapes</td><td>✅ 0 Verletzungen</td></tr>
+    <tr><td>SHACL: integriertes Link-Beispiel vs. alle zehn Link-Shapes</td><td>✅ 0 Verletzungen</td></tr>
+    <tr><td>SHACL: Built-Asset-Beispiel vs. Core + Vokabular-Shapes</td><td>✅ 0 Verletzungen</td></tr>
+    <tr><td>SHACL: Notification-Content-Beispiel vs. Core-Shape (+ Negativtest)</td><td>✅ 0 Verletzungen</td></tr>
+    <tr><td>Architektur: keine Cross-Domain-Properties in Domänen</td><td>✅ konform</td></tr>
+    <tr><td>Architektur: Link-Ontologien importieren exakte Versionen</td><td>✅ konform</td></tr>
+    <tr><td>Präfix-Kollisionen (vann:preferredNamespacePrefix)</td><td>✅ keine (conx-sbl → conx-sbdl korrigiert)</td></tr>
+    <tr><td>MANIFEST.json ↔ owl:versionInfo (39 Einträge)</td><td>✅ identisch</td></tr>
+    <tr><td>Dangling-IRIs im Construct-X-Namenraum</td><td>✅ keine</td></tr>
+    <tr><td>GAEB-Converter: <code>mvn clean verify</code> (2026-10-28)</td><td>✅ BUILD SUCCESS — Core 13/13, Web 7/7 Tests</td></tr>
+  </table>
+
+  <h3>SHACL-Profile</h3>
+  <table>
+    <tr><th>Profil</th><th>Wirkungsbereich</th></tr>
+    <tr><td><code>construction-schedule-shapes-core</code></td><td>Pflichtfelder, Milestone-Regel (plannedStart = plannedFinish), Datentypen</td></tr>
+    <tr><td><code>construction-schedule-shapes-{schedule-type,activity-status,precedence-relationship-type}</code></td><td>Optionale Vokabular-Bindung</td></tr>
+    <tr><td><code>breakdown-structure-shapes-core</code></td><td>Pflichtfelder, level als nonNegativeInteger, Wurzelknoten</td></tr>
+    <tr><td><code>breakdown-structure-shapes-node-types</code></td><td>Optionale Bindung der de-*-node-type-Vokabulare</td></tr>
+    <tr><td><code>gaeb-boq-shapes-core</code></td><td>Pflichtfelder, Disjunktheit, Preisregeln (Summe der Einheitspreisanteile = unitPrice; Mengensplit-Summe = Positionsmenge bei <code>splitsAreExhaustive</code>)</td></tr>
+    <tr><td><code>gaeb-boq-shapes-price-component-type</code></td><td>Optionale Bindung des Preisanteils-Vokabulars</td></tr>
+    <tr><td><code>construction-progress-report-shapes-core</code></td><td>Pflichtfelder (identifier, recordedAt), 0–100 %</td></tr>
+    <tr><td><code>construction-progress-report-shapes-activity-status</code></td><td>Optionale Bindung des geteilten Activity-Status-Vokabulars</td></tr>
+    <tr><td><code>construction-site-shapes-core</code></td><td>Pflichtfelder, Geometrie-Pflicht für SiteArea, lokale Koordinatensystem-Regeln</td></tr>
+    <tr><td><code>construction-site-shapes-vocabularies</code></td><td>Optionale Bindung der vier Site-Vokabulare (area/equipment/facility/utility-type)</td></tr>
+    <tr><td><code>construction-site-shapes-site-logistics</code></td><td>Fachliche Regeln: Übergabepunkt-Flächentyp, Kran-/Bauaufzug-/Container-/Lagerhilfsmittel-Regeln</td></tr>
+    <tr><td><code>construction-site-shapes-area-allocation</code></td><td>(0.2.0) Pflichtfelder, <code>validFrom ≤ validTo</code>, Konfliktregel für sich überschneidende Belegungen derselben SiteArea, Status-Vokabular-Bindung</td></tr>
+    <tr><td><code>construction-delivery-shapes-core</code></td><td>Pflichtfelder, Zeitkonsistenz (requested/planned/actual Start ≤ Finish), Menge ≥ 0</td></tr>
+    <tr><td><code>construction-delivery-shapes-vocabularies</code></td><td>Optionale Bindung der Vokabulare requirement-status und operation-type</td></tr>
+    <tr><td><code>built-asset-shapes-core</code></td><td>Pflichtfelder (identifier, name), Hierarchie-Regeln für räumliche Strukturelemente</td></tr>
+    <tr><td><code>built-asset-shapes-vocabularies</code></td><td>Optionale Bindung der Vokabulare asset-type und spatial-structure-type</td></tr>
+    <tr><td><code>notification-content-shapes</code></td><td>(0.1.1) Pflichtfelder, geschlossene Vokabular-Bindung, fachliche SPARQL-Regeln (TaskRequested / TaskStatusChanged / ResultAvailable)</td></tr>
+    <tr><td><code>schedule-{breakdown,boq,progress-report}-link-shapes-core</code></td><td>Domänen-/Range-Checks der Link-Properties</td></tr>
+    <tr><td><code>site-breakdown-link-shapes-core</code></td><td>Range-Check <code>isRepresentedByLBSNode</code> → LBSNode</td></tr>
+    <tr><td><code>delivery-site-link-shapes-core</code></td><td>Range-Check + maxCount 1 für <code>usesTransferPoint</code> → TransferPoint</td></tr>
+    <tr><td><code>delivery-boq-link-shapes-core</code></td><td>Range-Check + maxCount 1 für <code>fulfillsQuantitySplit</code> → QuantitySplit</td></tr>
+    <tr><td><code>schedule-delivery-link-shapes-core</code></td><td>Range-Check <code>supportsActivity</code> → Activity</td></tr>
+    <tr><td><code>schedule-site-link-shapes-core</code></td><td>Range-Check <code>allocatedForActivity</code> → Activity</td></tr>
+    <tr><td><code>site-built-asset-link-shapes-core</code></td><td>Range-Checks <code>containsBuiltAsset</code> → BuiltAsset, <code>isLocatedInSpatialStructureElement</code> → SpatialStructureElement</td></tr>
+    <tr><td><code>built-asset-breakdown-link-shapes-core</code></td><td>Range-Checks <code>isRepresentedByLBSNode</code> → LBSNode, <code>isRepresentedBySBSNode</code> → SBSNode, <code>isClassifiedByCBSNode</code> → CBSNode</td></tr>
+  </table>
+
+  <div class="warn">
+    <strong>Hinweis (rdflib):</strong> rdflib 7.6.0 kann <em>unquoted</em> numerische Literale mit
+    <code>^^</code>-Datentyp nicht parsen (z. B. <code>level 0^^xsd:nonNegativeInteger</code>).
+    Die Beispiele verwenden daher die semantisch identische quoted-Form
+    (<code>"0"^^xsd:nonNegativeInteger</code>), die von rdflib und Jena korrekt gelesen wird.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+
+<section id="jsonld">
+  <h2>18. JSON-LD-Kontext</h2>
+  <div class="ok">
+    <strong>Status: PASS (2026-11-04)</strong> — geprüft mit Jena 4.10.0 im selbstständigen
+    Verifikationsprojekt <code>contexts/validation/</code> (Java 25 / Maven 3.9.9).
+  </div>
+
+  <p>Seit dem 4. Nov 2026 liegt mit <code>contexts/construct-x-context.jsonld</code> ein
+  kombinierter JSON-LD-Kontext für das gesamte Package vor. Er ist in <code>MANIFEST.json</code>
+  unter <code>json_ld_context</code> registriert.</p>
+
+  <table>
+    <tr><th>Merkmal</th><th>Wert</th></tr>
+    <tr><td>Pfad / Version</td><td><code>contexts/construct-x-context.jsonld</code>, 0.1.0</td></tr>
+    <tr><td>Kontext-IRI (Top-Level <code>@id</code>)</td><td><code>https://www.construct-x.org/context/construct-x/0.1.0</code></td></tr>
+    <tr><td>JSON-LD-Version</td><td><code>@version: 1.1</code></td></tr>
+    <tr><td>Abdeckung</td><td>alle 8 Domänen-Ontologien, alle 10 Link-Ontologien, alle 21 SKOS-Vokabulare — in einer Datei</td></tr>
+    <tr><td><code>@context</code>-Einträge</td><td>371 = 1 <code>@version</code> + 54 Präfixe (15 Standard, 8 Domäne, 10 Links, 21 SKOS-Vokabular) + 204 Bare-Term→IRI-String-Mappings + 112 Objekt-Definitionen</td></tr>
+    <tr><td>Bare-Term-Keys</td><td>316, davon 0 geprefixte String-Mappings</td></tr>
+  </table>
+
+  <h3>Kollisions-Design</h3>
+  <p>Bezeichner, die in mehreren Modulen vorkommen (z. B. geteilte Vokabular- oder
+  Property-Namen), sind bewusst exakt <strong>ein</strong> Bare-Term-Eintrag zugeordnet.
+  Kollidierende Namen bleiben über ihr Modul-Präfix nutzbar; der Bare Term steht für die
+  eine zugeordnete Bedeutung.</p>
+
+  <h3>Designregeln des Kontexts</h3>
+  <table>
+    <tr><th>#</th><th>Regel</th></tr>
+    <tr><td>1</td><td>Term-Definitionen (z. B. <code>"@type": "@id"</code>) gelten <strong>nur</strong> für Bare-Term-Keys. Präfix-Keys expandieren als Kompakt-IRIs <em>ohne</em> Coercion.</td></tr>
+    <tr><td>2</td><td>IRI-Werte unter Präfix-Keys benötigen Wert-Objekte der Form <code>{"@id": …}</code>.</td></tr>
+    <tr><td>3</td><td>ObjectProperty-Bare-Terme erhalten <code>{"@id": &lt;iri&gt;, "@type": "@id"}</code>.</td></tr>
+    <tr><td>4</td><td>Alle Bare-Term-Keys mit <code>"@type": "@id"</code> (inkl. <code>seeAlso</code>) bekommen im Dokument nur volle IRI-Strings.</td></tr>
+    <tr><td>5</td><td>Typisierte Literale werden explizit als <code>{"@value": …, "@type": …}</code> geschrieben.</td></tr>
+    <tr><td>6</td><td>Kompakt-IRIs in <code>{"@id": …}</code>-Werten expandiert Jena 4.10.0 korrekt (durch den Lauf belegt).</td></tr>
+  </table>
+
+  <h3>Verifikation</h3>
+  <p>Das Projekt <code>contexts/validation/</code> (<code>pom.xml</code>,
+  <code>src/main/java/Main.java</code>, <code>test/test-doc.jsonld</code>,
+  <code>test/test-doc-reference.md</code>) expandiert das Testdokument gegen den Kontext,
+  prüft die erwarteten IRIs (One-Way-Check: zusätzliche IRIs erlaubt) und serialisiert das
+  Ergebnis zurück. Ergebnis 2026-11-04: <strong>PASS</strong> — 42 Triples / 64 IRIs
+  expandiert, Roundtrip 42 → 42, Exit Code 0.</p>
+  <pre>
+# PowerShell, Workdir: contexts\validation
+$env:JAVA_HOME='C:\Users\Markus König\AppData\Local\Temp\opencode\jdk25\jdk-25.0.5+8'
+&amp; 'C:\Users\Markus König\AppData\Local\Temp\opencode\maven\apache-maven-3.9.9\bin\mvn.cmd' -q compile exec:java '-Dexec.args=test\test-doc.jsonld'
+# -&gt; ERGEBNIS: PASS, Exit Code 0
+  </pre>
+  <div class="warn">
+    <strong>Hinweise:</strong> (1) Der Lauf erzeugt ein <code>target/</code>-Verzeichnis —
+    dieses gehört nicht ins Repo und ist danach zu löschen. (2) Das Repo-Testdokument
+    referenziert den Kontext über den relativen Pfad
+    <code>"../../construct-x-context.jsonld"</code>; eine Repo-Kopie des Testdokuments
+    niemals aus dem Temp-Ordner neu zu kopieren, weil dort ein anderer Pfad steht.
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+</script>
+</body>
+</html>

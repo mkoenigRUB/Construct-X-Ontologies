@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construct-X Use Case – Ontologien im Datenraum</title>
+<style>
+  :root {
+    --blue: #1a5fb4;
+    --blue-dark: #12407a;
+    --blue-light: #e8f0fb;
+    --green: #2e7d32;
+    --green-light: #e6f4e7;
+    --orange: #e65100;
+    --orange-light: #fff3e0;
+    --purple: #6a1b9a;
+    --purple-light: #f3e8fb;
+    --gray: #5f6368;
+    --gray-light: #f1f3f4;
+    --border: #dadce0;
+    --text: #202124;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+  /* ---------- Navigation ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--blue-dark);
+    display: flex; flex-wrap: wrap; align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  }
+  nav .brand {
+    color: #fff; font-weight: 700; font-size: 15px;
+    padding: 12px 14px 12px 0; margin-right: 8px; white-space: nowrap;
+  }
+  nav a {
+    color: #d7e3f4; text-decoration: none; font-size: 14px;
+    padding: 14px 12px; display: block;
+  }
+  nav a:hover { color: #fff; background: rgba(255,255,255,.1); }
+  /* ---------- Layout ---------- */
+  main { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
+  section { padding-top: 48px; }
+  h1 { font-size: 30px; margin-bottom: 8px; color: var(--blue-dark); }
+  h2 { font-size: 24px; color: var(--blue-dark); margin-bottom: 14px; border-bottom: 3px solid var(--blue); display: inline-block; padding-bottom: 4px; }
+  h3 { font-size: 18px; margin: 18px 0 8px; }
+  p { margin-bottom: 12px; }
+  .lead { font-size: 17px; color: var(--gray); }
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    color: #fff; padding: 56px 20px 48px; text-align: center;
+  }
+  .hero h1 { color: #fff; font-size: 34px; }
+  .hero p { max-width: 760px; margin: 12px auto 0; font-size: 17px; color: #d7e3f4; }
+  .hero .badge {
+    display: inline-block; background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.35); border-radius: 20px;
+    padding: 4px 14px; font-size: 13px; margin-bottom: 16px;
+  }
+  /* ---------- Cards ---------- */
+  .card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; margin-bottom: 16px; background: #fff;
+  }
+  .grid { display: grid; gap: 16px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card .icon { font-size: 28px; margin-bottom: 8px; }
+  .card h3 { margin-top: 0; }
+  .card.blue { background: var(--blue-light); border-color: #b9d0ee; }
+  .card.green { background: var(--green-light); border-color: #bfe0c1; }
+  .card.orange { background: var(--orange-light); border-color: #f5cfa8; }
+  .card.purple { background: var(--purple-light); border-color: #dcc0ec; }
+  .card.gray { background: var(--gray-light); }
+  ul.clean { list-style: none; }
+  ul.clean li { padding: 4px 0 4px 26px; position: relative; }
+  ul.clean li::before { content: "✓"; position: absolute; left: 4px; color: var(--green); font-weight: 700; }
+  ul.dash { padding-left: 20px; }
+  ul.dash li { margin-bottom: 6px; }
+  code, .mono {
+    font-family: Consolas, "Courier New", monospace;
+    background: var(--gray-light); border-radius: 4px;
+    padding: 1px 6px; font-size: 13.5px;
+  }
+  .callout {
+    border-left: 4px solid var(--blue); background: var(--blue-light);
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 14px 0;
+  }
+  .callout.warn { border-color: var(--orange); background: var(--orange-light); }
+  .callout.ok { border-color: var(--green); background: var(--green-light); }
+  /* ---------- Tabs ---------- */
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; }
+  .tab-btn {
+    border: 1px solid var(--border); background: #fff; cursor: pointer;
+    padding: 10px 16px; border-radius: 8px 8px 0 0; font-size: 14px;
+    color: var(--gray); border-bottom: none;
+  }
+  .tab-btn:hover { background: var(--gray-light); }
+  .tab-btn.active {
+    background: var(--blue); color: #fff; font-weight: 600;
+    border-color: var(--blue);
+  }
+  .tab-panel {
+    display: none; border: 1px solid var(--border); border-radius: 0 10px 10px 10px;
+    padding: 22px; background: #fff;
+  }
+  .tab-panel.active { display: block; }
+  /* ---------- Stepper ---------- */
+  .stepper { margin-top: 18px; }
+  .step-progress { display: flex; gap: 4px; margin-bottom: 16px; }
+  .step-progress .dot {
+    flex: 1; height: 6px; border-radius: 3px; background: var(--border);
+    transition: background .3s;
+  }
+  .step-progress .dot.done { background: var(--blue); }
+  .step-card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; min-height: 220px;
+    animation: fadeIn .35s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .step-card .step-num {
+    display: inline-block; background: var(--blue); color: #fff;
+    border-radius: 50%; width: 30px; height: 30px; line-height: 30px;
+    text-align: center; font-weight: 700; font-size: 14px; margin-bottom: 10px;
+  }
+  .step-card h4 { font-size: 17px; margin-bottom: 8px; }
+  .step-card .who {
+    display: inline-block; font-size: 12px; font-weight: 600;
+    border-radius: 12px; padding: 2px 10px; margin-bottom: 10px;
+  }
+  .who.gu { background: var(--blue-light); color: var(--blue-dark); }
+  .who.nu { background: var(--green-light); color: var(--green); }
+  .who.bl { background: var(--orange-light); color: var(--orange); }
+  .who.dr { background: var(--purple-light); color: var(--purple); }
+  .step-nav { display: flex; justify-content: space-between; margin-top: 14px; }
+  .btn {
+    border: 1px solid var(--blue); background: #fff; color: var(--blue);
+    padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 14px;
+  }
+  .btn:hover:not(:disabled) { background: var(--blue); color: #fff; }
+  .btn:disabled { opacity: .35; cursor: default; }
+  .btn.primary { background: var(--blue); color: #fff; }
+  .btn.primary:hover:not(:disabled) { background: var(--blue-dark); }
+  /* ---------- Diagrams ---------- */
+  .diagram { text-align: center; margin: 18px 0; overflow-x: auto; }
+  .diagram svg { max-width: 100%; height: auto; }
+  .flow-box {
+    display: inline-flex; flex-direction: column; align-items: center;
+    border: 2px solid var(--blue); border-radius: 10px;
+    padding: 10px 16px; background: #fff; min-width: 130px;
+    transition: all .3s; cursor: default;
+  }
+  .flow-box .fb-title { font-weight: 700; font-size: 14px; color: var(--blue-dark); }
+  .flow-box .fb-sub { font-size: 12px; color: var(--gray); }
+  .flow-arrow {
+    display: inline-flex; align-items: center; font-size: 22px;
+    color: var(--blue); padding: 0 10px; font-weight: 700;
+  }
+  .flow-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; margin: 10px 0; }
+  .flow-box.active-glow {
+    border-color: var(--orange); background: var(--orange-light);
+    box-shadow: 0 0 0 4px rgba(230,81,0,.15);
+  }
+  .flow-box.active-glow .fb-title { color: var(--orange); }
+  /* ---------- Ontology chain ---------- */
+  .chain { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; justify-content: center; margin: 16px 0; }
+  .chain-node {
+    border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px;
+    background: #fff; text-align: center; cursor: pointer; min-width: 120px;
+    transition: all .25s;
+  }
+  .chain-node .cn-name { font-weight: 700; font-size: 14px; }
+  .chain-node .cn-desc { font-size: 12px; color: var(--gray); }
+  .chain-node:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .chain-node.selected { border-color: var(--blue); background: var(--blue-light); box-shadow: 0 4px 10px rgba(26,95,180,.2); }
+  .chain-link { display: flex; align-items: center; color: var(--gray); font-size: 13px; font-weight: 600; }
+  .chain-info {
+    border: 1px dashed var(--blue); border-radius: 10px;
+    background: var(--blue-light); padding: 14px 18px; margin-top: 12px;
+    min-height: 70px; text-align: left;
+  }
+  /* ---------- Table ---------- */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--gray-light); }
+  tr:nth-child(even) td { background: #fafbfc; }
+  /* ---------- Glossary ---------- */
+  .glossary dt { font-weight: 700; color: var(--blue-dark); margin-top: 14px; }
+  .glossary dd { margin-left: 0; color: var(--gray); }
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--gray-light); border-top: 1px solid var(--border);
+    text-align: center; padding: 24px; color: var(--gray); font-size: 13px;
+  }
+  .small { font-size: 13px; color: var(--gray); }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 26px; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">🏗️ Construct-X Use Case</span>
+  <a href="#problem">Problem</a>
+  <a href="#ziel">Ziel</a>
+  <a href="#ontologien">Ontologien</a>
+  <a href="#datenraum">Datenraum</a>
+  <a href="#prozesse">5 Hauptprozesse</a>
+  <a href="#komponenten">Komponenten</a>
+  <a href="#glossar">Glossar</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">Beispiel-Szenario · Construct-X Ontologien + Datenraum</div>
+  <h1>Wie Ontologien den Datenaustausch auf der Baustelle ermöglichen</h1>
+  <p>Ein Generalunternehmer, ein Nachunternehmer und ein Baulogistikdienstleister planen zusammen ein Bauprojekt –
+  jeder mit seiner eigenen Software. Die Construct-X-Ontologien bilden die gemeinsame Sprache,
+  der Datenraum regelt, wer welche Daten wann nutzen darf.</p>
+</div>
+
+<main>
+
+<!-- ================= PROBLEM ================= -->
+<section id="problem">
+  <h2>1 · Das Problem</h2>
+  <p class="lead">Drei Unternehmen, drei verschiedene Systeme – und Informationen, die zusammengehören, aber in verschiedenen Systemen liegen.</p>
+
+  <div class="grid grid-3">
+    <div class="card blue">
+      <div class="icon">🏢</div>
+      <h3>Generalunternehmer (GU)</h3>
+      <p>Erstellt den <strong>Rahmenterminplan</strong> für das ganze Bauprojekt. Plant z.&nbsp;B. in <em>Microsoft Project</em> und verwaltet WBS, LBS und Baustelleneinrichtung in eigenen Systemen.</p>
+    </div>
+    <div class="card green">
+      <div class="icon">👷</div>
+      <h3>Nachunternehmer (NU)</h3>
+      <p>Übernimmt bestimmte Arbeiten (z.&nbsp;B. <em>Ausbau 5. Obergeschoss</em>) und erstellt daraus seine <strong>Fein- bzw. Taktplanung</strong> – z.&nbsp;B. in <em>Metronom</em>.</p>
+    </div>
+    <div class="card orange">
+      <div class="icon">🛗</div>
+      <h3>Baulogistikdienstleister (BL)</h3>
+      <p>Stellt Geräte und Einrichtungen bereit, z.&nbsp;B. einen <strong>Bauaufzug</strong>. Verwaltet Geräte und Verfügbarkeit in seinem eigenen Equipment-System.</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>Das Problem heute:</strong> Informationen müssen manuell exportiert, per Datei übertragen und im Zielsystem
+    wieder interpretiert werden. Das führt zu Medienbrüchen, unterschiedlichen Datenständen und viel Abstimmungsaufwand.
+    Besonders tricky: Eine Aktivität aus dem Terminplan muss mit ihrem <em>Ort</em>, ihrer <em>Arbeitsstruktur</em> und den
+    <em>verfügbaren Baustellenressourcen</em> in Beziehung gesetzt werden – und genau diese Informationen liegen in verschiedenen Systemen.
+  </div>
+</section>
+
+<!-- ================= ZIEL ================= -->
+<section id="ziel">
+  <h2>2 · Das Ziel</h2>
+  <p class="lead">Durchgängiger digitaler Datenaustausch – <strong>ohne</strong> dass ein Unternehmen seine Fachanwendung aufgeben muss.</p>
+  <p>Die Daten bleiben in den Systemen der Unternehmen. Für den Austausch werden nur die benötigten Daten in eine
+  <strong>gemeinsame, eindeutig beschriebene Struktur</strong> überführt. Das Zielbild ruht auf drei Grundprinzipien:</p>
+
+  <div class="grid grid-3">
+    <div class="card blue">
+      <div class="icon">🗣️</div>
+      <h3>Gemeinsame Semantik</h3>
+      <p>Alle ausgetauschten Daten haben eine einheitlich beschriebene Bedeutung und können systemübergreifend verstanden werden.</p>
+    </div>
+    <div class="card green">
+      <div class="icon">🎯</div>
+      <h3>Gezielte Datenbereitstellung</h3>
+      <p>Nur die Informationen werden bereitgestellt, die für den jeweiligen Anwendungsfall wirklich nötig sind – nicht der gesamte Datenbestand.</p>
+    </div>
+    <div class="card orange">
+      <div class="icon">🔐</div>
+      <h3>Kontrollierte Datennutzung</h3>
+      <p>Es ist klar geregelt, welcher Teilnehmer welche Daten zu welchem Zweck verwenden darf.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ONTOLOGIEN ================= -->
+<section id="ontologien">
+  <h2>3 · Die Rolle der Ontologien</h2>
+  <p class="lead">Die Ontologien sind die <strong>gemeinsame fachliche Sprache</strong>. Sie beschreiben nicht, wo Daten gespeichert sind,
+  sondern <em>was sie bedeuten</em> und <em>wie sie zusammenhängen</em>.</p>
+
+  <div class="grid grid-3">
+    <div class="card blue">
+      <div class="icon">📅</div>
+      <h3>Terminplanungsontologie</h3>
+      <p>Beschreibt Terminpläne, <code>Activity</code>s, Meilensteine und Anordnungsbeziehungen (Vorgänger/Nachfolger).</p>
+    </div>
+    <div class="card green">
+      <div class="icon">🗂️</div>
+      <h3>Breakdown-Structure-Ontologie</h3>
+      <p>Beschreibt Arbeits- und Ortsstrukturen: <code>WBSNode</code> (Arbeitspakete) und <code>LBSNode</code> (Orte).</p>
+    </div>
+    <div class="card orange">
+      <div class="icon">🏗️</div>
+      <h3>Construction-Site-Ontologie</h3>
+      <p>Beschreibt Baustellenbereiche (<code>SiteArea</code>) und verfügbares Equipment (<code>SiteEquipment</code>).</p>
+    </div>
+  </div>
+
+  <h3>Interaktiv: So hängen die Informationen zusammen</h3>
+  <p>Klicke auf ein Element, um zu sehen, was es bedeutet und wie es mit den anderen verbunden ist.</p>
+
+  <div class="chain" id="chain">
+    <div class="chain-node" data-key="activity">
+      <div class="cn-name">📅 Activity</div>
+      <div class="cn-desc">A100 · Ausbau 5. OG</div>
+    </div>
+    <div class="chain-link">── isClassifiedByWBSNode ──▶</div>
+    <div class="chain-node" data-key="wbs">
+      <div class="cn-name">🗂️ WBSNode</div>
+      <div class="cn-desc">03 · Innenausbau</div>
+    </div>
+  </div>
+  <div class="chain" id="chain2">
+    <div class="chain-node" data-key="activity2">
+      <div class="cn-name">📅 Activity</div>
+      <div class="cn-desc">A100 · Ausbau 5. OG</div>
+    </div>
+    <div class="chain-link">── isPerformedIn ──▶</div>
+    <div class="chain-node" data-key="lbs">
+      <div class="cn-name">📍 LBSNode</div>
+      <div class="cn-desc">LBS-05 · 5. Obergeschoss</div>
+    </div>
+    <div class="chain-link">◀── isRepresentedByLBSNode ──</div>
+    <div class="chain-node" data-key="sitearea">
+      <div class="cn-name">🏗️ SiteArea</div>
+      <div class="cn-desc">Arbeitsbereich 5. OG</div>
+    </div>
+    <div class="chain-link">◀── usesSiteArea ──</div>
+    <div class="chain-node" data-key="equipment">
+      <div class="cn-name">🛗 SiteEquipment</div>
+      <div class="cn-desc">Bauaufzug 4711</div>
+    </div>
+  </div>
+
+  <div class="chain-info" id="chainInfo">
+    👆 <strong>Tipp:</strong> Klicke auf eines der Elemente oben, um eine einfache Erklärung zu sehen.
+  </div>
+
+  <div class="callout ok">
+    <strong>Der große Vorteil:</strong> Ein Nachunternehmer erhält nicht nur „Aktivität A100, Zeitraum 02.–27.11.2026“.
+    Er kann <em>automatisiert</em> erkennen: <strong>wo</strong> die Arbeit stattfindet, <strong>zu welchem Arbeitspaket</strong> sie gehört,
+    <strong>welcher Baustellenbereich</strong> relevant ist und <strong>welches Equipment</strong> dort verfügbar ist.
+  </div>
+
+  <h3>Kanonisches Austauschmodell</h3>
+  <p>Jedes Unternehmen überführt seine Systemdaten einmal in das gemeinsame Construct-X-Modell – und zurück.
+  So muss <strong>nicht für jede Kombination zweier Fachsysteme</strong> eine eigene Schnittstelle gebaut werden:</p>
+  <div class="diagram">
+    <div class="flow-row">
+      <div class="flow-box"><span class="fb-title">MS Project</span><span class="fb-sub">GU</span></div>
+      <div class="flow-arrow">⇄</div>
+      <div class="flow-box" style="border-color:var(--purple)"><span class="fb-title" style="color:var(--purple)">Construct-X</span><span class="fb-sub">gemeinsames Modell</span></div>
+      <div class="flow-arrow">⇄</div>
+      <div class="flow-box" style="border-color:var(--green)"><span class="fb-title" style="color:var(--green)">Metronom</span><span class="fb-sub">NU</span></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box" style="border-color:var(--orange)"><span class="fb-title" style="color:var(--orange)">Equipment-System</span><span class="fb-sub">BL</span></div>
+      <div class="flow-arrow">⇄</div>
+      <div class="flow-box" style="border-color:var(--purple)"><span class="fb-title" style="color:var(--purple)">Construct-X</span><span class="fb-sub">gemeinsames Modell</span></div>
+      <div class="flow-arrow">⇄</div>
+      <div class="flow-box" style="border-color:var(--blue)"><span class="fb-title" style="color:var(--blue-dark)">WBS/LBS-System</span><span class="fb-sub">GU</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DATENRAUM ================= -->
+<section id="datenraum">
+  <h2>4 · Die Rolle des Datenraums</h2>
+  <p class="lead">Die Ontologien sagen, <em>was die Daten bedeuten</em>. Der Datenraum regelt,
+  <strong>wer auf welche Daten zugreifen darf, zu welchem Zweck und wann sie übertragen werden</strong>.</p>
+
+  <div class="grid grid-2">
+    <div class="card purple">
+      <h3>🧭 Ontologien</h3>
+      <ul class="dash">
+        <li>Was bedeuten die Daten?</li>
+        <li>Wie hängen sie fachlich zusammen?</li>
+      </ul>
+    </div>
+    <div class="card purple">
+      <h3>🏛️ Datenraum</h3>
+      <ul class="dash">
+        <li>Wer darf auf die Daten zugreifen?</li>
+        <li>Zu welchem Zweck dürfen sie genutzt werden?</li>
+        <li>Wann und wie werden sie übertragen?</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Der Datenraum ist die <strong>vertrauenswürdige Infrastruktur</strong> für den organisationsübergreifenden Austausch.
+  Es entsteht <em>kein</em> zentrales gemeinsames Projektsystem – jedes Unternehmen behält die Kontrolle über seine Daten.
+  Der Datenraum übernimmt vier Aufgaben:</p>
+
+  <div class="grid grid-2">
+    <div class="card gray"><div class="icon">🪪</div><h3>1. Teilnehmer identifizieren</h3>
+      <p>GU, NU und BL werden eindeutig identifiziert; Rollen und Projektzugehörigkeiten werden berücksichtigt.</p></div>
+    <div class="card gray"><div class="icon">📢</div><h3>2. Datenangebote bekannt machen</h3>
+      <p>Ein Unternehmen beschreibt, was es anbieten kann (z.&nbsp;B. „Planning Context für Projekt X“) – die Daten müssen noch nicht existieren.</p></div>
+    <div class="card gray"><div class="icon">📜</div><h3>3. Zugriff und Nutzung regeln</h3>
+      <p>Über Policies wird festgelegt, wer ein Angebot nutzen darf und für welchen Zweck.</p></div>
+    <div class="card gray"><div class="icon">📦</div><h3>4. Transfer kontrolliert ausführen</h3>
+      <p>Erst wenn der Zugriff zulässig ist, werden die Daten bereitgestellt und übertragen.</p></div>
+  </div>
+
+  <h3>Interaktiv: Der einfache Datenraum-Ablauf</h3>
+  <p>Klicke „Nächster Schritt“, um zu sehen, wie ein Datenaustausch im Datenraum abläuft.</p>
+  <div class="diagram" id="drFlow">
+    <div class="flow-row">
+      <div class="flow-box" id="dr-gu"><span class="fb-title">🏢 Generalunternehmer</span><span class="fb-sub">stellt Daten bereit</span></div>
+      <div class="flow-arrow" id="dr-arrow1">⇄</div>
+      <div class="flow-box" id="dr-space" style="border-color:var(--purple)"><span class="fb-title" style="color:var(--purple)">🏛️ Datenraum</span><span class="fb-sub">prüft &amp; koordiniert</span></div>
+      <div class="flow-arrow" id="dr-arrow2">⇄</div>
+      <div class="flow-box" id="dr-nu" style="border-color:var(--green)"><span class="fb-title" style="color:var(--green)">👷 Nachunternehmer</span><span class="fb-sub">erhält Daten</span></div>
+    </div>
+    <div class="chain-info" id="drInfo" style="text-align:center">
+      👇 <strong>Starte den Ablauf</strong>, um Schritt für Schritt zu sehen, was im Datenraum passiert.
+    </div>
+    <div class="step-nav" style="justify-content:center">
+      <button class="btn" id="drPrev" disabled>◀ Zurück</button>
+      <button class="btn primary" id="drNext">Nächster Schritt ▶</button>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Wichtig: Datenangebot ≠ Datenbereitstellung.</strong>
+    Der GU kann dauerhaft anbieten: „Planning Context für Nachunternehmer im Projekt X“.
+    Die konkreten Daten werden aber <em>erst erzeugt, wenn ein berechtigter Nachunternehmer zugreift</em> –
+    und zwar aus den <strong>aktuellen</strong> Datenquellen. So sind immer die zum Zeitpunkt des Zugriffs relevanten Daten enthalten.
+  </div>
+
+  <h3>Daten Dritter einbinden</h3>
+  <p>Der Datenraum erlaubt es, Daten mehrerer Unternehmen kontrolliert zusammenzuführen.
+  Der Baulogistikdienstleister stellt z.&nbsp;B. Bauaufzugsdaten bereit und erlaubt dem GU in einer
+  <strong>Datennutzungsvereinbarung</strong>, diese für das Projekt zu verwenden und an berechtigte Nachunternehmer weiterzugeben.
+  Der NU muss dafür <em>keine</em> eigene Beziehung zum Baulogistikdienstleister aufbauen:</p>
+  <div class="diagram">
+    <div class="flow-row">
+      <div class="flow-box" style="border-color:var(--orange)"><span class="fb-title" style="color:var(--orange)">🛗 Baulogistik</span><span class="fb-sub">Equipment-Daten + Weitergaberecht</span></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-box"><span class="fb-title">🏢 Generalunternehmer</span><span class="fb-sub">kombiniert alles</span></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-box" style="border-color:var(--green)"><span class="fb-title" style="color:var(--green)">👷 Nachunternehmer</span><span class="fb-sub">erhält Planungskontext</span></div>
+    </div>
+    <p class="small">Der GU fungiert als <strong>autorisierter Integrator</strong>: Terminplandaten + WBS/LBS + Baustelleninformationen + freigegebene Equipment-Daten → gemeinsamer Planungskontext.
+    Die Herkunft bleibt nachvollziehbar (Provenance): „Bauaufzug-Daten stammen vom Baulogistikdienstleister“.</p>
+  </div>
+</section>
+
+<!-- ================= PROZESSE ================= -->
+<section id="prozesse">
+  <h2>5 · Die fünf Hauptprozesse</h2>
+  <p class="lead">Der gesamte Datenaustausch gliedert sich in fünf Hauptprozesse. Wähle einen Prozess und arbeite dich Schritt für Schritt durch.</p>
+
+  <div class="tabs" id="procTabs">
+    <button class="tab-btn active" data-proc="0">① Einrichten</button>
+    <button class="tab-btn" data-proc="1">② Planungsauftrag</button>
+    <button class="tab-btn" data-proc="2">③ Planungskontext</button>
+    <button class="tab-btn" data-proc="3">④ Detailplanung</button>
+    <button class="tab-btn" data-proc="4">⑤ Integration</button>
+  </div>
+
+  <div class="tab-panel active" id="procPanel"></div>
+</section>
+
+<!-- ================= KOMPONENTEN ================= -->
+<section id="komponenten">
+  <h2>6 · Welche Komponenten werden entwickelt?</h2>
+  <p class="lead">Die Fachsysteme der Unternehmen bleiben unverändert. Die Entwicklungsarbeit besteht in der
+  <strong>semantischen Anbindung über Construct-X</strong> und den Diensten für die organisationsübergreifende Bereitstellung.
+  Es gibt drei Arten von Komponenten:</p>
+
+  <div class="grid grid-3">
+    <div class="card purple">
+      <div class="icon">🧩</div>
+      <h3>1. Gemeinsame Construct-X-Komponenten</h3>
+      <p class="small">Einmal entwickelt, von allen Teilnehmern genutzt:</p>
+      <ul class="dash small">
+        <li>Ontologien &amp; Link Ontologies</li>
+        <li>kontrollierte SKOS-Vokabulare</li>
+        <li>SHACL-Profile &amp; JSON-LD-Kontexte</li>
+        <li>IRI- &amp; Provenance-Konventionen</li>
+        <li><strong>Construct-X SDK</strong> (lesen/schreiben, validieren, IRIs verwalten …)</li>
+      </ul>
+    </div>
+    <div class="card blue">
+      <div class="icon">🔁</div>
+      <h3>2. Wiederverwendbare Converter-Services</h3>
+      <p class="small">Nicht individuell pro Unternehmen, sondern für häufige Systeme:</p>
+      <ul class="dash small">
+        <li>MS Project ↔ Construct-X</li>
+        <li>Primavera ↔ Construct-X</li>
+        <li>Metronom ↔ Construct-X</li>
+        <li>GAEB / IFC ↔ Construct-X</li>
+        <li>Equipment-System ↔ Construct-X</li>
+      </ul>
+      <p class="small">Unternehmensspezifische Besonderheiten werden über <strong>konfigurierbare Mapping-Profile</strong> gelöst
+      (z.&nbsp;B. welches Feld den WBS-Code enthält). Converter können zentral oder als lokale Container-Instanz betrieben werden.</p>
+    </div>
+    <div class="card green">
+      <div class="icon">🏭</div>
+      <h3>3. Unternehmensspezifische Dienste</h3>
+      <p class="small">Jedes Unternehmen entwickelt nur, was es wirklich braucht – die Datenraumtechnik
+      (Identität, Katalog, Policies, Transfer) wird von vorhandenen Datenraumkomponenten übernommen.</p>
+    </div>
+  </div>
+
+  <h3>Was braucht jeder Teilnehmer?</h3>
+  <div class="tabs" id="compTabs">
+    <button class="tab-btn active" data-comp="gu">🏢 Generalunternehmer</button>
+    <button class="tab-btn" data-comp="bl">🛗 Baulogistikdienstleister</button>
+    <button class="tab-btn" data-comp="nu">👷 Nachunternehmer</button>
+  </div>
+
+  <div class="tab-panel active" id="comp-gu">
+    <p><strong>Vorhandene Systeme (bleiben unverändert):</strong> Terminplanungssystem, WBS-System, LBS-System, Baustellen-/BE-Planungssystem.</p>
+    <div class="grid grid-2">
+      <div class="card blue">
+        <h3>Gemeinsame Komponenten nutzen</h3>
+        <ul class="dash small">
+          <li>Terminplan ↔ Construct-X Converter</li>
+          <li>WBS/LBS ↔ Construct-X Converter</li>
+          <li>Site ↔ Construct-X Converter</li>
+          <li>Construct-X SDK, SHACL-Profile, Ontologien &amp; Vokabulare</li>
+        </ul>
+      </div>
+      <div class="card gray">
+        <h3>Unternehmensspezifisch entwickeln</h3>
+        <ul class="dash small">
+          <li><strong>Planning Assignment Service</strong> – verwaltet die konkreten Planungsaufträge</li>
+          <li><strong>Semantic Integration Service</strong> – verbindet die Teilgraphen über die Link Ontologies</li>
+          <li><strong>Context Selection Service</strong> – wählt nur den benötigten Teilgraphen aus</li>
+          <li><strong>External Data Client</strong> – ruft z.&nbsp;B. den Equipment Data Service des BL ab</li>
+          <li><strong>Planning Context Service</strong> – der zentrale Dienst: Auswahl, Zusammenführung, Rechte-Prüfung, Provenance, SHACL, Snapshot, Bereitstellung</li>
+          <li><strong>Detailed Schedule Integration Service</strong> – prüft und importiert die Detailplanung des NU</li>
+          <li>Mapping-Profile, Snapshot- &amp; Provenance-Verwaltung</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small">Der GU hat den größten Entwicklungsumfang, weil hier mehrere Informationsquellen zu einem gemeinsamen Planungskontext zusammengeführt werden.</p>
+  </div>
+
+  <div class="tab-panel" id="comp-bl">
+    <p><strong>Vorhandenes System (bleibt unverändert):</strong> Equipment Management System (Geräte, Typen, Projekte, Standorte, Status, Verfügbarkeit).</p>
+    <div class="grid grid-2">
+      <div class="card orange">
+        <h3>Gemeinsame Komponenten nutzen</h3>
+        <ul class="dash small">
+          <li>Equipment ↔ Construct-X Converter</li>
+          <li>Construct-X SDK</li>
+          <li>Construction Site Ontology &amp; Equipment-Vokabulare</li>
+          <li>SHACL-Profile</li>
+        </ul>
+      </div>
+      <div class="card gray">
+        <h3>Unternehmensspezifisch entwickeln</h3>
+        <ul class="dash small">
+          <li><strong>Equipment Data Service</strong> – Abfragen nach Projekt, Baustellenbereich, Equipment-Typ, Status, Verfügbarkeit; liefert Ergebnisse auf Construct-X-Basis</li>
+          <li><strong>Policy-Konfiguration</strong> – wer darf die Daten wofür nutzen und weitergeben (überwiegend Konfiguration, keine Fachsoftware)</li>
+          <li>Mapping-Profil, Abfrage-/Filterlogik</li>
+          <li>Provenance- &amp; Identitätskonfiguration (eigene IRIs, z.&nbsp;B. <code>https://data.logistics-provider.example/equipment/4711</code>)</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small">Der Entwicklungsumfang bleibt vergleichsweise gering.</p>
+  </div>
+
+  <div class="tab-panel" id="comp-nu">
+    <p><strong>Vorhandenes System (bleibt unverändert):</strong> Taktplanungssystem (z.&nbsp;B. Metronom).</p>
+    <div class="grid grid-2">
+      <div class="card green">
+        <h3>Gemeinsame Komponenten nutzen</h3>
+        <ul class="dash small">
+          <li>Metronom ↔ Construct-X Converter (bidirektional, für alle Metronom-Nutzer)</li>
+          <li>Construct-X SDK</li>
+          <li>Ontologien &amp; Link Ontologies, Vokabulare</li>
+          <li>SHACL-Profile</li>
+        </ul>
+      </div>
+      <div class="card gray">
+        <h3>Unternehmensspezifisch entwickeln</h3>
+        <ul class="dash small">
+          <li><strong>Planning Context Client</strong> – fordert den Planungskontext an und übernimmt ihn</li>
+          <li><strong>Identity Mapping</strong> – bewahrt die Construct-X-Identitäten beim Import (z.&nbsp;B. A100 → Metronom-Objekt 4711 + externe IRI)</li>
+          <li>Verwaltung eigener IRIs für neue Detailaktivitäten (z.&nbsp;B. <code>https://data.subcontractor.example/activity/NA-101</code>)</li>
+          <li>Bezug zu Framework Activities &amp; Planning-Context-Snapshot</li>
+          <li><strong>Detailed Schedule Service</strong> – stellt das Planungsergebnis für den GU bereit (Graph, Referenzen, SHACL-Prüfung, Provenance)</li>
+          <li>Metronom-Mapping-Profil</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLOSSAR ================= -->
+<section id="glossar">
+  <h2>7 · Glossar</h2>
+  <p class="lead">Die wichtigsten Begriffe des Szenarios – einfach erklärt.</p>
+  <dl class="glossary">
+    <dt>Ontologie</dt>
+    <dd>Ein formales, gemeinsames Vokabular: Es definiert, welche Arten von Dingen es gibt (z.&nbsp;B. <em>Activity</em>, <em>SiteEquipment</em>) und welche Beziehungen zwischen ihnen erlaubt sind (z.&nbsp;B. <em>isPerformedIn</em>).</dd>
+    <dt>Link Ontology</dt>
+    <dd>Verbindet verschiedene fachliche Sichten miteinander – z.&nbsp;B. eine Activity mit einem WBSNode oder LBSNode.</dd>
+    <dt>IRI (Internationalized Resource Identifier)</dt>
+    <dd>Eine stabile, eindeutige Adresse für ein Objekt, z.&nbsp;B. <code>https://data.subcontractor.example/activity/NA-101</code>. Stabile IRIs ermöglichen, dass dieselbe Aktivität in allen Systemen eindeutig erkannt und aktualisiert statt dupliziert wird.</dd>
+    <dt>WBS / LBS</dt>
+    <dd><strong>WBS</strong> (Work Breakdown Structure) gliedert das Projekt in Arbeitspakete. <strong>LBS</strong> (Location Breakdown Structure) gliedert es räumlich (z.&nbsp;B. Gebäude, Etagen).</dd>
+    <dt>Planning Context</dt>
+    <dd>Der für einen konkreten Planungsauftrag zusammengestellte, semantisch verknüpfte Teilgraph: Aktivitäten + WBS + LBS + Baustellenbereiche + Equipment – nur das, was der Nachunternehmer braucht.</dd>
+    <dt>Snapshot (z.&nbsp;B. PCS-2026-10-27-001)</dt>
+    <dd>Ein eindeutig referenzierbarer „Fotograf“ des dynamisch erzeugten Planungskontexts: dokumentiert Datenstand, Ontologie-Versionen und Quellen. Die spätere Detailplanung verweist darauf.</dd>
+    <dt>SHACL-Profil</dt>
+    <dd>Definiert, welche Daten mindestens vorhanden sein müssen (z.&nbsp;B. „jede Activity braucht identifier, name, plannedStart, plannedFinish“). Sender und Empfänger prüfen damit automatisch dieselben Anforderungen.</dd>
+    <dt>SKOS-Vokabular</dt>
+    <dd>Kontrollierte Begriffswelten mit stabilen IRIs, z.&nbsp;B. Equipment-Typen (<em>ConstructionLift</em>, <em>Crane</em>). Unterschiedliche Bezeichnungen („Bauaufzug“, „Material Hoist“) werden als Synonyme hinterlegt; eigene Vokabulare können per <code>skos:exactMatch</code> gemappt werden.</dd>
+    <dt>Provenance</dt>
+    <dd>Herkunfts-Dokumentation: wer hat welche Information wann aus welchem System und auf welchem Datenstand bereitgestellt.</dd>
+    <dt>Datenraum</dt>
+    <dd>Vertrauenswürdige Infrastruktur für den organisationsübergreifenden Datenaustausch: Identität, Katalog (Datenangebote), Policies/Agreements (Nutzungsrechte) und kontrollierter Transfer.</dd>
+    <dt>Policy / Agreement</dt>
+    <dd>Die vereinbarten Regeln: Wer darf welche Daten zu welchem Zweck nutzen – und darf er sie weitergeben?</dd>
+    <dt>delegatedActivity / contextActivity</dt>
+    <dd>Beim Planungsauftrag: <em>delegated</em> = darf der NU detaillieren; <em>context</em> = dient nur als Randbedingung (z.&nbsp;B. Vorgänger/Nachfolger). Beide sind fachlich einfach <code>Activity</code>-Instanzen – die Unterscheidung gehört zum Auftrag, nicht zur Aktivität selbst.</dd>
+    <dt>JSON-LD</dt>
+    <dd>Ein Austauschformat, mit dem der Construct-X-Graph (mit allen semantischen Beziehungen) übertragen wird.</dd>
+  </dl>
+</section>
+
+</main>
+
+<footer>
+  Construct-X · AP 3.4 · Interaktive Erläuterung des Beispielszenarios „Nutzung der Ontologien im Datenraum“
+</footer>
+
+<script>
+/* ================= Ontology chain ================= */
+const chainTexts = {
+  activity:  "<strong>📅 Activity (A100 – Ausbau 5. OG)</strong><br>Ein Arbeitsschritt im Terminplan mit Start- und Endtermin. Hier: die Rahmenaktivität, die der Generalunternehmer dem Nachunternehmer zur Detailplanung übergibt.",
+  activity2: "<strong>📅 Activity (A100 – Ausbau 5. OG)</strong><br>Über <code>isPerformedIn</code> wird die Aktivität einem Ort (LBSNode) zugeordnet. Damit weiß jeder: <em>wo</em> die Arbeit stattfindet.",
+  wbs:       "<strong>🗂️ WBSNode (03 – Innenausbau)</strong><br>Ein Knoten der Arbeitsstruktur. Über <code>isClassifiedByWBSNode</code> ist klar, zu welchem Arbeitspaket die Aktivität fachlich gehört.",
+  lbs:       "<strong>📍 LBSNode (LBS-05 – 5. Obergeschoss)</strong><br>Ein Knoten der Ortsstruktur. Er ist der Ausgangspunkt, um den relevanten Baustellenbereich und das dortige Equipment automatisch zu finden.",
+  sitearea:  "<strong>🏗️ SiteArea (Arbeitsbereich 5. OG)</strong><br>Ein konkreter Baustellenbereich. Er ist über <code>isRepresentedByLBSNode</code> mit dem LBS-Knoten verbunden – deshalb findet man ihn automatisch über die Aktivität.",
+  equipment: "<strong>🛗 SiteEquipment (Bauaufzug 4711)</strong><br>Ein Gerät auf der Baustelle, über <code>usesSiteArea</code> dem Baustellenbereich zugeordnet. Es behält seine Identität beim Baulogistikdienstleister – alle anderen referenzieren nur darauf."
+};
+document.querySelectorAll('.chain-node').forEach(node => {
+  node.addEventListener('click', () => {
+    document.querySelectorAll('.chain-node').forEach(n => n.classList.remove('selected'));
+    node.classList.add('selected');
+    document.getElementById('chainInfo').innerHTML = chainTexts[node.dataset.key];
+  });
+});
+
+/* ================= Data space flow ================= */
+const drSteps = [
+  { text: "<strong>Schritt 1 – Datenangebot:</strong> Der Generalunternehmer veröffentlicht im Datenraum-Katalog ein Angebot: „Planning Context für Nachunternehmer im Projekt X“. Die Daten selbst werden noch <em>nicht</em> erzeugt.",
+    glow: ['dr-gu'] },
+  { text: "<strong>Schritt 2 – Anfrage:</strong> Der Nachunternehmer fordert den Planungskontext an. Er nennt Projekt, Planungsauftrag, seinen Namen und den Nutzungszweck (DetailedScheduling).",
+    glow: ['dr-nu'] },
+  { text: "<strong>Schritt 3 – Prüfung:</strong> Der Datenraum prüft: Ist der Teilnehmer eindeutig identifiziert? Gehört er zum Projekt? Ist er der richtige Nachunternehmer? Ist der Zweck zulässig? Besteht ein gültiges Nutzungsrecht?",
+    glow: ['dr-space'] },
+  { text: "<strong>Schritt 4 – Datenbereitstellung:</strong> Erst jetzt stellt der Generalunternehmer die Daten aus seinen <em>aktuellen</em> Systemen zusammen (Terminplan + WBS/LBS + Baustelle + freigegebene Equipment-Daten) und verknüpft sie semantisch.",
+    glow: ['dr-gu'] },
+  { text: "<strong>Schritt 5 – Kontrollierter Transfer:</strong> Der Datenraum koordiniert die Übertragung (z.&nbsp;B. als JSON-LD). Nur autorisierte Datenflüsse finden statt – der Nachunternehmer erhält den geprüften Planungskontext.",
+    glow: ['dr-space', 'dr-nu'] }
+];
+let drIdx = -1;
+function drRender() {
+  ['dr-gu','dr-space','dr-nu'].forEach(id => document.getElementById(id).classList.remove('active-glow'));
+  const info = document.getElementById('drInfo');
+  if (drIdx < 0) {
+    info.innerHTML = "👇 <strong>Starte den Ablauf</strong>, um Schritt für Schritt zu sehen, was im Datenraum passiert.";
+  } else {
+    drSteps[drIdx].glow.forEach(id => document.getElementById(id).classList.add('active-glow'));
+    info.innerHTML = drSteps[drIdx].text;
+  }
+  document.getElementById('drPrev').disabled = drIdx <= 0;
+  document.getElementById('drNext').disabled = drIdx >= drSteps.length - 1;
+}
+document.getElementById('drNext').addEventListener('click', () => { if (drIdx < drSteps.length - 1) { drIdx++; drRender(); } });
+document.getElementById('drPrev').addEventListener('click', () => { if (drIdx > 0) { drIdx--; drRender(); } });
+
+/* ================= Process tabs & steppers ================= */
+const processes = [
+  {
+    title: "Hauptprozess 1 – Datenraumbeziehungen und Nutzungsrechte einrichten",
+    intro: "Die <strong>Einrichtungsphase</strong>: Sie wird in der Regel nur einmal durchgeführt (oder bei Änderungen der Zusammenarbeit). Am Ende können sich die drei Teilnehmer semantisch verstehen – noch wurden aber keine konkreten Aktivitäten ausgetauscht.",
+    steps: [
+      { who: "dr", whoLabel: "Alle + Datenraum", title: "Gemeinsame semantische Grundlage festlegen",
+        text: "Die Unternehmen vereinbaren, welche Construct-X-Ontologien verwendet werden: <strong>Construction Schedule</strong> (Terminpläne, Aktivitäten), <strong>Breakdown Structure</strong> (WBS/LBS), <strong>Construction Site</strong> (Baustellenbereiche, Equipment) und die <strong>Link Ontologies</strong> zur Verknüpfung. Außerdem werden die <strong>Versionen</strong> festgelegt (z.&nbsp;B. Schedule 0.5.0, Breakdown 0.7.0, Site 0.1.0) – ein Datenangebot gibt sie an, damit der Empfänger vor dem Abruf weiß, welches Modell er verarbeiten muss." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Eigene Systeme auf Construct-X abbilden",
+        text: "Der GU legt für seine Systeme die Abbildung auf Construct-X fest: <strong>MS Project Task → Activity</strong> (identifier, name, plannedStart, plannedFinish, Abhängigkeiten), <strong>interner WBS-Knoten → WBSNode</strong>, <strong>interner Ortsknoten → LBSNode</strong> (mit stabilen Identitäten, z.&nbsp;B. WBS-03 „Innenausbau“, LBS-05 „5. OG“), <strong>Arbeitsbereich → SiteArea</strong>, <strong>Bauaufzug → SiteEquipment</strong>. Die Aktivitäten werden über die Link Ontology mit WBS/LBS verbunden – aus einem reinen Terminplan wird ein räumlich und organisatorisch interpretierbarer Terminplan." },
+      { who: "bl", whoLabel: "Baulogistikdienstleister", title: "Equipment semantisch beschreiben",
+        text: "Der BL beschreibt seinen Bauaufzug als <code>SiteEquipment</code> mit kontrolliertem Typ: <code>equipmentType = ConstructionLift</code> (statt einfach „Gerät 4711“). Wichtig: Das Equipment erhält eine <strong>IRI aus dem Namensraum des BL</strong> (z.&nbsp;B. <code>https://data.logistics-provider.example/equipment/ZEP-LIFT-4711</code>). Der GU erzeugt keine eigene Kopie-Identität, sondern referenziert diese Ressource – die Datenquelle bleibt eindeutig der Baulogistikdienstleister." },
+      { who: "bl", whoLabel: "Baulogistikdienstleister", title: "Nutzungs- und Weitergaberechte festlegen",
+        text: "Der BL legt fest, wie seine Daten genutzt werden dürfen: Der GU darf die Bauaufzugsdaten ✓ verwenden, ✓ für Project-X nutzen, ✓ in einen Planning Context integrieren und ✓ definierte Informationen an berechtigte Nachunternehmer weitergeben. Damit muss der NU später <strong>keine eigene Datenbeziehung</strong> zum BL aufbauen." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Construct-X in das eigene System anbinden",
+        text: "Der NU stellt sicher, dass sein Planungssystem (z.&nbsp;B. Metronom) Construct-X-Daten verarbeiten kann: Für den Import wird ein <strong>Construct-X → Taktplanung Converter</strong> vorbereitet (Activity → Planungsaktivität, LBSNode → Taktbereich, Termine → Randbedingungen) und für den Rückweg der umgekehrte Converter." },
+      { who: "dr", whoLabel: "Alle + Datenraum", title: "Vokabulare, SHACL-Profile und Datenraum einrichten",
+        text: "Gemeinsam werden <strong>kontrollierte Vokabulare</strong> vereinbart (z.&nbsp;B. Equipment-Typen: ConstructionLift, Crane, Forklift – mit SKOS-Synonymen, eigene Vokabulare können per <code>skos:exactMatch</code> gemappt werden) und <strong>SHACL-Profile</strong> (z.&nbsp;B. für einen Planning Context: Activity braucht identifier, name, Start, Ende, LBS-Verknüpfung; SiteEquipment braucht identifier und equipmentType). Im Datenraum werden schließlich <strong>Identitäten, Rollen, Datenangebote und Policies</strong> eingerichtet. Ergebnis: Die technische und semantische Grundlage steht – es kann ein konkreter Planungsauftrag definiert werden." }
+    ]
+  },
+  {
+    title: "Hauptprozess 2 – Planungsauftrag und Datenumfang festlegen",
+    intro: "Der Generalunternehmer definiert: <strong>Was soll der Nachunternehmer planen und welche Informationen benötigt er dafür?</strong> Wichtig: Es wird nur festgelegt, <em>was</em> bei einem späteren Zugriff bereitgestellt werden soll – der Planungskontext wird noch <em>nicht</em> erzeugt.",
+    steps: [
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Rahmenaktivität auswählen",
+        text: "Der GU hat seinen Rahmenterminplan (z.&nbsp;B. A090 Rohbau fertig, A100 Ausbau 5. OG, A110 Ausbau 6. OG, A120 Übergabe). Er entscheidet, dass der NU die Aktivität <strong>A100 „Ausbau 5. OG“</strong> im Detail planen soll. Diese Aktivität bleibt eine Aktivität des GU – der NU erhält nur den Auftrag, darunter eigene Detailaktivitäten zu planen (später: <code>DetailActivity isSubActivityOf A100</code>)." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Kontextaktivitäten festlegen",
+        text: "Für die Detailplanung braucht der NU auch Randbedingungen: z.&nbsp;B. <strong>A090</strong> (muss vorher fertig sein) und <strong>A120</strong> (Folgetermin Übergabe). Der Unterschied: <em>delegatedActivity</em> = darf der NU detaillieren; <em>contextActivity</em> = dient nur als Randbedingung. Beide sind fachlich einfach Activity-Instanzen – die Unterscheidung gehört zum konkreten Auftrag, nicht dauerhaft zur Aktivität." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Zeitlichen, WBS- und LBS-Kontext festlegen",
+        text: "Der GU legt den <strong>Planungskorridor</strong> fest (A100: 02.11.2026 – 27.11.2026, inkl. relevanter Vorgänger/Nachfolger), die <strong>WBS-Zuordnung</strong> (A100 → WBS 03 Innenausbau) und die <strong>LBS-Zuordnung</strong> (A100 → LBS-05, 5. Obergeschoss). Die LBS-Beziehung ist besonders wichtig: Sie ist der Ausgangspunkt, um Baustellenbereiche und Equipment automatisch zu finden." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Baustelleninformationen und Equipment als Auswahlregeln definieren",
+        text: "Statt konkrete Objekte manuell auszuwählen, kann der GU <strong>semantische Auswahlregeln</strong> definieren: „Beim Abruf alle SiteAreas berücksichtigen, die dem LBS-Knoten zugeordnet sind“ und „Equipment vom Typ <strong>ConstructionLift</strong> berücksichtigen“. Die Ontologien liefern die Beziehungen (Activity → LBSNode → SiteArea → SiteEquipment), über die die Informationen später automatisch gefunden werden." },
+      { who: "bl", whoLabel: "Baulogistikdienstleister", title: "Rolle des Baulogistikdienstleisters",
+        text: "Der BL hat hier nur eine begrenzte Rolle: Die Nutzungsrechte wurden in Hauptprozess 1 vereinbart. Der GU stellt fest: „Für ConstructionLift-Daten existiert ein zugelassenes Datenangebot des BL.“ Der BL muss noch keine aktuellen Daten liefern – sein Equipment Data Service muss nur später erreichbar sein." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Planungsauftrag als eigenes Objekt",
+        text: "Der NU wird als Adressat eindeutig festgelegt (Projekt, Provider, Consumer, Purpose = DetailedScheduling) und kann den Auftrag optional bestätigen. Der Planungsauftrag ist ein <strong>eigenes Austauschobjekt</strong> (z.&nbsp;B. PA-100), das referenziert: delegatedActivities (A100), contextActivities (A090, A120), requiredContext (WBS, LBS, SiteArea, ConstructionLift) und purpose. Es gehört nicht in die Schedule-Ontologie, sondern beschreibt den organisationsübergreifenden Austauschprozess." }
+    ]
+  },
+  {
+    title: "Hauptprozess 3 – Planungskontext erzeugen und bereitstellen",
+    intro: "Der Nachunternehmer fordert den Planungskontext an. Der Generalunternehmer stellt die Informationen <strong>dynamisch aus den aktuellen Datenquellen</strong> zusammen – kombiniert mit zulässigen Daten des Baulogistikdienstleisters.",
+    steps: [
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Planungskontext anfordern",
+        text: "Der NU fordert über sein Planungssystem bzw. die Datenraumkomponente den Planning Context an und referenziert dabei: Projekt (Project-X), Planungsauftrag (PA-100), Consumer (Subcontractor-A) und Zweck (DetailedScheduling). Er muss <strong>nicht wissen</strong>, aus welchen Systemen die Informationen beim GU stammen." },
+      { who: "dr", whoLabel: "Datenraum + GU", title: "Zugriff prüfen",
+        text: "Der Connector des GU prüft: Ist der Teilnehmer eindeutig identifiziert? Gehört er zum Projekt? Ist er der Nachunternehmer des Auftrags? Ist der Zweck zulässig? Besteht ein gültiges Nutzungsrecht? Erst wenn alles passt, wird der Planungskontext erzeugt. Der Datenraum übernimmt Identifikation, Berechtigungsprüfung und Autorisierung des Transfers." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Aktuelle Daten abrufen und semantisch verknüpfen",
+        text: "Der Planning Context Service liest den Planungsauftrag und holt die <strong>aktuellen</strong> Daten (keine alte Kopie!): Terminplandaten A090/A100/A120 aus MS Project, WBS/LBS-Zuordnungen aus dem WBS/LBS-System. Über die Link Ontology wird automatisch ermittelt: A100 → WBS „Innenausbau“, A100 → LBS „5. Obergeschoss“." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Baustellenbereich und Equipment semantisch bestimmen",
+        text: "Aus der LBS-Zuordnung wird der relevante <strong>SiteArea</strong> („Arbeitsbereich 5. OG“) ermittelt – über die Beziehung <code>SiteArea isRepresentedByLBSNode LBSNode</code>. Aus dem SiteArea wird das dort verfügbare <strong>SiteEquipment</strong> bestimmt (Typ: ConstructionLift). Das muss niemand manuell herstellen – es ergibt sich aus den semantischen Beziehungen. Das ist die Kernfunktion der Ontologien: <em>Weitere relevante Informationen können über die Beziehungen gefunden werden.</em>" },
+      { who: "bl", whoLabel: "Baulogistikdienstleister", title: "Aktuelle Equipment-Daten abrufen",
+        text: "Der GU ruft den Equipment Data Service des BL ab (Projekt, SiteArea, ConstructionLift). Der BL prüft die Anfrage und liefert die aktuellen Daten: <strong>ConstructionLift-4711</strong>, Status: available – bereits auf Basis der Construction Site Ontology. Der GU prüft zusätzlich die vereinbarten Weitergaberechte: fachlich relevant? + Nutzung erlaubt? → in den Planungskontext aufnehmen." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Teilgraph erzeugen, prüfen, Snapshot anlegen",
+        text: "Aus dem Gesamtprojekt (z.&nbsp;B. 10.000 Activities, 500 LBSNodes, 200 SiteAreas, 100 Equipment) wird nur der benötigte Teil ausgewählt: <strong>3 Activities, 1 WBSNode, 1 LBSNode, 1 SiteArea, 1 ConstructionLift</strong>. Die Herkunft wird dokumentiert (Provenance: A100 vom GU, Bauaufzug vom BL). Der Teilgraph wird gegen das <strong>SHACL-Profil</strong> geprüft und als eindeutig referenzierbarer <strong>Snapshot</strong> (PCS-2026-10-27-001) mit Datenstand, Ontologie-Versionen und Quellen festgehalten." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Übertragen, prüfen und ins Fachsystem übernehmen",
+        text: "Der geprüfte Planungskontext wird als <strong>JSON-LD</strong> über den Datenraum übertragen. Der NU prüft ihn mit demselben SHACL-Profil und konvertiert ihn in sein Planungssystem (Activity → Planungsaktivität, LBSNode → Taktbereich, Termine → Randbedingungen, SiteEquipment → Planungsressource). Die <strong>Snapshot-ID wird gespeichert</strong> – die spätere Feinplanung verweist darauf. Damit ist nachvollziehbar, auf welchem Datenstand die Planung basiert." }
+    ]
+  },
+  {
+    title: "Hauptprozess 4 – Detailplanung durchführen und freigeben",
+    intro: "Der Nachunternehmer plant in seinem <strong>eigenen Fachsystem</strong> – mit den übergebenen Randbedingungen. Am Ende wird das Ergebnis wieder in das gemeinsame semantische Modell überführt und bereitgestellt.",
+    steps: [
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Rahmenaktivität detaillieren",
+        text: "Im Planungssystem stehen bereit: Rahmenaktivität, Zeitfenster, Vorgänger/Nachfolger, Planungsbereich, Baustellenbereich, verfügbare Ressource. Der NU untergliedert A100 in Detailaktivitäten: <strong>NA-101</strong> Unterkonstruktion, <strong>NA-102</strong> Installationen, <strong>NA-103</strong> Trennwände, <strong>NA-104</strong> Decke, <strong>NA-105</strong> Abschlussarbeiten. Die Rahmenaktivität A100 bleibt bestehen – sie ist weiterhin die Steuerungsebene des GU." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Eindeutige Identitäten und Beziehungen",
+        text: "Die neuen Aktivitäten erhalten <strong>eigene stabile IRIs</strong> aus dem Namensraum des NU (z.&nbsp;B. <code>https://data.subcontractor.example/activity/NA-101</code>). Damit bleibt klar: A100 gehört zum GU, NA-101 zum NU. Über die Beziehung <code>isSubActivityOf</code> wird jede Detailaktivität mit A100 verbunden – der GU kann die Planung später <strong>automatisch</strong> der richtigen Aktivität zuordnen." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Termine, Abhängigkeiten und Randbedingungen planen",
+        text: "Der NU plant die zeitliche Struktur (NA-101: 02.–05.11. → NA-102: 06.–10.11. → … → NA-105: 22.–25.11.) mit <code>PrecedenceRelationship</code>-Beziehungen – dieselbe Semantik wie im Rahmenterminplan. Die Planung muss im vorgegebenen Korridor liegen (A090 Rohbau fertig → Detailplanung → A120 Übergabe, innerhalb 02.–27.11.). Fällt das nicht, wäre das ein eigener Abstimmungsprozess." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Räume und Ressourcen berücksichtigen",
+        text: "Die Detailaktivitäten übernehmen die räumliche Zuordnung (alle → LBS 5. OG; feinere Zonen A/B/C müssen weiterhin mit der LBS des GU zusammenhängen). Der Bauaufzug wird dort eingeplant, wo er gebraucht wird (z.&nbsp;B. NA-102/103/104). Wichtig: Der NU erzeugt <strong>keine Kopie</strong> des Bauaufzugs – er referenziert weiterhin die Ressource des Baulogistikdienstleisters. Der BL hat in diesem Prozess keine aktive Aufgabe." },
+      { who: "nu", whoLabel: "Nachunternehmer", title: "Exportieren und bereitstellen",
+        text: "Nach Abschluss wird das Ergebnis über den <strong>Construct-X Converter</strong> exportiert (Detail Activities + Termine + Abhängigkeiten + räumliche Zuordnungen + Bezug zu A100). Die Detailplanung referenziert den verwendeten <strong>Snapshot</strong> (PCS-001) und wird als neues Datenangebot bereitgestellt (z.&nbsp;B. DS-001): „Für Planungsauftrag PA-100 liegt ein neues Planungsergebnis vor.“ Der GU muss es noch nicht abrufen – das passiert in Hauptprozess 5." }
+    ]
+  },
+  {
+    title: "Hauptprozess 5 – Detailplanung übernehmen und integrieren",
+    intro: "Der Generalunternehmer übernimmt die Detailplanung des Nachunternehmers – <strong>nicht einfach als Datei-Import</strong>, sondern nach mehreren automatisierten Prüfungen.",
+    steps: [
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Neues Planungsergebnis erkennen und abrufen",
+        text: "Der GU erkennt über den Datenraum, dass für PA-100 ein neues Ergebnis vorliegt. Der Datenraum prüft: Wer stellt die Daten bereit? Gehört das Ergebnis zum Projekt? Ist der GU berechtigt? Welcher Auftrag ist betroffen? Anschließend wird die Detailplanung (Construct-X Detail Schedule) über den Datenraum übertragen." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Semantisch und fachlich prüfen",
+        text: "Mehrere Prüfungen: <strong>SHACL</strong> (DetailActivity, identifier, Start/Ende, Beziehung zur Rahmenaktivität, LBS-Zuordnung vorhanden?), <strong>Planungsauftrag</strong> (gehört DS-001 zu PA-100?), <strong>Terminrahmen</strong> (frühester Start ≥ Start von A100, spätestes Ende ≤ Ende von A100? Vorgänger A090 / Nachfolger A120 eingehalten?), <strong>Raum</strong> (alle Detailaktivitäten in LBS 5. OG oder zulässigem Unterbereich?) und <strong>Ressourcen</strong> (verwiesener Bauaufzug war Teil des Planning Context?)." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "Datenstand prüfen und freigeben",
+        text: "Da die Detailplanung auf Snapshot PCS-001 verweist, kann der GU gezielt prüfen, ob sich seitdem relevante Daten geändert haben (z.&nbsp;B. wurde A120 vorgezogen?). Keine relevante Änderung → <strong>Integration freigegeben</strong>. Relevante Änderung → erneute Abstimmung erforderlich. Die Freigabe kann automatisiert oder durch einen verantwortlichen Planer erfolgen." },
+      { who: "gu", whoLabel: "Generalunternehmer", title: "In den Rahmenterminplan integrieren",
+        text: "Über den <strong>Construct-X → Terminplanung Converter</strong> werden die Detailaktivitäten in das Terminplanungssystem des GU übernommen und A100 zugeordnet: A100 Ausbau 5. OG → NA-101 … NA-105. Die Rahmenaktivität bleibt als Steuerungsebene erhalten. Die <strong>ursprünglichen IRIs werden mitgespeichert</strong> (neben der internen MS-Project-ID) – so bleibt nachvollziehbar, dass NA-101 vom NU stammt." },
+      { who: "gu", whoLabel: "Alle", title: "Herkunft erhalten, Aktualisierung ermöglichen, dokumentieren",
+        text: "Der integrierte Plan enthält Informationen dreier Unternehmen – die <strong>Herkunft bleibt erhalten</strong> (A100: GU, NA-101: NU, Bauaufzug: BL). Stabile Identitäten ermöglichen <strong>Aktualisierung statt Duplizierung</strong>: Liefert der NU eine neue Version (NA-103 endet jetzt am 18.11.), erkennt der GU anhand der IRI, dass es eine Aktualisierung ist. Der neue Planungsstand wird dokumentiert (z.&nbsp;B. IS-2026-11-10-01) – die Kette ist geschlossen: Rahmenterminplan → Planungsauftrag → Planungskontext → Detailplanung → integrierter Plan." }
+    ]
+  }
+];
+
+const procPanel = document.getElementById('procPanel');
+const procState = processes.map(() => 0);
+
+function renderProcess(i) {
+  const p = processes[i];
+  const idx = procState[i];
+  let dots = p.steps.map((_, j) => `<div class="dot ${j <= idx ? 'done' : ''}"></div>`).join('');
+  const s = p.steps[idx];
+  procPanel.innerHTML = `
+    <h3 style="margin-top:0">${p.title}</h3>
+    <p>${p.intro}</p>
+    <div class="stepper">
+      <div class="step-progress">${dots}</div>
+      <div class="step-card">
+        <span class="step-num">${idx + 1}</span>
+        <span class="who ${s.who}">${s.whoLabel}</span>
+        <h4>${s.title}</h4>
+        <p style="margin-bottom:0">${s.text}</p>
+      </div>
+      <div class="step-nav">
+        <button class="btn" id="pPrev" ${idx === 0 ? 'disabled' : ''}>◀ Vorheriger Schritt</button>
+        <span class="small">${idx + 1} / ${p.steps.length}</span>
+        <button class="btn primary" id="pNext" ${idx === p.steps.length - 1 ? 'disabled' : ''}>Nächster Schritt ▶</button>
+      </div>
+    </div>`;
+  document.getElementById('pPrev').addEventListener('click', () => { procState[i]--; renderProcess(i); });
+  document.getElementById('pNext').addEventListener('click', () => { procState[i]++; renderProcess(i); });
+}
+
+document.querySelectorAll('#procTabs .tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#procTabs .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProcess(parseInt(btn.dataset.proc));
+  });
+});
+renderProcess(0);
+
+/* ================= Component tabs ================= */
+document.querySelectorAll('#compTabs .tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#compTabs .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    ['gu','bl','nu'].forEach(k => document.getElementById('comp-' + k).classList.remove('active'));
+    document.getElementById('comp-' + btn.dataset.comp).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

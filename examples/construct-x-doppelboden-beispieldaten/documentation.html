@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construct-X Doppelboden Exchange Package – Dokumentation</title>
+<style>
+:root{--fg:#18202a;--muted:#667085;--line:#d9dee7;--panel:#f6f8fb;--accent:#2457d6;--ok:#087f5b;--code:#f1f3f6}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--fg);background:white;line-height:1.5}
+main{max-width:1100px;margin:0 auto;padding:42px 34px 64px}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:700}
+h1{font-size:34px;line-height:1.15;margin:8px 0 10px}h2{font-size:23px;margin:38px 0 14px;padding-bottom:7px;border-bottom:1px solid var(--line)}h3{font-size:18px;margin:24px 0 8px}
+p{margin:9px 0}.lead{font-size:18px;color:#3b4654;max-width:900px}.muted{color:var(--muted)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 28px}.badge{padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:13px}.badge.ok{color:var(--ok);border-color:#b7dfd1;background:#f0fbf7}
+.flow{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:12px;margin:18px 0 24px}.box{border:1px solid var(--line);border-radius:12px;padding:18px;background:white}.box strong{display:block;font-size:17px}.arrow{text-align:center;font-size:30px;color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);border-radius:12px;padding:17px;background:var(--panel)}
+code,pre{font-family:Consolas,Monaco,monospace}code{background:var(--code);padding:1px 4px;border-radius:4px}pre{background:#111827;color:#e5e7eb;padding:18px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.45}
+table{width:100%;border-collapse:collapse;margin:12px 0 20px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px 8px}th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#4d5968}
+ul{padding-left:22px}.note{border-left:4px solid var(--accent);background:#f5f8ff;padding:12px 16px;margin:15px 0}.okbox{border-left:4px solid var(--ok);background:#f2fbf7;padding:12px 16px;margin:15px 0}
+.tree{white-space:pre;background:#fafbfc;border:1px solid var(--line);padding:16px;border-radius:10px;font-family:Consolas,monospace;font-size:13px;overflow:auto}
+footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media(max-width:760px){main{padding:26px 18px}.grid,.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}h1{font-size:28px}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">Construct-X · Beispiel Datenaustausch</div>
+<h1>Doppelboden – Dokumentation und Beispieldaten</h1>
+<p class="lead">Dieses Beispiel zeigt einen einfachen Datenaustausch zwischen zwei Projektbeteiligten im Rahmen von Construct-X. Ein Auftraggeber fordert für den Doppelboden eines Bauprojekts eine detaillierte Feinterminplanung an. Die Anforderung wird als Notification übertragen und verweist über <code>contextResource</code> auf einen separaten fachlichen Datensatz mit den zugehörigen Planungsinformationen.</p>
+<div class="badges"><span class="badge ok">Notification als JSON</span><span class="badge ok">Data Content als JSON</span><span class="badge ok">Klare Referenz über PCS-001</span></div> <h2>1. Beispiel und Zielsetzung</h2>
+<p>Das Beispiel demonstriert die Trennung zwischen einer <strong>operativen Nachricht</strong> und dem dazugehörigen <strong>fachlichen Data Content</strong>. Die Notification beschreibt, welche Information angefordert wird. Der eigentliche fachliche Inhalt wird in einer separaten Ressource bereitgestellt.</p>
+<p>Im konkreten Fall wird für den Doppelboden eine Feinterminplanung angefordert. Die Notification benennt den Task-Typ <code>DetailedScheduling</code> und verweist mit <code>contextResource</code> auf den Datensatz <code>PCS-001</code>. Dieser Datensatz enthält die für die weitere Bearbeitung relevanten Planungsinformationen.</p>
+<div class="note"><strong>Grundidee:</strong> Die Notification bleibt klein und transportiert nur die zur Steuerung des Vorgangs notwendigen Informationen. Umfangreichere fachliche Daten werden separat über eine referenzierte Ressource ausgetauscht.</div> 
+<h2>2. Grundlage: Tractus-X Industry Core KIT</h2>
+<p>Das Notification-Muster dieses Beispiels orientiert sich an der standardisierten Notification-Architektur des <strong>Tractus-X Industry Core KIT</strong> bzw. an <strong>CX-0151 Industry Core: Basics</strong>. Dort werden Notifications als JSON-Nachrichten mit zwei klar getrennten Bereichen beschrieben: einem standardisierten <code>header</code> und einem anwendungsspezifischen <code>content</code>. Die Übertragung erfolgt über einen Dataspace Connector.</p>
+<p>Construct-X übernimmt in diesem Beispiel dieses technische Grundmuster. Der Header folgt der aus Tractus-X bekannten Struktur; die fachlichen Inhalte im Bereich <code>content</code> sind dagegen Construct-X-spezifisch. Insbesondere ist <code>contextResource</code> keine Vorgabe des Industry Core KIT, sondern eine Construct-X-spezifische Referenz auf den separat bereitgestellten fachlichen Data Content.</p>
+<table>
+<thead><tr><th>Industry-Core-Element</th><th>Umsetzung im Beispiel</th></tr></thead>
+<tbody>
+<tr><td><code>header.messageId</code></td><td>Verwendet; eindeutige Nachrichten-ID als UUID-URN.</td></tr>
+<tr><td><code>header.context</code></td><td>Verwendet; <code>ConstructX-NotificationAPI-TaskRequest:1.0.0</code> kennzeichnet Notification API, Operation und API-Version.</td></tr>
+<tr><td><code>header.sentDateTime</code></td><td>Verwendet; Zeitstempel im ISO-8601-Format mit Zeitzone.</td></tr>
+<tr><td><code>header.senderBpn</code></td><td>Verwendet; im Beispiel mit einer synthetischen BPNL.</td></tr>
+<tr><td><code>header.receiverBpn</code></td><td>Verwendet; im Beispiel mit einer synthetischen BPNL.</td></tr>
+<tr><td><code>header.expectedResponseBy</code></td><td>Verwendet; optionale Frist für die erwartete Reaktion.</td></tr>
+<tr><td><code>header.version</code></td><td>Verwendet; <code>3.0.0</code> entsprechend dem in Tractus-X verbreiteten Message-Header-Modell.</td></tr>
+<tr><td><code>content</code></td><td>Use-Case-spezifisch; enthält die Construct-X-Fachinformation zur angeforderten Feinterminplanung.</td></tr>
+</tbody></table>
+<div class="note"><strong>Abgrenzung:</strong> Das Beispiel übernimmt das Industry-Core-Notification-Muster für den JSON-Payload. Eine vollständige Notification API umfasst darüber hinaus die Definition der unterstützten Operationen, HTTP-Endpunkte und Rückgabecodes sowie die Registrierung eines passenden Connector-Assets einschließlich Asset-Eigenschaften und Policies. Diese Infrastrukturartefakte sind nicht Gegenstand des vorliegenden Beispieldatenpakets.</div>
+
+<h2>3. Austauschstruktur</h2>
+<div class="flow"> <div class="box"><strong>Notification</strong><code>notification/doppelboden-task-request.json</code><p class="muted">Anforderung einer Feinterminplanung für den Doppelboden.</p></div> <div class="arrow">→</div> <div class="box"><strong>Data Content</strong><code>data/doppelboden-planning-context.json</code><p class="muted">Fachlicher Datensatz <code>PCS-001</code> mit den Planungsinformationen.</p></div>
+</div>
+<div class="note"><strong>Verknüpfung:</strong> Der Wert von <code>content.contextResource</code> in der Notification entspricht der <code>id</code> des fachlichen Datensatzes.</div> <h2>4. Paketinhalt</h2>
+<div class="tree">construct-x-doppelboden-beispieldaten/
+├── documentation.html
+├── notification/
+│ └── doppelboden-task-request.json
+└── data/ └── doppelboden-planning-context.json</div> <h2>5. Notification</h2>
+<p>Die Datei <code>doppelboden-task-request.json</code> ist die operative Nachricht zwischen den beteiligten Systemen. Ihre Grundstruktur folgt dem Tractus-X Industry Core KIT: Der standardisierte <code>header</code> enthält die technischen Nachrichtendaten; unter <code>content</code> liegt der Construct-X-spezifische fachliche Notification Content.</p>
+<p>Für das Beispiel sind insbesondere folgende Angaben relevant:</p>
+<ul> <li><code>notificationType = TaskRequested</code> – es wird eine Aufgabe bzw. Zuarbeit angefordert.</li> <li><code>taskType = DetailedScheduling</code> – Gegenstand der Anforderung ist eine detaillierte Terminplanung.</li> <li><code>subjectRole = Target</code> – die referenzierte Ressource ist Ziel bzw. Gegenstand der Aufgabe.</li> <li><code>contextResource = …/PCS-001</code> – Verweis auf den zugehörigen fachlichen Datensatz.</li>
+</ul> <h3>Beispiel der Referenz</h3>
+<pre>{ "content": { "notificationType": "TaskRequested", "taskType": "DetailedScheduling", "contextResource": "https://data.general-contractor.example/project/PROJECT-X/exchange/package/PCS-001" }
+}</pre> <h2>6. Data Content</h2>
+<p>Die Datei <code>doppelboden-planning-context.json</code> enthält den eigentlichen fachlichen Payload. Sie bildet den Planungskontext ab, den der Empfänger benötigt, um die angeforderte Feinterminplanung für die Doppelbodenarbeiten auszuarbeiten. Der Datensatz wird unabhängig von der Notification als eigene Ressource über den Datenraum bereitgestellt oder abgerufen.</p>
+<p>Der Data Content ist durch die Kennung <code>PCS-001</code> eindeutig identifiziert. Genau diese Ressource wird in der Notification über <code>content.contextResource</code> referenziert.</p>
+<pre>{ "id": "https://data.general-contractor.example/project/PROJECT-X/exchange/package/PCS-001", "identifier": "PCS-001", "semanticModel": { "type": "PlanningContext", "conformsTo": [ "…" ] }, "content": { "entities": [ … ] }
+}</pre> <h3>6.1 Aufbau des Payloads</h3>
+<table><thead><tr><th>Bereich</th><th>Bedeutung</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td>Eindeutige URI des bereitgestellten Datensatzes. Diese URI ist zugleich das Ziel von <code>contextResource</code> in der Notification.</td></tr>
+<tr><td><code>identifier</code></td><td>Kompakte fachliche Kennung des Datensatzes, hier <code>PCS-001</code>.</td></tr>
+<tr><td><code>semanticModel</code></td><td>Beschreibt den Typ des Datensatzes und referenziert über <code>conformsTo</code> die semantischen Construct-X-Modelle, nach denen die Inhalte strukturiert sind.</td></tr>
+<tr><td><code>content.entities</code></td><td>Enthält die fachlichen Objekte des Planungskontexts. Jedes Objekt besitzt eine eigene ID, einen Typ und die für diesen Objekttyp relevanten Eigenschaften und Beziehungen.</td></tr>
+</tbody></table> <h3>6.2 Inhalt des Planning Context</h3>
+<p>Der Planning Context enthält nicht nur die Zielaktivität selbst, sondern auch die Informationen, die für ihre detaillierte Terminierung und Ausführung relevant sind. Im Beispiel umfasst der Datensatz 47 miteinander verknüpfte fachliche Objekte.</p>
+<table><thead><tr><th>Informationsbereich</th><th>Beispielinhalt</th><th>Bedeutung für die Feinterminplanung</th></tr></thead><tbody>
+<tr><td>Terminplan</td><td>Rahmenterminplan <code>SCH-01</code>, Aktivität <code>A100</code> „Einbau eines Doppelbodens“</td><td>Vorgabe des übergeordneten Zeitfensters, das durch den Nachunternehmer weiter detailliert werden soll.</td></tr>
+<tr><td>Vorgängerbeziehung</td><td><code>A090</code> „TGA-Rohinstallation im Bodenhohlraum abschließen“ → <code>A100</code>, Beziehung <code>FinishToStart</code></td><td>Zeigt die terminliche Abhängigkeit, die bei der Feinterminplanung berücksichtigt werden muss.</td></tr>
+<tr><td>Leistungsverzeichnis</td><td>LV-Position <code>03.02.010</code> „Doppelboden liefern und einbauen“, Menge 300 m²</td><td>Verknüpft die auszuführende Leistung und Menge mit der Terminplanaktivität.</td></tr>
+<tr><td>Projektstruktur</td><td>WBS-Zuordnung „Doppelboden“ und LBS-Zuordnung „5. Obergeschoss“</td><td>Ordnet die Aktivität fachlich und räumlich in das Projekt ein.</td></tr>
+<tr><td>Arbeitsfläche</td><td><code>WORK-05OG</code> – Arbeitsbereich Doppelboden im 5. OG</td><td>Beschreibt den für die Ausführung vorgesehenen Arbeitsbereich.</td></tr>
+<tr><td>Lagerfläche</td><td><code>STORAGE-EXT-01</code> – Außenlagerfläche, u. a. 50 m² nutzbare Fläche und 25 m Entfernung zum Bauaufzug</td><td>Liefert Randbedingungen für Materialbereitstellung und Baustellenlogistik.</td></tr>
+<tr><td>Bauaufzug</td><td><code>LIFT-01</code> – Bauaufzug mit Verfügbarkeit im Ausführungszeitraum, Nutzlast, Plattformabmessungen und bedienten Ebenen</td><td>Ermöglicht die Berücksichtigung des vertikalen Materialtransports bei der Ablaufplanung.</td></tr>
+</tbody></table> <h3>6.3 Zielaktivität A100</h3>
+<p>Im Zentrum des Datensatzes steht die Aktivität <code>A100</code> „Einbau eines Doppelbodens“. Sie ist im Rahmenterminplan für den Zeitraum vom <strong>8. März 2027, 07:00 Uhr</strong> bis zum <strong>19. März 2027, 16:00 Uhr</strong> vorgesehen. Dieses Zeitfenster stellt den Rahmen dar, innerhalb dessen der Nachunternehmer seine detaillierte Ablauf- und Ressourcenplanung erstellen soll.</p>
+<p>Mit <code>A100</code> sind unter anderem folgende Informationen verknüpft:</p>
+<ul> <li>fachliche Einordnung in die Work Breakdown Structure,</li> <li>räumliche Zuordnung zum 5. Obergeschoss über die Location Breakdown Structure,</li> <li>die LV-Menge von 300 m² Doppelboden,</li> <li>die Vorgängeraktivität <code>A090</code>,</li> <li>Arbeits-, Lager- und Aufstellflächen,</li> <li>der für die Ausführung vorgesehene Bauaufzug einschließlich logistischer und technischer Eigenschaften.</li>
+</ul> <h3>6.4 Semantische Verknüpfung der Inhalte</h3>
+<p>Die einzelnen Objekte stehen nicht isoliert nebeneinander. Sie werden über ihre IDs miteinander verknüpft. So verweist beispielsweise der Quantity Split der LV-Position auf die Aktivität <code>A100</code>, die Aktivität auf die benötigten Flächenzuordnungen und die Flächenzuordnung wiederum auf konkrete Baustellenflächen. Auf diese Weise entsteht ein zusammenhängender Planungskontext, der von Anwendungen maschinell ausgewertet werden kann.</p>
+<p>Das Feld <code>semanticModel.conformsTo</code> enthält die Referenzen auf die verwendeten Construct-X-Ontologien und Shapes, beispielsweise für Terminplanung, Baustellenlogistik, GAEB/BoQ sowie WBS- und LBS-Verknüpfungen. Die eigentlichen Ontologiedateien müssen dafür nicht Bestandteil dieses Beispielpakets sein.</p> <h3>6.5 Warum der Data Content separat übertragen wird</h3>
+<p>Die Trennung von Notification und Data Content erlaubt es, die Nachricht klein und stabil zu halten. Die Notification signalisiert den fachlichen Vorgang und verweist auf den benötigten Kontext. Der Data Content kann dagegen unabhängig bereitgestellt, aktualisiert, versioniert und mit eigenen Zugriffsregeln versehen werden. Der Empfänger lädt nur den Datensatz, den er zur Bearbeitung der Aufgabe benötigt.</p>
+<h2>7. Ablauf des Datenaustauschs</h2>
+<ol> <li>Der Sender erzeugt die Notification <code>doppelboden-task-request.json</code>.</li> <li>Die Notification wird über den Connector an den Empfänger übertragen bzw. für ihn bereitgestellt.</li> <li>Der Empfänger liest <code>content.contextResource</code>.</li> <li>Über diese Referenz wird der fachliche Datensatz <code>PCS-001</code> identifiziert.</li> <li>Der Data Content <code>doppelboden-planning-context.json</code> wird separat bereitgestellt oder abgerufen und kann anschließend verarbeitet werden.</li>
+</ol> <h2>8. Rolle der beiden Beispieldateien</h2>
+<table><thead><tr><th>Datei</th><th>Rolle</th></tr></thead><tbody>
+<tr><td><code>notification/doppelboden-task-request.json</code></td><td>Operative Nachricht zur Anforderung der Feinterminplanung.</td></tr>
+<tr><td><code>data/doppelboden-planning-context.json</code></td><td>Fachlicher Datensatz mit den zugehörigen Planungsinformationen.</td></tr>
+</tbody></table>
+<p>Durch diese Trennung können Notifications klein und eindeutig bleiben, während fachliche Daten unabhängig davon verwaltet, versioniert und über den Datenraum bereitgestellt werden können.</p> <footer>Construct-X · Beispiel für den Austausch einer Notification mit referenziertem Data Content</footer>
+</main></body></html>

@@ -1,0 +1,27 @@
+{
+  "header": {
+    "messageId": "urn:uuid:11111111-1111-4111-8111-111111111111",
+    "context": "ConstructX-NotificationAPI-TaskRequest:1.0.0",
+    "sentDateTime": "2027-03-01T09:00:00Z",
+    "senderBpn": "BPNL000000000AAA",
+    "receiverBpn": "BPNL000000000ZZZ",
+    "expectedResponseBy": "2027-03-03T16:00:00Z",
+    "version": "3.0.0"
+  },
+  "content": {
+    "id": "https://data.general-contractor.example/project/PROJECT-X/notification-content/NC-DETAIL-001",
+    "identifier": "NC-DETAIL-001",
+    "title": "Anforderung Feinterminplanung Doppelboden",
+    "notificationType": "TaskRequested",
+    "taskType": "DetailedScheduling",
+    "contextResource": "https://data.general-contractor.example/project/PROJECT-X/exchange/package/PCS-001",
+    "subjectAssignments": [
+      {
+        "id": "https://data.general-contractor.example/project/PROJECT-X/notification-content/subject/SA-A100",
+        "identifier": "SA-A100",
+        "assignedResource": "https://data.general-contractor.example/project/PROJECT-X/activity/A100",
+        "subjectRole": "Target"
+      }
+    ]
+  }
+}
