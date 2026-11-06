@@ -18,6 +18,7 @@
 | N8 | `…/geom/GEOM-001` | (ohne @type) | — | Geometrie-Referenzziel |
 | N9 | `…/notification/NC-001` | `conx-nc:NotificationContent` | `conx-nc:taskStatus`, `conx-nc:taskType`, `conx-nc:notificationType`, `rdfs:seeAlso` | `conx-ts:Cancelled`; `conx-tt:DetailedScheduling`; `conx-nt:TaskRequested`; `…/schedule/SCH-01` |
 | N10 | `…/wbs/WBS-001` | (ohne @type, WBS-Knoten als Link-Ziel) | `conx-sbl:isClassifiedByWBSNode` (Rolle: N2 referenziert ihn), `conx-sbl:isClassifiedByCBSNode`, `conx-sbdl:isRepresentedByLBSNode`, `conx-babl:isRepresentedByLBSNode`, `conx-babl:isClassifiedByCBSNode` | `conx-bs:WBSNode`-Referenz, `conx-cs:Activity`, `conx-de-lbs:Storey` (×2), `conx-cs:Activity` |
+| N11 | `…/progress/INST-001` | `cxcp:InstallationProcess` | `hasExecutionSpace`, `hasExecutionSpaceValue`, `hasProgressEvidence`, `hasProgressEvidenceValue`, `ifcGlobalId` | `…/progress/PDS-EXEC-001`; `…/site/ROOM-412`; `…/progress/PDS-EV-001`; `…/progress/EVID-001`; String `2oX9fQ3nH6u8K1pLm4R7sT` (IFC GlobalId) |
 
 Abkürzung: `…` = `https://data.construct-x.org/project/X`
 
@@ -34,6 +35,7 @@ Abkürzung: `…` = `https://data.construct-x.org/project/X`
 | N7/N8 | construction-site (Klasse, 2 Properties), GeoSPARQL-Geometrie |
 | N9 | notification-content (Klasse, 3 Properties, 3 Vocabs), RDFS-seeAlso |
 | N10 | schedule-breakdown-link, site-breakdown-link, built-asset-breakdown-link, de-lbs-node-type-vocab |
+| N11 | construction-progress-Extension `cxcp` (Klasse InstallationProcess, 4 Objekt-Properties, Datatype-Property ifcGlobalId) |
 
 ## 3. Ontologie-Belege (alle Namen mit Grep in den echten Modul-TTLs verifiziert, Pfade relativ zum Repo-Root)
 
@@ -109,8 +111,21 @@ Abkürzung: `…` = `https://data.construct-x.org/project/X`
 | `geo:hasGeometry` → `http://www.opengis.net/ont/geosparql#hasGeometry` | GeoSPARQL |
 | `rdfs:seeAlso` → `http://www.w3.org/2000/01/rdf-schema#seeAlso` | RDFS |
 
+### 3.5 Construction-Progress-Extension `cxcp` (Node N11)
+
+| # | IRI | deklariert in |
+|---|---|---|
+| 49 | `cxcp:InstallationProcess` | `extensions\construct-x-construction-progress\ontology\construct-x-construction-progress.ttl` |
+| 50 | `cxcp:hasExecutionSpace` | dito |
+| 51 | `cxcp:hasExecutionSpaceValue` | dito |
+| 52 | `cxcp:hasProgressEvidence` | dito |
+| 53 | `cxcp:hasProgressEvidenceValue` | dito |
+| 54 | `cxcp:ifcGlobalId` | dito |
+
+IRI-Basis: `https://w3id.org/construct-x/construction-progress#` (anderes Namensraum-Schema als die Domänen-Ontologien; die Extension ist eine externe IoC-/BOT-Erweiterung, keine der 8 Domänen).
+
 ## 4. Jena-Verifikation (`Main.java`)
 
-- **Prüfung 1 (One-Way):** Alle im geparsten Modell vorkommenden IRIs (Subjekte, Prädikate, Resource-Objekte, Literal-Datatypes) müssen in der erwarteten IRI-Menge (64 IRIs, Sektion 3 + Standards) enthalten sein. Output: `OK <iri>` / `FEHLT <iri>`.
+- **Prüfung 1 (One-Way):** Alle im geparsten Modell vorkommenden IRIs (Subjekte, Prädikate, Resource-Objekte, Literal-Datatypes) müssen in der erwarteten IRI-Menge (75 IRIs: 64 Domänen/Link/Vocabular + 11 `cxcp` (Node N11) + Standards) enthalten sein. Output: `OK <iri>` / `FEHLT <iri>`.
 - **Prüfung 2 (Roundtrip):** Modell → JSON-LD → erneut parsen → Tripelanzahl muss identisch sein.
 - **Ergebnis:** `ERGEBNIS: PASS` (Exit 0) bzw. `FAIL(n)` (Exit 1).

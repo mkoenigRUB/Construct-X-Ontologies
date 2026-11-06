@@ -1,0 +1,104 @@
+@prefix ex:   <https://example.construct-x.eu/progress/> .
+@prefix cxcp: <https://w3id.org/construct-x/construction-progress#> .
+@prefix ioc:  <http://w3id.org/ioc#> .
+@prefix bot:  <https://w3id.org/bot#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+### Spatial structure
+ex:delivery-area-a a bot:Zone, ioc:Space ; dct:title "Anlieferzone A"@de .
+ex:storey-04       a bot:Zone, ioc:Space ; dct:title "4. Obergeschoss"@de .
+ex:room-4-12       a bot:Zone, ioc:Space ; dct:title "Raum 4.12"@de .
+
+### Responsible actor
+ex:site-manager a ioc:Actor ; dct:title "Bauleitung"@de .
+
+### Delivered package and its contained products
+ex:package-001 a ioc:Element ; dct:identifier "PACK-001" ; dct:title "Packstück Trockenbau"@de ;
+    ioc:hasElement ex:pack-content-01, ex:pack-content-02, ex:pack-content-03 .
+
+ex:gypsum-board-001 a ioc:Element ; dct:identifier "GK-001" ; dct:title "Gipskartonplatte 1"@de .
+ex:gypsum-board-002 a ioc:Element ; dct:identifier "GK-002" ; dct:title "Gipskartonplatte 2"@de .
+ex:metal-profile-001 a ioc:Element ; dct:identifier "MP-001" ; dct:title "Metallprofil 1"@de .
+
+ex:pack-content-01 a ioc:CurrentProcessDataState ; ioc:hasElementValue ex:gypsum-board-001 .
+ex:pack-content-02 a ioc:CurrentProcessDataState ; ioc:hasElementValue ex:gypsum-board-002 .
+ex:pack-content-03 a ioc:CurrentProcessDataState ; ioc:hasElementValue ex:metal-profile-001 .
+
+### Transport: same package is input and output, location changes
+ex:transport-001 a cxcp:TransportProcess ;
+    dct:title "Transport Packstück in das 4. Obergeschoss"@de ;
+    ioc:hasInputElement ex:transport-input-state ;
+    ioc:hasOutputElement ex:transport-output-state ;
+    ioc:hasInitialSpace ex:transport-initial-space-state ;
+    ioc:hasTargetSpace ex:transport-target-space-state ;
+    ioc:hasStatus ex:transport-status-state .
+
+ex:transport-input-state a ioc:CurrentProcessDataState ;
+    ioc:hasInputElementValue ex:package-001 ;
+    prov:generatedAtTime "2026-11-05T08:15:00+01:00"^^xsd:dateTime ;
+    ioc:generatedByActor ex:site-manager .
+
+ex:transport-output-state a ioc:CurrentProcessDataState ;
+    ioc:hasOutputElementValue ex:package-001 ;
+    prov:generatedAtTime "2026-11-05T08:25:00+01:00"^^xsd:dateTime ;
+    ioc:generatedByActor ex:site-manager .
+
+ex:transport-initial-space-state a ioc:CurrentProcessDataState ;
+    ioc:hasInitialSpaceValue ex:delivery-area-a ;
+    prov:generatedAtTime "2026-11-05T08:15:00+01:00"^^xsd:dateTime .
+
+ex:transport-target-space-state a ioc:CurrentProcessDataState ;
+    ioc:hasTargetSpaceValue ex:storey-04 ;
+    prov:generatedAtTime "2026-11-05T08:25:00+01:00"^^xsd:dateTime .
+
+ex:transport-status-state a ioc:CurrentProcessDataState ; ioc:hasStatusValue ex:transport-status .
+ex:transport-status a ioc:Status ; ioc:isStarted true ; ioc:isFinished true .
+
+### Installation: products become part of a wall
+ex:installation-001 a cxcp:InstallationProcess ;
+    dct:title "Montage Trockenbauwand Raum 4.12"@de ;
+    ioc:hasInputElement ex:install-input-01, ex:install-input-02, ex:install-input-03 ;
+    ioc:hasOutputElement ex:install-output-state ;
+    cxcp:hasExecutionSpace ex:install-execution-space-state ;
+    ioc:hasStatus ex:install-status-state ;
+    cxcp:hasProgressEvidence ex:install-evidence-state .
+
+ex:install-input-01 a ioc:CurrentProcessDataState ; ioc:hasInputElementValue ex:gypsum-board-001 .
+ex:install-input-02 a ioc:CurrentProcessDataState ; ioc:hasInputElementValue ex:gypsum-board-002 .
+ex:install-input-03 a ioc:CurrentProcessDataState ; ioc:hasInputElementValue ex:metal-profile-001 .
+
+ex:wall-4711 a bot:Element ;
+    dct:identifier "WALL-4711" ;
+    dct:title "Trockenbauwand Raum 4.12"@de ;
+    cxcp:ifcGlobalId "2oX9fQ3nH6u8K1pLm4R7sT" ;
+    ioc:isContainedIn ex:wall-location-state .
+
+ex:install-output-state a ioc:CurrentProcessDataState ;
+    ioc:hasOutputElementValue ex:wall-4711 ;
+    prov:generatedAtTime "2026-11-05T12:00:00+01:00"^^xsd:dateTime ;
+    ioc:generatedByActor ex:site-manager .
+
+ex:install-execution-space-state a ioc:CurrentProcessDataState ;
+    cxcp:hasExecutionSpaceValue ex:room-4-12 ;
+    prov:generatedAtTime "2026-11-05T12:00:00+01:00"^^xsd:dateTime ;
+    ioc:generatedByActor ex:site-manager .
+
+ex:wall-location-state a ioc:CurrentProcessDataState ;
+    ioc:isContainedInValue ex:room-4-12 ;
+    prov:generatedAtTime "2026-11-05T12:00:00+01:00"^^xsd:dateTime .
+
+ex:install-status-state a ioc:CurrentProcessDataState ; ioc:hasStatusValue ex:install-status .
+ex:install-status a ioc:Status ; ioc:isStarted true ; ioc:isFinished true .
+
+ex:photo-001 a cxcp:ProgressEvidence ;
+    dct:title "Foto der fertiggestellten Trockenbauwand"@de ;
+    dct:format "image/jpeg" ;
+    schema:contentUrl <https://example.construct-x.eu/evidence/photo-001.jpg> .
+
+ex:install-evidence-state a ioc:CurrentProcessDataState ;
+    cxcp:hasProgressEvidenceValue ex:photo-001 ;
+    prov:generatedAtTime "2026-11-05T12:03:00+01:00"^^xsd:dateTime ;
+    ioc:generatedByActor ex:site-manager .

@@ -111,7 +111,19 @@ public class Main {
             {"https://www.construct-x.org/ontology/site-breakdown-link#isRepresentedByLBSNode", "N10 conx-sbdl:isRepresentedByLBSNode (Kollision)"},
             {"https://www.construct-x.org/vocab/breakdown-structure/de-lbs-node-type#Storey", "N10 isRepresentedByLBSNode-Wert (conx-de-lbs:Storey)"},
             {"https://www.construct-x.org/ontology/built-asset-breakdown-link#isRepresentedByLBSNode", "N10 conx-babl:isRepresentedByLBSNode (Kollision)"},
-            {"https://www.construct-x.org/ontology/built-asset-breakdown-link#isClassifiedByCBSNode", "N10 conx-babl:isClassifiedByCBSNode (Kollision)"}
+            {"https://www.construct-x.org/ontology/built-asset-breakdown-link#isClassifiedByCBSNode", "N10 conx-babl:isClassifiedByCBSNode (Kollision)"},
+            // N11 cxcp Construction-Progress Extension
+            {"https://data.construct-x.org/project/X/progress/INST-001", "N11 Subjekt INST-001"},
+            {"https://w3id.org/construct-x/construction-progress#InstallationProcess", "N11 @type cxcp:InstallationProcess"},
+            {"https://w3id.org/construct-x/construction-progress#hasExecutionSpace", "N11 bare hasExecutionSpace (@id-Coercion)"},
+            {"https://data.construct-x.org/project/X/progress/PDS-EXEC-001", "N11 hasExecutionSpace-Wert PDS-EXEC-001"},
+            {"https://w3id.org/construct-x/construction-progress#hasExecutionSpaceValue", "N11 bare hasExecutionSpaceValue (@id-Coercion)"},
+            {"https://data.construct-x.org/project/X/site/ROOM-412", "N11 hasExecutionSpaceValue-Wert ROOM-412"},
+            {"https://w3id.org/construct-x/construction-progress#hasProgressEvidence", "N11 bare hasProgressEvidence (@id-Coercion)"},
+            {"https://data.construct-x.org/project/X/progress/PDS-EV-001", "N11 hasProgressEvidence-Wert PDS-EV-001"},
+            {"https://w3id.org/construct-x/construction-progress#hasProgressEvidenceValue", "N11 bare hasProgressEvidenceValue (@id-Coercion)"},
+            {"https://data.construct-x.org/project/X/progress/EVID-001", "N11 hasProgressEvidenceValue-Wert EVID-001"},
+            {"https://w3id.org/construct-x/construction-progress#ifcGlobalId", "N11 ifcGlobalId (String-Mapping)"}
         };
         int failures = 0;
         for (String[] e : expected) {

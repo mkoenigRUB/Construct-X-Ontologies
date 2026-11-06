@@ -1,0 +1,84 @@
+@prefix cxcp: <https://w3id.org/construct-x/construction-progress#> .
+@prefix ioc:  <http://w3id.org/ioc#> .
+@prefix bot:  <https://w3id.org/bot#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+<https://w3id.org/construct-x/construction-progress>
+    a owl:Ontology ;
+    owl:versionInfo "0.1.0" ;
+    owl:versionIRI <https://w3id.org/construct-x/construction-progress/0.1.0> ;
+    owl:imports <http://w3id.org/ioc> ;
+    dct:title "Construct-X Construction Progress Extension"@en ;
+    dct:title "Construct-X Erweiterung zur Baufortschrittserfassung"@de ;
+    dct:description "Schlanke Erweiterung der IoC Process Ontology zur räumlichen Verortung ausgeführter Bauprozesse sowie zur Nachverfolgung gelieferter Produkte bis zum verbauten Konstruktionselement."@de ;
+    vann:preferredNamespacePrefix "cxcp" ;
+    vann:preferredNamespaceUri "https://w3id.org/construct-x/construction-progress#" .
+
+### Process specializations
+
+cxcp:TransportProcess
+    a owl:Class ;
+    rdfs:subClassOf ioc:Process ;
+    rdfs:label "Transport process"@en , "Transportaktivität"@de ;
+    rdfs:comment "Bauprozess, bei dem ein Element oder eine Elementgruppe von einem Ausgangsraum zu einem Zielraum transportiert wird. Das transportierte physische Objekt kann dabei identisch als Input und Output auftreten."@de .
+
+cxcp:InstallationProcess
+    a owl:Class ;
+    rdfs:subClassOf ioc:Process ;
+    rdfs:label "Installation process"@en , "Einbauaktivität"@de ;
+    rdfs:comment "Bauprozess, bei dem ein oder mehrere Input-Elemente in ein dauerhaftes oder weiterverwendbares Konstruktionselement überführt beziehungsweise eingebaut werden."@de .
+
+cxcp:ProgressEvidence
+    a owl:Class ;
+    rdfs:subClassOf ioc:Information ;
+    rdfs:label "Progress evidence"@en , "Fortschrittsnachweis"@de ;
+    rdfs:comment "Information, die einen erfassten Baufortschritt belegt, zum Beispiel Foto, Scan, Lieferschein oder Messdatensatz."@de .
+
+### Missing spatial relation: where the activity itself was executed
+
+cxcp:hasExecutionSpace
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ioc:hasProcessDataState ;
+    rdfs:domain ioc:Process ;
+    rdfs:range ioc:ProcessDataState ;
+    rdfs:label "has execution space"@en , "hat Ausführungsort"@de ;
+    rdfs:comment "Verknüpft einen Prozess mit einem versionierbaren ProcessDataState für den räumlichen Bereich, in dem die Aktivität tatsächlich ausgeführt wurde. Ergänzt ioc:hasInitialSpace und ioc:hasTargetSpace."@de .
+
+cxcp:hasExecutionSpaceValue
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf ioc:hasValue ;
+    rdfs:domain ioc:ProcessDataState ;
+    rdfs:range ioc:Space ;
+    rdfs:label "has execution space value"@en , "hat Ausführungsort-Wert"@de ;
+    rdfs:comment "Verknüpft den Ausführungsort-Zustand mit dem konkreten ioc:Space, beispielsweise einem BOT-Raum oder Geschoss."@de .
+
+### Optional evidence relation, following the IoC ProcessDataState pattern
+
+cxcp:hasProgressEvidence
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf ioc:hasProcessDataState ;
+    rdfs:domain ioc:Process ;
+    rdfs:range ioc:ProcessDataState ;
+    rdfs:label "has progress evidence"@en , "hat Fortschrittsnachweis"@de .
+
+cxcp:hasProgressEvidenceValue
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:subPropertyOf ioc:hasValue ;
+    rdfs:domain ioc:ProcessDataState ;
+    rdfs:range cxcp:ProgressEvidence ;
+    rdfs:label "has progress evidence value"@en , "hat Fortschrittsnachweis-Wert"@de .
+
+### Pragmatic BIM identifier
+
+cxcp:ifcGlobalId
+    a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain bot:Element ;
+    rdfs:range xsd:string ;
+    rdfs:label "IFC GlobalId"@en , "IFC GlobalId"@de ;
+    rdfs:comment "Optionaler pragmatischer Verweis auf die IFC-GUID des resultierenden Konstruktionselements. Bei einer vollständig verlinkten IFC-RDF-Repräsentation kann stattdessen direkt auf das IFC-Element verwiesen werden."@de .

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Construct-X ICDD-Beispiele</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1120px;margin:38px auto;padding:0 24px;line-height:1.55;color:#1f2937}
+h1,h2,h3{color:#111827} h1{border-bottom:3px solid #111827;padding-bottom:10px}
+code,pre{font-family:Consolas,monospace} pre{background:#f6f7f9;border:1px solid #e5e7eb;padding:14px;border-radius:8px;overflow:auto}
+table{border-collapse:collapse;width:100%;margin:16px 0} th,td{border:1px solid #d1d5db;padding:9px;text-align:left;vertical-align:top} th{background:#f3f4f6}
+.note{background:#eef6ff;border-left:4px solid #2563eb;padding:12px 16px;margin:16px 0}
+.flow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0} .node{border:1px solid #9ca3af;border-radius:8px;padding:9px 12px;background:#fff} .arrow{font-size:20px}
+.small{font-size:.92em;color:#4b5563}
+</style></head><body>
+<h1>Construct-X – ICDD für Daten, Ontologien und Notifications</h1>
+
+<h2>1. Grundidee</h2>
+<p>ICDD wird als <strong>Liefer- und Verknüpfungsschicht</strong> über den bereits vorhandenen Construct-X-Datenmodellen genutzt. Die Fachsemantik bleibt in IoC, BOT und den Construct-X-Ontologien. ICDD bündelt dazugehörige Dokumente und beschreibt, welche Elemente in verschiedenen Dateien zueinander gehören.</p>
+<div class="flow"><div class="node">Notification</div><div class="arrow">→</div><div class="node">Data Content</div><div class="arrow">→</div><div class="node">ICDD<br>Dokumente + Ontologien + Linksets</div></div>
+
+<table>
+<tr><th>Baustein</th><th>Rolle</th></tr>
+<tr><td>Notification</td><td>Meldet Ereignis oder Anforderung; das Feld <code>informationContainer</code> ist hier eine Construct-X-spezifische Ergänzung.</td></tr>
+<tr><td>Data Content</td><td>Enthält fachliche Objekte und Beziehungen.</td></tr>
+<tr><td>IoC / BOT / Construct-X</td><td>Definieren Prozess-, Element-, Raum- und Fortschrittssemantik.</td></tr>
+<tr><td>ICDD</td><td>Bündelt Dateien und verknüpft Dokumente bzw. Elemente innerhalb von Dokumenten.</td></tr>
+</table>
+<div class="note"><strong>ICDD ersetzt nicht die Fachontologien.</strong> Eine Aussage wie „GK-001 ist Input von installation-001“ bleibt Teil des Fachmodells. ICDD verbindet z. B. die Repräsentation von WALL-4711 im JSON mit der IFC-Repräsentation desselben Bauteils.</div>
+
+<h2>2. Standardstruktur</h2>
+<pre>example.icdd
+├── Index.rdf
+├── Ontology resources/
+├── Payload documents/
+└── Payload triples/
+    └── links.rdf</pre>
+<p><code>Index.rdf</code> registriert interne/externe Dokumente und das Linkset. Die ICDD-Container- und Linkset-Ontologien werden über die ISO-IRIs referenziert. Eigene Construct-X-Ontologien können unter <code>Ontology resources/</code> mitgeliefert werden.</p>
+<p>Für JSON-Dokumente verwendet dieses Demonstratorprofil in <code>ls:identifierField</code> eine JSONPath-artige Schreibweise. ICDD definiert den Mechanismus des String-Based-Identifier, aber keine verbindliche JSONPath-Syntax; diese Festlegung sollte daher als Construct-X-Profil dokumentiert werden.</p>
+
+<h2>3. Beispiel A – Baufortschritt</h2>
+<div class="flow"><div class="node">PACK-001</div><div class="arrow">→</div><div class="node">Transport 4. OG</div><div class="arrow">→</div><div class="node">GK-001 / GK-002 / MP-001</div><div class="arrow">→</div><div class="node">installation-001</div><div class="arrow">→</div><div class="node">WALL-4711</div></div>
+<p>Der Container enthält alle drei Data-Content-Revisionen, die drei Notifications, die Construct-X Construction Progress Ontology, eine kleine IFC-Referenzdatei und die Beispielantwort.</p>
+
+<h3>ICDD-Linkset</h3>
+<table>
+<tr><th>Quelle</th><th>Ziel</th><th>Bedeutung</th></tr>
+<tr><td>Notification <code>processId</code></td><td>Prozess-ID im passenden Data Content</td><td>Verknüpft die Meldung mit dem fachlichen Prozess.</td></tr>
+<tr><td><code>WALL-4711</code> im JSON</td><td>IFC GlobalId <code>2oX9fQ3nH6u8K1pLm4R7sT</code></td><td>Verbindet Baufortschrittsdaten und BIM-Repräsentation.</td></tr>
+<tr><td><code>photo-001</code></td><td>externes Fortschrittsfoto</td><td>Verbindet Prozessnachweis und externe Evidenz.</td></tr>
+</table>
+<p>Die eigentliche Rückverfolgung <code>PACK-001 → Produkte → installation-001 → WALL-4711</code> bleibt im Fachmodell. ICDD ergänzt die dokumentübergreifende Nachweisführung.</p>
+
+<h3>Ontologien</h3>
+<p><code>Ontology resources/construct-x-construction-progress.ttl</code> wird lokal mitgeliefert. Diese Ontologie importiert die IoC Process Ontology. So kann der Container die für das konkrete Austauschpaket relevante Construct-X-Erweiterung direkt mitführen, ohne IoC oder BOT zu kopieren.</p>
+
+<h2>4. Beispiel B – Doppelboden / Feinterminplanung</h2>
+<div class="flow"><div class="node">Task Request</div><div class="arrow">→</div><div class="node">contextResource</div><div class="arrow">→</div><div class="node">PCS-001</div><div class="arrow">→</div><div class="node">Aktivität A100</div></div>
+<p>Hier zeigt ICDD besonders klar den Mehrwert für das erste Construct-X-Beispiel.</p>
+<h3>Link 1: Notification → Planning Context</h3>
+<pre>Notification: $.content.contextResource
+= https://.../exchange/package/PCS-001
+
+          ↓ ICDD DirectedBinaryLink
+
+Data Content: $.id
+= https://.../exchange/package/PCS-001</pre>
+<h3>Link 2: Zielaktivität → Fachobjekt</h3>
+<pre>Notification: $.content.subjectAssignments[*].assignedResource
+= https://.../activity/A100
+
+          ↓ ICDD DirectedBinaryLink
+
+Data Content: $.content.entities[*].id
+= https://.../activity/A100</pre>
+<p>Dadurch wird sowohl das gesamte Datenpaket als auch das konkret adressierte Fachobjekt dokumentübergreifend auflösbar.</p>
+
+<h3>Ontologien</h3>
+<p>Die Notification-Ontologie wird lokal unter <code>Ontology resources/</code> mitgeliefert. Die im Planning Context unter <code>semanticModel.conformsTo</code> aufgeführten Construct-X-Domänenontologien und Shapes bleiben externe veröffentlichte Ressourcen. Das vermeidet redundante Kopien und hält den Container klein.</p>
+
+<h2>5. Zusammenspiel mit Notifications und Connector</h2>
+<p>Die Notifications in beiden Demonstratoren enthalten zusätzlich:</p>
+<pre>"informationContainer": "urn:uuid:..."</pre>
+<p>Dieses Feld ist <strong>keine Tractus-X-Industry-Core-Vorgabe</strong>, sondern eine Construct-X-spezifische Ergänzung. Im produktiven Connector-Austausch kann die Notification klein bleiben und auf einen separat angebotenen ICDD-Asset-Identifier verweisen. Im Demonstrator sind die Notifications zusätzlich im Container enthalten, damit das Beispiel vollständig nachvollziehbar bleibt.</p>
+
+<h2>6. Dateien im Baufortschrittscontainer</h2>
+<pre>Index.rdf
+Ontology resources/construct-x-construction-progress.ttl
+Payload documents/bim/building-reference.ifc
+Payload documents/data/01-after-delivery.json
+Payload documents/data/02-after-transport.json
+Payload documents/data/03-after-installation.json
+Payload documents/notifications/01-delivery-completed.json
+Payload documents/notifications/02-transport-completed.json
+Payload documents/notifications/03-installation-completed.json
+Payload documents/result/example-answer.json
+Payload triples/links.rdf</pre>
+<h2>7. Dateien im Doppelbodencontainer</h2>
+<pre>Index.rdf
+Ontology resources/notification-content-ontology.ttl
+Payload documents/data/doppelboden-planning-context.json
+Payload documents/documentation/original-example-documentation.html
+Payload documents/notification/doppelboden-task-request.json
+Payload triples/links.rdf</pre>
+
+<h2>8. Technischer Status</h2>
+<p>Beide Container verwenden die ISO-21597-orientierte Grundstruktur mit <code>Index.rdf</code>, <code>Ontology resources</code>, <code>Payload documents</code> und <code>Payload triples</code>. <code>Index.rdf</code> und <code>links.rdf</code> sind RDF/XML und wurden erfolgreich geparst. Die IFC-Datei im Baufortschrittsbeispiel ist bewusst ein kleines Demonstrator-Referenzmodell ohne Geometrie.</p>
+<p class="small">Die lokale Struktur- und RDF-Prüfung ist keine formale Zertifizierung durch einen externen ISO-21597-Validator. Für eine produktive Freigabe sollte zusätzlich eine Validierung z. B. über eine ICDD-Plattform erfolgen.</p>
+
+<h2>9. Referenzen</h2>
+<ul>
+<li>ISO 21597-1:2020 – Information container for linked document delivery – Part 1: Container.</li>
+<li>ISO 21597-2:2020 – Link types / dynamic semantics.</li>
+<li>RUB ICDD Platform – ICDD-Verarbeitung und Validierung.</li>
+<li>IoC Process Ontology – Prozess-, Input-/Output- und Zustandsmodellierung.</li>
+</ul>
+</body></html>

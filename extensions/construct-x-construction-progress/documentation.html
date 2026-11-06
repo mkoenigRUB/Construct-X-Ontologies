@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construct-X – Baufortschrittserfassung auf Basis der IoC Process Ontology</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1120px;margin:40px auto;padding:0 24px;line-height:1.58;color:#1d1d1f}
+h1,h2,h3{color:#17365d;line-height:1.25}h1{margin-bottom:.3em}h2{margin-top:1.8em;border-bottom:1px solid #dfe3e8;padding-bottom:.25em}
+code,pre{background:#f4f5f7}pre{padding:16px;overflow:auto;border-radius:6px;line-height:1.4}code{padding:2px 4px}
+.box{background:#f6f8fa;border-left:4px solid #17365d;padding:14px 18px;margin:18px 0}.box.green{border-left-color:#438b55}.box.orange{border-left-color:#bc6b16}
+table{border-collapse:collapse;width:100%;margin:16px 0}th,td{border:1px solid #d6d9dd;padding:9px 10px;vertical-align:top}th{background:#eef1f4;text-align:left}
+.flow{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;white-space:pre;overflow:auto;background:#fafafa;padding:16px;border:1px solid #ddd;border-radius:6px;line-height:1.42}
+.small{font-size:.92em;color:#555}.tag-ioc{font-weight:bold;color:#17365d}.tag-cx{font-weight:bold;color:#8a4b08}.tag-bot{font-weight:bold;color:#276749}
+ul{padding-left:1.4em}li{margin:.25em 0}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:800px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>Construct-X – Baufortschrittserfassung auf Basis der IoC Process Ontology</h1>
+<p>Die Construct-X-Erweiterung dient dazu, ausgeführte Bauaktivitäten so zu dokumentieren, dass sich Material- und Produktflüsse bis zum tatsächlich entstandenen Konstruktionselement nachvollziehen lassen. Die Erweiterung ersetzt dabei <strong>nicht</strong> die bestehende <strong>IoC Process Ontology</strong>, sondern verwendet deren Prozessmodell und ergänzt nur die für die Baufortschrittserfassung fehlenden Informationen.</p>
+<div class="box"><strong>Zentrale Anwendungsfrage:</strong> Welche auf die Baustelle gelieferten Produkte wurden durch welche Aktivität an welchem Ort in welchem Konstruktionselement verbaut?</div>
+
+<h2>1. Grundidee: IoC bleibt die Prozessontologie</h2>
+<p>Die <strong>IoC Process Ontology</strong> stellt bereits die wesentlichen Bausteine für die Beschreibung von Bauprozessen bereit: Prozesse, Input- und Output-Elemente, Räume, Status, Akteure sowie zeitlich versionierbare Prozessdaten. Zusätzlich sind in IoC bereits wichtige Verbindungen zu anderen Bauontologien definiert: <code>bot:Element</code> ist als Unterklasse von <code>ioc:Element</code> und <code>bot:Zone</code> als Unterklasse von <code>ioc:Space</code> eingebunden. Auch <code>IfcSpace</code> wird als Spezialisierung von <code>ioc:Space</code> berücksichtigt.</p>
+<p>Construct-X führt deshalb <strong>keine parallelen Begriffe für Input, Output oder Raum</strong> ein. Diese Informationen werden direkt mit IoC modelliert. Ergänzt werden nur zusätzliche, use-case-spezifische Aussagen wie der tatsächliche Ausführungsort einer Tätigkeit oder ein Fortschrittsnachweis.</p>
+
+<table>
+<tr><th>Bereich</th><th>Vorhandene Ontologie</th><th>Construct-X-Erweiterung</th></tr>
+<tr><td>Prozess</td><td><span class="tag-ioc">IoC</span>: <code>ioc:Process</code></td><td><code>cxcp:TransportProcess</code>, <code>cxcp:InstallationProcess</code> als Spezialisierungen</td></tr>
+<tr><td>Input / Output</td><td><span class="tag-ioc">IoC</span>: <code>hasInputElement</code>, <code>hasOutputElement</code></td><td>keine neue Beziehung</td></tr>
+<tr><td>Ausgangs- / Zielraum</td><td><span class="tag-ioc">IoC</span>: <code>hasInitialSpace</code>, <code>hasTargetSpace</code></td><td>keine neue Beziehung</td></tr>
+<tr><td>Ort der eigentlichen Ausführung</td><td>nicht separat ausgedrückt</td><td><span class="tag-cx">Construct-X</span>: <code>hasExecutionSpace</code></td></tr>
+<tr><td>Konstruktion / BIM-Element</td><td><span class="tag-bot">BOT</span> <code>bot:Element</code>, in IoC bereits als <code>ioc:Element</code> eingeordnet</td><td>optional <code>cxcp:ifcGlobalId</code></td></tr>
+<tr><td>Fortschrittsnachweis</td><td>allgemeine Prozessdatenstruktur vorhanden</td><td><span class="tag-cx">Construct-X</span>: <code>ProgressEvidence</code></td></tr>
+</table>
+
+<h2>2. Das wichtigste IoC-Muster: ProcessDataState</h2>
+<p>IoC verbindet dynamische Prozessinformationen nicht direkt mit dem konkreten Wert. Zwischen Prozess und Wert liegt ein <code>ioc:ProcessDataState</code>. Dadurch kann zu einer Aussage zusätzlich gespeichert werden, <strong>wann</strong> sie erzeugt wurde und <strong>durch wen</strong> sie erfasst wurde.</p>
+<div class="flow">ioc:Process
+   │
+   ├── ioc:hasInputElement ─────► ioc:ProcessDataState
+   │                                   │
+   │                                   ├── ioc:hasInputElementValue ──► ioc:Element
+   │                                   ├── prov:generatedAtTime
+   │                                   └── ioc:generatedByActor
+   │
+   ├── ioc:hasTargetSpace ──────► ioc:ProcessDataState
+   │                                   │
+   │                                   └── ioc:hasTargetSpaceValue ───► ioc:Space
+   │
+   └── ioc:hasStatus ───────────► ioc:ProcessDataState
+                                       │
+                                       └── ioc:hasStatusValue ─────────► ioc:Status</div>
+<div class="box green"><strong>Warum diese Zwischenschicht wichtig ist:</strong> Der Prozess bleibt stabil, während sich seine Informationen ändern können. So lassen sich beispielsweise ein später korrigierter Zielort oder ein neuer Status als neuer Zustand erfassen, ohne den Prozess selbst neu anzulegen.</div>
+<p>Die Construct-X-Beziehungen <code>cxcp:hasExecutionSpace</code> und <code>cxcp:hasProgressEvidence</code> folgen exakt diesem IoC-Muster: Auch sie verweisen zuerst auf einen <code>ProcessDataState</code> und erst danach auf den konkreten Wert.</p>
+
+<h2>3. Beispiel A – Transport eines gelieferten Packstücks</h2>
+<p>Ein Packstück <code>PACK-001</code> wird in der Anlieferzone übernommen und in das 4. Obergeschoss transportiert. Das Packstück wird dabei nicht in ein anderes Objekt umgewandelt. Deshalb ist <strong>dasselbe physische Objekt Input und Output</strong> des Transportprozesses.</p>
+<div class="flow">PACK-001
+   │ Input
+   ▼
+TRANSPORT-001
+   │
+   ├── Ausgangsraum ──► Anlieferzone A
+   ├── Zielraum ──────► 4. Obergeschoss
+   │
+   ▼ Output
+PACK-001</div>
+
+<h3>3.1 Was kommt aus IoC?</h3>
+<table>
+<tr><th>Aussage</th><th>IoC-Modellierung</th></tr>
+<tr><td>Packstück ist Input</td><td><code>ioc:hasInputElement</code> → State → <code>ioc:hasInputElementValue PACK-001</code></td></tr>
+<tr><td>Packstück ist Output</td><td><code>ioc:hasOutputElement</code> → State → <code>ioc:hasOutputElementValue PACK-001</code></td></tr>
+<tr><td>Start in Anlieferzone A</td><td><code>ioc:hasInitialSpace</code> → State → <code>ioc:hasInitialSpaceValue delivery-area-a</code></td></tr>
+<tr><td>Ziel im 4. Obergeschoss</td><td><code>ioc:hasTargetSpace</code> → State → <code>ioc:hasTargetSpaceValue storey-04</code></td></tr>
+<tr><td>Status des Transports</td><td><code>ioc:hasStatus</code> → State → <code>ioc:Status</code></td></tr>
+</table>
+<p>Für diesen einfachen Transport ist somit <strong>keine neue Construct-X-Raumbeziehung erforderlich</strong>. IoC kann bereits ausdrücken, wo das Packstück aufgenommen wurde und wohin es gelangt ist.</p>
+
+<pre><code>:transport-001 a cxcp:TransportProcess ;
+    ioc:hasInputElement  :transport-input-state ;
+    ioc:hasOutputElement :transport-output-state ;
+    ioc:hasInitialSpace  :transport-initial-space-state ;
+    ioc:hasTargetSpace   :transport-target-space-state .
+
+:transport-input-state
+    ioc:hasInputElementValue :package-001 .
+
+:transport-output-state
+    ioc:hasOutputElementValue :package-001 .</code></pre>
+
+<h2>4. Beispiel B – Einbau von Produkten in eine Trockenbauwand</h2>
+<p>Nach dem Transport werden zwei Gipskartonplatten und ein Metallprofil im Raum 4.12 montiert. Anders als beim Transport entsteht jetzt ein <strong>neues Konstruktionselement</strong>: die Trockenbauwand <code>WALL-4711</code>.</p>
+<div class="flow">GK-001 ─┐
+GK-002 ─┼──► INSTALLATION-001 ───► WALL-4711
+MP-001 ─┘              │                 │
+                        │                 ├── bot:Element
+                        │                 ├── IFC GlobalId
+                        │                 └── liegt in Raum 4.12
+                        │
+                        └── Ausführung in Raum 4.12</div>
+
+<h3>4.1 Was kommt aus IoC?</h3>
+<p>Die drei Produkte werden mit den vorhandenen IoC-Beziehungen als Inputs des Prozesses erfasst. Die erzeugte Trockenbauwand wird als Output angegeben. Weil IoC <code>bot:Element</code> bereits als Unterklasse von <code>ioc:Element</code> einordnet, kann das BIM-Konstruktionselement direkt als Prozessoutput verwendet werden.</p>
+
+<h3>4.2 Was ergänzt Construct-X?</h3>
+<p>Beim Einbau reicht die Frage „Woher?“ und „Wohin?“ nicht aus. Entscheidend ist vielmehr: <strong>Wo wurde die Tätigkeit selbst ausgeführt?</strong> Dafür ergänzt Construct-X <code>cxcp:hasExecutionSpace</code>. Im Beispiel ist dies Raum 4.12.</p>
+<pre><code>:installation-001 a cxcp:InstallationProcess ;
+    ioc:hasInputElement  :install-input-01, :install-input-02, :install-input-03 ;
+    ioc:hasOutputElement :install-output-state ;
+    cxcp:hasExecutionSpace :install-execution-space-state .
+
+:install-execution-space-state
+    cxcp:hasExecutionSpaceValue :room-4-12 .</code></pre>
+<p>Zusätzlich kann das Ergebnis über <code>ioc:isContainedIn</code> räumlich verortet werden:</p>
+<pre><code>:wall-4711 a bot:Element ;
+    ioc:isContainedIn :wall-location-state ;
+    cxcp:ifcGlobalId "2oX9fQ3nH6u8K1pLm4R7sT" .
+
+:wall-location-state
+    ioc:isContainedInValue :room-4-12 .</code></pre>
+
+<div class="box orange"><strong>Wichtige Unterscheidung:</strong> <code>cxcp:hasExecutionSpace</code> beschreibt den Ort der <em>Aktivität</em>. <code>ioc:isContainedIn</code> beschreibt dagegen den Ort des <em>resultierenden Elements</em>. In vielen Einbaufällen sind beide Räume identisch, semantisch sind es jedoch unterschiedliche Aussagen.</div>
+
+<h2>5. Vom gelieferten Packstück zur verbauten Konstruktion</h2>
+<p>Die eigentliche Nachverfolgung entsteht aus dem Zusammenspiel mehrerer vorhandener IoC-Beziehungen. Das Packstück enthält konkrete Produkte. Diese Produkte werden später Inputs eines Einbauprozesses. Der Einbauprozess erzeugt ein BIM-Konstruktionselement als Output.</p>
+<div class="flow">PACK-001
+   │
+   │ ioc:hasElement → State → ioc:hasElementValue
+   │
+   ├── GK-001 ─┐
+   ├── GK-002 ─┼──► Input von INSTALLATION-001
+   └── MP-001 ─┘              │
+                               │ ioc:hasOutputElement
+                               ▼
+                           WALL-4711
+                               │
+                               ├── IFC GlobalId
+                               └── Raum 4.12</div>
+<p>Damit ist keine zusätzliche Beziehung wie <code>installedInWall</code> notwendig. Die Provenienz ergibt sich aus dem Prozessgraphen:</p>
+<div class="flow">geliefertes Packstück
+   → enthaltenes Produkt
+      → Input eines Einbauprozesses
+         → Output dieses Einbauprozesses
+            → Konstruktionselement</div>
+<p>Die Datei <code>queries/package-to-construction.rq</code> enthält eine SPARQL-Abfrage für genau diese Kette.</p>
+
+<h2>6. Räumliche Aussagen im Zusammenspiel</h2>
+<table>
+<tr><th>Frage</th><th>Beziehung</th><th>Beispiel</th><th>Quelle</th></tr>
+<tr><td>Woher kommt ein Prozessgegenstand?</td><td><code>ioc:hasInitialSpace</code></td><td>Anlieferzone A</td><td>IoC</td></tr>
+<tr><td>Wohin wird er transportiert?</td><td><code>ioc:hasTargetSpace</code></td><td>4. Obergeschoss</td><td>IoC</td></tr>
+<tr><td>Wo wird eine Tätigkeit ausgeführt?</td><td><code>cxcp:hasExecutionSpace</code></td><td>Raum 4.12</td><td>Construct-X-Erweiterung</td></tr>
+<tr><td>Wo befindet sich ein Element?</td><td><code>ioc:isContainedIn</code></td><td>WALL-4711 in Raum 4.12</td><td>IoC</td></tr>
+<tr><td>Wie wird der Raum semantisch repräsentiert?</td><td><code>bot:Zone</code> bzw. <code>IfcSpace</code></td><td>Raum 4.12 / 4. OG</td><td>BOT / IFC, in IoC eingebunden</td></tr>
+</table>
+
+<h2>7. Fortschrittsnachweise</h2>
+<p>Ein Prozess kann zusätzlich mit einem Nachweis verbunden werden, beispielsweise einem Foto, Scan oder Messdatensatz. Construct-X ergänzt dafür <code>cxcp:ProgressEvidence</code>. Auch hier bleibt das IoC-Prinzip der versionierbaren ProcessDataStates erhalten.</p>
+<div class="flow">INSTALLATION-001
+      │
+      └── cxcp:hasProgressEvidence
+                │
+                ▼
+        ProcessDataState
+                │
+                ├── cxcp:hasProgressEvidenceValue ─► PHOTO-001
+                ├── prov:generatedAtTime
+                └── ioc:generatedByActor</div>
+<p><code>ioc:generatedByActor</code> kennzeichnet dabei den Akteur, der den Datenzustand bzw. die Information erzeugt oder erfasst hat. Dies ist nicht zwingend identisch mit der Person oder Organisation, die die handwerkliche Tätigkeit ausgeführt hat. Soll der ausführende Akteur beschrieben werden, kann dafür das bereits vorhandene IoC-Muster <code>ioc:hasActor</code> / <code>ioc:hasActorValue</code> verwendet werden.</p>
+
+<h2>8. IFC- und BIM-Verknüpfung</h2>
+<p>Das resultierende Bauteil wird als <code>bot:Element</code> modelliert. IoC ordnet <code>bot:Element</code> bereits unter <code>ioc:Element</code> ein. Dadurch ist kein zusätzlicher Mapping-Layer notwendig, um ein BIM-Element als Output eines IoC-Prozesses zu verwenden.</p>
+<p>Im Beispiel wird zusätzlich eine <code>cxcp:ifcGlobalId</code> gespeichert. Diese pragmatische Variante ist sinnvoll, wenn das IFC-Modell außerhalb des RDF-Graphen verwaltet wird. Liegt dagegen bereits eine IFC-RDF-Repräsentation vor, kann direkt auf die URI des IFC-Elements verwiesen werden.</p>
+<div class="flow">WALL-4711
+   ├── a bot:Element
+   │      └── durch IoC zugleich ioc:Element
+   ├── cxcp:ifcGlobalId → IFC-GUID
+   └── ioc:isContainedIn → State → bot:Zone / IfcSpace</div>
+
+<h2>9. Was wird bewusst nicht neu modelliert?</h2>
+<p>Die Construct-X-Erweiterung soll klein bleiben. Folgende Begriffe werden deshalb ausdrücklich <strong>nicht</strong> dupliziert:</p>
+<ul>
+<li>allgemeiner Prozess – bereits <code>ioc:Process</code></li>
+<li>Input und Output – bereits <code>ioc:hasInputElement</code> / <code>ioc:hasOutputElement</code></li>
+<li>Produkt bzw. Bauelement – bereits <code>ioc:Element</code> und <code>bot:Element</code></li>
+<li>Start- und Zielraum – bereits <code>ioc:hasInitialSpace</code> / <code>ioc:hasTargetSpace</code></li>
+<li>räumliche Einordnung eines Elements – bereits <code>ioc:isContainedIn</code></li>
+<li>Status – bereits <code>ioc:hasStatus</code></li>
+<li>Akteur – bereits <code>ioc:Actor</code> sowie <code>ioc:hasActor</code></li>
+<li>Zeitpunkt eines Datenzustands – bereits <code>prov:generatedAtTime</code></li>
+</ul>
+<p>Construct-X ergänzt nur die use-case-spezifische Semantik, die in IoC nicht separat vorhanden ist.</p>
+
+<h2>10. Runtime-JSON und semantisches Modell</h2>
+<p><code>examples/construction-progress-example.json</code> ist eine kompakte Darstellung für den operativen Datenaustausch über einen Connector. Sie vermeidet RDF-spezifische Syntax und bildet dieselben fachlichen Aussagen in einer anwendungsfreundlichen JSON-Struktur ab. Die RDF-Dateien <code>.ttl</code> und <code>.jsonld</code> dienen dagegen als semantische Referenz und für Knowledge-Graph-/SPARQL-Anwendungen.</p>
+<p>Für die Laufzeit gilt daher:</p>
+<div class="flow">Connector / Anwendung
+      │
+      └── construction-progress-example.json
+                  │
+                  └── semantisch beschrieben durch
+                       IoC Process Ontology
+                       + Construct-X Construction Progress Extension</div>
+
+<h2>11. Enthaltene Dateien</h2>
+<table>
+<tr><th>Datei</th><th>Zweck</th></tr>
+<tr><td><code>ontology/construct-x-construction-progress.ttl</code></td><td>Schlanke Construct-X-Erweiterungsontologie; importiert IoC.</td></tr>
+<tr><td><code>shapes/construct-x-construction-progress-shapes.ttl</code></td><td>SHACL-Regeln für Transport- und Einbauaktivitäten.</td></tr>
+<tr><td><code>examples/construction-progress-example.ttl</code></td><td>Semantische Beispieldaten in Turtle.</td></tr>
+<tr><td><code>examples/construction-progress-example.jsonld</code></td><td>RDF-äquivalente JSON-LD-Darstellung.</td></tr>
+<tr><td><code>examples/construction-progress-example.json</code></td><td>Runtime-JSON-Payload für Connector-Austausch.</td></tr>
+<tr><td><code>queries/package-to-construction.rq</code></td><td>SPARQL-Abfrage von geliefertem Packstück zum verbauten Konstruktionselement.</td></tr>
+</table>
+
+<h2>12. Kompetenzfragen</h2>
+<ul>
+<li>Wo wurde eine konkrete Bauaktivität ausgeführt?</li>
+<li>Von welchem Ausgangsort zu welchem Zielort wurde ein Packstück transportiert?</li>
+<li>Welche Produkte waren in einem gelieferten Packstück enthalten?</li>
+<li>Welche dieser Produkte wurden als Input eines Einbauprozesses verwendet?</li>
+<li>Welches Konstruktionselement ist aus diesem Einbauprozess hervorgegangen?</li>
+<li>Welche IFC-GUID besitzt dieses Konstruktionselement?</li>
+<li>In welchem Raum bzw. Geschoss befindet sich das Konstruktionselement?</li>
+<li>Welcher Nachweis dokumentiert den erfassten Baufortschritt?</li>
+<li>Wer hat den zugehörigen Datenzustand erfasst?</li>
+</ul>
+
+<h2>13. Referenzen</h2>
+<ul>
+<li>IoC Process Ontology: <a href="https://internet-of-construction.github.io/IoC-Process-Ontology/">https://internet-of-construction.github.io/IoC-Process-Ontology/</a></li>
+<li>IoC Ontology Source: <a href="https://github.com/Internet-of-Construction/IoC-Process-Ontology">https://github.com/Internet-of-Construction/IoC-Process-Ontology</a></li>
+<li>Building Topology Ontology (BOT): <a href="https://w3id.org/bot">https://w3id.org/bot</a></li>
+</ul>
+<p class="small">Die Construct-X-Erweiterung verwendet die IoC Process Ontology als semantische Grundlage. Die vorhandenen IoC-Beziehungen werden wiederverwendet und nur dort ergänzt, wo für die Baufortschrittserfassung eine zusätzliche Aussage erforderlich ist.</p>
+</body>
+</html>

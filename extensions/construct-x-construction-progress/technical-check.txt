@@ -1,0 +1,11 @@
+Construct-X Construction Progress Extension – technical check
+
+OK RDF parse: ontology/construct-x-construction-progress.ttl (58 triples)
+OK RDF parse: shapes/construct-x-construction-progress-shapes.ttl (69 triples)
+OK RDF parse: examples/construction-progress-example.ttl (102 triples)
+OK RDF parse: examples/construction-progress-example.jsonld (102 triples)
+OK RDF equivalence: example TTL == JSON-LD (102 triples)
+OK runtime JSON: valid JSON, no JSON-LD control fields
+OK transport example: same package as input and output
+OK installation example: executionSpace present
+OK output construction: IFC GlobalId present

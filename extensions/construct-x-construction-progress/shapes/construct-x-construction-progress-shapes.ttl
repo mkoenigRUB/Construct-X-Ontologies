@@ -1,0 +1,64 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix cxcp: <https://w3id.org/construct-x/construction-progress#> .
+@prefix ioc:  <http://w3id.org/ioc#> .
+@prefix bot:  <https://w3id.org/bot#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+cxcp:TransportProcessShape
+    a sh:NodeShape ;
+    sh:targetClass cxcp:TransportProcess ;
+    sh:property [
+        sh:path ( ioc:hasInputElement ioc:hasInputElementValue ) ;
+        sh:minCount 1 ;
+        sh:message "Eine Transportaktivität benötigt mindestens ein Input-Element."@de
+    ] ;
+    sh:property [
+        sh:path ( ioc:hasOutputElement ioc:hasOutputElementValue ) ;
+        sh:minCount 1 ;
+        sh:message "Eine Transportaktivität benötigt mindestens ein Output-Element."@de
+    ] ;
+    sh:property [
+        sh:path ( ioc:hasInitialSpace ioc:hasInitialSpaceValue ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Eine Transportaktivität benötigt genau einen Ausgangsraum."@de
+    ] ;
+    sh:property [
+        sh:path ( ioc:hasTargetSpace ioc:hasTargetSpaceValue ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Eine Transportaktivität benötigt genau einen Zielraum."@de
+    ] ;
+    sh:sparql [
+        sh:message "Bei einer Transportaktivität muss mindestens ein physisches Element sowohl als Input als auch als Output erhalten bleiben."@de ;
+        sh:select """
+            PREFIX ioc: <http://w3id.org/ioc#>
+            SELECT $this WHERE {
+              FILTER NOT EXISTS {
+                $this ioc:hasInputElement ?inState .
+                ?inState ioc:hasInputElementValue ?element .
+                $this ioc:hasOutputElement ?outState .
+                ?outState ioc:hasOutputElementValue ?element .
+              }
+            }
+        """
+    ] .
+
+cxcp:InstallationProcessShape
+    a sh:NodeShape ;
+    sh:targetClass cxcp:InstallationProcess ;
+    sh:property [
+        sh:path ( ioc:hasInputElement ioc:hasInputElementValue ) ;
+        sh:minCount 1 ;
+        sh:message "Eine Einbauaktivität benötigt mindestens ein Input-Element."@de
+    ] ;
+    sh:property [
+        sh:path ( ioc:hasOutputElement ioc:hasOutputElementValue ) ;
+        sh:minCount 1 ;
+        sh:qualifiedValueShape [ sh:class bot:Element ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "Eine Einbauaktivität benötigt mindestens ein resultierendes Konstruktionselement als bot:Element."@de
+    ] ;
+    sh:property [
+        sh:path ( cxcp:hasExecutionSpace cxcp:hasExecutionSpaceValue ) ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Eine Einbauaktivität benötigt genau einen Ausführungsort."@de
+    ] .

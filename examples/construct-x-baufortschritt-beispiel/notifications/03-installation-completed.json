@@ -1,0 +1,18 @@
+{
+  "header": {
+    "messageId": "urn:uuid:7a5b6c8d-4259-4c73-8b9d-3e4f5a6b7c80",
+    "context": "ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0",
+    "sentDateTime": "2026-11-05T12:03:00+01:00",
+    "senderBpn": "BPNL000000000AAA",
+    "receiverBpn": "BPNL000000000BBB",
+    "version": "3.0.0"
+  },
+  "content": {
+    "eventType": "PROCESS_COMPLETED",
+    "processId": "installation-001",
+    "processType": "InstallationProcess",
+    "dataResourceId": "urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10",
+    "dataRevision": 3,
+    "description": "Die Produkte GK-001, GK-002 und MP-001 wurden in WALL-4711 eingebaut."
+  }
+}

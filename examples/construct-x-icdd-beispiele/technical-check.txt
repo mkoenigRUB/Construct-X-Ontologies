@@ -1,0 +1,2 @@
+construct-x-baufortschritt-beispiel.icdd: OK | Index 111 Tripel | Links 78 Tripel | Dateien 11
+construct-x-doppelboden-feinterminplanung.icdd: OK | Index 49 Tripel | Links 34 Tripel | Dateien 6

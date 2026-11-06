@@ -1,6 +1,6 @@
 {
   "package": "Construct-X ontologies draft",
-  "date": "2026-11-04",
+  "date": "2026-11-06",
   "domain_ontologies": {
     "construction-schedule": "0.5.0",
     "breakdown-structure": "0.7.0",
@@ -63,5 +63,8 @@
   },
   "sdk": {
     "construct-x-sdk": "0.1.0-SNAPSHOT"
+  },
+  "extensions": {
+    "construct-x-construction-progress": "0.1.0"
   }
 }

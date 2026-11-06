@@ -1,0 +1,19 @@
+PREFIX cxcp: <https://w3id.org/construct-x/construction-progress#>
+PREFIX ioc:  <http://w3id.org/ioc#>
+PREFIX dct:  <http://purl.org/dc/terms/>
+
+# In welcher Konstruktion wurden die Produkte aus einem gelieferten Packstück verbaut?
+SELECT ?package ?product ?installation ?construction ?ifcGlobalId ?executionSpace
+WHERE {
+  VALUES ?package { <https://example.construct-x.eu/progress/package-001> }
+
+  ?package ioc:hasElement / ioc:hasElementValue ?product .
+
+  ?installation a cxcp:InstallationProcess ;
+      ioc:hasInputElement / ioc:hasInputElementValue ?product ;
+      ioc:hasOutputElement / ioc:hasOutputElementValue ?construction ;
+      cxcp:hasExecutionSpace / cxcp:hasExecutionSpaceValue ?executionSpace .
+
+  OPTIONAL { ?construction cxcp:ifcGlobalId ?ifcGlobalId . }
+}
+ORDER BY ?product

@@ -35,6 +35,7 @@
     "conx-dbl": "https://www.construct-x.org/ontology/delivery-boq-link#",
     "conx-dsl": "https://www.construct-x.org/ontology/delivery-site-link#",
     "conx-babl": "https://www.construct-x.org/ontology/built-asset-breakdown-link#",
+    "cxcp": "https://w3id.org/construct-x/construction-progress#",
     "conx-st": "https://www.construct-x.org/vocab/construction-schedule/schedule-type#",
     "conx-status": "https://www.construct-x.org/vocab/construction-schedule/activity-status#",
     "conx-prt": "https://www.construct-x.org/vocab/construction-schedule/precedence-relationship-type#",
@@ -707,6 +708,26 @@
     "seeAlso": {
       "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
       "@type": "@id"
-    }
+    },
+    "TransportProcess": "https://w3id.org/construct-x/construction-progress#TransportProcess",
+    "InstallationProcess": "https://w3id.org/construct-x/construction-progress#InstallationProcess",
+    "ProgressEvidence": "https://w3id.org/construct-x/construction-progress#ProgressEvidence",
+    "hasExecutionSpace": {
+      "@id": "https://w3id.org/construct-x/construction-progress#hasExecutionSpace",
+      "@type": "@id"
+    },
+    "hasExecutionSpaceValue": {
+      "@id": "https://w3id.org/construct-x/construction-progress#hasExecutionSpaceValue",
+      "@type": "@id"
+    },
+    "hasProgressEvidence": {
+      "@id": "https://w3id.org/construct-x/construction-progress#hasProgressEvidence",
+      "@type": "@id"
+    },
+    "hasProgressEvidenceValue": {
+      "@id": "https://w3id.org/construct-x/construction-progress#hasProgressEvidenceValue",
+      "@type": "@id"
+    },
+    "ifcGlobalId": "https://w3id.org/construct-x/construction-progress#ifcGlobalId"
   }
 }

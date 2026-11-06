@@ -1,0 +1,18 @@
+{
+  "header": {
+    "messageId": "urn:uuid:6c4d5e7f-3148-4b62-9a7c-2d3e4f5a6b70",
+    "context": "ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0",
+    "sentDateTime": "2026-11-05T08:26:00+01:00",
+    "senderBpn": "BPNL000000000AAA",
+    "receiverBpn": "BPNL000000000BBB",
+    "version": "3.0.0"
+  },
+  "content": {
+    "eventType": "PROCESS_COMPLETED",
+    "processId": "transport-001",
+    "processType": "TransportProcess",
+    "dataResourceId": "urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10",
+    "dataRevision": 2,
+    "description": "Packstück PACK-001 wurde von Anlieferzone A in das 4. Obergeschoss transportiert."
+  }
+}

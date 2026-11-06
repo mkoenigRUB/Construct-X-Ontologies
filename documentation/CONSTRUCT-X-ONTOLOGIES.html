@@ -138,6 +138,7 @@
   <a href="#usecase">16. Use Case</a>
   <a href="#validierung">17. Validierung</a>
   <a href="#jsonld">18. JSON-LD-Kontext</a>
+  <a href="#cxcp-icdd">19. cxcp-Extension &amp; ICDD-Container</a>
 </nav>
 
 <main>
@@ -2249,22 +2250,24 @@ ex:sa-a100
 <section id="jsonld">
   <h2>18. JSON-LD-Kontext</h2>
   <div class="ok">
-    <strong>Status: PASS (2026-11-04)</strong> — geprüft mit Jena 4.10.0 im selbstständigen
+    <strong>Status: PASS (2026-11-06, cxcp-Erweiterung)</strong> — geprüft mit Jena 4.10.0 im selbstständigen
     Verifikationsprojekt <code>contexts/validation/</code> (Java 25 / Maven 3.9.9).
   </div>
 
   <p>Seit dem 4. Nov 2026 liegt mit <code>contexts/construct-x-context.jsonld</code> ein
   kombinierter JSON-LD-Kontext für das gesamte Package vor. Er ist in <code>MANIFEST.json</code>
-  unter <code>json_ld_context</code> registriert.</p>
+  unter <code>json_ld_context</code> registriert. Seit dem 6. Nov 2026 deckt er zusätzlich die
+  Construction Progress Extension <code>cxcp</code> ab (Präfix <code>cxcp</code> + 8 Bare-Terme,
+  s. Sektion 19).</p>
 
   <table>
     <tr><th>Merkmal</th><th>Wert</th></tr>
     <tr><td>Pfad / Version</td><td><code>contexts/construct-x-context.jsonld</code>, 0.1.0</td></tr>
     <tr><td>Kontext-IRI (Top-Level <code>@id</code>)</td><td><code>https://www.construct-x.org/context/construct-x/0.1.0</code></td></tr>
-    <tr><td>JSON-LD-Version</td><td><code>@version: 1.1</code></td></tr>
-    <tr><td>Abdeckung</td><td>alle 8 Domänen-Ontologien, alle 10 Link-Ontologien, alle 21 SKOS-Vokabulare — in einer Datei</td></tr>
-    <tr><td><code>@context</code>-Einträge</td><td>371 = 1 <code>@version</code> + 54 Präfixe (15 Standard, 8 Domäne, 10 Links, 21 SKOS-Vokabular) + 204 Bare-Term→IRI-String-Mappings + 112 Objekt-Definitionen</td></tr>
-    <tr><td>Bare-Term-Keys</td><td>316, davon 0 geprefixte String-Mappings</td></tr>
+    <tr><td>JSON-LD-Version</td><td><code>@version: 1.1</code> (bewusst nicht hochgezogen — s. Hinweis unten)</td></tr>
+    <tr><td>Abdeckung</td><td>alle 8 Domänen-Ontologien, alle 10 Link-Ontologien, alle 21 SKOS-Vokabulare <strong>und die cxcp-Extension</strong> — in einer Datei</td></tr>
+    <tr><td><code>@context</code>-Einträge</td><td>380 = 1 <code>@version</code> + 55 Präfixe (15 Standard, 8 Domäne, 10 Links, 21 SKOS-Vokabular, 1 Extension <code>cxcp</code>) + 208 Bare-Term→IRI-String-Mappings + 116 Objekt-Definitionen</td></tr>
+    <tr><td>Bare-Term-Keys</td><td>324, davon 0 geprefixte String-Mappings</td></tr>
   </table>
 
   <h3>Kollisions-Design</h3>
@@ -2289,12 +2292,13 @@ ex:sa-a100
   <code>src/main/java/Main.java</code>, <code>test/test-doc.jsonld</code>,
   <code>test/test-doc-reference.md</code>) expandiert das Testdokument gegen den Kontext,
   prüft die erwarteten IRIs (One-Way-Check: zusätzliche IRIs erlaubt) und serialisiert das
-  Ergebnis zurück. Ergebnis 2026-11-04: <strong>PASS</strong> — 42 Triples / 64 IRIs
-  expandiert, Roundtrip 42 → 42, Exit Code 0.</p>
+  Ergebnis zurück. Ergebnis 2026-11-06: <strong>PASS</strong> — 48 Triples / 77 IRIs
+  expandiert (75 erwartete IRIs, davon 11 <code>cxcp</code> für den neuen Test-Node N11),
+  Roundtrip 48 → 48, Exit Code 0.</p>
   <pre>
 # PowerShell, Workdir: contexts\validation
-$env:JAVA_HOME='C:\Users\Markus König\AppData\Local\Temp\opencode\jdk25\jdk-25.0.5+8'
-&amp; 'C:\Users\Markus König\AppData\Local\Temp\opencode\maven\apache-maven-3.9.9\bin\mvn.cmd' -q compile exec:java '-Dexec.args=test\test-doc.jsonld'
+$env:JAVA_HOME='&lt;jdk25-Installation&gt;'
+&amp; '&lt;maven-Installation&gt;\bin\mvn.cmd' -q compile exec:java '-Dexec.args=test\test-doc.jsonld'
 # -&gt; ERGEBNIS: PASS, Exit Code 0
   </pre>
   <div class="warn">
@@ -2303,6 +2307,77 @@ $env:JAVA_HOME='C:\Users\Markus König\AppData\Local\Temp\opencode\jdk25\jdk-25.
     referenziert den Kontext über den relativen Pfad
     <code>"../../construct-x-context.jsonld"</code>; eine Repo-Kopie des Testdokuments
     niemals aus dem Temp-Ordner neu zu kopieren, weil dort ein anderer Pfad steht.
+    (3) <strong>Jena-<code>@version</code>-Eigenart (2026-11-06):</strong> Jena 4.10.0
+    akzeptiert das nicht-standardisierte Kontext-Feld <code>@version</code> nur mit dem
+    Wert <code>1.1</code> (Zahl oder String); jeder andere Wert (z. B. <code>1.2</code>)
+    bricht den Loader mit <code>LOADING_REMOTE_CONTEXT_FAILED</code>. Der Kontext hält
+    deshalb bei <code>@version: 1.1</code>, während die <code>cxcp</code>-Terme aufgenommen
+    wurden; die versionierte Kontext-IRI (<code>@id</code>, 0.1.0) bleibt der
+    Versionsmarker.
+  </div>
+</section>
+
+<!-- ============================================================ -->
+
+<section id="cxcp-icdd">
+  <h2>19. Construction Progress Extension (cxcp) &amp; ICDD-Container</h2>
+  <div class="ok">
+    <strong>Status: PASS (2026-11-06)</strong> — RDF-Parse, SHACL (Run 11, inkl.
+    <code>sh:sparql</code>-Constraint + Negativtest), ICDD-Integritätscheck (alle
+    SHA-256-Prüfsummen) und MANIFEST-Check konsistent.
+  </div>
+
+  <h3>19.1 Construction Progress Extension <code>cxcp</code> 0.1.0</h3>
+  <p>Unter <code>extensions/construct-x-construction-progress/</code> liegt eine schlanke
+  Erweiterung der <strong>externen IoC Process Ontology</strong> (<code>w3id.org/ioc</code>)
+  und von <strong>BOT</strong> (<code>w3id.org/bot</code>) zur räumlichen Verortung
+  ausgeführter Bauprozesse und zur Nachverfolgung gelieferter Produkte bis zum verbauten
+  BIM-Konstruktionselement. Sie hat ein eigenes IRI-Schema
+  (<code>https://w3id.org/construct-x/construction-progress#</code>) und ist damit
+  <strong>keine der 8 Domänen-Ontologien</strong> — die Linking Rule (Querrelationen nur in
+  Link-Ontologien zwischen Construct-X-Domänen) greift nicht. In <code>MANIFEST.json</code>
+  ist sie deshalb in der eigenen Sektion <code>extensions</code> registriert.</p>
+  <table>
+    <tr><th>Bestandteil</th><th>Inhalt</th></tr>
+    <tr><td><code>ontology/</code></td><td>3 Klassen (<code>TransportProcess</code>, <code>InstallationProcess</code>, <code>ProgressEvidence</code>), 4 Objekt-Properties (<code>hasExecutionSpace(Value)</code>, <code>hasProgressEvidence(Value)</code>), 1 Datatype-Property (<code>ifcGlobalId</code>); 58 Tripel, <code>owl:versionInfo "0.1.0"</code> + <code>owl:versionIRI</code></td></tr>
+    <tr><td><code>shapes/</code></td><td>SHACL-Profil (69 Tripel) mit u. a. einem <code>sh:sparql</code>-Constraint: eine Transportaktivität muss mindestens ein physisches Element sowohl als Input als auch als Output behalten</td></tr>
+    <tr><td><code>examples/</code></td><td>End-to-End-Beispiel (Turtle + JSON-LD + Runtime-JSON, je 102 Tripel, äquivalenzgeprüft): Packstück → Transport → Einbau in IFC-Element</td></tr>
+    <tr><td><code>queries/</code></td><td>SPARQL-Beispiel <code>package-to-construction.rq</code>: „In welcher Konstruktion wurden die Produkte aus einem Packstück verbaut?"</td></tr>
+  </table>
+  <p>Die 8 <code>cxcp</code>-Terme sind zusätzlich im JSON-LD-Kontext hinterlegt (Präfix
+  <code>cxcp</code>, s. Sektion 18) und dort über den Test-Node N11 verifiziert.</p>
+
+  <h3>19.2 Baufortschritt-Beispiel (Plain JSON)</h3>
+  <p><code>examples/construct-x-baufortschritt-beispiel/</code> zeigt die durchgängige Kette
+  Lieferung → Transport → Einbau als 3 versionierte Plain-JSON-Datenstände (revision 1–3),
+  3 Notifications im Tractus-X-Header-/Construct-X-Content-Muster und die Antwort auf die
+  Leitfrage (<code>result/example-answer.json</code>: die Produkte aus PACK-001 sind in
+  WALL-4711, IFC-GlobalId, Raum 4.12).</p>
+
+  <h3>19.3 ICDD-Container (ISO 21597)</h3>
+  <p><code>examples/construct-x-icdd-beispiele/</code> enthält zwei
+  <strong>ICDD-Container</strong> (ZIP-Format, ISO 21597) als Beispiel für die
+  Liefer-/Verknüpfungsschicht:</p>
+  <table>
+    <tr><th>Container</th><th>Inhalt</th></tr>
+    <tr><td><code>construct-x-baufortschritt-beispiel.icdd</code></td><td><code>Index.rdf</code> (111 Tripel) + eingebettete <code>cxcp</code>-Ontologie + 8 Payload-Dokumente (3 Daten-Revisions, 3 Notifications, 1 IFC-Datei, 1 Result) + <code>links.rdf</code> (78 Tripel, JSONPath-basierte Identifier → DirectedBinaryLinks)</td></tr>
+    <tr><td><code>construct-x-doppelboden-feinterminplanung.icdd</code></td><td><code>Index.rdf</code> (49 Tripel) + eingebettete notification-content-Ontologie + 3 Payload-Dokumente (Task-Request, Planning-Context, Dokumentation) + <code>links.rdf</code> (34 Tripel)</td></tr>
+  </table>
+  <p>Jedes Payload-Dokument trägt im <code>Index.rdf</code> eine <code>ct:checksum</code>
+  (SHA-256); die Integritätsprüfung (RDF-Parse von <code>Index.rdf</code>/<code>links.rdf</code>,
+  Neu-Berechnung aller Prüfsummen, TTL-Parse der eingebetteten Ontologie) lief am 2026-11-06
+  durch (alle OK).</p>
+  <div class="warn">
+    <strong>Synchronisation (2026-11-06):</strong> Da nichts veröffentlicht bzw. produktiv
+    genutzt ist, wurde der Doppelboden-Container an die aktuelle Ontologie angepasst: die
+    eingebettete <code>notification-content-ontology.ttl</code> wurde von 0.1.0 auf 0.1.1
+    ersetzt (ergibt <code>contextResource</code>). Die Ontologie-Kopie im Ordner
+    <code>Ontology resources/</code> ist bewusst <em>kein</em> checksummiertes
+    <code>ct:InternalDocument</code> — es musste daher keine Prüfsumme im
+    <code>Index.rdf</code> geändert werden; alle 3 Payload-Prüfsummen blieben gültig. Die
+    <code>informationContainer</code>-Rückverweise in den Container-Notifications
+    (Zeiger auf die eigene Container-UUID) sind das beabsichtigte ICDD-Merkmal und wurden
+    beibehalten.
   </div>
 </section>
 

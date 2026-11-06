@@ -1,0 +1,16 @@
+{
+  "question": "In welcher Konstruktion wurden die auf die Baustelle gelieferten Produkte aus PACK-001 verbaut?",
+  "deliveredPackage": "PACK-001",
+  "deliveredProducts": [
+    "GK-001",
+    "GK-002",
+    "MP-001"
+  ],
+  "installationProcess": "installation-001",
+  "constructionElement": {
+    "identifier": "WALL-4711",
+    "name": "Trockenbauwand Raum 4.12",
+    "ifcGlobalId": "2oX9fQ3nH6u8K1pLm4R7sT",
+    "location": "Raum 4.12"
+  }
+}

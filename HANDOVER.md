@@ -1,6 +1,6 @@
 # Handover — Construct-X Ontologien & Converter
 
-**Stand:** 2026-11-05 (Construct-X SDK, Converter-Repo) · **Status:** alle Verifikationen PASS
+**Stand:** 2026-11-06 (Construction Progress Extension `cxcp` + Baufortschritt-Beispiel + ICDD-Container, Ontologie-Repo) · **Status:** alle Verifikationen PASS
 
 Dieses Dokument ist selbstständig: es beschreibt den Zustand beider Repos, wie man die
 Entwicklungs-Umgebung auf einem **fremden Rechner** aufsetzt, und alle Wiederhol-Befehle.
@@ -14,16 +14,27 @@ lag, ist hier als "neu aufsetzbar" beschrieben — Sciebo synchronisiert ausschl
 
 - 8 Domänen-Module: Construction Schedule 0.5.0, Breakdown Structure 0.7.0, GAEB BoQ 0.5.0,
   Construction Progress Report 0.1.0, Construction Site 0.2.0, Construction Delivery 0.1.0,
-  Built Asset 0.1.0, **Notification Content 0.1.1** (am 2026-11-04 integriert).
+  Built Asset 0.1.0, Notification Content 0.1.1.
+- **1 Extension** (2026-11-06): `extensions/construct-x-construction-progress/` —
+  **Construction Progress Extension `cxcp` 0.1.0** (extern, baut auf IoC Process Ontology
+  `w3id.org/ioc` + BOT `w3id.org/bot` auf, eigenes IRI-Schema
+  `w3id.org/construct-x/construction-progress#`; keine der 8 Domänen, Linking-Rule nicht anwendbar).
+  Enthält `ontology/`, `shapes/`, `examples/`, `queries/` + README + documentation.html.
 - 10 Link-Ontologien, 21 SKOS-Vokabulare, SHACL-Profile, Beispieldaten.
-- 83 TTL-Dateien + 39 RDF/XML-Mirrors parse-frei; **SHACL 10/10 Runs conform, 0 Violations**;
-  MANIFEST ↔ `versionInfo` konsistent; 40 Präfixe ohne Kollision.
+- **Beispiele (2026-11-06):** `examples/construct-x-baufortschritt-beispiel/` (End-to-End:
+  Lieferung→Transport→Einbau, 3 Plain-JSON-Revisions + 3 Notifications + Result) und
+  `examples/construct-x-icdd-beispiele/` (2 ICDD-Container, ISO 21597: Baufortschritt +
+  Doppelboden; der Doppelboden-Container wurde auf die aktuelle notification-content 0.1.1
+  synchronisiert).
+- 86 TTL-Dateien + 39 RDF/XML-Mirrors parse-frei; **SHACL 11/11 Runs conform, 0 Violations**;
+  MANIFEST ↔ `versionInfo` konsistent (41 Einträge); 41 Präfixe ohne Kollision.
 - **JSON-LD-Kontext** `contexts/construct-x-context.jsonld` (0.1.0, `@version: 1.1`,
-  Kontext-IRI `https://www.construct-x.org/context/construct-x/0.1.0`): 371 `@context`-Einträge
-  (1 `@version` + 54 Präfixe + 204 Bare-Term-String-Mappings + 112 Objekt-Definitionen).
+  Kontext-IRI `https://www.construct-x.org/context/construct-x/0.1.0`): 380 `@context`-Einträge
+  (1 `@version` + 55 Präfixe + 208 Bare-Term-String-Mappings + 116 Objekt-Definitionen),
+  seit 2026-11-06 inkl. `cxcp`-Präfix + 8 cxcp-Terme.
   Kollidierende Bare-Terme sind nur per Präfix nutzbar — Designentscheidung.
-  Verifiziert per Jena 4.10.0 (Projekt `contexts/validation/`): 42 Triples / 64 IRIs,
-  Roundtrip 42 → 42, Exit 0.
+  Verifiziert per Jena 4.10.0 (Projekt `contexts/validation/`): 48 Triples / 77 IRIs,
+  Roundtrip 48 → 48, Exit 0.
 
 ### Converter-Repo (`construct-x-converters`)
 
@@ -77,7 +88,7 @@ Weitere Hinweise:
 
 Pfade in `$env:TEMP\opencode\…`; bei abweichendem Benutzerkonto entsprechend ersetzen.
 
-### 3.1 RDF-Parse (Ontologie-Repo, 83 TTL + 39 RDF/XML)
+### 3.1 RDF-Parse (Ontologie-Repo, 86 TTL + 39 RDF/XML)
 
 ```powershell
 $py = "$env:LOCALAPPDATA\Temp\opencode\shacl-venv\Scripts\python.exe"
@@ -86,7 +97,7 @@ $py = "$env:LOCALAPPDATA\Temp\opencode\shacl-venv\Scripts\python.exe"
 
 Auch ohne Fehler = PASS. (Bei Inline-Befehls-Problemen: .ps1 auf Platte, s. §4.)
 
-### 3.2 SHACL — 10 Runs (erwartet: alle conform, 0 Violations)
+### 3.2 SHACL — 11 Runs (erwartet: alle conform, 0 Violations)
 
 Ablauf pro Run: SHACL-Profil(e) + SKOS-Vokabular(en) des Moduls in den **Data-Graph**
 laden (nötig für `sh:class skos:Concept` / `sh:in`), Beispiel-Datei parsen,
@@ -104,6 +115,7 @@ laden (nötig für `sh:class skos:Concept` / `sh:in`), Beispiel-Datei parsen,
 | 8 | integriertes Link-Beispiel | alle 10 Link-Profile |
 | 9 | `built-asset-links-example.ttl` | Site–Built Asset + Built Asset–Breakdown |
 | 10 | `notification-content` Beispiel | Core (inkl. Negativtest: `TaskRequested` ohne `taskType`/Target muss verstoßen) |
+| 11 | `extensions/construct-x-construction-progress` Beispiel | cxcp-Profile, **mit `advanced=True`** (enthält einen `sh:sparql`-Constraint: Transport muss ein Element als Input UND Output behalten; inkl. Negativtest: Transport mit unterschiedlichem Input/Output-Element muss verstoßen) |
 
 Die exakte Laufkonfiguration steht in `VALIDATION.md` (Abschnitt "Package validation").
 
@@ -115,13 +127,27 @@ $env:JAVA_HOME = "$env:LOCALAPPDATA\Temp\opencode\jdk25\jdk-25.0.5+8"
 & "$env:LOCALAPPDATA\Temp\opencode\maven\apache-maven-3.9.9\bin\mvn.cmd" -q compile exec:java "-Dexec.args=test\test-doc.jsonld"
 ```
 
-Erwartet: 42 Triples, 64 IRIs (One-Way-Check; zusätzliche IRIs erlaubt), Roundtrip 42 → 42.
+Erwartet: 48 Triples, 77 IRIs (One-Way-Check auf 75 erwartete IRIs; zusätzliche IRIs erlaubt),
+Roundtrip 48 → 48.
 Das erzeugt `contexts\validation\target\` → **danach löschen** (gehört nicht ins Repo).
 Achtung: Die Repo-Kopie `test/test-doc.jsonld` referenziert den Kontext per
 `"../../construct-x-context.jsonld"` — **nie** die Temp-Version über die Repo-Kopie
 kopieren.
+Achtung: Jena 4.10.0 akzeptiert das Kontext-Feld `@version` **nur** mit dem Wert `1.1`
+(jeder andere Wert → `LOADING_REMOTE_CONTEXT_FAILED`); daher bleibt `@version: 1.1`
+(versionierte Kontext-IRI `@id` bleibt der Versionsmarker).
 
-### 3.4 Converter-Tests (161/161 erwartet: SDK 81 + GAEB 32 + MS 33 + RDF 15)
+### 3.4 ICDD-Container-Integrität + MANIFEST-Check (neu, 2026-11-06)
+
+Pro `.icdd`-Container (ZIP): `Index.rdf` als RDF/XML parsen, für jede `ct:InternalDocument`
+mit `ct:checksum` den SHA-256 der `Payload documents/…`-Datei neu berechnen und vergleichen,
+`Payload triples/links.rdf` als RDF/XML parsen, eingebettete Ontologie als TTL parsen.
+Außerdem: MANIFEST ↔ in-file `versionInfo`-Konsistenz (41 Einträge, inkl. `extensions`).
+
+Erwartet: alle Checksummen OK (Baufortschritt 8/8, Doppelboden 3/3), `ICDD-CHECK: PASS`,
+`MANIFEST-CHECK: PASS`. (Laufskripte liegen in der Arbeitssitzung 2026-11-06, s. `VALIDATION.md`.)
+
+### 3.5 Converter-Tests (161/161 erwartet: SDK 81 + GAEB 32 + MS 33 + RDF 15)
 
 Zuerst das SDK-Modul (bei SDK-Änderungen; ansonsten einmalig, bis es im lokalen m2 liegt):
 
@@ -170,7 +196,7 @@ Class-Dateien aus `target/` mitbenutzt).
 
 | Punkt | Status |
 |---|---|
-| **Kein Git** in beiden Repos | bekanntes Risiko: alle Änderungen nur per Sciebo-Sync gesichert |
+| **Git** | Ontologie-Repo seit 2026-11-05 auf GitHub (`mkoenigRUB/Construct-X-Ontologies`, `main`); Converter-Repo weiterhin **ohne** Git (bewusst) — dort nur Sciebo-Sync |
 | **Toolchains maschinenspezifisch im Temp** | JDK/Maven/Venv müssen auf jedem Rechner neu aufgesetzt werden (§2) |
 | **Kein zentrales Test-Skript** im Converter-Repo | `Converter\build.ps1` ist **kein** Ersatz (GAEB-Sandbox-Fallback, hardcodet `C:\Program Files\Java\jdk-20`, benötigt vorbefülltes `web/lib`); `test-all.ps1` existiert nicht |
 | **Parker B: selektive LV-Positions-Auswahl** | Nutzerfrage offen: "Bauposten nur (flache Liste) oder alle Ebenen (Baum mit Checkboxen)?" + Strikt-Modus-Toggle |
@@ -182,11 +208,14 @@ Class-Dateien aus `target/` mitbenutzt).
 
 | Datei | Inhalt |
 |---|---|
-| `README.md` | Repo-Überblick, Modulstand, JSON-LD-Passus (Z. 45), SDK-Passus (Z. 47) |
-| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-10-Runs (Z. 49–59), SDK/Converter-Verifikation (Z. 65–70), Jena-Abschnitt (Z. 88 ff.), Notes 19–24 |
-| `AUDIT.md` | Audit-Items; Items 41–45 (Z. 69–75) = JSON-LD-Kontext, Items 46–48 (Z. 77–80) = SDK |
-| `MANIFEST.json` | zentraler Register (39 Ontologie-Einträge + `json_ld_context` + `sdk`-Sektion) |
-| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku; Sektion 18 (id `jsonld`) Z. 2230–2297 |
-| `contexts/construct-x-context.jsonld` | JSON-LD-Kontext V2 (40991 B, 712 Z.; `@id` Z. 2, `@version` Z. 4, Präfixe Z. 5–58) |
-| `contexts/validation/test/test-doc-reference.md` | Referenz-Explanation der Test-Doku |
+| `README.md` | Repo-Überblick, Modulstand (inkl. Extension), JSON-LD- + SDK-Passus, 2026-11-06-Integration |
+| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-11-Runs, ICDD-Validierungsabschnitt, Jena-Abschnitt, Notes 19–29 |
+| `AUDIT.md` | Audit-Items; Items 41–45 = JSON-LD-Kontext, 46–48 = SDK, **49–55 (2026-11-06) = cxcp-Extension + Beispiele + ICDD** |
+| `MANIFEST.json` | zentrales Register (41 Ontologie-Einträge + `json_ld_context` + `sdk` + **`extensions`**-Sektion) |
+| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku; Sektion 18 (JSON-LD) und **Sektion 19 (cxcp-Extension + ICDD, id `cxcp-icdd`)** |
+| `extensions/construct-x-construction-progress/` | cxcp 0.1.0: `ontology/` (58 Tripel), `shapes/` (69 Tripel, 1× `sh:sparql`), `examples/` (TTL + JSON-LD + Runtime-JSON), `queries/`, README, documentation.html |
+| `examples/construct-x-baufortschritt-beispiel/` | End-to-End-Beispiel (3 Daten-Revisions, 3 Notifications, Result) |
+| `examples/construct-x-icdd-beispiele/` | 2 ICDD-Container (ISO 21597) + README + documentation.html |
+| `contexts/construct-x-context.jsonld` | JSON-LD-Kontext (0.1.0, `@version: 1.1`, 380 `@context`-Einträge, inkl. `cxcp`-Präfix + 8 Terme) |
+| `contexts/validation/test/test-doc-reference.md` | Referenz-Explanation der Test-Doku (inkl. Node N11 = cxcp) |
 | `construct-x-converters/HANDOFF.md` | Handover-Dokument des Converter-Repos |

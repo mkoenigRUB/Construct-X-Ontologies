@@ -1,0 +1,69 @@
+{
+  "id": "urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10",
+  "semanticModel": "https://w3id.org/construct-x/construction-progress#0.1.0",
+  "revision": 1,
+  "recordedAt": "2026-11-05T07:56:00+01:00",
+  "spaces": [
+    {
+      "id": "delivery-area-a",
+      "type": "Zone",
+      "name": "Anlieferzone A"
+    },
+    {
+      "id": "storey-04",
+      "type": "Zone",
+      "name": "4. Obergeschoss"
+    },
+    {
+      "id": "room-4-12",
+      "type": "Zone",
+      "name": "Raum 4.12"
+    }
+  ],
+  "elements": [
+    {
+      "id": "package-001",
+      "type": "Package",
+      "identifier": "PACK-001",
+      "name": "Packstück Trockenbau",
+      "deliveryReference": "DEL-2026-001",
+      "contains": [
+        "gypsum-board-001",
+        "gypsum-board-002",
+        "metal-profile-001"
+      ],
+      "location": "delivery-area-a"
+    },
+    {
+      "id": "gypsum-board-001",
+      "type": "Product",
+      "identifier": "GK-001",
+      "name": "Gipskartonplatte 1"
+    },
+    {
+      "id": "gypsum-board-002",
+      "type": "Product",
+      "identifier": "GK-002",
+      "name": "Gipskartonplatte 2"
+    },
+    {
+      "id": "metal-profile-001",
+      "type": "Product",
+      "identifier": "MP-001",
+      "name": "Metallprofil 1"
+    }
+  ],
+  "processes": [
+    {
+      "id": "delivery-001",
+      "type": "DeliveryProcess",
+      "name": "Annahme Packstück Trockenbau",
+      "outputElements": [
+        "package-001"
+      ],
+      "targetSpace": "delivery-area-a",
+      "status": "completed",
+      "completedAt": "2026-11-05T07:55:00+01:00"
+    }
+  ]
+}

@@ -72,6 +72,15 @@
       "conx-sbdl:isRepresentedByLBSNode": { "@id": "conx-de-lbs:Storey" },
       "conx-babl:isRepresentedByLBSNode": { "@id": "conx-de-lbs:Storey" },
       "conx-babl:isClassifiedByCBSNode": { "@id": "https://data.construct-x.org/project/X/cbs/CBS-001" }
+    },
+    {
+      "@id": "https://data.construct-x.org/project/X/progress/INST-001",
+      "@type": "cxcp:InstallationProcess",
+      "hasExecutionSpace": "https://data.construct-x.org/project/X/progress/PDS-EXEC-001",
+      "hasExecutionSpaceValue": "https://data.construct-x.org/project/X/site/ROOM-412",
+      "hasProgressEvidence": "https://data.construct-x.org/project/X/progress/PDS-EV-001",
+      "hasProgressEvidenceValue": "https://data.construct-x.org/project/X/progress/EVID-001",
+      "ifcGlobalId": "2oX9fQ3nH6u8K1pLm4R7sT"
     }
   ]
 }

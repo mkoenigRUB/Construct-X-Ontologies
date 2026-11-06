@@ -1,0 +1,546 @@
+[
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-target-space-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasTargetSpaceValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/storey-04"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T08:25:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/delivery-area-a",
+    "@type": [
+      "https://w3id.org/bot#Zone",
+      "http://w3id.org/ioc#Space"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Anlieferzone A"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/site-manager",
+    "@type": [
+      "http://w3id.org/ioc#Actor"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Bauleitung"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-status",
+    "@type": [
+      "http://w3id.org/ioc#Status"
+    ],
+    "http://w3id.org/ioc#isFinished": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "http://w3id.org/ioc#isStarted": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/gypsum-board-001",
+    "@type": [
+      "http://w3id.org/ioc#Element"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "GK-001"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Gipskartonplatte 1"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-input-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#generatedByActor": [
+      {
+        "@id": "https://example.construct-x.eu/progress/site-manager"
+      }
+    ],
+    "http://w3id.org/ioc#hasInputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/package-001"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T08:15:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/metal-profile-001",
+    "@type": [
+      "http://w3id.org/ioc#Element"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "MP-001"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Metallprofil 1"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/package-001",
+    "@type": [
+      "http://w3id.org/ioc#Element"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "PACK-001"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Packstück Trockenbau"
+      }
+    ],
+    "http://w3id.org/ioc#hasElement": [
+      {
+        "@id": "https://example.construct-x.eu/progress/pack-content-01"
+      },
+      {
+        "@id": "https://example.construct-x.eu/progress/pack-content-02"
+      },
+      {
+        "@id": "https://example.construct-x.eu/progress/pack-content-03"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-status-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasStatusValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-status"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-output-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#generatedByActor": [
+      {
+        "@id": "https://example.construct-x.eu/progress/site-manager"
+      }
+    ],
+    "http://w3id.org/ioc#hasOutputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/package-001"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T08:25:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-input-02",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasInputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/gypsum-board-002"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-input-03",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasInputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/metal-profile-001"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/photo-001",
+    "@type": [
+      "https://w3id.org/construct-x/construction-progress#ProgressEvidence"
+    ],
+    "http://purl.org/dc/terms/format": [
+      {
+        "@value": "image/jpeg"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Foto der fertiggestellten Trockenbauwand"
+      }
+    ],
+    "https://schema.org/contentUrl": [
+      {
+        "@id": "https://example.construct-x.eu/evidence/photo-001.jpg"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-001",
+    "@type": [
+      "https://w3id.org/construct-x/construction-progress#TransportProcess"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Transport Packstück in das 4. Obergeschoss"
+      }
+    ],
+    "http://w3id.org/ioc#hasInitialSpace": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-initial-space-state"
+      }
+    ],
+    "http://w3id.org/ioc#hasInputElement": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-input-state"
+      }
+    ],
+    "http://w3id.org/ioc#hasOutputElement": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-output-state"
+      }
+    ],
+    "http://w3id.org/ioc#hasStatus": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-status-state"
+      }
+    ],
+    "http://w3id.org/ioc#hasTargetSpace": [
+      {
+        "@id": "https://example.construct-x.eu/progress/transport-target-space-state"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/pack-content-03",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/metal-profile-001"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-evidence-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#generatedByActor": [
+      {
+        "@id": "https://example.construct-x.eu/progress/site-manager"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T12:03:00+01:00"
+      }
+    ],
+    "https://w3id.org/construct-x/construction-progress#hasProgressEvidenceValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/photo-001"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/pack-content-01",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/gypsum-board-001"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-status",
+    "@type": [
+      "http://w3id.org/ioc#Status"
+    ],
+    "http://w3id.org/ioc#isFinished": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "http://w3id.org/ioc#isStarted": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/storey-04",
+    "@type": [
+      "https://w3id.org/bot#Zone",
+      "http://w3id.org/ioc#Space"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "4. Obergeschoss"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/wall-4711",
+    "@type": [
+      "https://w3id.org/bot#Element"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "WALL-4711"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Trockenbauwand Raum 4.12"
+      }
+    ],
+    "http://w3id.org/ioc#isContainedIn": [
+      {
+        "@id": "https://example.construct-x.eu/progress/wall-location-state"
+      }
+    ],
+    "https://w3id.org/construct-x/construction-progress#ifcGlobalId": [
+      {
+        "@value": "2oX9fQ3nH6u8K1pLm4R7sT"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-input-01",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasInputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/gypsum-board-001"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-output-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#generatedByActor": [
+      {
+        "@id": "https://example.construct-x.eu/progress/site-manager"
+      }
+    ],
+    "http://w3id.org/ioc#hasOutputElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/wall-4711"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T12:00:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/pack-content-02",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasElementValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/gypsum-board-002"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/room-4-12",
+    "@type": [
+      "https://w3id.org/bot#Zone",
+      "http://w3id.org/ioc#Space"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Raum 4.12"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-status-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasStatusValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-status"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/installation-001",
+    "@type": [
+      "https://w3id.org/construct-x/construction-progress#InstallationProcess"
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Montage Trockenbauwand Raum 4.12"
+      }
+    ],
+    "http://w3id.org/ioc#hasInputElement": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-input-01"
+      },
+      {
+        "@id": "https://example.construct-x.eu/progress/install-input-02"
+      },
+      {
+        "@id": "https://example.construct-x.eu/progress/install-input-03"
+      }
+    ],
+    "http://w3id.org/ioc#hasOutputElement": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-output-state"
+      }
+    ],
+    "http://w3id.org/ioc#hasStatus": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-status-state"
+      }
+    ],
+    "https://w3id.org/construct-x/construction-progress#hasExecutionSpace": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-execution-space-state"
+      }
+    ],
+    "https://w3id.org/construct-x/construction-progress#hasProgressEvidence": [
+      {
+        "@id": "https://example.construct-x.eu/progress/install-evidence-state"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/gypsum-board-002",
+    "@type": [
+      "http://w3id.org/ioc#Element"
+    ],
+    "http://purl.org/dc/terms/identifier": [
+      {
+        "@value": "GK-002"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "de",
+        "@value": "Gipskartonplatte 2"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/wall-location-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#isContainedInValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/room-4-12"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T12:00:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/transport-initial-space-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#hasInitialSpaceValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/delivery-area-a"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T08:15:00+01:00"
+      }
+    ]
+  },
+  {
+    "@id": "https://example.construct-x.eu/progress/install-execution-space-state",
+    "@type": [
+      "http://w3id.org/ioc#CurrentProcessDataState"
+    ],
+    "http://w3id.org/ioc#generatedByActor": [
+      {
+        "@id": "https://example.construct-x.eu/progress/site-manager"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-11-05T12:00:00+01:00"
+      }
+    ],
+    "https://w3id.org/construct-x/construction-progress#hasExecutionSpaceValue": [
+      {
+        "@id": "https://example.construct-x.eu/progress/room-4-12"
+      }
+    ]
+  }
+]

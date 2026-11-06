@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Construct-X Baufortschritt – Beispiel mit Daten und Notifications</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:1100px;margin:40px auto;padding:0 24px;line-height:1.55;color:#1f2937}
+h1,h2,h3{color:#111827} h1{border-bottom:3px solid #111827;padding-bottom:10px}
+code,pre{font-family:Consolas,monospace} pre{background:#f5f7fa;padding:16px;border-radius:8px;overflow:auto;font-size:13px}
+.box{border:1px solid #d1d5db;border-radius:10px;padding:18px;margin:16px 0;background:#fff}
+.flow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:20px 0}
+.node{border:1px solid #9ca3af;border-radius:8px;padding:10px 14px;background:#f9fafb}
+.arrow{font-size:22px}
+table{border-collapse:collapse;width:100%;margin:16px 0} th,td{border:1px solid #d1d5db;padding:9px;text-align:left;vertical-align:top}
+th{background:#f3f4f6}
+.note{background:#eef2ff;border-left:4px solid #6366f1;padding:12px 16px;margin:16px 0}
+</style>
+</head>
+<body>
+<h1>Construct-X Baufortschritt – Beispiel mit Daten und Notifications</h1>
+
+<h2>1. Ziel des Beispiels</h2>
+<p>Das Beispiel soll eine einfache, aber durchgängige Frage beantworten:</p>
+<div class="note"><strong>In welcher Konstruktion wurden die auf die Baustelle gelieferten Produkte verbaut?</strong></div>
+<p>Dazu werden drei reale Vorgänge abgebildet: Lieferung, innerbetrieblicher Transport und Einbau. Die fachlichen Detaildaten liegen im Data Content. Notifications informieren einen Partner nur darüber, dass sich dieser Datenstand durch einen abgeschlossenen Prozess geändert hat.</p>
+
+<div class="flow">
+<div class="node">PACK-001<br>Lieferung</div><div class="arrow">→</div>
+<div class="node">Transport<br>4. OG</div><div class="arrow">→</div>
+<div class="node">GK-001 / GK-002 / MP-001<br>Einbau</div><div class="arrow">→</div>
+<div class="node">WALL-4711<br>Raum 4.12 / IFC-GUID</div>
+</div>
+
+<h2>2. Daten und Notification – unterschiedliche Aufgaben</h2>
+<table>
+<tr><th>Artefakt</th><th>Aufgabe</th></tr>
+<tr><td>Data Content</td><td>Enthält die fachlichen Informationen: Packstücke, Produkte, Räume, Prozesse, Input-/Output-Beziehungen und das entstandene Konstruktionselement.</td></tr>
+<tr><td>Notification</td><td>Meldet schlank, dass ein bestimmter Prozess abgeschlossen wurde und welcher Datenstand dazu gehört.</td></tr>
+</table>
+<p>Die Notification wiederholt also nicht alle fachlichen Daten. Über <code>dataResourceId</code> und <code>dataRevision</code> kann der Empfänger den passenden Data Content laden.</p>
+
+<h2>3. Schritt 1 – Lieferung</h2>
+<p>Das Packstück <strong>PACK-001</strong> wird in der Anlieferzone A angenommen. Es enthält zwei Gipskartonplatten und ein Metallprofil.</p>
+<h3>Notification</h3>
+<pre>{
+  &quot;header&quot;: {
+    &quot;messageId&quot;: &quot;urn:uuid:5e3b4a9c-2d7f-4a21-8b6e-1c2d3e4f5a60&quot;,
+    &quot;context&quot;: &quot;ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0&quot;,
+    &quot;sentDateTime&quot;: &quot;2026-11-05T07:56:00+01:00&quot;,
+    &quot;senderBpn&quot;: &quot;BPNL000000000AAA&quot;,
+    &quot;receiverBpn&quot;: &quot;BPNL000000000BBB&quot;,
+    &quot;version&quot;: &quot;3.0.0&quot;
+  },
+  &quot;content&quot;: {
+    &quot;eventType&quot;: &quot;PROCESS_COMPLETED&quot;,
+    &quot;processId&quot;: &quot;delivery-001&quot;,
+    &quot;processType&quot;: &quot;DeliveryProcess&quot;,
+    &quot;dataResourceId&quot;: &quot;urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10&quot;,
+    &quot;dataRevision&quot;: 1,
+    &quot;description&quot;: &quot;Packstück PACK-001 wurde in Anlieferzone A angenommen.&quot;
+  }
+}</pre>
+<h3>Relevanter Data Content</h3>
+<pre>{
+  &quot;package&quot;: {
+    &quot;id&quot;: &quot;package-001&quot;,
+    &quot;type&quot;: &quot;Package&quot;,
+    &quot;identifier&quot;: &quot;PACK-001&quot;,
+    &quot;name&quot;: &quot;Packstück Trockenbau&quot;,
+    &quot;deliveryReference&quot;: &quot;DEL-2026-001&quot;,
+    &quot;contains&quot;: [
+      &quot;gypsum-board-001&quot;,
+      &quot;gypsum-board-002&quot;,
+      &quot;metal-profile-001&quot;
+    ],
+    &quot;location&quot;: &quot;delivery-area-a&quot;
+  },
+  &quot;process&quot;: {
+    &quot;id&quot;: &quot;delivery-001&quot;,
+    &quot;type&quot;: &quot;DeliveryProcess&quot;,
+    &quot;name&quot;: &quot;Annahme Packstück Trockenbau&quot;,
+    &quot;outputElements&quot;: [
+      &quot;package-001&quot;
+    ],
+    &quot;targetSpace&quot;: &quot;delivery-area-a&quot;,
+    &quot;status&quot;: &quot;completed&quot;,
+    &quot;completedAt&quot;: &quot;2026-11-05T07:55:00+01:00&quot;
+  }
+}</pre>
+
+<h2>4. Schritt 2 – Transport</h2>
+<p>Dasselbe Packstück wird anschließend von der Anlieferzone A in das 4. Obergeschoss transportiert. Input und Output sind dasselbe physische Packstück. Der Prozess verändert vor allem dessen räumlichen Zustand.</p>
+<h3>Notification</h3>
+<pre>{
+  &quot;header&quot;: {
+    &quot;messageId&quot;: &quot;urn:uuid:6c4d5e7f-3148-4b62-9a7c-2d3e4f5a6b70&quot;,
+    &quot;context&quot;: &quot;ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0&quot;,
+    &quot;sentDateTime&quot;: &quot;2026-11-05T08:26:00+01:00&quot;,
+    &quot;senderBpn&quot;: &quot;BPNL000000000AAA&quot;,
+    &quot;receiverBpn&quot;: &quot;BPNL000000000BBB&quot;,
+    &quot;version&quot;: &quot;3.0.0&quot;
+  },
+  &quot;content&quot;: {
+    &quot;eventType&quot;: &quot;PROCESS_COMPLETED&quot;,
+    &quot;processId&quot;: &quot;transport-001&quot;,
+    &quot;processType&quot;: &quot;TransportProcess&quot;,
+    &quot;dataResourceId&quot;: &quot;urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10&quot;,
+    &quot;dataRevision&quot;: 2,
+    &quot;description&quot;: &quot;Packstück PACK-001 wurde von Anlieferzone A in das 4. Obergeschoss transportiert.&quot;
+  }
+}</pre>
+<h3>Relevanter Data Content</h3>
+<pre>{
+  &quot;id&quot;: &quot;transport-001&quot;,
+  &quot;type&quot;: &quot;TransportProcess&quot;,
+  &quot;name&quot;: &quot;Transport Packstück in das 4. Obergeschoss&quot;,
+  &quot;inputElements&quot;: [
+    &quot;package-001&quot;
+  ],
+  &quot;outputElements&quot;: [
+    &quot;package-001&quot;
+  ],
+  &quot;initialSpace&quot;: &quot;delivery-area-a&quot;,
+  &quot;targetSpace&quot;: &quot;storey-04&quot;,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;completedAt&quot;: &quot;2026-11-05T08:25:00+01:00&quot;
+}</pre>
+
+<h2>5. Schritt 3 – Einbau</h2>
+<p>Die drei Produkte aus dem Packstück werden im Raum 4.12 zu einer Trockenbauwand zusammengebaut. Hier unterscheiden sich Input und Output: Die Produkte sind Inputs, die Wand ist das neue Output-Element.</p>
+<h3>Notification</h3>
+<pre>{
+  &quot;header&quot;: {
+    &quot;messageId&quot;: &quot;urn:uuid:7a5b6c8d-4259-4c73-8b9d-3e4f5a6b7c80&quot;,
+    &quot;context&quot;: &quot;ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0&quot;,
+    &quot;sentDateTime&quot;: &quot;2026-11-05T12:03:00+01:00&quot;,
+    &quot;senderBpn&quot;: &quot;BPNL000000000AAA&quot;,
+    &quot;receiverBpn&quot;: &quot;BPNL000000000BBB&quot;,
+    &quot;version&quot;: &quot;3.0.0&quot;
+  },
+  &quot;content&quot;: {
+    &quot;eventType&quot;: &quot;PROCESS_COMPLETED&quot;,
+    &quot;processId&quot;: &quot;installation-001&quot;,
+    &quot;processType&quot;: &quot;InstallationProcess&quot;,
+    &quot;dataResourceId&quot;: &quot;urn:uuid:1f5c8a42-24b7-4e89-9a6f-5d8c7b3e2a10&quot;,
+    &quot;dataRevision&quot;: 3,
+    &quot;description&quot;: &quot;Die Produkte GK-001, GK-002 und MP-001 wurden in WALL-4711 eingebaut.&quot;
+  }
+}</pre>
+<h3>Relevanter Data Content</h3>
+<pre>{
+  &quot;process&quot;: {
+    &quot;id&quot;: &quot;installation-001&quot;,
+    &quot;type&quot;: &quot;InstallationProcess&quot;,
+    &quot;name&quot;: &quot;Montage Trockenbauwand Raum 4.12&quot;,
+    &quot;inputElements&quot;: [
+      &quot;gypsum-board-001&quot;,
+      &quot;gypsum-board-002&quot;,
+      &quot;metal-profile-001&quot;
+    ],
+    &quot;outputElements&quot;: [
+      &quot;wall-4711&quot;
+    ],
+    &quot;executionSpace&quot;: &quot;room-4-12&quot;,
+    &quot;status&quot;: &quot;completed&quot;,
+    &quot;completedAt&quot;: &quot;2026-11-05T12:00:00+01:00&quot;,
+    &quot;evidence&quot;: [
+      {
+        &quot;id&quot;: &quot;photo-001&quot;,
+        &quot;type&quot;: &quot;Photo&quot;,
+        &quot;mediaType&quot;: &quot;image/jpeg&quot;,
+        &quot;url&quot;: &quot;https://example.construct-x.eu/evidence/photo-001.jpg&quot;
+      }
+    ]
+  },
+  &quot;outputElement&quot;: {
+    &quot;id&quot;: &quot;wall-4711&quot;,
+    &quot;type&quot;: &quot;ConstructionElement&quot;,
+    &quot;identifier&quot;: &quot;WALL-4711&quot;,
+    &quot;name&quot;: &quot;Trockenbauwand Raum 4.12&quot;,
+    &quot;ifcGlobalId&quot;: &quot;2oX9fQ3nH6u8K1pLm4R7sT&quot;,
+    &quot;location&quot;: &quot;room-4-12&quot;
+  }
+}</pre>
+
+<h2>6. Wie wird die zentrale Frage beantwortet?</h2>
+<p>Die Rückverfolgung erfolgt über die IDs:</p>
+<ol>
+<li><code>PACK-001</code> enthält <code>GK-001</code>, <code>GK-002</code> und <code>MP-001</code>.</li>
+<li>Diese drei Produkte sind Inputs von <code>installation-001</code>.</li>
+<li>Der Output von <code>installation-001</code> ist <code>WALL-4711</code>.</li>
+<li><code>WALL-4711</code> besitzt die IFC-GlobalId <code>2oX9fQ3nH6u8K1pLm4R7sT</code> und liegt in Raum 4.12.</li>
+</ol>
+<pre>{
+  &quot;question&quot;: &quot;In welcher Konstruktion wurden die auf die Baustelle gelieferten Produkte aus PACK-001 verbaut?&quot;,
+  &quot;deliveredPackage&quot;: &quot;PACK-001&quot;,
+  &quot;deliveredProducts&quot;: [
+    &quot;GK-001&quot;,
+    &quot;GK-002&quot;,
+    &quot;MP-001&quot;
+  ],
+  &quot;installationProcess&quot;: &quot;installation-001&quot;,
+  &quot;constructionElement&quot;: {
+    &quot;identifier&quot;: &quot;WALL-4711&quot;,
+    &quot;name&quot;: &quot;Trockenbauwand Raum 4.12&quot;,
+    &quot;ifcGlobalId&quot;: &quot;2oX9fQ3nH6u8K1pLm4R7sT&quot;,
+    &quot;location&quot;: &quot;Raum 4.12&quot;
+  }
+}</pre>
+
+<h2>7. Bezug zur IoC Process Ontology</h2>
+<p>Im semantischen Modell werden die Prozesse und ihre Input-/Output-Beziehungen mit der IoC Process Ontology beschrieben. Die Construct-X-Erweiterung ergänzt insbesondere die für die Baufortschrittserfassung benötigte Ausführungsposition und Evidenz. Der Runtime-JSON-Payload ist bewusst kompakter als die RDF-Repräsentation.</p>
+<table>
+<tr><th>Beispielinformation</th><th>Semantische Rolle</th></tr>
+<tr><td>GK-001 ist Input des Einbaus</td><td>IoC Input Element</td></tr>
+<tr><td>WALL-4711 ist Output des Einbaus</td><td>IoC Output Element</td></tr>
+<tr><td>Anlieferzone A → 4. OG</td><td>IoC Initial Space / Target Space</td></tr>
+<tr><td>Einbau findet in Raum 4.12 statt</td><td>Construct-X Execution Space</td></tr>
+<tr><td>Foto der Wand</td><td>Construct-X Progress Evidence</td></tr>
+<tr><td>IFC-GlobalId der Wand</td><td>Verknüpfung zum BIM-Konstruktionselement</td></tr>
+</table>
+
+<h2>8. Bezug zum Tractus-X Industry Core Notification Pattern</h2>
+<p>Die Notifications verwenden die typische Trennung aus standardisiertem <code>header</code> und use-case-spezifischem <code>content</code>. Der Construct-X-spezifische Inhalt enthält nur die Information, welcher Bauprozess abgeschlossen wurde und auf welchen Datenstand verwiesen wird.</p>
+<p>Im Beispiel wird für den Header <code>version = 3.0.0</code> verwendet. Der API-Kontext lautet <code>ConstructX-ConstructionProgressAPI-ProcessCompleted:1.0.0</code>.</p>
+
+<h2>9. Dateien im Beispiel</h2>
+<ul>
+<li><code>data/01-after-delivery.json</code></li>
+<li><code>data/02-after-transport.json</code></li>
+<li><code>data/03-after-installation.json</code></li>
+<li><code>notifications/01-delivery-completed.json</code></li>
+<li><code>notifications/02-transport-completed.json</code></li>
+<li><code>notifications/03-installation-completed.json</code></li>
+<li><code>result/example-answer.json</code></li>
+</ul>
+</body>
+</html>
