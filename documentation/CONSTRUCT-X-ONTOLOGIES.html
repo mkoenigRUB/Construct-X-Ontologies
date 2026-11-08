@@ -126,7 +126,7 @@
   <a href="#schedule">4. Construction Schedule</a>
   <a href="#breakdown">5. Breakdown Structure</a>
   <a href="#boq">6. GAEB BoQ</a>
-  <a href="#progress">7. Progress Report</a>
+  <a href="#progress">7. Construction Progress</a>
   <a href="#site">8. Construction Site</a>
   <a href="#delivery">9. Construction Delivery</a>
   <a href="#built-asset">10. Built Asset</a>
@@ -138,7 +138,6 @@
   <a href="#usecase">16. Use Case</a>
   <a href="#validierung">17. Validierung</a>
   <a href="#jsonld">18. JSON-LD-Kontext</a>
-  <a href="#cxcp-icdd">19. cxcp-Extension &amp; ICDD-Container</a>
 </nav>
 
 <main>
@@ -722,14 +721,22 @@ graph TD
 
 <!-- ============================================================ -->
 <section id="progress">
-  <h2>7. <span class="tag cpr">CPR</span> Construction Progress Report <span class="ns">v0.1.0</span></h2>
+  <h2>7. Construction Progress <span class="ns">CPR v0.1.0 · cxcp v0.1.0</span></h2>
+  <p>Das Baufortschritts-Konzept von Construct-X umfasst zwei sich ergänzende Seiten:
+     die <strong>punktuelle Fortschrittsmeldung</strong> (CPR: Status, Fertigstellungsgrad,
+     Ist- und Prognose-Termine) und die <strong>prozesshafte, räumlich verortete
+     Ausführungserfassung</strong> (Construction Progress Extension, <code>cxcp</code>:
+     Lieferung, Transport, Einbau bis zum BIM-Konstruktionselement). Beide Seiten werden
+     hier als ein zusammenhängendes Konzept beschrieben.</p>
+
+  <h3>Fortschrittsmeldung (CPR)</h3>
   <p class="ns">Namespace: <code>https://www.construct-x.org/ontology/construction-progress-report#</code></p>
 
   <p>Zeitpunktbezogene Meldung über den Fortschrittsstand eines Bauvorgangs.
      Die Beziehung zum <code>Activity</code> liegt in der Link-Ontologie
      <code>schedule-progress-report-link</code> (<code>reportsOnActivity</code>).</p>
 
-  <h3>Properties</h3>
+  <h3>CPR-Properties</h3>
   <table>
     <tr><th>Property</th><th>Datentyp / Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
     <tr><td><code>identifier</code></td><td>xsd:string</td><td>Functional, Pflicht (SHACL)</td><td>Fachliche Kennung der Meldung</td></tr>
@@ -749,6 +756,43 @@ graph LR
     PR -- "reportsOnActivity (conx-sprl)" --> ACT
     classDef inst fill:#ffeff7,stroke:#bf3989,color:#82505a
   </div>
+
+  <h3>Baufortschritt als zusammenhängendes Konzept: die Construction Progress Extension (cxcp)</h3>
+  <p>„Construction Progress" umfasst zwei sich ergänzende Seiten. Neben der oben
+  beschriebenen <strong>punktuellen Fortschrittsmeldung</strong> (CPR: Status,
+  Fertigstellungsgrad, Ist-/Prognose-Termine) erfasst das Konzept auch die
+  <strong>prozesshafte, räumlich verortete Ausführung</strong> — wo ein geliefertes Packstück
+  hingebracht wurde und in welchem BIM-Konstruktionselement seine Produkte verbaut sind.</p>
+
+  <p>Für diese Seite liegt unter
+  <code>extensions/construct-x-construction-progress/</code> die
+  <strong>Construction Progress Extension <code>cxcp</code> 0.1.0</strong> (Namespace
+  <code>https://w3id.org/construct-x/construction-progress#</code>). Die Extension ist bewusst
+  schmal gehalten: Prozess- und Raumdynamik stellt sie auf den
+  <strong>externen Ontologien IoC</strong> (<code>w3id.org/ioc</code>, Process Ontology) und
+  <strong>BOT</strong> (<code>w3id.org/bot</code>, Building Ontology/Taxonomy) auf; Construct-X
+  definiert nur die baufortschrittsspezifische Oberstruktur darüber. Es handelt sich um eine
+  reine Erweiterung der externen Ontologien, nicht um eine Änderung derselben.</p>
+
+  <table>
+    <tr><th>cxcp-Begriff</th><th>Bedeutung</th><th>Aufbau auf (extern)</th></tr>
+    <tr><td><code>TransportProcess</code></td><td>Transport eines Elements bzw. einer Elementgruppe von einem Ausgangs- zu einem Zielraum (das transportierte Objekt ist zugleich Input und Output)</td><td>Subklasse von <code>ioc:Process</code></td></tr>
+    <tr><td><code>InstallationProcess</code></td><td>Einbau von Input-Elementen in ein dauerhaftes Konstruktionselement</td><td>Subklasse von <code>ioc:Process</code></td></tr>
+    <tr><td><code>ProgressEvidence</code></td><td>Fortschrittsnachweis (z. B. Foto, Scan, Lieferschein, Messdatensatz)</td><td>Subklasse von <code>ioc:Information</code></td></tr>
+    <tr><td><code>hasExecutionSpace(Value)</code></td><td>Räumlicher Bereich, in dem die Aktivität tatsächlich ausgeführt wurde</td><td>Sub-Property von <code>ioc:hasProcessDataState</code> bzw. <code>ioc:hasValue</code></td></tr>
+    <tr><td><code>hasProgressEvidence(Value)</code></td><td>Zugehöriger Fortschrittsnachweis</td><td>Sub-Property von <code>ioc:hasProcessDataState</code> bzw. <code>ioc:hasValue</code></td></tr>
+    <tr><td><code>ifcGlobalId</code></td><td>Pragmatischer Verweis auf die IFC-GUID des resultierenden Konstruktionselements</td><td>Datatype-Property (<code>xsd:string</code>, Domain <code>bot:Element</code>)</td></tr>
+  </table>
+
+  <p>Damit ergänzen sich <strong>CPR</strong> (punktuelle Meldung) und <strong>cxcp</strong>
+  (prozesshafte, räumlich verortete Erfassung) zu einem zusammenhängenden
+  Baufortschritts-Konzept. Die 8 <code>cxcp</code>-Terme sind zusätzlich im JSON-LD-Kontext
+  hinterlegt (Präfix <code>cxcp</code>, s. Sektion 18) und per SHACL-Profil abgesichert (inkl.
+  eines Constraints, das für Transport sicherstellt, dass mindestens ein Element als Input und
+  Output erhalten bleibt). Ein durchgängiges Beispiel (Lieferung → Transport → Einbau bis zum
+  IFC-Element) liegt als SHACL-validiertes
+  <code>extensions/construct-x-construction-progress/examples/</code> sowie als verständliches
+  Plain-JSON-Beispiel unter <code>examples/construct-x-baufortschritt-beispiel/</code>.</p>
 </section>
 
 
@@ -2258,7 +2302,7 @@ ex:sa-a100
   kombinierter JSON-LD-Kontext für das gesamte Package vor. Er ist in <code>MANIFEST.json</code>
   unter <code>json_ld_context</code> registriert. Seit dem 6. Nov 2026 deckt er zusätzlich die
   Construction Progress Extension <code>cxcp</code> ab (Präfix <code>cxcp</code> + 8 Bare-Terme,
-  s. Sektion 19).</p>
+  s. Sektion 7 „Construction Progress").</p>
 
   <table>
     <tr><th>Merkmal</th><th>Wert</th></tr>
@@ -2314,70 +2358,6 @@ $env:JAVA_HOME='&lt;jdk25-Installation&gt;'
     deshalb bei <code>@version: 1.1</code>, während die <code>cxcp</code>-Terme aufgenommen
     wurden; die versionierte Kontext-IRI (<code>@id</code>, 0.1.0) bleibt der
     Versionsmarker.
-  </div>
-</section>
-
-<!-- ============================================================ -->
-
-<section id="cxcp-icdd">
-  <h2>19. Construction Progress Extension (cxcp) &amp; ICDD-Container</h2>
-  <div class="ok">
-    <strong>Status: PASS (2026-11-06)</strong> — RDF-Parse, SHACL (Run 11, inkl.
-    <code>sh:sparql</code>-Constraint + Negativtest), ICDD-Integritätscheck (alle
-    SHA-256-Prüfsummen) und MANIFEST-Check konsistent.
-  </div>
-
-  <h3>19.1 Construction Progress Extension <code>cxcp</code> 0.1.0</h3>
-  <p>Unter <code>extensions/construct-x-construction-progress/</code> liegt eine schlanke
-  Erweiterung der <strong>externen IoC Process Ontology</strong> (<code>w3id.org/ioc</code>)
-  und von <strong>BOT</strong> (<code>w3id.org/bot</code>) zur räumlichen Verortung
-  ausgeführter Bauprozesse und zur Nachverfolgung gelieferter Produkte bis zum verbauten
-  BIM-Konstruktionselement. Sie hat ein eigenes IRI-Schema
-  (<code>https://w3id.org/construct-x/construction-progress#</code>) und ist damit
-  <strong>keine der 8 Domänen-Ontologien</strong> — die Linking Rule (Querrelationen nur in
-  Link-Ontologien zwischen Construct-X-Domänen) greift nicht. In <code>MANIFEST.json</code>
-  ist sie deshalb in der eigenen Sektion <code>extensions</code> registriert.</p>
-  <table>
-    <tr><th>Bestandteil</th><th>Inhalt</th></tr>
-    <tr><td><code>ontology/</code></td><td>3 Klassen (<code>TransportProcess</code>, <code>InstallationProcess</code>, <code>ProgressEvidence</code>), 4 Objekt-Properties (<code>hasExecutionSpace(Value)</code>, <code>hasProgressEvidence(Value)</code>), 1 Datatype-Property (<code>ifcGlobalId</code>); 58 Tripel, <code>owl:versionInfo "0.1.0"</code> + <code>owl:versionIRI</code></td></tr>
-    <tr><td><code>shapes/</code></td><td>SHACL-Profil (69 Tripel) mit u. a. einem <code>sh:sparql</code>-Constraint: eine Transportaktivität muss mindestens ein physisches Element sowohl als Input als auch als Output behalten</td></tr>
-    <tr><td><code>examples/</code></td><td>End-to-End-Beispiel (Turtle + JSON-LD + Runtime-JSON, je 102 Tripel, äquivalenzgeprüft): Packstück → Transport → Einbau in IFC-Element</td></tr>
-    <tr><td><code>queries/</code></td><td>SPARQL-Beispiel <code>package-to-construction.rq</code>: „In welcher Konstruktion wurden die Produkte aus einem Packstück verbaut?"</td></tr>
-  </table>
-  <p>Die 8 <code>cxcp</code>-Terme sind zusätzlich im JSON-LD-Kontext hinterlegt (Präfix
-  <code>cxcp</code>, s. Sektion 18) und dort über den Test-Node N11 verifiziert.</p>
-
-  <h3>19.2 Baufortschritt-Beispiel (Plain JSON)</h3>
-  <p><code>examples/construct-x-baufortschritt-beispiel/</code> zeigt die durchgängige Kette
-  Lieferung → Transport → Einbau als 3 versionierte Plain-JSON-Datenstände (revision 1–3),
-  3 Notifications im Tractus-X-Header-/Construct-X-Content-Muster und die Antwort auf die
-  Leitfrage (<code>result/example-answer.json</code>: die Produkte aus PACK-001 sind in
-  WALL-4711, IFC-GlobalId, Raum 4.12).</p>
-
-  <h3>19.3 ICDD-Container (ISO 21597)</h3>
-  <p><code>examples/construct-x-icdd-beispiele/</code> enthält zwei
-  <strong>ICDD-Container</strong> (ZIP-Format, ISO 21597) als Beispiel für die
-  Liefer-/Verknüpfungsschicht:</p>
-  <table>
-    <tr><th>Container</th><th>Inhalt</th></tr>
-    <tr><td><code>construct-x-baufortschritt-beispiel.icdd</code></td><td><code>Index.rdf</code> (111 Tripel) + eingebettete <code>cxcp</code>-Ontologie + 8 Payload-Dokumente (3 Daten-Revisions, 3 Notifications, 1 IFC-Datei, 1 Result) + <code>links.rdf</code> (78 Tripel, JSONPath-basierte Identifier → DirectedBinaryLinks)</td></tr>
-    <tr><td><code>construct-x-doppelboden-feinterminplanung.icdd</code></td><td><code>Index.rdf</code> (49 Tripel) + eingebettete notification-content-Ontologie + 3 Payload-Dokumente (Task-Request, Planning-Context, Dokumentation) + <code>links.rdf</code> (34 Tripel)</td></tr>
-  </table>
-  <p>Jedes Payload-Dokument trägt im <code>Index.rdf</code> eine <code>ct:checksum</code>
-  (SHA-256); die Integritätsprüfung (RDF-Parse von <code>Index.rdf</code>/<code>links.rdf</code>,
-  Neu-Berechnung aller Prüfsummen, TTL-Parse der eingebetteten Ontologie) lief am 2026-11-06
-  durch (alle OK).</p>
-  <div class="warn">
-    <strong>Synchronisation (2026-11-06):</strong> Da nichts veröffentlicht bzw. produktiv
-    genutzt ist, wurde der Doppelboden-Container an die aktuelle Ontologie angepasst: die
-    eingebettete <code>notification-content-ontology.ttl</code> wurde von 0.1.0 auf 0.1.1
-    ersetzt (ergibt <code>contextResource</code>). Die Ontologie-Kopie im Ordner
-    <code>Ontology resources/</code> ist bewusst <em>kein</em> checksummiertes
-    <code>ct:InternalDocument</code> — es musste daher keine Prüfsumme im
-    <code>Index.rdf</code> geändert werden; alle 3 Payload-Prüfsummen blieben gültig. Die
-    <code>informationContainer</code>-Rückverweise in den Container-Notifications
-    (Zeiger auf die eigene Container-UUID) sind das beabsichtigte ICDD-Merkmal und wurden
-    beibehalten.
   </div>
 </section>
 

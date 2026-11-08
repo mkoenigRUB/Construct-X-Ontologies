@@ -210,9 +210,10 @@ Class-Dateien aus `target/` mitbenutzt).
 |---|---|
 | `README.md` | Repo-Überblick, Modulstand (inkl. Extension), JSON-LD- + SDK-Passus, 2026-11-06-Integration |
 | `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-11-Runs, ICDD-Validierungsabschnitt, Jena-Abschnitt, Notes 19–29 |
-| `AUDIT.md` | Audit-Items; Items 41–45 = JSON-LD-Kontext, 46–48 = SDK, **49–55 (2026-11-06) = cxcp-Extension + Beispiele + ICDD** |
+| `AUDIT.md` | Audit-Items; Items 41–45 = JSON-LD-Kontext, 46–48 = SDK, **49–56 (2026-11-06) = cxcp-Extension + Beispiele + ICDD, 56 = Doku-Restrukturierung** |
 | `MANIFEST.json` | zentrales Register (41 Ontologie-Einträge + `json_ld_context` + `sdk` + **`extensions`**-Sektion) |
-| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku; Sektion 18 (JSON-LD) und **Sektion 19 (cxcp-Extension + ICDD, id `cxcp-icdd`)** |
+| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku (nur Ontologien, 18 Sektionen); **Sektion 7 = Construction Progress (CPR + cxcp als zusammenhängendes Konzept, einziger cxcp-Standort)**, Sektion 18 = JSON-LD (inkl. cxcp-Terme, Verweis auf Sektion 7) |
+| `documentation/ICDD-EXAMPLES.md` | eigenständige ICDD-Dokumentation (2026-11-06): Container-Aufbau (ISO 21597), beide Beispiele, Integritätsstatus + Doppelboden-Sync-Notiz, Referenzen |
 | `extensions/construct-x-construction-progress/` | cxcp 0.1.0: `ontology/` (58 Tripel), `shapes/` (69 Tripel, 1× `sh:sparql`), `examples/` (TTL + JSON-LD + Runtime-JSON), `queries/`, README, documentation.html |
 | `examples/construct-x-baufortschritt-beispiel/` | End-to-End-Beispiel (3 Daten-Revisions, 3 Notifications, Result) |
 | `examples/construct-x-icdd-beispiele/` | 2 ICDD-Container (ISO 21597) + README + documentation.html |
