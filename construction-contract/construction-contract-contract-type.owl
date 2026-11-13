@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#WorksContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Works Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Werkvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#ConstructionContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Construction Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Bauvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#LogisticsContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Logistics Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Logistikvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Contract Type Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-ct</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-contract/contract-type#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Contract Type</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Vertragsart</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#RentalContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Rental Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Mietvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#SupplyContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Supply Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Liefervertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#MaintenanceContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Maintenance Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Wartungs-/Servicevertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#FrameworkAgreement">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Framework Agreement</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Rahmenvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#PlanningContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Planning Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Planungsvertrag</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contract-type#ServiceContract">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contract-type"/>
+    <skos:prefLabel xml:lang="en">Service Contract</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Dienstleistungsvertrag</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

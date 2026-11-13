@@ -1,0 +1,22 @@
+@prefix conx-phs: <https://www.construct-x.org/vocab/construction-project/project-phase-status#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/project-phase-status>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/project-phase-status/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Project Phase Status Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-phs" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/project-phase-status#" ;
+    skos:prefLabel "Project Phase Status"@en ;
+    skos:prefLabel "Projektphasen-Status"@de .
+
+conx-phs:Planned a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-status> ; skos:prefLabel "Planned"@en ; skos:prefLabel "Geplant"@de .
+conx-phs:InProcess a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-status> ; skos:prefLabel "In Process"@en ; skos:prefLabel "In Bearbeitung"@de .
+conx-phs:Completed a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-status> ; skos:prefLabel "Completed"@en ; skos:prefLabel "Abgeschlossen"@de .
+conx-phs:OnHold a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-status> ; skos:prefLabel "On Hold"@en ; skos:prefLabel "Ausgesetzt"@de .

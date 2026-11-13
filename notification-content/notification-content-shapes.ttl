@@ -33,7 +33,7 @@ conx-nc:NotificationContentShape a sh:NodeShape ;
             sh:select """PREFIX conx-nc: <https://www.construct-x.org/ontology/notification-content#>
 PREFIX conx-nt: <https://www.construct-x.org/vocab/notification-content/notification-type#>
 PREFIX conx-tt: <https://www.construct-x.org/vocab/notification-content/task-type#>
-SELECT $this WHERE { $this conx-nc:notificationType conx-nt:TaskRequested ; conx-nc:taskType conx-tt:DetailedScheduling . { SELECT $this (COUNT(?ctx) AS ?cnt) WHERE { OPTIONAL { $this conx-nc:contextResource ?ctx } } GROUP BY $this HAVING (?cnt != 1) } }""" ],
+SELECT $this WHERE { $this conx-nc:notificationType conx-nt:TaskRequested ; conx-nc:taskType conx-tt:DetailedScheduling . { SELECT $this WHERE { OPTIONAL { $this conx-nc:contextResource ?ctx } } GROUP BY $this HAVING (COUNT(?ctx) != 1) } }""" ],
         [ a sh:SPARQLConstraint ;
             sh:message "DataAvailable, DataUpdated and DataDeleted must reference at least one Target resource."@en ;
             sh:select """
@@ -58,10 +58,10 @@ SELECT $this WHERE { $this conx-nc:notificationType conx-nt:TaskRequested ; conx
             SELECT $this WHERE {
                 $this conx-nc:notificationType conx-nt:TaskRequested .
                 {
-                    SELECT $this (COUNT(?tt) AS ?cnt)
+                    SELECT $this
                     WHERE { OPTIONAL { $this conx-nc:taskType ?tt } }
                     GROUP BY $this
-                    HAVING (?cnt != 1)
+                    HAVING (COUNT(?tt) != 1)
                 }
                 UNION
                 {
@@ -80,10 +80,10 @@ SELECT $this WHERE { $this conx-nc:notificationType conx-nt:TaskRequested ; conx
             SELECT $this WHERE {
                 $this conx-nc:notificationType conx-nt:TaskStatusChanged .
                 {
-                    SELECT $this (COUNT(?status) AS ?cnt)
+                    SELECT $this
                     WHERE { OPTIONAL { $this conx-nc:taskStatus ?status } }
                     GROUP BY $this
-                    HAVING (?cnt != 1)
+                    HAVING (COUNT(?status) != 1)
                 }
             }
         """ ],

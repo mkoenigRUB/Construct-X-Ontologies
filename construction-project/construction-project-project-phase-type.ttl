@@ -1,0 +1,24 @@
+@prefix conx-pht: <https://www.construct-x.org/vocab/construction-project/project-phase-type#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/project-phase-type>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/project-phase-type/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Project Phase Type Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-pht" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/project-phase-type#" ;
+    skos:prefLabel "Project Phase Type"@en ;
+    skos:prefLabel "Projektphasen-Typ"@de .
+
+conx-pht:Initialization a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Initialization"@en ; skos:prefLabel "Initialisierung"@de .
+conx-pht:Offer a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Offer"@en ; skos:prefLabel "Angebot"@de .
+conx-pht:Planning a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Planning"@en ; skos:prefLabel "Planung"@de .
+conx-pht:Bidding a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Bidding / Tendering"@en ; skos:prefLabel "Ausschreibung"@de .
+conx-pht:Execution a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Execution"@en ; skos:prefLabel "Ausführung"@de .
+conx-pht:Completion a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-phase-type> ; skos:prefLabel "Completion"@en ; skos:prefLabel "Abschluss"@de .

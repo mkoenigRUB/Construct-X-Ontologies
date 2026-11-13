@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-phase-status#Completed">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-phase-status"/>
+    <skos:prefLabel xml:lang="en">Completed</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Abgeschlossen</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-phase-status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-project/project-phase-status/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Project Phase Status Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-phs</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-project/project-phase-status#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Project Phase Status</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Projektphasen-Status</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-phase-status#Planned">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-phase-status"/>
+    <skos:prefLabel xml:lang="en">Planned</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Geplant</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-phase-status#OnHold">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-phase-status"/>
+    <skos:prefLabel xml:lang="en">On Hold</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Ausgesetzt</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-phase-status#InProcess">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-phase-status"/>
+    <skos:prefLabel xml:lang="en">In Process</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">In Bearbeitung</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,22 @@
+@prefix conx-cpm: <https://www.construct-x.org/vocab/construction-contract/pricing-model#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-contract/pricing-model>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-contract/pricing-model/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Pricing Model Vocabulary"@en ;
+    dcterms:created "2026-11-11"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-cpm" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-contract/pricing-model#" ;
+    skos:prefLabel "Pricing Model"@en ;
+    skos:prefLabel "Vergütungsmodell"@de .
+
+conx-cpm:LumpSum a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/pricing-model> ; skos:prefLabel "Lump Sum"@en ; skos:prefLabel "Pauschalpreis"@de .
+conx-cpm:UnitPrice a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/pricing-model> ; skos:prefLabel "Unit Price"@en ; skos:prefLabel "Einheitspreis"@de .
+conx-cpm:HourlyRate a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/pricing-model> ; skos:prefLabel "Hourly / Daily Rate"@en ; skos:prefLabel "Stunden- / Tagessatz"@de .
+conx-cpm:RentalPerTimeUnit a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/pricing-model> ; skos:prefLabel "Rental per Time Unit"@en ; skos:prefLabel "Miete pro Zeiteinheit"@de .

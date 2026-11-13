@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#Obligation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Obligation</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertragliche Pflicht</skos:altLabel>
+    <rdfs:comment xml:lang="en">A key contractual obligation of a party within a contract (e.g. to provide a machine, to make a payment). Only the most relevant obligations are modeled; a full obligations/rights/conditions clause hierarchy is out of scope for this draft.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Eine wesentliche vertragliche Pflicht einer Partei innerhalb eines Vertrags (z. B. Bereitstellung eines Geräts, Erbringung einer Zahlung). Nur die wesentlichsten Pflichten werden modelliert; eine vollständige Pflichten-/Rechte-/Bedingungen-Klauselhierarchie ist außerhalb des Entwurfs-Scope.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#ContractParty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Contract Party</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertragspartei</skos:altLabel>
+    <rdfs:comment xml:lang="en">A participating organization or person in a contract in one or more contract-specific roles. The same organization can be client in one contract and contractor in another; the role is bound to this contract, not to the organization.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Eine beteiligte Organisation oder Person in einem Vertrag in einer oder mehreren vertragsbezogenen Rollen. Dieselbe Organisation kann in einem Vertrag Auftraggeber und in einem anderen Auftragnehmer sein; die Rolle ist an diesen Vertrag gebunden, nicht an die Organisation.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#Contract">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Contract</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertrag</skos:altLabel>
+    <rdfs:comment xml:lang="en">A contractual business relationship between one or more parties. The contract hierarchy (main/sub-contracts) is derived from the contracts themselves, not from a fixed organizational chart. Relations to a Project are defined in the project-contract link ontology.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Die Vertragshierarchie (Haupt-/Nachverträge) ergibt sich aus den Verträgen selbst, nicht aus einer fest verdrahteten Organisationsstruktur. Beziehungen zu einem Projekt werden in der project-contract Link-Ontologie definiert.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#commencementDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">commencement date</rdfs:label>
+    <skos:altLabel xml:lang="de">Beginndatum</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#subjectType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">subject type</rdfs:label>
+    <skos:altLabel xml:lang="de">Gegenstandstyp</skos:altLabel>
+    <rdfs:comment xml:lang="en">What is owed, characterized by its subject type (work, service, product, material, equipment, …), taken from the contract subject type vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Was geschuldet wird, charakterisiert durch seinen Gegenstandstyp (Werk, Dienstleistung, Produkt, Material, Gerät, …), aus dem Vokabular für Vertragsgegenstände.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasContractItem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:label xml:lang="en">has contract item</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Vertragsposition</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#dueDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Obligation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">due date</rdfs:label>
+    <skos:altLabel xml:lang="de">Fälligkeitsdatum</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#isObligationOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-contract#hasObligation"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Obligation"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:label xml:lang="en">is obligation of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Pflicht von</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#contractType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">contract type</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertragsart</skos:altLabel>
+    <rdfs:comment xml:lang="en">The kind of contract (works, service, supply, rental, …), taken from the contract type vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Art des Vertrags (Werk, Dienstleistung, Lieferung, Miete, …), aus dem Vokabular für Vertragsarten.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#itemPeriodUntil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">item period until</rdfs:label>
+    <skos:altLabel xml:lang="de">Leistungszeitraum bis</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasUpstreamContract">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-contract#subcontractOf"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:label xml:lang="en">has upstream contract</rdfs:label>
+    <skos:altLabel xml:lang="de">hat übergeordneten Vertrag</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#identifier">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">identifier</rdfs:label>
+    <skos:altLabel xml:lang="de">Kennung</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasRole">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">has role</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Rolle</skos:altLabel>
+    <rdfs:comment xml:lang="en">The role(s) of the party within this contract, taken from the contractual role vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Rolle(n) der Partei in diesem Vertrag, aus dem Vokabular für Vertragsrollen.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#note">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">note</rdfs:label>
+    <skos:altLabel xml:lang="de">Hinweis</skos:altLabel>
+    <rdfs:comment xml:lang="en">Optional note on the party (e.g. validity period, remarks).</rdfs:comment>
+    <rdfs:comment xml:lang="de">Optionaler Hinweis zur Partei (z. B. Gültigkeitszeitraum, Bemerkungen).</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#contractValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:label xml:lang="en">contract value</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertragswert</skos:altLabel>
+    <rdfs:comment xml:lang="en">The total value of the contract. Detailed compensation breakdown (retention, payment schedule, …) is out of scope for this draft.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Der Gesamtwert des Vertrags. Eine detaillierte Vergütungsauflösung (Retentions, Zahlungsplan, …) ist außerhalb des Entwurfs-Scope.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#description">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">description</rdfs:label>
+    <skos:altLabel xml:lang="de">Beschreibung</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasObligation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Obligation"/>
+    <rdfs:label xml:lang="en">has obligation</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Pflicht</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#validUntil">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">valid until</rdfs:label>
+    <skos:altLabel xml:lang="de">gültig bis</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasParty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:label xml:lang="en">has party</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Vertragspartei</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#ContractItem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Contract Item</rdfs:label>
+    <skos:altLabel xml:lang="de">Vertragsposition / Leistungsposten</skos:altLabel>
+    <rdfs:comment xml:lang="en">A quantified item owed under a contract (e.g. a rented machine, a logistics service, a construction work). The concrete owed service or deliverable is characterized by its subject type; a typed reference to a Project Deliverable is reserved for the link ontology.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Eine mengenmäßig beschriebene, aus einem Vertrag geschuldete Position (z. B. ein gemietetes Baugerät, ein Logistikdienst, ein Bauauftrag). Die konkrete geschuldete Leistung bzw. der Liefergegenstand wird durch seinen Gegenstandstyp charakterisiert; ein typisierter Verweis auf ein Projekt-Ergebnis ist der Link-Ontologie vorbehalten.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#currency">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">currency</rdfs:label>
+    <skos:altLabel xml:lang="de">Währung</skos:altLabel>
+    <rdfs:comment xml:lang="en">Currency of the contract value, e.g. EUR.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Währung des Vertragswerts, z. B. EUR.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#itemPeriodFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">item period from</rdfs:label>
+    <skos:altLabel xml:lang="de">Leistungszeitraum von</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#isPartyOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-contract#hasParty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:label xml:lang="en">is party of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Partei von</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#isContractItemOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-contract#hasContractItem"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:label xml:lang="en">is contract item of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Vertragsposition von</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#unit">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">unit</rdfs:label>
+    <skos:altLabel xml:lang="de">Einheit</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/construction-contract/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Construction Contract Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X-Ontologie für Bauverträge</dcterms:title>
+    <dcterms:description xml:lang="en">Describes construction contracts with their type, parties and roles, owed items, key obligations, validity period and contract value. The contract-to-project relation and typed references to deliverables are defined in a dedicated link ontology; parties are untyped IRI references pending the planned core organization/agent ontology.</dcterms:description>
+    <dcterms:description xml:lang="de">Beschreibt Bauverträge mit ihrer Vertragsart, Parteien und Rollen, geschuldeten Positionen, wesentlichen Pflichten, Laufzeit und Vertragswert. Die Verknüpfung zum Projekt und typisierte Verweise auf Liefergegenstände werden in einer dedizierten Link-Ontologie definiert; Parteien sind untypisierte IRI-Referenzen bis zur geplanten Core-Ontologie für Organisationen/Agenten.</dcterms:description>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/construct-x"/>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:modified>
+    <dcterms:source xml:lang="de">Construct-X working document: x_Idee_Vertragsontologie für Construct-X (3.4.7), 2026-11-11 — deliberately trimmed to the 9 core questions</dcterms:source>
+    <vann:preferredNamespacePrefix>conx-con</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/construction-contract#</vann:preferredNamespaceUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#validFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">valid from</rdfs:label>
+    <skos:altLabel xml:lang="de">gültig ab</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#member">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:label xml:lang="en">member</rdfs:label>
+    <skos:altLabel xml:lang="de">Mitglied</skos:altLabel>
+    <rdfs:comment xml:lang="en">The participating organization or person (also joint venture / consortium). Intended to be typed by the (planned) core organization/agent ontology; in this draft it is an untyped IRI reference.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die beteiligte Organisation oder Person (auch Joint Venture / ARGE). Soll durch die (geplante) Core-Ontologie für Organisationen/Agenten typisiert werden; in diesem Entwurf eine nicht typisierte IRI-Referenz.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#pricingModel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">pricing model</rdfs:label>
+    <skos:altLabel xml:lang="de">Vergütungsmodell</skos:altLabel>
+    <rdfs:comment xml:lang="en">How the contract is priced (lump sum, unit price, hourly rate, rental per time unit, …), taken from the pricing model vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Wie der Vertrag vergütet wird (Pauschal, Einheitspreis, Stunden-/Tagessatz, Miete pro Zeiteinheit, …), aus dem Vokabular für Vergütungsmodelle.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#terminationDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">termination date</rdfs:label>
+    <skos:altLabel xml:lang="de">Beendigungsdatum</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#subcontractOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:label xml:lang="en">subcontract of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Nachvertrag von</skos:altLabel>
+    <rdfs:comment xml:lang="en">Links a contract to its upstream (main) contract, so the contract hierarchy is derived from the contracts themselves.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Verknüpft einen Vertrag mit seinem übergeordneten (Haupt-)Vertrag, sodass die Vertragshierarchie aus den Verträgen selbst abgeleitet wird.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#quantity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractItem"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:label xml:lang="en">quantity</rdfs:label>
+    <skos:altLabel xml:lang="de">Menge</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#obligatedParty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Obligation"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#ContractParty"/>
+    <rdfs:label xml:lang="en">obligated party</rdfs:label>
+    <skos:altLabel xml:lang="de">verpflichtete Partei</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#signingDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">signing date</rdfs:label>
+    <skos:altLabel xml:lang="de">Unterschreibdatum</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">name</rdfs:label>
+    <skos:altLabel xml:lang="de">Bezeichnung</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
+  </rdf:Description>
+</rdf:RDF>

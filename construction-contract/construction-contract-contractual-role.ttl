@@ -1,0 +1,27 @@
+@prefix conx-crt: <https://www.construct-x.org/vocab/construction-contract/contractual-role#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-contract/contractual-role>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-contract/contractual-role/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Contractual Role Vocabulary"@en ;
+    dcterms:created "2026-11-11"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-crt" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-contract/contractual-role#" ;
+    skos:prefLabel "Contractual Role"@en ;
+    skos:prefLabel "Vertragsrolle"@de .
+
+conx-crt:Client a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Client (Bauherr)"@en ; skos:prefLabel "Auftraggeber / Bauherr"@de .
+conx-crt:Contractor a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Contractor"@en ; skos:prefLabel "Auftragnehmer"@de .
+conx-crt:Supplier a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Supplier"@en ; skos:prefLabel "Lieferant"@de .
+conx-crt:ServiceProvider a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Service Provider"@en ; skos:prefLabel "Dienstleister"@de .
+conx-crt:Customer a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Customer"@en ; skos:prefLabel "Kunde / Besteller"@de .
+conx-crt:Landlord a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Landlord"@en ; skos:prefLabel "Vermieter"@de .
+conx-crt:Tenant a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Tenant"@en ; skos:prefLabel "Mieter"@de .
+conx-crt:Planner a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Planner"@en ; skos:prefLabel "Planer"@de .
+conx-crt:LogisticsProvider a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contractual-role> ; skos:prefLabel "Logistics Provider"@en ; skos:prefLabel "Baulogistikdienstleister"@de .

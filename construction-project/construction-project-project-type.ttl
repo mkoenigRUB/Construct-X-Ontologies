@@ -1,0 +1,24 @@
+@prefix conx-pt: <https://www.construct-x.org/vocab/construction-project/project-type#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/project-type>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/project-type/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Project Type Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-pt" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/project-type#" ;
+    skos:prefLabel "Project Type"@en ;
+    skos:prefLabel "Projekttyp"@de .
+
+conx-pt:Newbuild a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "New Build"@en ; skos:prefLabel "Neubau"@de .
+conx-pt:Modification a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "Modification"@en ; skos:prefLabel "Umbau / Änderung"@de .
+conx-pt:Renovation a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "Renovation"@en ; skos:prefLabel "Sanierung"@de .
+conx-pt:Repair a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "Repair"@en ; skos:prefLabel "Instandsetzung"@de .
+conx-pt:Demolition a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "Demolition"@en ; skos:prefLabel "Abriss / Bestand"@de .
+conx-pt:OperationMaintenance a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-type> ; skos:prefLabel "Operation & Maintenance"@en ; skos:prefLabel "Betrieb / Instandhaltung"@de .

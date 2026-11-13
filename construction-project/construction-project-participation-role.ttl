@@ -1,0 +1,26 @@
+@prefix conx-por: <https://www.construct-x.org/vocab/construction-project/participation-role#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/participation-role>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/participation-role/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Participation Role Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-por" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/participation-role#" ;
+    skos:prefLabel "Participation Role"@en ;
+    skos:prefLabel "Beteiligungsrolle"@de .
+
+conx-por:Client a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Client (Bauherr)"@en ; skos:prefLabel "Auftraggeber / Bauherr"@de .
+conx-por:GeneralContractor a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "General Contractor (GU)"@en ; skos:prefLabel "Generalunternehmer"@de .
+conx-por:Subcontractor a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Subcontractor (NU)"@en ; skos:prefLabel "Nachunternehmer"@de .
+conx-por:Planner a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Planner"@en ; skos:prefLabel "Planer"@de .
+conx-por:ProjectLeader a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Project Leader"@en ; skos:prefLabel "Projektleitung"@de .
+conx-por:Supplier a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Supplier"@en ; skos:prefLabel "Lieferant"@de .
+conx-por:LogisticsProvider a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Logistics Provider"@en ; skos:prefLabel "Baulogistikdienstleister"@de .
+conx-por:Consultant a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/participation-role> ; skos:prefLabel "Consultant"@en ; skos:prefLabel "Berater / Sachverständiger"@de .

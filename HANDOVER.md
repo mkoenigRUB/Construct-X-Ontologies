@@ -1,6 +1,6 @@
 # Handover — Construct-X Ontologien & Converter
 
-**Stand:** 2026-11-06 (Construction Progress Extension `cxcp` + Baufortschritt-Beispiel + ICDD-Container, Ontologie-Repo) · **Status:** alle Verifikationen PASS
+**Stand:** 2026-11-08 (Converter-Repo: Bauposten-Auswahl + Strikt-Modus-Toggle, s. `STATUS-reverse-converters.md`) / 2026-11-06 (Construction Progress Extension `cxcp` + Baufortschritt-Beispiel + ICDD-Container, Ontologie-Repo) · **Status:** alle Verifikationen PASS
 
 Dieses Dokument ist selbstständig: es beschreibt den Zustand beider Repos, wie man die
 Entwicklungs-Umgebung auf einem **fremden Rechner** aufsetzt, und alle Wiederhol-Befehle.
@@ -147,7 +147,7 @@ Außerdem: MANIFEST ↔ in-file `versionInfo`-Konsistenz (41 Einträge, inkl. `e
 Erwartet: alle Checksummen OK (Baufortschritt 8/8, Doppelboden 3/3), `ICDD-CHECK: PASS`,
 `MANIFEST-CHECK: PASS`. (Laufskripte liegen in der Arbeitssitzung 2026-11-06, s. `VALIDATION.md`.)
 
-### 3.5 Converter-Tests (161/161 erwartet: SDK 81 + GAEB 32 + MS 33 + RDF 15)
+### 3.5 Converter-Tests (183/183 erwartet: SDK 85 + GAEB 48 + MS 35 + RDF 15)
 
 Zuerst das SDK-Modul (bei SDK-Änderungen; ansonsten einmalig, bis es im lokalen m2 liegt):
 
@@ -168,7 +168,7 @@ Set-Location "D:\Sciebo\Construction-X\200_Arbeitspakete\AP3\AP 3.4\construct-x-
 # analog: …\msproject-converter-service  und  …\rdf-converter-service
 ```
 
-Erwartet: GAEB core 17/17 + web 15/15, MS 33/33, RDF 15/15, SDK 81/81 = **161/161**.
+Erwartet: GAEB core 26/26 + web 22/22, MS 35/35, RDF 15/15, SDK 85/85 = **183/183** (2026-11-08: SDK/GAEB/MS neu verifiziert; RDF-Modul unverändert, 15/15 vom 2026-11-05).
 `clean` ist **erforderlich** (ECJ-Stale-Class-Falle: ohne `clean` werden evtl. alte
 Class-Dateien aus `target/` mitbenutzt).
 
@@ -199,7 +199,7 @@ Class-Dateien aus `target/` mitbenutzt).
 | **Git** | Ontologie-Repo seit 2026-11-05 auf GitHub (`mkoenigRUB/Construct-X-Ontologies`, `main`); Converter-Repo weiterhin **ohne** Git (bewusst) — dort nur Sciebo-Sync |
 | **Toolchains maschinenspezifisch im Temp** | JDK/Maven/Venv müssen auf jedem Rechner neu aufgesetzt werden (§2) |
 | **Kein zentrales Test-Skript** im Converter-Repo | `Converter\build.ps1` ist **kein** Ersatz (GAEB-Sandbox-Fallback, hardcodet `C:\Program Files\Java\jdk-20`, benötigt vorbefülltes `web/lib`); `test-all.ps1` existiert nicht |
-| **Parker B: selektive LV-Positions-Auswahl** | Nutzerfrage offen: "Bauposten nur (flache Liste) oder alle Ebenen (Baum mit Checkboxen)?" + Strikt-Modus-Toggle |
+| **Parker B: selektive LV-Positions-Auswahl** | **erledigt (08.11.)**: Baum mit Checkboxen (GAEB-Tab 8084) + `POST /api/v1/positions/gaeb-boq` + `selection`-Parameter am Convert-Endpoint; Strikt-Modus-Toggle `strict=true` an beiden Reverse-Endpoints (Datenverlust → 400, Approximationen getolert, Klassifikation `ConxStrict` im SDK). Details: `Construct-X-Converters/HANDOFF.md` (2026-11-08) + `README.md` |
 | **Semantic-Kennzeichen im JSON-LD-Test-Doc** | bewusst akzeptiert (z. B. `conx-cs:hasStatus`-Domain = Activity, aber N2 ist kein Activity; `conx-del:quantity`-Domain = LogisticsLoadItem vs. N3 LogisticsLoad; N10-Link mit `sbdl`/`babl`-Properties). Der Jena-Test prüft nur IRI-Expansion, **kein SHACL** |
 | **Altlasten im Ontologie-Root** | `Construct-X-Ontologies.zip`, `gaeb-boq.zip`, `notification-content_0.1.1.zip`, `VSCode_…Starter (1).zip`, `AGENTS.md.bak` — bewusst unangetastet; `maven.zip` in Temp ist löschbar |
 | ~~**AUDIT-Item 44**~~ | erledigt (04.11.): formaler Konsistenz-Check in `AUDIT.md` Item 45 dokumentiert — alle Sub-Behauptungen bestätigt |

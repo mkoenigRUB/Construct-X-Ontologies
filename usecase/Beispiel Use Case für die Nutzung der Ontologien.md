@@ -916,7 +916,7 @@ Beispielsweise:
 ```
 Construction Schedule 0.5.0
 Breakdown Structure 0.7.0
-Construction Site 0.1.0
+Construction Site 0.2.0
 ```
 
 Ein Datenangebot sollte deshalb angeben:
@@ -925,7 +925,7 @@ Ein Datenangebot sollte deshalb angeben:
 conformsTo:
 Construction Schedule 0.5.0
 Breakdown Structure 0.7.0
-Construction Site 0.1.0
+Construction Site 0.2.0
 ```
 
 Dadurch weiß der Empfänger bereits vor dem Abruf, welches semantische Modell er verarbeiten können muss.
@@ -2355,7 +2355,7 @@ generatedAt:
 Ontology Versions:
 Construction Schedule 0.5.0
 Breakdown Structure 0.7.0
-Construction Site 0.1.0
+Construction Site 0.2.0
 
 Sources:
 Terminplan-Version ...

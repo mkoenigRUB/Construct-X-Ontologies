@@ -1,0 +1,68 @@
+@prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-con-sh: <https://www.construct-x.org/shapes/construction-contract#> .
+@prefix conx-ct: <https://www.construct-x.org/vocab/construction-contract/contract-type#> .
+@prefix conx-crt: <https://www.construct-x.org/vocab/construction-contract/contractual-role#> .
+@prefix conx-cst: <https://www.construct-x.org/vocab/construction-contract/subject-type#> .
+@prefix conx-cpm: <https://www.construct-x.org/vocab/construction-contract/pricing-model#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<https://www.construct-x.org/shapes/construction-contract/vocabularies>
+    a owl:Ontology ;
+    owl:versionIRI <https://www.construct-x.org/shapes/construction-contract/vocabularies/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    owl:imports
+      <https://www.construct-x.org/ontology/construction-contract/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-contract/contract-type/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-contract/contractual-role/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-contract/subject-type/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-contract/pricing-model/0.1.0> .
+
+conx-con-sh:ContractTypeVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:Contract ;
+    sh:property [
+      sh:path conx-con:contractType ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-ct:WorksContract conx-ct:ConstructionContract conx-ct:ServiceContract
+        conx-ct:SupplyContract conx-ct:RentalContract conx-ct:FrameworkAgreement
+        conx-ct:PlanningContract conx-ct:MaintenanceContract conx-ct:LogisticsContract
+      )
+    ] .
+
+conx-con-sh:ContractualRoleVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:ContractParty ;
+    sh:property [
+      sh:path conx-con:hasRole ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-crt:Client conx-crt:Contractor conx-crt:Supplier conx-crt:ServiceProvider
+        conx-crt:Customer conx-crt:Landlord conx-crt:Tenant conx-crt:Planner
+        conx-crt:LogisticsProvider
+      )
+    ] .
+
+conx-con-sh:SubjectTypeVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:ContractItem ;
+    sh:property [
+      sh:path conx-con:subjectType ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-cst:Work conx-cst:ConstructionWork conx-cst:Service conx-cst:PlanningService
+        conx-cst:LogisticsService conx-cst:Product conx-cst:Material conx-cst:Equipment
+        conx-cst:Deliverable
+      )
+    ] .
+
+conx-con-sh:PricingModelVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:Contract ;
+    sh:property [
+      sh:path conx-con:pricingModel ;
+      sh:nodeKind sh:IRI ;
+      sh:in ( conx-cpm:LumpSum conx-cpm:UnitPrice conx-cpm:HourlyRate conx-cpm:RentalPerTimeUnit )
+    ] .

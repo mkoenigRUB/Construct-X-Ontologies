@@ -1,0 +1,23 @@
+@prefix conx-ps: <https://www.construct-x.org/vocab/construction-project/project-status#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/project-status>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/project-status/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Project Status Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-ps" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/project-status#" ;
+    skos:prefLabel "Project Status"@en ;
+    skos:prefLabel "Projektstatus"@de .
+
+conx-ps:OnTime a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-status> ; skos:prefLabel "On Time"@en ; skos:prefLabel "Im Zeitplan"@de .
+conx-ps:Delayed a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-status> ; skos:prefLabel "Delayed"@en ; skos:prefLabel "In Verzug"@de .
+conx-ps:Blocked a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-status> ; skos:prefLabel "Blocked"@en ; skos:prefLabel "Blockiert"@de .
+conx-ps:Completed a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-status> ; skos:prefLabel "Completed"@en ; skos:prefLabel "Abgeschlossen"@de .
+conx-ps:Terminated a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/project-status> ; skos:prefLabel "Terminated"@en ; skos:prefLabel "Abgebrochen"@de .

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/status-indicator#Green">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/status-indicator"/>
+    <skos:prefLabel xml:lang="en">Green</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Grün</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/status-indicator">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-project/status-indicator/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Status Indicator Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-si</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-project/status-indicator#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Status Indicator (Traffic Light)</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Ampelstatus</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/status-indicator#Yellow">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/status-indicator"/>
+    <skos:prefLabel xml:lang="en">Yellow</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Gelb</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/status-indicator#Red">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/status-indicator"/>
+    <skos:prefLabel xml:lang="en">Red</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Rot</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Contract Subject Type Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-cst</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-contract/subject-type#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Contract Subject Type</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Vertragsgegenstand</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Service">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Service</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Dienstleistung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Work">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Work</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Werkleistung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#LogisticsService">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Logistics Service</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Logistikdienstleistung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Deliverable">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Deliverable</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Liefergegenstand / Ergebnis</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Equipment">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Equipment</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Baugerät / Ausrüstung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Product">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Product</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Produkt / Bauprodukt</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#Material">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Material</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Material / Baustoff</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#ConstructionWork">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Construction Work</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Bauauftrag / Bauausführung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/subject-type#PlanningService">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/subject-type"/>
+    <skos:prefLabel xml:lang="en">Planning Service</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Planungsleistung</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

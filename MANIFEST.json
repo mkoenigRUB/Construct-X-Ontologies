@@ -1,7 +1,9 @@
 {
   "package": "Construct-X ontologies draft",
-  "date": "2026-11-06",
+  "date": "2026-11-11",
   "domain_ontologies": {
+    "construction-contract": "0.1.0",
+    "construction-project": "0.1.0",
     "construction-schedule": "0.5.0",
     "breakdown-structure": "0.7.0",
     "gaeb-boq": "0.5.0",
@@ -51,6 +53,20 @@
   "built_asset_vocabularies": {
     "asset-type": "0.1.0",
     "spatial-structure-type": "0.1.0"
+  },
+  "contract_vocabularies": {
+    "contract-type": "0.1.0",
+    "contractual-role": "0.1.0",
+    "subject-type": "0.1.0",
+    "pricing-model": "0.1.0"
+  },
+  "project_vocabularies": {
+    "project-type": "0.1.0",
+    "project-phase-type": "0.1.0",
+    "project-phase-status": "0.1.0",
+    "project-status": "0.1.0",
+    "status-indicator": "0.1.0",
+    "participation-role": "0.1.0"
   },
   "notification_vocabularies": {
     "notification-type": "0.1.0",

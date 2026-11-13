@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#Newbuild">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">New Build</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Neubau</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Project Type Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-pt</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-project/project-type#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Project Type</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Projekttyp</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#Demolition">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">Demolition</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Abriss / Bestand</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#OperationMaintenance">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">Operation &amp; Maintenance</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Betrieb / Instandhaltung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#Renovation">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">Renovation</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Sanierung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#Modification">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">Modification</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Umbau / Änderung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/project-type#Repair">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/project-type"/>
+    <skos:prefLabel xml:lang="en">Repair</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Instandsetzung</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

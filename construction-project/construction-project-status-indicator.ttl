@@ -1,0 +1,21 @@
+@prefix conx-si: <https://www.construct-x.org/vocab/construction-project/status-indicator#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-project/status-indicator>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-project/status-indicator/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Status Indicator Vocabulary"@en ;
+    dcterms:created "2026-11-10"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-si" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-project/status-indicator#" ;
+    skos:prefLabel "Status Indicator (Traffic Light)"@en ;
+    skos:prefLabel "Ampelstatus"@de .
+
+conx-si:Green a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/status-indicator> ; skos:prefLabel "Green"@en ; skos:prefLabel "Grün"@de .
+conx-si:Yellow a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/status-indicator> ; skos:prefLabel "Yellow"@en ; skos:prefLabel "Gelb"@de .
+conx-si:Red a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-project/status-indicator> ; skos:prefLabel "Red"@en ; skos:prefLabel "Rot"@de .

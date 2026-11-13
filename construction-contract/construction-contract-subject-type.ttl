@@ -1,0 +1,27 @@
+@prefix conx-cst: <https://www.construct-x.org/vocab/construction-contract/subject-type#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-contract/subject-type>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-contract/subject-type/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Contract Subject Type Vocabulary"@en ;
+    dcterms:created "2026-11-11"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-cst" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-contract/subject-type#" ;
+    skos:prefLabel "Contract Subject Type"@en ;
+    skos:prefLabel "Vertragsgegenstand"@de .
+
+conx-cst:Work a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Work"@en ; skos:prefLabel "Werkleistung"@de .
+conx-cst:ConstructionWork a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Construction Work"@en ; skos:prefLabel "Bauauftrag / Bauausführung"@de .
+conx-cst:Service a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Service"@en ; skos:prefLabel "Dienstleistung"@de .
+conx-cst:PlanningService a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Planning Service"@en ; skos:prefLabel "Planungsleistung"@de .
+conx-cst:LogisticsService a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Logistics Service"@en ; skos:prefLabel "Logistikdienstleistung"@de .
+conx-cst:Product a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Product"@en ; skos:prefLabel "Produkt / Bauprodukt"@de .
+conx-cst:Material a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Material"@en ; skos:prefLabel "Material / Baustoff"@de .
+conx-cst:Equipment a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Equipment"@en ; skos:prefLabel "Baugerät / Ausrüstung"@de .
+conx-cst:Deliverable a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/subject-type> ; skos:prefLabel "Deliverable"@en ; skos:prefLabel "Liefergegenstand / Ergebnis"@de .

@@ -1,0 +1,145 @@
+@prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-ct: <https://www.construct-x.org/vocab/construction-contract/contract-type#> .
+@prefix conx-crt: <https://www.construct-x.org/vocab/construction-contract/contractual-role#> .
+@prefix conx-cst: <https://www.construct-x.org/vocab/construction-contract/subject-type#> .
+@prefix conx-cpm: <https://www.construct-x.org/vocab/construction-contract/pricing-model#> .
+@prefix ex: <https://data.example.com/project/bruecke-xy/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Referenzorganisationen: in diesem Entwurf untypisierte IRI-Referenzen;
+# die Typisierung (Organization / JointVenture) erfolgt später durch die
+# geplante Core-Ontologie für Organisationen/Agenten.
+
+# Vertragskette der Brücke-XY-Grafik (aus der Vertrags-Idee 3.4.7):
+# C01 DB -> ARGE (Hauptbauvertrag)
+#   C03 ARGE -> Lindner (Nachvertrag)
+#     C04 Lindner -> Zeppelin (Miete + Logistik)
+#       C06 Zueblin -> Zeppelin (Nach-Nachvertrag)
+
+ex:contract-c01
+    a conx-con:Contract ;
+    conx-con:identifier "C01" ;
+    conx-con:name "Hauptbauvertrag Brücke XY" ;
+    conx-con:contractType conx-ct:ConstructionContract ;
+    conx-con:pricingModel conx-cpm:LumpSum ;
+    conx-con:signingDate "2026-03-15"^^xsd:date ;
+    conx-con:validFrom "2026-04-01"^^xsd:date ;
+    conx-con:validUntil "2027-12-31"^^xsd:date ;
+    conx-con:contractValue "45000000"^^xsd:decimal ;
+    conx-con:currency "EUR" ;
+    conx-con:hasParty ex:party-db-c01, ex:party-arge-c01 ;
+    conx-con:hasContractItem ex:item-c01-01 .
+
+ex:party-db-c01
+    a conx-con:ContractParty ;
+    conx-con:identifier "C01-P01" ;
+    conx-con:member ex:org-db ;
+    conx-con:hasRole conx-crt:Client ;
+    conx-con:isPartyOf ex:contract-c01 .
+
+ex:party-arge-c01
+    a conx-con:ContractParty ;
+    conx-con:identifier "C01-P02" ;
+    conx-con:member ex:jv-arge-porr-strabag-zueblin ;
+    conx-con:hasRole conx-crt:Contractor ;
+    conx-con:isPartyOf ex:contract-c01 .
+
+ex:item-c01-01
+    a conx-con:ContractItem ;
+    conx-con:identifier "C01-01" ;
+    conx-con:name "Errichtung Brücke XY" ;
+    conx-con:subjectType conx-cst:ConstructionWork ;
+    conx-con:isContractItemOf ex:contract-c01 .
+
+ex:contract-c03
+    a conx-con:Contract ;
+    conx-con:identifier "C03" ;
+    conx-con:name "Nachvertrag Brücke XY – Lindner" ;
+    conx-con:contractType conx-ct:WorksContract ;
+    conx-con:pricingModel conx-cpm:UnitPrice ;
+    conx-con:validFrom "2026-05-01"^^xsd:date ;
+    conx-con:validUntil "2027-10-31"^^xsd:date ;
+    conx-con:contractValue "8200000"^^xsd:decimal ;
+    conx-con:currency "EUR" ;
+    conx-con:subcontractOf ex:contract-c01 ;
+    conx-con:hasParty ex:party-arge-c03, ex:party-lindner-c03 ;
+    conx-con:hasContractItem ex:item-c03-01 ;
+    conx-con:hasObligation ex:obl-c03-01 .
+
+ex:party-arge-c03
+    a conx-con:ContractParty ;
+    conx-con:identifier "C03-P01" ;
+    conx-con:member ex:jv-arge-porr-strabag-zueblin ;
+    conx-con:hasRole conx-crt:Client ;
+    conx-con:isPartyOf ex:contract-c03 .
+
+ex:party-lindner-c03
+    a conx-con:ContractParty ;
+    conx-con:identifier "C03-P02" ;
+    conx-con:member ex:org-lindner ;
+    conx-con:hasRole conx-crt:Contractor ;
+    conx-con:isPartyOf ex:contract-c03 .
+
+ex:item-c03-01
+    a conx-con:ContractItem ;
+    conx-con:identifier "C03-01" ;
+    conx-con:name "Bauaufzug inkl. Betrieb" ;
+    conx-con:subjectType conx-cst:Equipment ;
+    conx-con:quantity "2"^^xsd:decimal ;
+    conx-con:unit "Stück" ;
+    conx-con:itemPeriodFrom "2026-06-01"^^xsd:date ;
+    conx-con:itemPeriodUntil "2027-09-30"^^xsd:date ;
+    conx-con:isContractItemOf ex:contract-c03 .
+
+ex:obl-c03-01
+    a conx-con:Obligation ;
+    conx-con:identifier "C03-O01" ;
+    conx-con:description "Bereitstellung und Betrieb von 2 Bauaufzügen während der Bauphase." ;
+    conx-con:obligatedParty ex:party-lindner-c03 ;
+    conx-con:dueDate "2026-06-01"^^xsd:date ;
+    conx-con:isObligationOf ex:contract-c03 .
+
+ex:contract-c04
+    a conx-con:Contract ;
+    conx-con:identifier "C04" ;
+    conx-con:name "Logistik- und Mietvertrag Lindner – Zeppelin" ;
+    conx-con:description "Baulogistik (Anlieferung, Verbringung) und Miete von Hebezeugen." ;
+    conx-con:contractType conx-ct:LogisticsContract ;
+    conx-con:pricingModel conx-cpm:RentalPerTimeUnit ;
+    conx-con:validFrom "2026-06-15"^^xsd:date ;
+    conx-con:validUntil "2027-09-15"^^xsd:date ;
+    conx-con:contractValue "1450000"^^xsd:decimal ;
+    conx-con:currency "EUR" ;
+    conx-con:subcontractOf ex:contract-c03 ;
+    conx-con:hasParty ex:party-lindner-c04, ex:party-zeppelin-c04 ;
+    conx-con:hasContractItem ex:item-c04-01, ex:item-c04-02 .
+
+ex:party-lindner-c04
+    a conx-con:ContractParty ;
+    conx-con:identifier "C04-P01" ;
+    conx-con:member ex:org-lindner ;
+    conx-con:hasRole conx-crt:Client ;
+    conx-con:isPartyOf ex:contract-c04 .
+
+ex:party-zeppelin-c04
+    a conx-con:ContractParty ;
+    conx-con:identifier "C04-P02" ;
+    conx-con:member ex:org-zeppelin ;
+    conx-con:hasRole conx-crt:LogisticsProvider, conx-crt:Landlord ;
+    conx-con:isPartyOf ex:contract-c04 .
+
+ex:item-c04-01
+    a conx-con:ContractItem ;
+    conx-con:identifier "C04-01" ;
+    conx-con:name "Baulogistik Anlieferung/Verbringung" ;
+    conx-con:subjectType conx-cst:LogisticsService ;
+    conx-con:isContractItemOf ex:contract-c04 .
+
+ex:item-c04-02
+    a conx-con:ContractItem ;
+    conx-con:identifier "C04-02" ;
+    conx-con:name "Miete Hubarbeitsbühnen" ;
+    conx-con:subjectType conx-cst:Equipment ;
+    conx-con:quantity "3"^^xsd:decimal ;
+    conx-con:unit "Monat" ;
+    conx-con:isContractItemOf ex:contract-c04 .

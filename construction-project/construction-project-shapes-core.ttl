@@ -1,0 +1,100 @@
+@prefix conx-proj: <https://www.construct-x.org/ontology/construction-project#> .
+@prefix conx-proj-sh: <https://www.construct-x.org/shapes/construction-project#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/shapes/construction-project/core>
+    a owl:Ontology ;
+    owl:versionIRI <https://www.construct-x.org/shapes/construction-project/core/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    owl:imports <https://www.construct-x.org/ontology/construction-project/0.1.0> ;
+    dcterms:title "Construct-X Construction Project Core SHACL Profile"@en .
+
+conx-proj-sh:ProjectShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:Project ;
+    sh:property [ sh:path conx-proj:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:name ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:description ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:projectType ; sh:nodeKind sh:IRI ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:plannedStart ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:plannedEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:actualStart ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:actualEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:currentStatus ; sh:nodeKind sh:IRI ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:statusIndicator ; sh:nodeKind sh:IRI ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:progress ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:maxInclusive 100 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:projectGoal ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:plannedBudget ; sh:datatype xsd:decimal ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:currencyCode ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:location ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path conx-proj:hasProjectPhase ; sh:class conx-proj:ProjectPhase ] ;
+    sh:property [ sh:path conx-proj:hasParticipation ; sh:class conx-proj:ProjectParticipation ] ;
+    sh:property [ sh:path conx-proj:hasDeliverable ; sh:class conx-proj:ProjectDeliverable ] ;
+    sh:property [ sh:path conx-proj:hasSubProject ; sh:class conx-proj:Project ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "plannedStart must not be later than plannedEnd."@en ;
+        sh:select """
+          PREFIX conx-proj: <https://www.construct-x.org/ontology/construction-project#>
+          SELECT $this WHERE {
+            $this conx-proj:plannedStart ?s ; conx-proj:plannedEnd ?f .
+            FILTER (?s > ?f)
+          }
+        """
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "actualStart must not be later than actualEnd."@en ;
+        sh:select """
+          PREFIX conx-proj: <https://www.construct-x.org/ontology/construction-project#>
+          SELECT $this WHERE {
+            $this conx-proj:actualStart ?s ; conx-proj:actualEnd ?f .
+            FILTER (?s > ?f)
+          }
+        """
+    ] .
+
+conx-proj-sh:ProjectPhaseShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectPhase ;
+    sh:property [ sh:path conx-proj:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:name ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:phaseType ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:ordinalNumber ; sh:datatype xsd:nonNegativeInteger ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:phaseStatus ; sh:nodeKind sh:IRI ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:plannedStart ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:plannedEnd ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:isPhaseOf ; sh:class conx-proj:Project ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "plannedStart must not be later than plannedEnd."@en ;
+        sh:select """
+          PREFIX conx-proj: <https://www.construct-x.org/ontology/construction-project#>
+          SELECT $this WHERE {
+            $this conx-proj:plannedStart ?s ; conx-proj:plannedEnd ?f .
+            FILTER (?s > ?f)
+          }
+        """
+    ] .
+
+conx-proj-sh:ProjectParticipationShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectParticipation ;
+    sh:property [ sh:path conx-proj:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:member ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:hasRole ; sh:nodeKind sh:IRI ; sh:minCount 1 ] ;
+    sh:property [ sh:path conx-proj:note ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:isParticipationOf ; sh:class conx-proj:Project ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+conx-proj-sh:ProjectDeliverableShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectDeliverable ;
+    sh:property [ sh:path conx-proj:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:name ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:description ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:acceptanceDate ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:isAccepted ; sh:datatype xsd:boolean ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-proj:isDeliverableOf ; sh:class conx-proj:Project ; sh:minCount 1 ; sh:maxCount 1 ] .

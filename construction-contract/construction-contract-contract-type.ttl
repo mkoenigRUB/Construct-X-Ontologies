@@ -1,0 +1,27 @@
+@prefix conx-ct: <https://www.construct-x.org/vocab/construction-contract/contract-type#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/vocab/construction-contract/contract-type>
+    a owl:Ontology, skos:ConceptScheme ;
+    owl:versionIRI <https://www.construct-x.org/vocab/construction-contract/contract-type/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    dcterms:title "Construct-X Contract Type Vocabulary"@en ;
+    dcterms:created "2026-11-11"^^xsd:date ;
+    vann:preferredNamespacePrefix "conx-ct" ;
+    vann:preferredNamespaceUri "https://www.construct-x.org/vocab/construction-contract/contract-type#" ;
+    skos:prefLabel "Contract Type"@en ;
+    skos:prefLabel "Vertragsart"@de .
+
+conx-ct:WorksContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Works Contract"@en ; skos:prefLabel "Werkvertrag"@de .
+conx-ct:ConstructionContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Construction Contract"@en ; skos:prefLabel "Bauvertrag"@de .
+conx-ct:ServiceContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Service Contract"@en ; skos:prefLabel "Dienstleistungsvertrag"@de .
+conx-ct:SupplyContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Supply Contract"@en ; skos:prefLabel "Liefervertrag"@de .
+conx-ct:RentalContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Rental Contract"@en ; skos:prefLabel "Mietvertrag"@de .
+conx-ct:FrameworkAgreement a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Framework Agreement"@en ; skos:prefLabel "Rahmenvertrag"@de .
+conx-ct:PlanningContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Planning Contract"@en ; skos:prefLabel "Planungsvertrag"@de .
+conx-ct:MaintenanceContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Maintenance Contract"@en ; skos:prefLabel "Wartungs-/Servicevertrag"@de .
+conx-ct:LogisticsContract a skos:Concept ; skos:inScheme <https://www.construct-x.org/vocab/construction-contract/contract-type> ; skos:prefLabel "Logistics Contract"@en ; skos:prefLabel "Logistikvertrag"@de .

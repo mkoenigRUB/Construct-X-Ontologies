@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Planner">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Planner</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Planer</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Contractor">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Contractor</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Auftragnehmer</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Tenant">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Tenant</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Mieter</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Contractual Role Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-11</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-crt</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-contract/contractual-role#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Contractual Role</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Vertragsrolle</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#LogisticsProvider">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Logistics Provider</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Baulogistikdienstleister</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Client">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Client (Bauherr)</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Auftraggeber / Bauherr</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Supplier">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Supplier</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Lieferant</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Landlord">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Landlord</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Vermieter</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#Customer">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Customer</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Kunde / Besteller</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-contract/contractual-role#ServiceProvider">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-contract/contractual-role"/>
+    <skos:prefLabel xml:lang="en">Service Provider</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Dienstleister</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

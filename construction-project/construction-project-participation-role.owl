@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#Consultant">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Consultant</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Berater / Sachverständiger</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Participation Role Vocabulary</dcterms:title>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
+    <vann:preferredNamespacePrefix>conx-por</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/construction-project/participation-role#</vann:preferredNamespaceUri>
+    <skos:prefLabel xml:lang="en">Participation Role</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Beteiligungsrolle</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#Planner">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Planner</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Planer</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#LogisticsProvider">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Logistics Provider</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Baulogistikdienstleister</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#Client">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Client (Bauherr)</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Auftraggeber / Bauherr</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#Supplier">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Supplier</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Lieferant</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#ProjectLeader">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Project Leader</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Projektleitung</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#GeneralContractor">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">General Contractor (GU)</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Generalunternehmer</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/vocab/construction-project/participation-role#Subcontractor">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="https://www.construct-x.org/vocab/construction-project/participation-role"/>
+    <skos:prefLabel xml:lang="en">Subcontractor (NU)</skos:prefLabel>
+    <skos:prefLabel xml:lang="de">Nachunternehmer</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

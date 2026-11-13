@@ -1,0 +1,89 @@
+@prefix conx-proj: <https://www.construct-x.org/ontology/construction-project#> .
+@prefix conx-proj-sh: <https://www.construct-x.org/shapes/construction-project#> .
+@prefix conx-pt: <https://www.construct-x.org/vocab/construction-project/project-type#> .
+@prefix conx-pht: <https://www.construct-x.org/vocab/construction-project/project-phase-type#> .
+@prefix conx-phs: <https://www.construct-x.org/vocab/construction-project/project-phase-status#> .
+@prefix conx-ps: <https://www.construct-x.org/vocab/construction-project/project-status#> .
+@prefix conx-si: <https://www.construct-x.org/vocab/construction-project/status-indicator#> .
+@prefix conx-por: <https://www.construct-x.org/vocab/construction-project/participation-role#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<https://www.construct-x.org/shapes/construction-project/vocabularies>
+    a owl:Ontology ;
+    owl:versionIRI <https://www.construct-x.org/shapes/construction-project/vocabularies/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    owl:imports
+      <https://www.construct-x.org/ontology/construction-project/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/project-type/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/project-phase-type/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/project-phase-status/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/project-status/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/status-indicator/0.1.0> ,
+      <https://www.construct-x.org/vocab/construction-project/participation-role/0.1.0> .
+
+conx-proj-sh:ProjectTypeVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:Project ;
+    sh:property [
+      sh:path conx-proj:projectType ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-pt:Newbuild conx-pt:Modification conx-pt:Renovation
+        conx-pt:Repair conx-pt:Demolition conx-pt:OperationMaintenance
+      )
+    ] .
+
+conx-proj-sh:ProjectStatusVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:Project ;
+    sh:property [
+      sh:path conx-proj:currentStatus ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-ps:OnTime conx-ps:Delayed conx-ps:Blocked conx-ps:Completed conx-ps:Terminated
+      )
+    ] .
+
+conx-proj-sh:StatusIndicatorVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:Project ;
+    sh:property [
+      sh:path conx-proj:statusIndicator ;
+      sh:nodeKind sh:IRI ;
+      sh:in ( conx-si:Green conx-si:Yellow conx-si:Red )
+    ] .
+
+conx-proj-sh:ProjectPhaseTypeVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectPhase ;
+    sh:property [
+      sh:path conx-proj:phaseType ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-pht:Initialization conx-pht:Offer conx-pht:Planning conx-pht:Bidding
+        conx-pht:Execution conx-pht:Completion
+      )
+    ] .
+
+conx-proj-sh:ProjectPhaseStatusVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectPhase ;
+    sh:property [
+      sh:path conx-proj:phaseStatus ;
+      sh:nodeKind sh:IRI ;
+      sh:in ( conx-phs:Planned conx-phs:InProcess conx-phs:Completed conx-phs:OnHold )
+    ] .
+
+conx-proj-sh:ParticipationRoleVocabularyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-proj:ProjectParticipation ;
+    sh:property [
+      sh:path conx-proj:hasRole ;
+      sh:nodeKind sh:IRI ;
+      sh:in (
+        conx-por:Client conx-por:GeneralContractor conx-por:Subcontractor conx-por:Planner
+        conx-por:ProjectLeader conx-por:Supplier conx-por:LogisticsProvider conx-por:Consultant
+      )
+    ] .

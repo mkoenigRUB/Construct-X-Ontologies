@@ -1,0 +1,106 @@
+@prefix conx-proj: <https://www.construct-x.org/ontology/construction-project#> .
+@prefix conx-pt: <https://www.construct-x.org/vocab/construction-project/project-type#> .
+@prefix conx-pht: <https://www.construct-x.org/vocab/construction-project/project-phase-type#> .
+@prefix conx-phs: <https://www.construct-x.org/vocab/construction-project/project-phase-status#> .
+@prefix conx-ps: <https://www.construct-x.org/vocab/construction-project/project-status#> .
+@prefix conx-si: <https://www.construct-x.org/vocab/construction-project/status-indicator#> .
+@prefix conx-por: <https://www.construct-x.org/vocab/construction-project/participation-role#> .
+@prefix ex: <https://data.example.com/project/alpha/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Referenzorganisationen: in diesem Entwurf bewusst untypisierte IRI-Referenzen;
+# die Typisierung (Organization/Person) erfolgt später durch die geplante
+# Core-Ontologie für Organisationen/Agenten. Für die SHACL-Prüfung genügt
+# sh:nodeKind sh:IRI auf conx-proj:member.
+
+ex:project-alpha
+    a conx-proj:Project ;
+    conx-proj:identifier "3f2c1a9e-5b6d-4c7e-8f9a-0b1c2d3e4f5a" ;
+    conx-proj:name "Verlegung Doppelboden 5. OG, Neubau Verwaltung" ;
+    conx-proj:description "Ausbauprojekt zur Verlegung des Doppelbodens im 5. Obergeschoss eines Neubaus." ;
+    conx-proj:projectType conx-pt:Newbuild ;
+    conx-proj:plannedStart "2026-09-01"^^xsd:date ;
+    conx-proj:plannedEnd "2027-04-30"^^xsd:date ;
+    conx-proj:actualStart "2026-09-03"^^xsd:date ;
+    conx-proj:currentStatus conx-ps:OnTime ;
+    conx-proj:statusIndicator conx-si:Green ;
+    conx-proj:progress "45"^^xsd:decimal ;
+    conx-proj:projectGoal "Fristgerechte Verlegung des Doppelbodens im 5. OG mit abgenommenem As-Built-Modell." ;
+    conx-proj:plannedBudget "2500000"^^xsd:decimal ;
+    conx-proj:currencyCode "EUR" ;
+    conx-proj:location "Bochum, Campus, Gebäude V1" ;
+    conx-proj:hasProjectPhase ex:phase-planning, ex:phase-execution, ex:phase-completion ;
+    conx-proj:hasParticipation ex:part-lindner-gu, ex:part-zueblin-nu, ex:part-zeppelin-log ;
+    conx-proj:hasDeliverable ex:deliv-doppelboden, ex:deliv-asbuilt .
+
+ex:phase-planning
+    a conx-proj:ProjectPhase ;
+    conx-proj:identifier "PHASE-01" ;
+    conx-proj:name "Planung" ;
+    conx-proj:phaseType conx-pht:Planning ;
+    conx-proj:ordinalNumber "1"^^xsd:nonNegativeInteger ;
+    conx-proj:phaseStatus conx-phs:Completed ;
+    conx-proj:plannedStart "2026-09-01"^^xsd:date ;
+    conx-proj:plannedEnd "2026-11-30"^^xsd:date ;
+    conx-proj:isPhaseOf ex:project-alpha .
+
+ex:phase-execution
+    a conx-proj:ProjectPhase ;
+    conx-proj:identifier "PHASE-02" ;
+    conx-proj:name "Ausführung" ;
+    conx-proj:phaseType conx-pht:Execution ;
+    conx-proj:ordinalNumber "2"^^xsd:nonNegativeInteger ;
+    conx-proj:phaseStatus conx-phs:InProcess ;
+    conx-proj:plannedStart "2026-12-01"^^xsd:date ;
+    conx-proj:plannedEnd "2027-03-31"^^xsd:date ;
+    conx-proj:isPhaseOf ex:project-alpha .
+
+ex:phase-completion
+    a conx-proj:ProjectPhase ;
+    conx-proj:identifier "PHASE-03" ;
+    conx-proj:name "Abschluss" ;
+    conx-proj:phaseType conx-pht:Completion ;
+    conx-proj:ordinalNumber "3"^^xsd:nonNegativeInteger ;
+    conx-proj:phaseStatus conx-phs:Planned ;
+    conx-proj:plannedStart "2027-04-01"^^xsd:date ;
+    conx-proj:plannedEnd "2027-04-30"^^xsd:date ;
+    conx-proj:isPhaseOf ex:project-alpha .
+
+ex:part-lindner-gu
+    a conx-proj:ProjectParticipation ;
+    conx-proj:identifier "PART-01" ;
+    conx-proj:member ex:org-lindner ;
+    conx-proj:hasRole conx-por:GeneralContractor ;
+    conx-proj:note "Verantwortlich für die Gesamtleitung der Ausbauarbeiten." ;
+    conx-proj:isParticipationOf ex:project-alpha .
+
+ex:part-zueblin-nu
+    a conx-proj:ProjectParticipation ;
+    conx-proj:identifier "PART-02" ;
+    conx-proj:member ex:org-zueblin ;
+    conx-proj:hasRole conx-por:Subcontractor ;
+    conx-proj:note "Zuständig für die Verlegung des Doppelbodens." ;
+    conx-proj:isParticipationOf ex:project-alpha .
+
+ex:part-zeppelin-log
+    a conx-proj:ProjectParticipation ;
+    conx-proj:identifier "PART-03" ;
+    conx-proj:member ex:org-zeppelin ;
+    conx-proj:hasRole conx-por:LogisticsProvider ;
+    conx-proj:isParticipationOf ex:project-alpha .
+
+ex:deliv-doppelboden
+    a conx-proj:ProjectDeliverable ;
+    conx-proj:identifier "DELIV-01" ;
+    conx-proj:name "Eingebauter Doppelboden 5. OG" ;
+    conx-proj:description "300 m² Doppelboden verlegt, geprüft und abgenommen." ;
+    conx-proj:isDeliverableOf ex:project-alpha .
+
+ex:deliv-asbuilt
+    a conx-proj:ProjectDeliverable ;
+    conx-proj:identifier "DELIV-02" ;
+    conx-proj:name "As-Built-Modell 5. OG" ;
+    conx-proj:description "Abgenommenes As-Built-Modell des ausgeführten Bereichs." ;
+    conx-proj:acceptanceDate "2027-04-28"^^xsd:date ;
+    conx-proj:isAccepted "false"^^xsd:boolean ;
+    conx-proj:isDeliverableOf ex:project-alpha .

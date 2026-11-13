@@ -1,0 +1,85 @@
+@prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-con-sh: <https://www.construct-x.org/shapes/construction-contract#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/shapes/construction-contract/core>
+    a owl:Ontology ;
+    owl:versionIRI <https://www.construct-x.org/shapes/construction-contract/core/0.1.0> ;
+    owl:versionInfo "0.1.0" ;
+    owl:imports <https://www.construct-x.org/ontology/construction-contract/0.1.0> ;
+    dcterms:title "Construct-X Construction Contract Core SHACL Profile"@en .
+
+conx-con-sh:ContractShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:Contract ;
+    sh:property [ sh:path conx-con:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:name ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:description ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:contractType ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:validFrom ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:validUntil ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:signingDate ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:commencementDate ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:terminationDate ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:contractValue ; sh:datatype xsd:decimal ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:currency ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:pricingModel ; sh:nodeKind sh:IRI ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:hasParty ; sh:class conx-con:ContractParty ; sh:minCount 1 ] ;
+    sh:property [ sh:path conx-con:hasContractItem ; sh:class conx-con:ContractItem ] ;
+    sh:property [ sh:path conx-con:hasObligation ; sh:class conx-con:Obligation ] ;
+    sh:property [ sh:path conx-con:subcontractOf ; sh:class conx-con:Contract ; sh:maxCount 1 ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "validFrom must not be later than validUntil."@en ;
+        sh:select """
+          PREFIX conx-con: <https://www.construct-x.org/ontology/construction-contract#>
+          SELECT $this WHERE {
+            $this conx-con:validFrom ?s ; conx-con:validUntil ?f .
+            FILTER (?s > ?f)
+          }
+        """
+    ] .
+
+conx-con-sh:ContractPartyShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:ContractParty ;
+    sh:property [ sh:path conx-con:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:member ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:hasRole ; sh:nodeKind sh:IRI ; sh:minCount 1 ] ;
+    sh:property [ sh:path conx-con:note ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:isPartyOf ; sh:class conx-con:Contract ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+conx-con-sh:ContractItemShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:ContractItem ;
+    sh:property [ sh:path conx-con:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:name ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:subjectType ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:quantity ; sh:datatype xsd:decimal ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:unit ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:itemPeriodFrom ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:itemPeriodUntil ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:isContractItemOf ; sh:class conx-con:Contract ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "itemPeriodFrom must not be later than itemPeriodUntil."@en ;
+        sh:select """
+          PREFIX conx-con: <https://www.construct-x.org/ontology/construction-contract#>
+          SELECT $this WHERE {
+            $this conx-con:itemPeriodFrom ?s ; conx-con:itemPeriodUntil ?f .
+            FILTER (?s > ?f)
+          }
+        """
+    ] .
+
+conx-con-sh:ObligationShape
+    a sh:NodeShape ;
+    sh:targetClass conx-con:Obligation ;
+    sh:property [ sh:path conx-con:identifier ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:description ; sh:datatype xsd:string ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:obligatedParty ; sh:class conx-con:ContractParty ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:dueDate ; sh:datatype xsd:date ; sh:maxCount 1 ] ;
+    sh:property [ sh:path conx-con:isObligationOf ; sh:class conx-con:Contract ; sh:minCount 1 ; sh:maxCount 1 ] .
