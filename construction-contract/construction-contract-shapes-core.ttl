@@ -30,7 +30,6 @@ conx-con-sh:ContractShape
     sh:property [ sh:path conx-con:hasParty ; sh:class conx-con:ContractParty ; sh:minCount 1 ] ;
     sh:property [ sh:path conx-con:hasContractItem ; sh:class conx-con:ContractItem ] ;
     sh:property [ sh:path conx-con:hasObligation ; sh:class conx-con:Obligation ] ;
-    sh:property [ sh:path conx-con:subcontractOf ; sh:class conx-con:Contract ; sh:maxCount 1 ] ;
     sh:sparql [
         a sh:SPARQLConstraint ;
         sh:message "validFrom must not be later than validUntil."@en ;

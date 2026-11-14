@@ -27,8 +27,8 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:label xml:lang="en">Contract</rdfs:label>
     <skos:altLabel xml:lang="de">Vertrag</skos:altLabel>
-    <rdfs:comment xml:lang="en">A contractual business relationship between one or more parties. The contract hierarchy (main/sub-contracts) is derived from the contracts themselves, not from a fixed organizational chart. Relations to a Project are defined in the project-contract link ontology.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Die Vertragshierarchie (Haupt-/Nachverträge) ergibt sich aus den Verträgen selbst, nicht aus einer fest verdrahteten Organisationsstruktur. Beziehungen zu einem Projekt werden in der project-contract Link-Ontologie definiert.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A contractual business relationship between one or more parties. Contracts are modeled in isolation (single-contract view); the aggregation of a contract chain (main/sub-contracts) into a project is done in the project context (project-contract link ontology). Special case: a party that is a joint venture / ARGE is still exactly one untyped IRI (see ContractParty.member).</rdfs:comment>
+    <rdfs:comment xml:lang="de">Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Verträge werden isoliert betrachtet (Einzelvertragssicht); das Zusammenführen einer Vertragskette (Haupt-/Nachverträge) zum Projekt erfolgt im Projekt bzw. über die project-contract Link-Ontologie. Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau eine untypisierte IRI (s. ContractParty.member).</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#commencementDate">
@@ -94,15 +94,6 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     <rdfs:label xml:lang="en">item period until</rdfs:label>
     <skos:altLabel xml:lang="de">Leistungszeitraum bis</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#hasUpstreamContract">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-contract#subcontractOf"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
-    <rdfs:label xml:lang="en">has upstream contract</rdfs:label>
-    <skos:altLabel xml:lang="de">hat übergeordneten Vertrag</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#identifier">
@@ -282,17 +273,6 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     <rdfs:label xml:lang="en">termination date</rdfs:label>
     <skos:altLabel xml:lang="de">Beendigungsdatum</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#subcontractOf">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-contract#Contract"/>
-    <rdfs:label xml:lang="en">subcontract of</rdfs:label>
-    <skos:altLabel xml:lang="de">ist Nachvertrag von</skos:altLabel>
-    <rdfs:comment xml:lang="en">Links a contract to its upstream (main) contract, so the contract hierarchy is derived from the contracts themselves.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Verknüpft einen Vertrag mit seinem übergeordneten (Haupt-)Vertrag, sodass die Vertragshierarchie aus den Verträgen selbst abgeleitet wird.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-contract"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-contract#quantity">

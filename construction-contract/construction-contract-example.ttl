@@ -10,11 +10,16 @@
 # die Typisierung (Organization / JointVenture) erfolgt später durch die
 # geplante Core-Ontologie für Organisationen/Agenten.
 
-# Vertragskette der Brücke-XY-Grafik (aus der Vertrags-Idee 3.4.7):
-# C01 DB -> ARGE (Hauptbauvertrag)
-#   C03 ARGE -> Lindner (Nachvertrag)
-#     C04 Lindner -> Zeppelin (Miete + Logistik)
-#       C06 Zueblin -> Zeppelin (Nach-Nachvertrag)
+# Einzelvertragssicht: Jeder Vertrag wird isoliert betrachtet (aus der
+# Brücke-XY-Vertragskette, Vertrags-Idee 3.4.7):
+# C01 DB <-> ARGE (Hauptbauvertrag)
+# C03 ARGE <-> Lindner (Werkvertrag)
+# C04 Lindner <-> Zeppelin (Logistik- und Mietvertrag)
+# Die Kette selbst wird NICHT in der Vertrags-Domäne verknüpft, sondern
+# erst im Projekt zusammengeführt (project-contract Link-Ontologie).
+# Spezialfall ARGE: das Joint Venture bleibt genau eine untypisierte IRI
+# (ex:jv-arge-porr-strabag-zueblin) als ContractParty.member — die
+# Zusammensetzung gehört zur Core-Org-Ontologie.
 
 ex:contract-c01
     a conx-con:Contract ;
@@ -61,7 +66,6 @@ ex:contract-c03
     conx-con:validUntil "2027-10-31"^^xsd:date ;
     conx-con:contractValue "8200000"^^xsd:decimal ;
     conx-con:currency "EUR" ;
-    conx-con:subcontractOf ex:contract-c01 ;
     conx-con:hasParty ex:party-arge-c03, ex:party-lindner-c03 ;
     conx-con:hasContractItem ex:item-c03-01 ;
     conx-con:hasObligation ex:obl-c03-01 .
@@ -110,7 +114,6 @@ ex:contract-c04
     conx-con:validUntil "2027-09-15"^^xsd:date ;
     conx-con:contractValue "1450000"^^xsd:decimal ;
     conx-con:currency "EUR" ;
-    conx-con:subcontractOf ex:contract-c03 ;
     conx-con:hasParty ex:party-lindner-c04, ex:party-zeppelin-c04 ;
     conx-con:hasContractItem ex:item-c04-01, ex:item-c04-02 .
 

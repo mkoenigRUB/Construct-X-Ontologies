@@ -1251,7 +1251,7 @@ graph TD
      Vertragswert, die <strong>Vertragsparteien</strong> (Person oder Organisation mit 
      Vertragsrolle), die <strong>geschuldeten Positionen</strong> (Gegenstand, Menge, 
      Zeitraum) sowie die <strong>Pflichten</strong> der Parteien. 
-     Nachunternehmerebenen werden über <code>subcontractOf</code> verknüpft; 
+     Verträge werden <strong>isoliert betrachtet (Einzelvertragssicht)</strong> — die Vertragskette (Haupt-/Nachverträge) wird erst im Projekt zusammengeführt (project-contract Link-Ontologie). Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau eine untypisierte IRI. 
      Beziehungen zu anderen Construct-X-Domänen laufen ausschließlich über 
      Link-Ontologien.</p>
 
@@ -1267,7 +1267,6 @@ graph TD
     CT -- "hasParty" --> CP
     CT -- "hasContractItem" --> CI
     CT -- "hasObligation" --> OB
-    CT -- "subcontractOf" --> CT
     CP -- "member" --> IRI
     CP -- "hasRole" --> SKOS
     CT -- "contractType / pricingModel" --> SKOS
@@ -1286,13 +1285,11 @@ graph TD
     <tr><td><code>isContractItemOf</code></td><td>ContractItem</td><td>Contract</td><td>Inverse von <code>hasContractItem</code></td><td>Verweis auf den Vertrag</td></tr>
     <tr><td><code>hasObligation</code></td><td>Contract</td><td>Obligation</td><td>— (mehrere)</td><td>Vertragspflicht</td></tr>
     <tr><td><code>isObligationOf</code></td><td>Obligation</td><td>Contract</td><td>Inverse von <code>hasObligation</code></td><td>Verweis auf den Vertrag</td></tr>
-    <tr><td><code>member</code></td><td>ContractParty</td><td>IRI</td><td>Functional, Pflicht</td><td>Vertragspartei als IRI</td></tr>
+    <tr><td><code>member</code></td><td>ContractParty</td><td>IRI</td><td>Functional, Pflicht</td><td>Vertragspartei als IRI (Joint Venture / ARGE = genau eine IRI)</td></tr>
     <tr><td><code>hasRole</code></td><td>ContractParty</td><td>skos:Concept</td><td>Functional, Pflicht</td><td>Vertragsrolle (Vokabular <code>contractual-role</code>)</td></tr>
     <tr><td><code>contractType</code></td><td>Contract</td><td>skos:Concept</td><td>Functional, Pflicht</td><td>Vertragsart (Vokabular <code>contract-type</code>)</td></tr>
     <tr><td><code>subjectType</code></td><td>ContractItem</td><td>skos:Concept</td><td>Functional</td><td>Art des Vertragsgegenstands (Vokabular <code>subject-type</code>)</td></tr>
     <tr><td><code>pricingModel</code></td><td>Contract</td><td>skos:Concept</td><td>Functional (optional)</td><td>Preisfindungsmodell (Vokabular <code>pricing-model</code>)</td></tr>
-    <tr><td><code>subcontractOf</code></td><td>Contract</td><td>Contract</td><td>Functional</td><td>Übergeordneter Vertrag (Nachunternehmerebene)</td></tr>
-    <tr><td><code>hasUpstreamContract</code></td><td>Contract</td><td>Contract</td><td>Inverse von <code>subcontractOf</code></td><td>Nachunternehmervertrag</td></tr>
     <tr><td><code>obligatedParty</code></td><td>Obligation</td><td>ContractParty</td><td>Functional, Pflicht</td><td>Zur Pflicht Verpflichtete Partei</td></tr>
   </table>
 
@@ -2590,7 +2587,6 @@ ex:contract-c03
     conx-con:identifier "C03" ;
     conx-con:name "Nachvertrag Brücke XY – Lindner" ;
     conx-con:contractType conx-ct:WorksContract ;
-    conx-con:subcontractOf ex:contract-c01 ;
     conx-con:hasObligation ex:obl-c03-01 .
 
 ex:obl-c03-01
@@ -2663,7 +2659,7 @@ ex:obl-c03-01
 <section id="validierung">
   <h2>19. Validierung</h2>
   <div class="ok">
-    <strong>Status: PASS (2026-11-12)</strong> — geprüft mit rdflib 6.3.2 + pySHACL 0.28.1 (dediziertes venv; rdflib 7.6.0 / pySHACL 0.40.1 finden 0 Shapes).
+    <strong>Status: PASS (2026-11-14)</strong> — geprüft mit rdflib 7.6.0 + pySHACL 0.40.1 (Repo-`.venv`; s. `scripts/README.md`).
   </div>
   <table>
     <tr><th>Prüfung</th><th>Ergebnis</th></tr>

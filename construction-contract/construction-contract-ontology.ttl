@@ -30,8 +30,8 @@ conx-con:Contract
     a owl:Class ;
     rdfs:label "Contract"@en ;
     skos:altLabel "Vertrag"@de ;
-    rdfs:comment "A contractual business relationship between one or more parties. The contract hierarchy (main/sub-contracts) is derived from the contracts themselves, not from a fixed organizational chart. Relations to a Project are defined in the project-contract link ontology."@en ;
-    rdfs:comment "Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Die Vertragshierarchie (Haupt-/Nachverträge) ergibt sich aus den Verträgen selbst, nicht aus einer fest verdrahteten Organisationsstruktur. Beziehungen zu einem Projekt werden in der project-contract Link-Ontologie definiert."@de ;
+    rdfs:comment "A contractual business relationship between one or more parties. Contracts are modeled in isolation (single-contract view); the aggregation of a contract chain (main/sub-contracts) into a project is done in the project context (project-contract link ontology). Special case: a party that is a joint venture / ARGE is still exactly one untyped IRI (see ContractParty.member)."@en ;
+    rdfs:comment "Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Verträge werden isoliert betrachtet (Einzelvertragssicht); das Zusammenführen einer Vertragskette (Haupt-/Nachverträge) zum Projekt erfolgt im Projekt bzw. über die project-contract Link-Ontologie. Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau eine untypisierte IRI (s. ContractParty.member)."@de ;
     rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
 
 conx-con:ContractParty
@@ -160,25 +160,6 @@ conx-con:pricingModel
     skos:altLabel "Vergütungsmodell"@de ;
     rdfs:comment "How the contract is priced (lump sum, unit price, hourly rate, rental per time unit, …), taken from the pricing model vocabulary."@en ;
     rdfs:comment "Wie der Vertrag vergütet wird (Pauschal, Einheitspreis, Stunden-/Tagessatz, Miete pro Zeiteinheit, …), aus dem Vokabular für Vergütungsmodelle."@de ;
-    rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
-
-conx-con:subcontractOf
-    a owl:ObjectProperty, owl:FunctionalProperty ;
-    rdfs:domain conx-con:Contract ;
-    rdfs:range conx-con:Contract ;
-    rdfs:label "subcontract of"@en ;
-    skos:altLabel "ist Nachvertrag von"@de ;
-    rdfs:comment "Links a contract to its upstream (main) contract, so the contract hierarchy is derived from the contracts themselves."@en ;
-    rdfs:comment "Verknüpft einen Vertrag mit seinem übergeordneten (Haupt-)Vertrag, sodass die Vertragshierarchie aus den Verträgen selbst abgeleitet wird."@de ;
-    rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
-
-conx-con:hasUpstreamContract
-    a owl:ObjectProperty ;
-    owl:inverseOf conx-con:subcontractOf ;
-    rdfs:domain conx-con:Contract ;
-    rdfs:range conx-con:Contract ;
-    rdfs:label "has upstream contract"@en ;
-    skos:altLabel "hat übergeordneten Vertrag"@de ;
     rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
 
 conx-con:obligatedParty
