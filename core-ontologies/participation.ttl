@@ -1,0 +1,125 @@
+# baseURI: https://www.construct-x.org/ontology/participation
+# prefix: conx-part
+
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-part: <https://www.construct-x.org/ontology/participation#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/participation>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Participation Ontology, version 0.2.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Participation-Ontologie, Version 0.2.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-27"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert eine allgemeine qualifizierte Zuordnung genau eines Agenten zu genau einer Rolle in genau einem fachlichen Kontext."@de ;
+  dcterms:description "Defines a general qualified assignment of exactly one agent to exactly one role in exactly one domain context."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-10-07"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <https://www.w3.org/TR/swbp-n-aryRelations/> ;
+  dcterms:source <https://www.w3.org/TR/vocab-org/> ;
+  dcterms:source <https://www.w3.org/TR/skos-reference/> ;
+  dcterms:title "Construct-X Participation Ontology"@en ;
+  dcterms:title "Construct-X Participation-Ontologie"@de ;
+  vann:preferredNamespacePrefix "conx-part" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/participation#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/participation/0.2.0> ;
+  owl:versionInfo "0.2.0" ;
+.
+
+## Classes
+
+conx-part:Participation
+  a owl:Class ;
+  rdfs:comment "Tatsaechlich geltende oder historisch gegoltene Zuordnung genau eines Agenten zu genau einer Rolle in genau einem fachlichen Kontext."@de ;
+  rdfs:comment "An actually applicable or historically applicable assignment of exactly one agent to exactly one role in exactly one domain context."@en ;
+  rdfs:label "Beteiligung"@de ;
+  rdfs:label "Participation"@en ;
+.
+
+conx-part:Role
+  a owl:Class ;
+  rdfs:comment "Kontrollierte Funktion, die ein Agent innerhalb einer Participation gegenueber einem fachlichen Kontext einnimmt. Konkrete Rollen werden als Referenzdaten ausserhalb der T-Box gepflegt."@de ;
+  rdfs:comment "Controlled function held by an agent within a Participation in relation to a domain context. Concrete roles are maintained as reference data outside the T-Box."@en ;
+  rdfs:label "Role"@en ;
+  rdfs:label "Rolle"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+## Object properties
+
+conx-part:participant
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt den Agenten, dessen Rolle durch die Participation beschrieben wird."@de ;
+  rdfs:comment "Specifies the agent whose role is described by the Participation."@en ;
+  rdfs:domain conx-part:Participation ;
+  rdfs:label "participant"@en ;
+  rdfs:label "beteiligter Agent"@de ;
+  rdfs:range conx-agent:Agent ;
+.
+
+conx-part:role
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die genau eine kontrollierte Rolle des Agenten innerhalb der Participation."@de ;
+  rdfs:comment "Specifies the single controlled role of the agent within the Participation."@en ;
+  rdfs:domain conx-part:Participation ;
+  rdfs:label "role"@en ;
+  rdfs:label "Rolle"@de ;
+  rdfs:range conx-part:Role ;
+.
+
+conx-part:context
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die fachliche Ressource, gegenueber der die Rollenzuordnung gilt. Der Kontexttyp bleibt bewusst offen."@de ;
+  rdfs:comment "Specifies the domain resource in relation to which the role assignment applies. The context type deliberately remains open."@en ;
+  rdfs:domain conx-part:Participation ;
+  rdfs:label "context"@en ;
+  rdfs:label "Kontext"@de ;
+.
+
+conx-part:hasParticipation
+  a owl:ObjectProperty ;
+  rdfs:label "hat Beteiligung"@de, "has participation"@en ;
+  rdfs:comment "Verknüpft einen fachlichen Kontext mit einer Beteiligungsinstanz, nicht unmittelbar mit einem Agenten. Optionale Navigation in Gegenrichtung zu context."@de ;
+  rdfs:comment "Links a domain context to a participation instance, not directly to an agent. Optional navigation in the inverse direction of context."@en ;
+  rdfs:range conx-part:Participation ;
+  owl:inverseOf conx-part:context ;
+.
+
+## Datatype properties
+
+conx-part:startDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Datum, ab dem die durch die Participation beschriebene Rollenzuordnung gilt oder galt."@de ;
+  rdfs:comment "Date from which the role assignment described by the Participation applies or applied."@en ;
+  rdfs:domain conx-part:Participation ;
+  rdfs:label "start date"@en ;
+  rdfs:label "Startdatum"@de ;
+  rdfs:range xsd:date ;
+.
+
+conx-part:endDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Datum, bis zu dem die durch die Participation beschriebene Rollenzuordnung gilt oder galt."@de ;
+  rdfs:comment "Date until which the role assignment described by the Participation applies or applied."@en ;
+  rdfs:domain conx-part:Participation ;
+  rdfs:label "end date"@en ;
+  rdfs:label "Enddatum"@de ;
+  rdfs:range xsd:date ;
+.

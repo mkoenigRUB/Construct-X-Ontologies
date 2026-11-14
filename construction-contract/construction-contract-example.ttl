@@ -1,4 +1,6 @@
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
 @prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
 @prefix conx-ct: <https://www.construct-x.org/vocab/construction-contract/contract-type#> .
 @prefix conx-crt: <https://www.construct-x.org/vocab/construction-contract/contractual-role#> .
 @prefix conx-cst: <https://www.construct-x.org/vocab/construction-contract/subject-type#> .
@@ -6,9 +8,10 @@
 @prefix ex: <https://data.example.com/project/bruecke-xy/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# Referenzorganisationen: in diesem Entwurf untypisierte IRI-Referenzen;
-# die Typisierung (Organization / JointVenture) erfolgt später durch die
-# geplante Core-Ontologie für Organisationen/Agenten.
+# Referenzorganisationen: Agenten der Construct-X-Core-Ontologien
+# (core-ontologies/agent.ttl, core-ontologies/organization.ttl).
+# ContractParty.member hat den Range conx-agent:Agent; die konkreten
+# Instanzen sind Organisationen (conx-org:LegalEntity).
 
 # Einzelvertragssicht: Jeder Vertrag wird isoliert betrachtet (aus der
 # Brücke-XY-Vertragskette, Vertrags-Idee 3.4.7):
@@ -17,9 +20,56 @@
 # C04 Lindner <-> Zeppelin (Logistik- und Mietvertrag)
 # Die Kette selbst wird NICHT in der Vertrags-Domäne verknüpft, sondern
 # erst im Projekt zusammengeführt (project-contract Link-Ontologie).
-# Spezialfall ARGE: das Joint Venture bleibt genau eine untypisierte IRI
-# (ex:jv-arge-porr-strabag-zueblin) als ContractParty.member — die
-# Zusammensetzung gehört zur Core-Org-Ontologie.
+# Spezialfall ARGE: das Joint Venture bleibt genau eine Organisation als
+# ContractParty.member — die Zusammensetzung (Porr/Strabag/Züblin) wird
+# über Mitgliedschaften der Core-Organisationsontologie modelliert.
+
+# --- Referenzorganisationen (Core-Ontologien) ---------------------------
+
+ex:org-db
+    a conx-org:LegalEntity ;
+    conx-org:name "Deutsche Bahn AG" .
+
+ex:org-lindner
+    a conx-org:LegalEntity ;
+    conx-org:name "Lindner AG" .
+
+ex:org-zeppelin
+    a conx-org:LegalEntity ;
+    conx-org:name "Zeppelin Baumaschinen GmbH" .
+
+ex:jv-arge-porr-strabag-zueblin
+    a conx-org:Organization ;
+    conx-org:name "ARGE Porr Strabag Züblin" .
+
+ex:org-porr
+    a conx-org:LegalEntity ;
+    conx-org:name "PORR AG" .
+
+ex:org-strabag
+    a conx-org:LegalEntity ;
+    conx-org:name "STRABAG SE" .
+
+ex:org-zueblin
+    a conx-org:LegalEntity ;
+    conx-org:name "Züblin AG" .
+
+# Mitgliedschaften der ARGE (Core-Organisationsontologie)
+
+ex:ms-arge-porr
+    a conx-org:Membership ;
+    conx-org:member ex:org-porr ;
+    conx-org:membershipOrganization ex:jv-arge-porr-strabag-zueblin .
+
+ex:ms-arge-strabag
+    a conx-org:Membership ;
+    conx-org:member ex:org-strabag ;
+    conx-org:membershipOrganization ex:jv-arge-porr-strabag-zueblin .
+
+ex:ms-arge-zueblin
+    a conx-org:Membership ;
+    conx-org:member ex:org-zueblin ;
+    conx-org:membershipOrganization ex:jv-arge-porr-strabag-zueblin .
 
 ex:contract-c01
     a conx-con:Contract ;

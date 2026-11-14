@@ -1,0 +1,109 @@
+# baseURI: https://www.construct-x.org/ontology/vso
+# prefix: conx-vso
+
+@prefix conx-vso: <https://www.construct-x.org/ontology/vso#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix opm: <https://w3id.org/opm#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/vso>
+  rdf:type owl:Ontology ;
+  dcterms:created "2026-08-06"^^xsd:date ;
+  dcterms:modified "2026-09-01"^^xsd:date ;
+  dcterms:description "Definiert ein systemneutrales Referenzmodell für die Zuweisung von Merkmalsdefinitionen, die Abbildung ihrer Zustände und die Angabe der jeweils verwendeten Einheit."@de ;
+  dcterms:description "Defines a system-neutral reference model for assigning property definitions, representing their states, and specifying the unit used for each state."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:title "Construct-X Value Semantics Ontology"@en ;
+  dcterms:title "Construct-X-Ontologie zur Wertsemantik"@de ;
+  vann:preferredNamespacePrefix "conx-vso";
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/vso#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/vso/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+  .
+
+conx-vso:AssignedProperty
+  rdf:type owl:Class ;
+  rdfs:comment "Repräsentiert die Zuweisung einer Merkmalsdefinition und genau eines Merkmalszustands an ein Bezugsobjekt."@de ;
+  rdfs:comment "Represents the assignment of one property definition and exactly one property state to a resource."@en ;
+  rdfs:label "Assigned property"@en ;
+  rdfs:label "Zugewiesenes Merkmal"@de ;
+  rdfs:subClassOf opm:Property ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-vso:hasPropertyReference ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-vso:hasPropertyState ;
+    ] ;
+.
+conx-vso:PropertyState
+  rdf:type owl:Class ;
+  rdfs:comment "Represents the state of a property assignment with exactly one value and an optional unit."@en ;
+  rdfs:comment "Repräsentiert den konkreten Zustand einer Merkmalszuweisung mit genau einem Wert und einer optional verwendeten Einheit."@de ;
+  rdfs:label "Merkmalszustand"@de ;
+  rdfs:label "Property state"@en ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf opm:PropertyState ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:value ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-vso:hasUsedUnit ;
+    ] ;
+.
+conx-vso:hasProperty
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Links a feature of interest to a property assignment associated with it."@en ;
+  rdfs:comment "Verknüpft ein Bezugsobjekt mit einer ihm eindeutig zugeordneten Merkmalszuweisung."@de ;
+  rdfs:label "has property assignment"@en ;
+  rdfs:label "hat Merkmalszuweisung"@de ;
+  rdfs:range conx-vso:AssignedProperty ;
+  rdfs:subPropertyOf owl:topObjectProperty ;
+.
+conx-vso:hasPropertyReference
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Links a property assignment to a property definition from any property system."@en ;
+  rdfs:comment "Verknüpft eine Merkmalszuweisung mit genau einer Merkmalsdefinition aus einem beliebigen Property-System."@de ;
+  rdfs:domain conx-vso:AssignedProperty ;
+  rdfs:label "references property definition"@en ;
+  rdfs:label "referenziert Merkmalsdefinition"@de ;
+  rdfs:subPropertyOf owl:topObjectProperty ;
+.
+conx-vso:hasPropertyState
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Links a property assignment to its single property state."@en ;
+  rdfs:comment "Verknüpft eine Merkmalszuweisung mit ihrem einzigen Merkmalszustand."@de ;
+  rdfs:domain conx-vso:AssignedProperty ;
+  rdfs:label "has property state"@en ;
+  rdfs:label "hat Merkmalszustand"@de ;
+  rdfs:range conx-vso:PropertyState ;
+  rdfs:subPropertyOf owl:topObjectProperty ;
+  rdfs:subPropertyOf opm:hasPropertyState ;
+.
+conx-vso:hasUsedUnit
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Gibt die Einheit an, in der der Wert eines konkreten Merkmalszustands angegeben ist."@de ;
+  rdfs:comment "Specifies the unit in which the value of a specific property state is expressed."@en ;
+  rdfs:domain conx-vso:PropertyState ;
+  rdfs:label "has used unit"@en ;
+  rdfs:label "hat verwendete Einheit"@de ;
+  rdfs:range qudt:Unit ;
+  rdfs:subPropertyOf owl:topObjectProperty ;
+.
+
+
+

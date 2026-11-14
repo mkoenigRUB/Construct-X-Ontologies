@@ -96,6 +96,7 @@
   .tag.cs { background: var(--cs); } .tag.bs { background: var(--bs); }
   .tag.boq { background: var(--boq); } .tag.cpr { background: var(--cpr); }
   .tag.site { background: #0e7490; } .tag.del { background: #b45309; } .tag.ba { background: #b91c1c; } .tag.nc { background: #6d28d9; } .tag.proj { background: #0f766e; } .tag.con { background: #4338ca; }
+.tag.core { background: #0e7490; }
   .tag.link { background: var(--link); } .tag.vocab { background: #57606a; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media (max-width: 900px) { .layout { flex-direction: column; } nav { width: 100%; height: auto; position: static; } .grid2 { grid-template-columns: 1fr; } }
@@ -106,12 +107,12 @@
 
 <header>
   <h1>Construct-X Ontologies</h1>
-  <p>Integriertes Draft-Paket: zehn Domänen-Ontologien, zehn Link-Ontologien und einunddreißig SKOS-Vokabulare
+  <p>Integriertes Draft-Paket: zehn Domänen-Ontologien, acht Core-Ontologien (übergeordnete Konzepte), zehn Link-Ontologien und einunddreißig SKOS-Vokabulare
      für Bauablaufpläne, Gliederungsstrukturen, Leistungsverzeichnisse, Baufortschrittsmeldungen,
      Baustellen und Baustellenanlieferungen.</p>
   <div class="badges">
-    <span class="badge">Stand: 2026-11-12</span>
-    <span class="badge">104 Turtle-Dateien</span>
+    <span class="badge">Stand: 2026-11-14</span>
+    <span class="badge">112 Turtle-Dateien</span>
     <span class="badge">Validierung: PASS</span>
     <span class="badge">Lizenz: CC-BY-4.0</span>
   </div>
@@ -133,13 +134,14 @@
   <a href="#notification">11. Notification Content</a>
   <a href="#project">12. Construction Project</a>
   <a href="#contract">13. Construction Contract</a>
-  <a href="#links">14. Link-Ontologien</a>
-  <a href="#vocab">15. Vokabulare</a>
-  <a href="#beispiele">16. Beispiele (Turtle)</a>
-  <a href="#converter">17. GAEB-Converter</a>
-  <a href="#usecase">18. Use Case</a>
-  <a href="#validierung">19. Validierung</a>
-  <a href="#jsonld">20. JSON-LD-Kontext</a>
+  <a href="#core">14. Core-Ontologien (übergeordnete Konzepte)</a>
+  <a href="#links">15. Link-Ontologien</a>
+  <a href="#vocab">16. Vokabulare</a>
+  <a href="#beispiele">17. Beispiele (Turtle)</a>
+  <a href="#converter">18. GAEB-Converter</a>
+  <a href="#usecase">19. Use Case</a>
+  <a href="#validierung">20. Validierung</a>
+  <a href="#jsonld">21. JSON-LD-Kontext</a>
 </nav>
 
 <main>
@@ -195,11 +197,11 @@
       die Ontologien zusammenhängen und was sich durchgängig modellieren lässt, und sollte
       vor dem Eintauchen in die einzelnen Domänen gelesen werden. Die Sektionen 4–13
       beschreiben die einzelnen Domänen-Ontologien (T-Box, ObjectProperties, Datentypen,
-      SHACL-Profile, A-Box-Beispiel). Sektion 14 fasst die Link-Ontologien zusammen,
-      Sektion 15 dokumentiert die SKOS-Vokabulare, ihre Nutzung (Bindung über
+      SHACL-Profile, A-Box-Beispiel). Sektion 15 fasst die Link-Ontologien zusammen,
+      Sektion 16 dokumentiert die SKOS-Vokabulare, ihre Nutzung (Bindung über
       SHACL-Profile, Referenzierung in Daten) sowie die Regeln für Synonyme und
-      externe Vokabular-Mappings. Sektion 16 zeigt die Beispieldaten als Turtle,
-      Sektion 17 die Validierungsergebnisse. Die T-Box-Diagramme zeigen das Schema
+      externe Vokabular-Mappings. Sektion 17 zeigt die Beispieldaten als Turtle,
+      Sektion 18 die Validierungsergebnisse. Die T-Box-Diagramme zeigen das Schema
       (Klassen und Properties), die A-Box-Diagramme konkrete Instanzen.</p>
 
   <h3>Manifest — Domänen-Ontologien</h3>
@@ -571,7 +573,7 @@ graph TD
   <p class="ns">Die drei Vokabulare <code>schedule-type</code>, <code>activity-status</code> und
      <code>precedence-relationship-type</code> werden über optionale SHACL-Profile
      eingebunden — Begriffe, Bindung und Nutzung:
-     <a href="#vocab-schedule">Sektion 15, Construction Schedule</a>.</p>
+     <a href="#vocab-schedule">Sektion 16, Construction Schedule</a>.</p>
 
   <h3>A-Box (Instanzen): Netzplan-Ausschnitt</h3>
   <div class="mermaid">
@@ -643,7 +645,7 @@ graph TD
 
   <p class="ns">Die vier Deutschland-spezifischen Knotentyp-Vokabulare für <code>nodeType</code>
      (de-wbs/lbs/sbs/cbs-node-type) sind ausschließlich in
-     <a href="#vocab-node-types">Sektion 15 (Vokabulare)</a> dokumentiert —
+     <a href="#vocab-node-types">Sektion 16 (Vokabulare)</a> dokumentiert —
      dort auch Begriffe, Quellen und die SHACL-Bindung.</p>
 
   <h3>A-Box (Instanzen): WBS-Hierarchie</h3>
@@ -719,7 +721,7 @@ graph TD
     <tr><td><code>isContainedIn</code> / <code>isSectionContainedIn</code></td><td>BoQItem / BoQSection</td><td>BillOfQuantities</td><td>Zugehörigkeit zum LV</td></tr>
     <tr><td><code>hasQuantitySplit</code> / <code>isQuantitySplitOf</code></td><td>BoQItem</td><td>QuantitySplit</td><td>Mengensplit einer Position</td></tr>
     <tr><td><code>hasUnitPriceComponent</code> / <code>isUnitPriceComponentOf</code></td><td>BoQItem</td><td>UnitPriceComponent</td><td>Einheitspreisanteil</td></tr>
-    <tr><td><code>hasPriceComponentType</code></td><td>UnitPriceComponent</td><td>skos:Concept</td><td>Typ des Anteils (Labor, Materials, …); Vokabular <code>boq-price-component-type</code>, Begriffe und Bindung: <a href="#vocab-boq">Sektion 15, GAEB BoQ</a></td></tr>
+    <tr><td><code>hasPriceComponentType</code></td><td>UnitPriceComponent</td><td>skos:Concept</td><td>Typ des Anteils (Labor, Materials, …); Vokabular <code>boq-price-component-type</code>, Begriffe und Bindung: <a href="#vocab-boq">Sektion 16, GAEB BoQ</a></td></tr>
     <tr><td><code>hasCatalogAssignment</code> / <code>isAssignmentOf</code></td><td>CatalogAssignableEntity</td><td>CatalogAssignment</td><td>Katalogzuordnung</td></tr>
     <tr><td><code>referencesExternalObject</code></td><td>CatalogAssignment</td><td>ExternalObjectReference</td><td>Externe Objektreferenz</td></tr>
     <tr><td><code>quantity</code> / <code>unitCode</code></td><td>QuantifiedEntity</td><td>decimal / string</td><td>Menge und Einheit</td></tr>
@@ -768,7 +770,7 @@ graph TD
     <tr><th>Property</th><th>Datentyp / Range</th><th>Merkmale</th><th>Beschreibung</th></tr>
     <tr><td><code>identifier</code></td><td>xsd:string</td><td>Functional, Pflicht (SHACL)</td><td>Fachliche Kennung der Meldung</td></tr>
     <tr><td><code>recordedAt</code></td><td>xsd:dateTime</td><td>Functional, Pflicht (SHACL)</td><td>Erfassungszeitpunkt</td></tr>
-    <tr><td><code>activityStatus</code></td><td>skos:Concept</td><td>Functional</td><td>Status des Vorgangs zum Erfassungszeitpunkt; optionales SHACL-Profil bindet das Activity-Status-Vokabular (geteilt mit Construction Schedule; Begriffe und Bindung: <a href="#vocab-progress">Sektion 15, Progress Report</a>)</td></tr>
+    <tr><td><code>activityStatus</code></td><td>skos:Concept</td><td>Functional</td><td>Status des Vorgangs zum Erfassungszeitpunkt; optionales SHACL-Profil bindet das Activity-Status-Vokabular (geteilt mit Construction Schedule; Begriffe und Bindung: <a href="#vocab-progress">Sektion 16, Progress Report</a>)</td></tr>
     <tr><td><code>completionPercentage</code></td><td>xsd:decimal</td><td>Functional, 0–100</td><td>Fertigstellungsgrad</td></tr>
     <tr><td><code>actualStart</code></td><td>xsd:dateTime</td><td>Functional</td><td>Tatsächlicher Start</td></tr>
     <tr><td><code>actualFinish</code></td><td>xsd:dateTime</td><td>Functional</td><td>Tatsächliches Ende</td></tr>
@@ -814,7 +816,7 @@ graph LR
   <p>Damit ergänzen sich <strong>CPR</strong> (punktuelle Meldung) und <strong>cxcp</strong>
   (prozesshafte, räumlich verortete Erfassung) zu einem zusammenhängenden
   Baufortschritts-Konzept. Die 8 <code>cxcp</code>-Terme sind zusätzlich im JSON-LD-Kontext
-  hinterlegt (Präfix <code>cxcp</code>, s. Sektion 20) und per SHACL-Profil abgesichert (inkl.
+  hinterlegt (Präfix <code>cxcp</code>, s. Sektion 21) und per SHACL-Profil abgesichert (inkl.
   eines Constraints, das für Transport sicherstellt, dass mindestens ein Element als Input und
   Output erhalten bleibt). Ein durchgängiges Beispiel (Lieferung → Transport → Einbau bis zum
   IFC-Element) liegt als SHACL-validiertes
@@ -917,7 +919,7 @@ graph TD
 
   <div class="note"><strong>SHACL-Profile:</strong> <code>core</code> (Pflichtfelder, Geometrie-Pflicht für SiteArea),
      <code>vocabularies</code> (Bindung der vier Site-Vokabulare; Begriffe und Bindung:
-     <a href="#vocab-site">Sektion 15, Construction Site</a>),
+     <a href="#vocab-site">Sektion 16, Construction Site</a>),
      <code>site-logistics</code>
      (fachliche Regeln: Übergabepunkt nur in Ladezone/Lager/Arbeitsbereich/Stellfläche; Kran benötigt genau eine
      Aufstellfläche, genau eine Sperrzone und Baustrom; Bauaufzug und Container analog; Lagerhilfsmittel benötigen Stellfläche)
@@ -1017,7 +1019,7 @@ graph TD
      <code>actualStart ≤ actualFinish</code>, Menge ≥ 0) und <code>vocabularies</code>
      (Bindung der Vokabulare <code>requirement-status</code> und <code>operation-type</code>;
      Begriffe und Bindung:
-     <a href="#vocab-delivery">Sektion 15, Construction Delivery</a>).</div>
+     <a href="#vocab-delivery">Sektion 16, Construction Delivery</a>).</div>
 
   <h3>A-Box (Instanzen): Anlieferung mit drei Logistikvorgängen</h3>
   <div class="mermaid">
@@ -1085,7 +1087,7 @@ graph TD
      Hierarchie-Regeln für räumliche Strukturelemente) und <code>vocabularies</code>
      (Bindung der Vokabulare <code>asset-type</code> und <code>spatial-structure-type</code>;
      Begriffe und Bindung:
-     <a href="#vocab-built-asset">Sektion 15, Built Asset</a>).</div>
+     <a href="#vocab-built-asset">Sektion 16, Built Asset</a>).</div>
 </section>
 
 
@@ -1146,7 +1148,7 @@ graph TD
   <div class="note"><strong>SHACL-Profil:</strong> <code>core</code> — Pflichtfelder
      (<code>notificationType</code> sowie je nach Typ <code>taskType</code>/
      <code>taskStatus</code>), geschlossene Wertebereiche der vier Vokabulare
-     (<a href="#vocab-notification">Sektion 15, Notification Content</a>) sowie
+     (<a href="#vocab-notification">Sektion 16, Notification Content</a>) sowie
      fachliche SPARQL-Regeln, z. B. &#8222;<code>TaskRequested</code> muss genau einen
      <code>taskType</code> und mindestens ein Target referenzieren&#8220; und
      &#8222;<code>DetailedScheduling</code> muss genau eine
@@ -1164,7 +1166,7 @@ graph TD
      Projektdaten (Typ, Status, Budget, Terminrahmen), die <strong>Planungsphasen</strong> 
      mit Ist-Status und Reihenfolge, die <strong>Beteiligungen</strong> (Person oder 
      Organisation mit Rolle) sowie die <strong>Ergebnisse</strong> (Liefergegenstände 
-     mit Abnahme). Beziehungen zu anderen Construct-X-Domänen laufen 
+     mit Abnahme). Beteiligungen verweisen auf <strong>Agenten der Core-Agenten-Ontologie</strong> (<code>conx-agent:Agent</code>, s. Sektion 14). Beziehungen zu anderen Construct-X-Domänen laufen 
      ausschließlich über Link-Ontologien.</p>
 
   <h3>T-Box (Schema)</h3>
@@ -1195,7 +1197,7 @@ graph TD
     <tr><td><code>isPhaseOf</code></td><td>ProjectPhase</td><td>Project</td><td>Inverse von <code>hasProjectPhase</code></td><td>Verweis auf das übergeordnete Projekt</td></tr>
     <tr><td><code>hasParticipation</code></td><td>Project</td><td>ProjectParticipation</td><td>— (mehrere)</td><td>Beteiligung am Projekt</td></tr>
     <tr><td><code>isParticipationOf</code></td><td>ProjectParticipation</td><td>Project</td><td>Inverse von <code>hasParticipation</code></td><td>Verweis auf das beteiligte Projekt</td></tr>
-    <tr><td><code>member</code></td><td>ProjectParticipation</td><td>IRI</td><td>Functional, Pflicht</td><td>Beteiligte Person oder Organisation</td></tr>
+    <tr><td><code>member</code></td><td>ProjectParticipation</td><td>conx-agent:Agent</td><td>Functional, Pflicht</td><td>Beteiligter Agent (Organisation oder Person) der Core-Agenten-Ontologie</td></tr>
     <tr><td><code>hasRole</code></td><td>ProjectParticipation</td><td>skos:Concept</td><td>Functional, Pflicht</td><td>Rolle der Beteiligung (Vokabular <code>participation-role</code>)</td></tr>
     <tr><td><code>hasDeliverable</code></td><td>Project</td><td>ProjectDeliverable</td><td>— (mehrere)</td><td>Ergebnis/Liefergegenstand des Projekts</td></tr>
     <tr><td><code>isDeliverableOf</code></td><td>ProjectDeliverable</td><td>Project</td><td>Inverse von <code>hasDeliverable</code></td><td>Verweis auf das zugehörige Projekt</td></tr>
@@ -1238,7 +1240,7 @@ graph TD
 
   <p class="ns">Die sechs Vokabulare werden über das optionale SHACL-Profil 
      <code>construction-project-shapes-vocabularies</code> eingebunden — Begriffe, 
-     Bindung und Nutzung: <a href="#vocab-project">Sektion 15, Construction Project</a>.</p>
+     Bindung und Nutzung: <a href="#vocab-project">Sektion 16, Construction Project</a>.</p>
 </section>
 
 
@@ -1251,7 +1253,7 @@ graph TD
      Vertragswert, die <strong>Vertragsparteien</strong> (Person oder Organisation mit 
      Vertragsrolle), die <strong>geschuldeten Positionen</strong> (Gegenstand, Menge, 
      Zeitraum) sowie die <strong>Pflichten</strong> der Parteien. 
-     Verträge werden <strong>isoliert betrachtet (Einzelvertragssicht)</strong> — die Vertragskette (Haupt-/Nachverträge) wird erst im Projekt zusammengeführt (project-contract Link-Ontologie). Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau eine untypisierte IRI. 
+     Verträge werden <strong>isoliert betrachtet (Einzelvertragssicht)</strong> — die Vertragskette (Haupt-/Nachverträge) wird erst im Projekt zusammengeführt (project-contract Link-Ontologie). Vertragsparteien verweisen auf <strong>Agenten der Core-Agenten-Ontologie</strong> (<code>conx-agent:Agent</code>, s. Sektion 14). Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, ist genau eine Organisation — die Zusammensetzung (z. B. Porr/Strabag/Züblin) wird über <code>conx-org:Membership</code> in der Core-Organisationsontologie modelliert. 
      Beziehungen zu anderen Construct-X-Domänen laufen ausschließlich über 
      Link-Ontologien.</p>
 
@@ -1285,7 +1287,7 @@ graph TD
     <tr><td><code>isContractItemOf</code></td><td>ContractItem</td><td>Contract</td><td>Inverse von <code>hasContractItem</code></td><td>Verweis auf den Vertrag</td></tr>
     <tr><td><code>hasObligation</code></td><td>Contract</td><td>Obligation</td><td>— (mehrere)</td><td>Vertragspflicht</td></tr>
     <tr><td><code>isObligationOf</code></td><td>Obligation</td><td>Contract</td><td>Inverse von <code>hasObligation</code></td><td>Verweis auf den Vertrag</td></tr>
-    <tr><td><code>member</code></td><td>ContractParty</td><td>IRI</td><td>Functional, Pflicht</td><td>Vertragspartei als IRI (Joint Venture / ARGE = genau eine IRI)</td></tr>
+    <tr><td><code>member</code></td><td>ContractParty</td><td>conx-agent:Agent</td><td>Functional, Pflicht</td><td>Vertragspartei als Agent der Core-Agenten-Ontologie (Joint Venture / ARGE = genau eine Organisation, Zusammensetzung über <code>conx-org:Membership</code>)</td></tr>
     <tr><td><code>hasRole</code></td><td>ContractParty</td><td>skos:Concept</td><td>Functional, Pflicht</td><td>Vertragsrolle (Vokabular <code>contractual-role</code>)</td></tr>
     <tr><td><code>contractType</code></td><td>Contract</td><td>skos:Concept</td><td>Functional, Pflicht</td><td>Vertragsart (Vokabular <code>contract-type</code>)</td></tr>
     <tr><td><code>subjectType</code></td><td>ContractItem</td><td>skos:Concept</td><td>Functional</td><td>Art des Vertragsgegenstands (Vokabular <code>subject-type</code>)</td></tr>
@@ -1323,14 +1325,61 @@ graph TD
 
   <p class="ns">Die vier Vokabulare werden über das optionale SHACL-Profil 
      <code>construction-contract-shapes-vocabularies</code> eingebunden — Begriffe, 
-     Bindung und Nutzung: <a href="#vocab-contract">Sektion 15, Construction Contract</a>.</p>
+     Bindung und Nutzung: <a href="#vocab-contract">Sektion 16, Construction Contract</a>.</p>
 </section>
 
 
 
 <!-- ============================================================ -->
+<section id="core">
+  <h2>14. <span class="tag core">CORE</span> Core-Ontologien <span class="ns">übergeordnete Konzepte</span></h2>
+  <p class="ns">Verzeichnis: <code>core-ontologies/</code> (Stand 2026-11-14; Autor: Sven Zentgraf, RUB; CC-BY-4.0)</p>
+
+  <p>Die Core-Ontologien sind die „übergeordneten Konzepte“ des
+     Construct-X-Ontologienetzwerks (Confluence: Status Ontologieentwicklung).
+     Sie sind <strong>keine Domänen-Ontologien</strong> — die
+     <a href="#architektur">Linking Rule</a> greift nicht — und werden von
+     den Domänen direkt als <code>rdfs:range</code> referenziert
+     (Präzedenz: <code>skos:Concept</code> in allen Vokabular-Properties,
+     GeoSPARQL in Built Asset/Site). Agent ist die gemeinsame Oberklasse für
+     alle Akteure (⊁ <code>foaf:Agent</code>); Person und Organization sind
+     deren Unterklassen. Seit 2026-11-14 tragen <code>ContractParty.member</code>
+     und <code>ProjectParticipation.member</code> den Range
+     <code>conx-agent:Agent</code>.</p>
+
+  <h3>Die acht Core-Ontologien</h3>
+  <table>
+    <tr><th>Ontologie</th><th>Präfix / IRI</th><th>Version</th><th>Kern</th></tr>
+    <tr><td><code>agent</code></td><td><code>conx-agent</code> / <code>…/ontology/agent#</code></td><td>0.1.0</td><td><code>Agent</code> (gemeinsame Oberklasse, ⊁ <code>foaf:Agent</code>)</td></tr>
+    <tr><td><code>person</code></td><td><code>conx-person</code> / <code>…/ontology/person#</code></td><td>0.1.0</td><td><code>Person</code> ⊁ Agent (Name, Geburtsdaten, Staatsangehörigkeit)</td></tr>
+    <tr><td><code>organization</code></td><td><code>conx-org</code> / <code>…/ontology/organization#</code></td><td>0.1.0</td><td><code>Organization</code> ⊁ Agent; <code>LegalEntity</code>, <code>Membership</code>, <code>LegalRepresentation</code></td></tr>
+    <tr><td><code>address</code></td><td><code>conx-addr</code> / <code>…/ontology/address#</code></td><td>0.1.0</td><td><code>Address</code>, <code>AddressAssignment</code>, <code>Country</code>…</td></tr>
+    <tr><td><code>participation</code></td><td><code>conx-part</code> / <code>…/ontology/participation#</code></td><td>0.2.0</td><td>allgemeine <code>Participation</code> (Agent + Rolle + Kontext; Kontext bewusst offen)</td></tr>
+    <tr><td><code>contact</code></td><td><code>conx-contact</code> / <code>…/ontology/contact#</code></td><td>0.1.0</td><td><code>ContactPoint</code>, <code>ContactMethod</code>…</td></tr>
+    <tr><td><code>document</code></td><td><code>conx-doc</code> / <code>…/ontology/document#</code></td><td>0.1.0</td><td><code>Document</code>, <code>DocumentReference</code>, <code>DocumentType</code>/<code>Status</code></td></tr>
+    <tr><td><code>vso</code></td><td><code>conx-vso</code> / <code>…/ontology/vso#</code></td><td>0.1.0</td><td><code>AssignedProperty</code>, <code>PropertyState</code> (Einheiten via QUDT/OPM)</td></tr>
+  </table>
+
+  <h3>Verwendung &amp; Spezialfall ARGE</h3>
+  <div class="note">
+    <strong>Range statt Import:</strong> Die Core-Ontologien werden
+    <em>nicht</em> per <code>owl:imports</code> eingezogen, sondern als
+    <code>rdfs:range</code> referenziert (erst bei stabiler Publikation).
+    SHACL bleibt <code>sh:nodeKind sh:IRI</code> <em>ohne</em>
+    <code>sh:class</code>: pySHACL mit <code>infer='none'</code> wendet
+    Subklassen-Ergebnisse nicht an, eine <code>sh:class conx-agent:Agent</code>
+    wäre auf nur <code>conx-org:LegalEntity</code>-typisierte Nodes
+    falsche Negativ. Die formale Typisierung lebt im Range der Ontologie.
+    <strong>ARGE / Joint Venture:</strong> bleibt genau <em>ein</em>
+    <code>conx-agent:Agent</code> (eine <code>conx-org:Organization</code>); die
+    Zusammensetzung (Porr/Strabag/Züblin) wird über
+    <code>conx-org:Membership</code> in der Core-Organisationsontologie
+    modelliert, nicht in der Vertrags- oder Projekt-Domäne.</div>
+</section>
+
+<!-- ============================================================ -->
 <section id="links">
-  <h2>14. <span class="tag link">LINK</span> Link-Ontologien</h2>
+  <h2>15. <span class="tag link">LINK</span> Link-Ontologien</h2>
 
   <h3>schedule-breakdown-link <span class="ns">v0.6.0 · conx-sbl</span></h3>
   <table>
@@ -1457,7 +1506,7 @@ graph TB
 
 <!-- ============================================================ -->
 <section id="vocab">
-  <h2>15. <span class="tag vocab">VOCAB</span> SKOS-Vokabulare</h2>
+  <h2>16. <span class="tag vocab">VOCAB</span> SKOS-Vokabulare</h2>
   <p>Alle Vokabulare sind <code>skos:ConceptScheme</code>s mit <code>skos:Concept</code>-Instanzen.
      Sie werden <strong>nicht</strong> von den Domänen-Ontologien importiert, sondern über
      <strong>optionale SHACL-Profile</strong> als Wertebereichsrestriktion eingebunden
@@ -2318,7 +2367,7 @@ WHERE {
 
 <!-- ============================================================ -->
 <section id="beispiele">
-  <h2>16. Beispiele (Turtle)</h2>
+  <h2>17. Beispiele (Turtle)</h2>
   <p>Alle Beispiele liegen als <code>*-example.ttl</code> in den jeweiligen Ordnern und
      bestehen die SHACL-Validierung gegen die Core-Shapes (mit Ontologie-Kontext).</p>
 
@@ -2524,12 +2573,19 @@ ex:sa-a100
 
   <h3>Construction Project</h3>
   <pre><code>@prefix ex: &lt;https://data.example.com/project/alpha/&gt; .
+@prefix conx-agent: &lt;https://www.construct-x.org/ontology/agent#&gt; .
+@prefix conx-org: &lt;https://www.construct-x.org/ontology/organization#&gt; .
 @prefix conx-proj: &lt;https://www.construct-x.org/ontology/construction-project#&gt; .
 @prefix conx-pt: &lt;https://www.construct-x.org/vocab/construction-project/project-type#&gt; .
 @prefix conx-ps: &lt;https://www.construct-x.org/vocab/construction-project/project-status#&gt; .
 @prefix conx-si: &lt;https://www.construct-x.org/vocab/construction-project/status-indicator#&gt; .
 @prefix conx-por: &lt;https://www.construct-x.org/vocab/construction-project/participation-role#&gt; .
 @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+# Beteiligte Agenten (Core-Ontologien, Sektion 14)
+ex:org-lindner  a conx-org:LegalEntity ; conx-org:name "Lindner AG" .
+ex:org-zueblin  a conx-org:LegalEntity ; conx-org:name "Züblin AG" .
+ex:org-zeppelin a conx-org:LegalEntity ; conx-org:name "Zeppelin Baumaschinen GmbH" .
 
 ex:project-alpha
     a conx-proj:Project ;
@@ -2556,11 +2612,21 @@ ex:part-lindner-gu
 
   <h3>Construction Contract</h3>
   <pre><code>@prefix ex: &lt;https://data.example.com/project/bruecke-xy/&gt; .
+@prefix conx-agent: &lt;https://www.construct-x.org/ontology/agent#&gt; .
 @prefix conx-con: &lt;https://www.construct-x.org/ontology/construction-contract#&gt; .
+@prefix conx-org: &lt;https://www.construct-x.org/ontology/organization#&gt; .
 @prefix conx-ct: &lt;https://www.construct-x.org/vocab/construction-contract/contract-type#&gt; .
 @prefix conx-crt: &lt;https://www.construct-x.org/vocab/construction-contract/contractual-role#&gt; .
 @prefix conx-cpm: &lt;https://www.construct-x.org/vocab/construction-contract/pricing-model#&gt; .
 @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+# Vertragsparteien als Agenten (Core-Ontologien, Sektion 14)
+ex:org-db a conx-org:LegalEntity ; conx-org:name "Deutsche Bahn AG" .
+ex:org-lindner a conx-org:LegalEntity ; conx-org:name "Lindner AG" .
+ex:jv-arge-porr-strabag-zueblin a conx-org:Organization ; conx-org:name "ARGE Porr Strabag Züblin" .
+ex:ms-arge-porr a conx-org:Membership ; conx-org:member ex:org-porr ;
+    conx-org:membershipOrganization ex:jv-arge-porr-strabag-zueblin .
+# (weitere Memberships: Strabag, Züblin)
 
 ex:contract-c01
     a conx-con:Contract ;
@@ -2600,7 +2666,7 @@ ex:obl-c03-01
 
 <!-- ============================================================ -->
 <section id="converter">
-  <h2>17. GAEB-Converter (Java)</h2>
+  <h2>18. GAEB-Converter (Java)</h2>
   <p>Der Converter <code>Converter/</code> (Maven-Multimodul, Java 17, Apache Jena 4.10, Spring Boot 3.2.5)
   wandelt GAEB DA XML 3.3 (Datenaustauschphasen X80–X87) in Construct-X GAEB-BoQ-Turtle um.
   Er ist der erste der in der <a href="#usecase">Use-Case-Gesamtübersicht</a> skizzierten
@@ -2634,7 +2700,7 @@ ex:obl-c03-01
 <!-- ============================================================ -->
 
 <section id="usecase">
-  <h2>18. Use Case: Ontologien im Datenraum</h2>
+  <h2>19. Use Case: Ontologien im Datenraum</h2>
   <p>Im Verzeichnis <code>usecase/</code> ist ein durchgängiges Anwendungsszenario dokumentiert,
   das zeigt, wie die Ontologien den organisationsübergreifenden Datenaustausch ermöglichen:</p>
   <ul>
@@ -2657,13 +2723,13 @@ ex:obl-c03-01
 <!-- ============================================================ -->
 
 <section id="validierung">
-  <h2>19. Validierung</h2>
+  <h2>20. Validierung</h2>
   <div class="ok">
     <strong>Status: PASS (2026-11-14)</strong> — geprüft mit rdflib 7.6.0 + pySHACL 0.40.1 (Repo-`.venv`; s. `scripts/README.md`).
   </div>
   <table>
     <tr><th>Prüfung</th><th>Ergebnis</th></tr>
-    <tr><td>Turtle-Parsing aller 104 Dateien (inkl. SKOS-Mapping-Beispiel und cxcp-Extension)</td><td>✅ keine Fehler</td></tr>
+    <tr><td>Turtle-Parsing aller 112 Dateien (inkl. SKOS-Mapping-Beispiel und cxcp-Extension)</td><td>✅ keine Fehler</td></tr>
     <tr><td>RDF/XML-Parsing aller 51 Dateien</td><td>✅ keine Fehler</td></tr>
     <tr><td>SHACL: Delivery-Beispiel vs. Core + Vokabular-Shapes</td><td>✅ 0 Verletzungen</td></tr>
     <tr><td>SHACL: Site-Beispiel vs. Core + Vokabular + Site-Logistics + Area-Allocation-Shapes</td><td>✅ 0 Verletzungen</td></tr>
@@ -2675,7 +2741,7 @@ ex:obl-c03-01
     <tr><td>Architektur: keine Cross-Domain-Properties in Domänen</td><td>✅ konform</td></tr>
     <tr><td>Architektur: Link-Ontologien importieren exakte Versionen</td><td>✅ konform</td></tr>
     <tr><td>Präfix-Kollisionen (vann:preferredNamespacePrefix)</td><td>✅ keine (conx-sbl → conx-sbdl korrigiert)</td></tr>
-    <tr><td>MANIFEST.json ↔ owl:versionInfo (54 Einträge)</td><td>✅ identisch</td></tr>
+    <tr><td>MANIFEST.json ↔ owl:versionInfo (62 Einträge)</td><td>✅ identisch</td></tr>
     <tr><td>Dangling-IRIs im Construct-X-Namenraum</td><td>✅ keine</td></tr>
     <tr><td>GAEB-Converter: <code>mvn clean verify</code> (2026-10-28)</td><td>✅ BUILD SUCCESS — Core 13/13, Web 7/7 Tests</td></tr>
   </table>
@@ -2723,7 +2789,7 @@ ex:obl-c03-01
 <!-- ============================================================ -->
 
 <section id="jsonld">
-  <h2>20. JSON-LD-Kontext</h2>
+  <h2>21. JSON-LD-Kontext</h2>
   <div class="ok">
     <strong>Status: PASS (2026-11-06, cxcp-Erweiterung)</strong> — geprüft mit Jena 4.10.0 im selbstständigen
     Verifikationsprojekt <code>contexts/validation/</code> (Java 25 / Maven 3.9.9).

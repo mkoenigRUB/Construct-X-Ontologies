@@ -7,136 +7,22 @@
    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
    xmlns:vann="http://purl.org/vocab/vann/"
 >
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isParticipationOf">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isPhaseOf">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasParticipation"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:label xml:lang="en">is participation of</rdfs:label>
-    <skos:altLabel xml:lang="de">ist Beteiligung von</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#plannedStart">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
-    <rdfs:label xml:lang="en">planned start</rdfs:label>
-    <skos:altLabel xml:lang="de">geplanter Beginn</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#projectType">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-    <rdfs:label xml:lang="en">project type</rdfs:label>
-    <skos:altLabel xml:lang="de">Projekttyp</skos:altLabel>
-    <rdfs:comment xml:lang="en">The kind of project (new build, modification, repair, …), taken from the project type vocabulary.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Die Art des Projekts (Neubau, Umbau, Instandsetzung, …), aus dem Vokabular für Projekttypen.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#statusIndicator">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-    <rdfs:label xml:lang="en">status indicator</rdfs:label>
-    <skos:altLabel xml:lang="de">Ampelstatus</skos:altLabel>
-    <rdfs:comment xml:lang="en">The traffic-light indicator (green, yellow, red) for the project health, taken from the status indicator vocabulary.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Der Ampelstatus (grün, gelb, rot) für die Projektfähigkeit, aus dem Vokabular für Statusindikatoren.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasSubProject">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:label xml:lang="en">has sub-project</rdfs:label>
-    <skos:altLabel xml:lang="de">hat Teilprojekt</skos:altLabel>
-    <rdfs:comment xml:lang="en">Optional decomposition of a project into sub-projects. Nesting depth and cardinality are intentionally not fixed in this draft.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Optionale Zerlegung eines Projekts in Teilprojekte. Verschachtelungstiefe und Kardinalität sind in diesem Entwurf bewusst nicht festgelegt.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#phaseStatus">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasProjectPhase"/>
     <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectPhase"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-    <rdfs:label xml:lang="en">phase status</rdfs:label>
-    <skos:altLabel xml:lang="de">Phasenstatus</skos:altLabel>
-    <rdfs:comment xml:lang="en">The status of the phase, taken from the project phase status vocabulary.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Der Status der Phase, aus dem Vokabular für Projektphasen-Status.</rdfs:comment>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:label xml:lang="en">is phase of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Phase von</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#member">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isSubProjectOf">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
-    <rdfs:label xml:lang="en">member</rdfs:label>
-    <skos:altLabel xml:lang="de">Mitglied</skos:altLabel>
-    <rdfs:comment xml:lang="en">The participating organization or person. Intended to be typed by the (planned) core organization/agent ontology; in this draft it is an untyped IRI reference.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Die beteiligte Organisation oder Person. Soll durch die (geplante) Core-Ontologie für Organisationen/Agenten typisiert werden; in diesem Entwurf eine nicht typisierte IRI-Referenz.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isAccepted">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectDeliverable"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-    <rdfs:label xml:lang="en">is accepted</rdfs:label>
-    <skos:altLabel xml:lang="de">ist abgenommen</skos:altLabel>
-    <rdfs:comment xml:lang="en">Whether the deliverable has been formally accepted.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Ob der Liefergegenstand formal abgenommen wurde.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#plannedEnd">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
-    <rdfs:label xml:lang="en">planned end</rdfs:label>
-    <skos:altLabel xml:lang="de">geplantes Ende</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasRole">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
-    <rdfs:label xml:lang="en">has role</rdfs:label>
-    <skos:altLabel xml:lang="de">hat Rolle</skos:altLabel>
-    <rdfs:comment xml:lang="en">The role of the member within this project, taken from the participation role vocabulary.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Die Rolle des Mitglieds in diesem Projekt, aus dem Vokabular für Beteiligungsrollen.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#description">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">description</rdfs:label>
-    <skos:altLabel xml:lang="de">Beschreibung</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ProjectPhase">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="en">Project Phase</rdfs:label>
-    <skos:altLabel xml:lang="de">Projektphase</skos:altLabel>
-    <rdfs:comment xml:lang="en">An ordered planning phase of a project (e.g. planning, bidding, execution) with its own type, status and time frame.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Eine geordnete Planungsphase eines Projekts (z. B. Planung, Ausschreibung, Ausführung) mit eigenem Typ, Status und Zeitfenster.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#actualStart">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
-    <rdfs:label xml:lang="en">actual start</rdfs:label>
-    <skos:altLabel xml:lang="de">tatsächlicher Beginn</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#location">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasSubProject"/>
     <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">location</rdfs:label>
-    <skos:altLabel xml:lang="de">Standort</skos:altLabel>
-    <rdfs:comment xml:lang="en">A coordinate or address for the project location, as a free-text reference. Intended to be replaced by a typed geolocation/address (planned core ontology) later.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Eine Koordinate oder Adresse für den Projektstandort als frei formatierte Referenz. Soll später durch eine typisierte Geolocation/Adresse (geplante Core-Ontologie) ersetzt werden.</rdfs:comment>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:label xml:lang="en">is sub-project of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Teilprojekt von</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isDeliverableOf">
@@ -148,12 +34,55 @@
     <skos:altLabel xml:lang="de">ist Ergebnis von</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ProjectParticipation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="en">Project Participation</rdfs:label>
-    <skos:altLabel xml:lang="de">Projektbeteiligung</skos:altLabel>
-    <rdfs:comment xml:lang="en">The participation of a member (organization or person) in a project in a specific role. Roles are project-specific: the same organization can be client in one project and contractor in another.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Die Beteiligung eines Mitglieds (Organisation oder Person) an einem Projekt in einer bestimmten Rolle. Rollen sind projektspezifisch: dieselbe Organisation kann in einem Projekt Auftraggeber und in einem anderen Auftragnehmer sein.</rdfs:comment>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/construction-project/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+    <dcterms:title xml:lang="en">Construct-X Construction Project Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X-Ontologie für Bauprojekte</dcterms:title>
+    <dcterms:description xml:lang="en">Describes a construction project with its master data, planning phases, participations (members and roles) and key deliverables. Cross-domain relations to schedule, breakdown, bill of quantities, site, delivery and built asset are defined in dedicated link ontologies.</dcterms:description>
+    <dcterms:description xml:lang="de">Beschreibt ein Bauprojekt mit Stammdaten, Planungsphasen, Beteiligungen (Mitglieder und Rollen) und wesentlichen Ergebnissen/Liefergegenständen. Domänenübergreifende Beziehungen zu Terminplan, Gliederung, Leistungsverzeichnis, Baustelle, Lieferung und Bauwerk werden in dedizierten Link-Ontologien definiert.</dcterms:description>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/construct-x"/>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:modified>
+    <dcterms:source xml:lang="de">Construct-X working documents: Ontologien &amp; Standards für Projekte (3.4.7) and Arbeitsdokument Project, 2026-11-10</dcterms:source>
+    <vann:preferredNamespacePrefix>conx-proj</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/construction-project#</vann:preferredNamespaceUri>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#identifier">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">identifier</rdfs:label>
+    <skos:altLabel xml:lang="de">Kennung</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isParticipationOf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasParticipation"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:label xml:lang="en">is participation of</rdfs:label>
+    <skos:altLabel xml:lang="de">ist Beteiligung von</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ordinalNumber">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:label xml:lang="en">ordinal number</rdfs:label>
+    <skos:altLabel xml:lang="de">Ordnungszahl</skos:altLabel>
+    <rdfs:comment xml:lang="en">The order of the element (e.g. phase) within its sequence.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Ordnungszahl des Elements (z. B. Phase) innerhalb seiner Folge.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#plannedEnd">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">planned end</rdfs:label>
+    <skos:altLabel xml:lang="de">geplantes Ende</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#acceptanceDate">
@@ -173,61 +102,73 @@
     <skos:altLabel xml:lang="de">hat Beteiligung</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isSubProjectOf">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#Project">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Project</rdfs:label>
+    <skos:altLabel xml:lang="de">Bauprojekt</skos:altLabel>
+    <rdfs:comment xml:lang="en">A construction project as the overarching unit of planning, execution and reporting. It is identified by a stable identifier (GUID) and carries master data, planning phases, participations and key deliverables.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Ein Bauprojekt als übergeordnete Einheit der Planung, Ausführung und Berichterstattung. Es wird durch eine stabile Kennung (GUID) identifiziert und trägt Stammdaten, Planungsphasen, Beteiligungen und wesentliche Ergebnisse.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#statusIndicator">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasSubProject"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:label xml:lang="en">is sub-project of</rdfs:label>
-    <skos:altLabel xml:lang="de">ist Teilprojekt von</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#actualEnd">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
-    <rdfs:label xml:lang="en">actual end</rdfs:label>
-    <skos:altLabel xml:lang="de">tatsächliches Ende</skos:altLabel>
-    <rdfs:comment xml:lang="en">The date the project was actually completed; also serves as the project closure date.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Das Datum der tatsächlichen Fertigstellung; dient zugleich als Abschlussdatum des Projekts.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#progress">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
     <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    <rdfs:label xml:lang="en">progress</rdfs:label>
-    <skos:altLabel xml:lang="de">Fortschritt</skos:altLabel>
-    <rdfs:comment xml:lang="en">Overall project progress in percent from 0 to 100.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Gesamtfortschritt des Projekts in Prozent von 0 bis 100.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">status indicator</rdfs:label>
+    <skos:altLabel xml:lang="de">Ampelstatus</skos:altLabel>
+    <rdfs:comment xml:lang="en">The traffic-light indicator (green, yellow, red) for the project health, taken from the status indicator vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Der Ampelstatus (grün, gelb, rot) für die Projektfähigkeit, aus dem Vokabular für Statusindikatoren.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#identifier">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">identifier</rdfs:label>
-    <skos:altLabel xml:lang="de">Kennung</skos:altLabel>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#projectGoal">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">project goal</rdfs:label>
-    <skos:altLabel xml:lang="de">Projektziel</skos:altLabel>
-    <rdfs:comment xml:lang="en">The overarching goal of the project, as a free-text description.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Das übergeordnete Ziel des Projekts als freitextliche Beschreibung.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isPhaseOf">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#member">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/construction-project#hasProjectPhase"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/agent#Agent"/>
+    <rdfs:label xml:lang="en">member</rdfs:label>
+    <skos:altLabel xml:lang="de">Mitglied</skos:altLabel>
+    <rdfs:comment xml:lang="en">The participating organization or person. References an agent of the Construct-X core agent ontology; the range is the common superclass, concrete instances are typically organizations (core organization ontology) or persons (core person ontology). A joint venture is exactly one such agent (composition via core organization memberships).</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die beteiligte Organisation oder Person. Verweist auf einen Agenten der Construct-X-Core-Agenten-Ontologie; der Range ist die gemeinsame Oberklasse, konkrete Instanzen sind typischerweise Organisationen (Core-Organisationsontologie) oder Personen (Core-Personenontologie). Ein Joint Venture ist genau ein solcher Agent (Zusammensetzung über Mitgliedschaften der Core-Organisationsontologie).</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#isAccepted">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectDeliverable"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:label xml:lang="en">is accepted</rdfs:label>
+    <skos:altLabel xml:lang="de">ist abgenommen</skos:altLabel>
+    <rdfs:comment xml:lang="en">Whether the deliverable has been formally accepted.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Ob der Liefergegenstand formal abgenommen wurde.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#phaseStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
     <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectPhase"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:label xml:lang="en">is phase of</rdfs:label>
-    <skos:altLabel xml:lang="de">ist Phase von</skos:altLabel>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">phase status</rdfs:label>
+    <skos:altLabel xml:lang="de">Phasenstatus</skos:altLabel>
+    <rdfs:comment xml:lang="en">The status of the phase, taken from the project phase status vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Der Status der Phase, aus dem Vokabular für Projektphasen-Status.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#note">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">note</rdfs:label>
+    <skos:altLabel xml:lang="de">Hinweis</skos:altLabel>
+    <rdfs:comment xml:lang="en">Optional note on the participation (e.g. validity period, remarks).</rdfs:comment>
+    <rdfs:comment xml:lang="de">Optionaler Hinweis zur Beteiligung (z. B. Gültigkeitszeitraum, Bemerkungen).</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#description">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">description</rdfs:label>
+    <skos:altLabel xml:lang="de">Beschreibung</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#phaseType">
@@ -239,6 +180,16 @@
     <skos:altLabel xml:lang="de">Phasentyp</skos:altLabel>
     <rdfs:comment xml:lang="en">The type of the phase, taken from the project phase type vocabulary.</rdfs:comment>
     <rdfs:comment xml:lang="de">Der Typ der Phase, aus dem Vokabular für Projektphasen-Typen.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#actualEnd">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">actual end</rdfs:label>
+    <skos:altLabel xml:lang="de">tatsächliches Ende</skos:altLabel>
+    <rdfs:comment xml:lang="en">The date the project was actually completed; also serves as the project closure date.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Das Datum der tatsächlichen Fertigstellung; dient zugleich als Abschlussdatum des Projekts.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#currentStatus">
@@ -260,6 +211,96 @@
     <rdfs:comment xml:lang="de">Ein wesentliches Ergebnis oder Liefergegenstand eines Projekts (z. B. ein abgeschlossener Bauabschnitt, ein As-Built-Modell), der einer Abnahme, Übergabe oder Inbetriebnahme unterliegt.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#plannedStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">planned start</rdfs:label>
+    <skos:altLabel xml:lang="de">geplanter Beginn</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#projectGoal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">project goal</rdfs:label>
+    <skos:altLabel xml:lang="de">Projektziel</skos:altLabel>
+    <rdfs:comment xml:lang="en">The overarching goal of the project, as a free-text description.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Das übergeordnete Ziel des Projekts als freitextliche Beschreibung.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ProjectParticipation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Project Participation</rdfs:label>
+    <skos:altLabel xml:lang="de">Projektbeteiligung</skos:altLabel>
+    <rdfs:comment xml:lang="en">The participation of a member (organization or person) in a project in a specific role. Roles are project-specific: the same organization can be client in one project and contractor in another.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Beteiligung eines Mitglieds (Organisation oder Person) an einem Projekt in einer bestimmten Rolle. Rollen sind projektspezifisch: dieselbe Organisation kann in einem Projekt Auftraggeber und in einem anderen Auftragnehmer sein.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#actualStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">actual start</rdfs:label>
+    <skos:altLabel xml:lang="de">tatsächlicher Beginn</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasDeliverable">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectDeliverable"/>
+    <rdfs:label xml:lang="en">has deliverable</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Ergebnis / Liefergegenstand</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#progress">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <rdfs:label xml:lang="en">progress</rdfs:label>
+    <skos:altLabel xml:lang="de">Fortschritt</skos:altLabel>
+    <rdfs:comment xml:lang="en">Overall project progress in percent from 0 to 100.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Gesamtfortschritt des Projekts in Prozent von 0 bis 100.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#location">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">location</rdfs:label>
+    <skos:altLabel xml:lang="de">Standort</skos:altLabel>
+    <rdfs:comment xml:lang="en">A coordinate or address for the project location, as a free-text reference. Intended to be replaced by a typed geolocation/address (planned core ontology) later.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Eine Koordinate oder Adresse für den Projektstandort als frei formatierte Referenz. Soll später durch eine typisierte Geolocation/Adresse (geplante Core-Ontologie) ersetzt werden.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasRole">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">has role</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Rolle</skos:altLabel>
+    <rdfs:comment xml:lang="en">The role of the member within this project, taken from the participation role vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Rolle des Mitglieds in diesem Projekt, aus dem Vokabular für Beteiligungsrollen.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#name">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">name</rdfs:label>
+    <skos:altLabel xml:lang="de">Bezeichnung</skos:altLabel>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasSubProject">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:label xml:lang="en">has sub-project</rdfs:label>
+    <skos:altLabel xml:lang="de">hat Teilprojekt</skos:altLabel>
+    <rdfs:comment xml:lang="en">Optional decomposition of a project into sub-projects. Nesting depth and cardinality are intentionally not fixed in this draft.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Optionale Zerlegung eines Projekts in Teilprojekte. Verschachtelungstiefe und Kardinalität sind in diesem Entwurf bewusst nicht festgelegt.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#currencyCode">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
@@ -271,28 +312,13 @@
     <rdfs:comment xml:lang="de">Währung des geplanten Budgets, z. B. EUR.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#name">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">name</rdfs:label>
-    <skos:altLabel xml:lang="de">Bezeichnung</skos:altLabel>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ProjectPhase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Project Phase</rdfs:label>
+    <skos:altLabel xml:lang="de">Projektphase</skos:altLabel>
+    <rdfs:comment xml:lang="en">An ordered planning phase of a project (e.g. planning, bidding, execution) with its own type, status and time frame.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Eine geordnete Planungsphase eines Projekts (z. B. Planung, Ausschreibung, Ausführung) mit eigenem Typ, Status und Zeitfenster.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
-    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/construction-project/0.1.0"/>
-    <owl:versionInfo>0.1.0</owl:versionInfo>
-    <dcterms:title xml:lang="en">Construct-X Construction Project Ontology</dcterms:title>
-    <dcterms:title xml:lang="de">Construct-X-Ontologie für Bauprojekte</dcterms:title>
-    <dcterms:description xml:lang="en">Describes a construction project with its master data, planning phases, participations (members and roles) and key deliverables. Cross-domain relations to schedule, breakdown, bill of quantities, site, delivery and built asset are defined in dedicated link ontologies.</dcterms:description>
-    <dcterms:description xml:lang="de">Beschreibt ein Bauprojekt mit Stammdaten, Planungsphasen, Beteiligungen (Mitglieder und Rollen) und wesentlichen Ergebnissen/Liefergegenständen. Domänenübergreifende Beziehungen zu Terminplan, Gliederung, Leistungsverzeichnis, Baustelle, Lieferung und Bauwerk werden in dedizierten Link-Ontologien definiert.</dcterms:description>
-    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/construct-x"/>
-    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
-    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:created>
-    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-11-10</dcterms:modified>
-    <dcterms:source xml:lang="de">Construct-X working documents: Ontologien &amp; Standards für Projekte (3.4.7) and Arbeitsdokument Project, 2026-11-10</dcterms:source>
-    <vann:preferredNamespacePrefix>conx-proj</vann:preferredNamespacePrefix>
-    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/construction-project#</vann:preferredNamespaceUri>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#plannedBudget">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
@@ -305,32 +331,15 @@
     <rdfs:comment xml:lang="de">Das geplante Gesamtbudget. Eine detaillierte Kostenbetrachtung ist nicht Bestandteil und wird über die Kostengliederung referenziert (Link-Ontologie).</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#Project">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="en">Project</rdfs:label>
-    <skos:altLabel xml:lang="de">Bauprojekt</skos:altLabel>
-    <rdfs:comment xml:lang="en">A construction project as the overarching unit of planning, execution and reporting. It is identified by a stable identifier (GUID) and carries master data, planning phases, participations and key deliverables.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Ein Bauprojekt als übergeordnete Einheit der Planung, Ausführung und Berichterstattung. Es wird durch eine stabile Kennung (GUID) identifiziert und trägt Stammdaten, Planungsphasen, Beteiligungen und wesentliche Ergebnisse.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#note">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectParticipation"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:label xml:lang="en">note</rdfs:label>
-    <skos:altLabel xml:lang="de">Hinweis</skos:altLabel>
-    <rdfs:comment xml:lang="en">Optional note on the participation (e.g. validity period, remarks).</rdfs:comment>
-    <rdfs:comment xml:lang="de">Optionaler Hinweis zur Beteiligung (z. B. Gültigkeitszeitraum, Bemerkungen).</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#ordinalNumber">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#projectType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
-    <rdfs:label xml:lang="en">ordinal number</rdfs:label>
-    <skos:altLabel xml:lang="de">Ordnungszahl</skos:altLabel>
-    <rdfs:comment xml:lang="en">The order of the element (e.g. phase) within its sequence.</rdfs:comment>
-    <rdfs:comment xml:lang="de">Die Ordnungszahl des Elements (z. B. Phase) innerhalb seiner Folge.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">project type</rdfs:label>
+    <skos:altLabel xml:lang="de">Projekttyp</skos:altLabel>
+    <rdfs:comment xml:lang="en">The kind of project (new build, modification, repair, …), taken from the project type vocabulary.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Die Art des Projekts (Neubau, Umbau, Instandsetzung, …), aus dem Vokabular für Projekttypen.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasProjectPhase">
@@ -341,14 +350,6 @@
     <skos:altLabel xml:lang="de">hat Projektphase</skos:altLabel>
     <rdfs:comment xml:lang="en">Orders a project into its planning phases. The order is given by the ordinalNumber of the phase.</rdfs:comment>
     <rdfs:comment xml:lang="de">Ordnet einem Projekt seine Planungsphasen zu. Die Reihenfolge ergibt sich aus der ordinalNumber der Phase.</rdfs:comment>
-    <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/construction-project#hasDeliverable">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/construction-project#Project"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-project#ProjectDeliverable"/>
-    <rdfs:label xml:lang="en">has deliverable</rdfs:label>
-    <skos:altLabel xml:lang="de">hat Ergebnis / Liefergegenstand</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/construction-project"/>
   </rdf:Description>
 </rdf:RDF>

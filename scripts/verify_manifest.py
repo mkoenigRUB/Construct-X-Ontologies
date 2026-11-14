@@ -7,6 +7,8 @@ OWL = rdflib.Namespace('http://www.w3.org/2002/07/owl#')
 def path_for(section, key):
     if section == 'domain_ontologies':
         return f'{key}/{key}-ontology.ttl'
+    if section == 'core_ontologies':
+        return f'core-ontologies/{key}.ttl'
     if section == 'link_ontologies':
         return f'link-ontologies/{key}.ttl'
     if section == 'schedule_vocabularies':

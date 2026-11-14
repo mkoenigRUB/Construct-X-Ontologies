@@ -1,0 +1,251 @@
+# baseURI: https://www.construct-x.org/ontology/organization
+# prefix: conx-org
+
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
+@prefix conx-person: <https://www.construct-x.org/ontology/person#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/organization>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Organization Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Organisationsontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-27"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert den fachlichen Kern für Organisationen, rechtliche Einheiten, Organisationseinheiten, Mitgliedschaften und rechtliche Vertretungen im Construct-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines the domain core for organizations, legal entities, organizational units, memberships, and legal representations in the Construct-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-27"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <https://www.w3.org/TR/vocab-org/> ;
+  dcterms:source <https://semiceu.github.io/Core-Business-Vocabulary/releases/2.3.0/> ;
+  dcterms:source <https://docs.oasis-open.org/ubl/cs01-UBL-2.5/> ;
+  dcterms:source <https://schema.org/Organization> ;
+  dcterms:title "Construct-X Organization Ontology"@en ;
+  dcterms:title "Construct-X Organisationsontologie"@de ;
+  vann:preferredNamespacePrefix "conx-org" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/organization#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/organization/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+## Classes
+
+conx-org:Organization
+  a owl:Class ;
+  rdfs:comment "Ein organisierter kollektiver Akteur mit einem gemeinsamen Zweck oder einer dauerhaft erkennbaren Struktur. Die Klasse behauptet weder eigene Rechtspersönlichkeit noch eine bestimmte wirtschaftliche Rolle."@de ;
+  rdfs:comment "An organized collective agent with a common purpose or a persistently recognizable structure. The class asserts neither separate legal personality nor a particular economic role."@en ;
+  rdfs:label "Organisation"@de ;
+  rdfs:label "Organization"@en ;
+  rdfs:subClassOf conx-agent:Agent ;
+  rdfs:subClassOf org:Organization ;
+.
+
+conx-org:LegalEntity
+  a owl:Class ;
+  rdfs:comment "Eine Organisation mit eigenständiger rechtlicher Identität, die im relevanten Rechtsraum als Träger von Rechten und Pflichten behandelt wird."@de ;
+  rdfs:comment "An organization with a separate legal identity that is treated as a bearer of rights and obligations in the relevant jurisdiction."@en ;
+  rdfs:label "Rechtliche Einheit"@de ;
+  rdfs:label "Legal Entity"@en ;
+  rdfs:subClassOf conx-org:Organization ;
+.
+
+conx-org:OrganizationalUnit
+  a owl:Class ;
+  rdfs:comment "Ein organisatorischer Teil einer oder mehrerer übergeordneter Organisationen mit eigener Funktion oder Zuständigkeit, aber ohne daraus abgeleitete eigene Rechtspersönlichkeit."@de ;
+  rdfs:comment "An organizational part of one or more parent organizations with its own function or responsibility, but without a separate legal identity being implied."@en ;
+  rdfs:label "Organisationseinheit"@de ;
+  rdfs:label "Organizational Unit"@en ;
+  rdfs:subClassOf conx-org:Organization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+.
+
+conx-org:Membership
+  a owl:Class ;
+  rdfs:comment "Eine eigenständige Beziehung, durch die genau ein Agent Mitglied genau einer Organisation ist. Rolle und Gültigkeitszeitraum gehören nicht zum MVP."@de ;
+  rdfs:comment "A standalone relationship through which exactly one Agent is a member of exactly one Organization. Role and validity period are outside the MVP."@en ;
+  rdfs:label "Mitgliedschaft"@de ;
+  rdfs:label "Membership"@en ;
+  rdfs:subClassOf org:Membership ;
+.
+
+conx-org:LegalRepresentation
+  a owl:Class ;
+  rdfs:comment "Eine rechtliche Vertretungsbeziehung zwischen einer Legal Entity und einer Person. Personendaten werden nicht in der Beziehung dupliziert."@de ;
+  rdfs:comment "A legal representation relationship between a Legal Entity and a Person. Personal data is not duplicated in the relationship."@en ;
+  rdfs:label "Rechtliche Vertretung"@de ;
+  rdfs:label "Legal Representation"@en ;
+.
+
+## Datatype properties
+
+conx-org:name
+  a owl:DatatypeProperty ;
+  rdfs:comment "Allgemein verwendbare Bezeichnung einer Organisation."@de ;
+  rdfs:comment "Generally usable name of an Organization."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "name"@en ;
+  rdfs:label "Bezeichnung"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:subPropertyOf schema:name ;
+.
+
+conx-org:legalName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Rechtlich beziehungsweise registeramtlich geführter Name einer Legal Entity."@de ;
+  rdfs:comment "Legal or officially registered name of a Legal Entity."@en ;
+  rdfs:domain conx-org:LegalEntity ;
+  rdfs:label "legal name"@en ;
+  rdfs:label "rechtlicher Name"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:subPropertyOf schema:legalName ;
+.
+
+conx-org:alternativeName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Weitere gebräuchliche Bezeichnung, Kurzform oder Handelsname einer Organisation."@de ;
+  rdfs:comment "Alternative commonly used name, abbreviation, or trade name of an Organization."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "alternative name"@en ;
+  rdfs:label "alternative Bezeichnung"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:subPropertyOf schema:alternateName ;
+.
+
+conx-org:registrationDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Kalenderdatum, an dem eine Legal Entity im maßgeblichen Register registriert wurde. Es ist nicht automatisch das Gründungsdatum oder der Beginn der Geschäftstätigkeit."@de ;
+  rdfs:comment "Calendar date on which a Legal Entity was registered in the relevant register. It is not automatically the founding date or the start of business activity."@en ;
+  rdfs:domain conx-org:LegalEntity ;
+  rdfs:label "registration date"@en ;
+  rdfs:label "Registrierungsdatum"@de ;
+  rdfs:range xsd:date ;
+.
+
+## Object properties
+
+conx-org:legalForm
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Legal Entity mit einer kontrolliert beschriebenen Rechtsform."@de ;
+  rdfs:comment "Links a Legal Entity to a controlled legal-form concept."@en ;
+  rdfs:domain conx-org:LegalEntity ;
+  rdfs:label "legal form"@en ;
+  rdfs:label "Rechtsform"@de ;
+  rdfs:range skos:Concept ;
+.
+
+conx-org:activity
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Organisation mit einem kontrolliert klassifizierten Tätigkeitsbereich."@de ;
+  rdfs:comment "Links an Organization to a controlled activity classification."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "activity"@en ;
+  rdfs:label "Tätigkeit"@de ;
+  rdfs:range skos:Concept ;
+.
+
+conx-org:subOrganizationOf
+  a owl:ObjectProperty ;
+  rdfs:comment "Ordnet eine Organisation einer übergeordneten Organisation in einer allgemeinen Organisationshierarchie unter, ohne Eigentum oder Kontrolle zu behaupten."@de ;
+  rdfs:comment "Assigns an Organization to a parent Organization in a general organizational hierarchy without asserting ownership or control."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "sub-organization of"@en ;
+  rdfs:label "Unterorganisation von"@de ;
+  rdfs:range conx-org:Organization ;
+  rdfs:subPropertyOf org:subOrganizationOf ;
+  owl:inverseOf conx-org:hasSubOrganization ;
+.
+
+conx-org:hasSubOrganization
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Organisation mit einer ihr organisatorisch untergeordneten Organisation."@de ;
+  rdfs:comment "Links an Organization to an organizationally subordinate Organization."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "has sub-organization"@en ;
+  rdfs:label "hat Unterorganisation"@de ;
+  rdfs:range conx-org:Organization ;
+  rdfs:subPropertyOf org:hasSubOrganization ;
+.
+
+conx-org:unitOf
+  a owl:ObjectProperty ;
+  rdfs:comment "Ordnet eine Organisationseinheit einer übergeordneten Organisation zu. Mehrere Zuordnungen sind für Matrixorganisationen möglich."@de ;
+  rdfs:comment "Assigns an Organizational Unit to a parent Organization. Multiple assignments are possible for matrix organizations."@en ;
+  rdfs:domain conx-org:OrganizationalUnit ;
+  rdfs:label "unit of"@en ;
+  rdfs:label "Einheit von"@de ;
+  rdfs:range conx-org:Organization ;
+  rdfs:subPropertyOf org:unitOf ;
+  owl:inverseOf conx-org:hasUnit ;
+.
+
+conx-org:hasUnit
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Organisation mit einer enthaltenen Organisationseinheit."@de ;
+  rdfs:comment "Links an Organization to a contained Organizational Unit."@en ;
+  rdfs:domain conx-org:Organization ;
+  rdfs:label "has unit"@en ;
+  rdfs:label "hat Organisationseinheit"@de ;
+  rdfs:range conx-org:OrganizationalUnit ;
+  rdfs:subPropertyOf org:hasUnit ;
+.
+
+conx-org:member
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt den Agenten, der Subjekt einer Mitgliedschaft ist."@de ;
+  rdfs:comment "Identifies the Agent that is the subject of a Membership."@en ;
+  rdfs:domain conx-org:Membership ;
+  rdfs:label "member"@en ;
+  rdfs:label "Mitglied"@de ;
+  rdfs:range conx-agent:Agent ;
+  rdfs:subPropertyOf org:member ;
+.
+
+conx-org:membershipOrganization
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die Organisation, in der eine Mitgliedschaft besteht."@de ;
+  rdfs:comment "Identifies the Organization in which a Membership exists."@en ;
+  rdfs:domain conx-org:Membership ;
+  rdfs:label "membership organization"@en ;
+  rdfs:label "Mitgliedschaftsorganisation"@de ;
+  rdfs:range conx-org:Organization ;
+  rdfs:subPropertyOf org:organization ;
+.
+
+conx-org:representedOrganization
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die Legal Entity, auf die sich eine rechtliche Vertretungsbeziehung bezieht."@de ;
+  rdfs:comment "Identifies the Legal Entity to which a legal representation relationship applies."@en ;
+  rdfs:domain conx-org:LegalRepresentation ;
+  rdfs:label "represented organization"@en ;
+  rdfs:label "vertretene Organisation"@de ;
+  rdfs:range conx-org:LegalEntity ;
+.
+
+conx-org:representative
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die Person, die eine Legal Entity rechtlich vertritt."@de ;
+  rdfs:comment "Identifies the Person who legally represents a Legal Entity."@en ;
+  rdfs:domain conx-org:LegalRepresentation ;
+  rdfs:label "representative"@en ;
+  rdfs:label "vertretende Person"@de ;
+  rdfs:range conx-person:Person ;
+.

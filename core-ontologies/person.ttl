@@ -1,0 +1,190 @@
+# baseURI: https://www.construct-x.org/ontology/person
+# prefix: conx-person
+
+@prefix conx-addr: <https://www.construct-x.org/ontology/address#> .
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-person: <https://www.construct-x.org/ontology/person#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <http://www.w3.org/ns/person#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/person>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Person Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Personenontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-25"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert den fachlichen Kern für reale natürliche Personen, ihre Namen, Geburtsdaten, Geschlechtsangaben, Staatsangehörigkeiten und Verweise auf Identitätsnachweise im Construction-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines the domain core for real natural persons, their names, birth data, sex and gender information, citizenships, and links to identity evidence in the Construction-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-25"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <http://www.w3.org/ns/person> ;
+  dcterms:source <https://docs.oasis-open.org/ubl/cs01-UBL-2.5/xsd/common/UBL-CommonAggregateComponents-2.5.xsd> ;
+  dcterms:source <https://schema.org/Person> ;
+  dcterms:source <https://www.w3.org/TR/vcard-rdf/> ;
+  dcterms:title "Construct-X Person Ontology"@en ;
+  dcterms:title "Construct-X Personenontologie"@de ;
+  vann:preferredNamespacePrefix "conx-person" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/person#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/person/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+## Classes
+
+conx-person:Person
+  a owl:Class ;
+  rdfs:comment "Eine reale natürliche Person, unabhängig davon, ob sie lebt oder verstorben ist. Organisationen, Softwaredienste, Rollen und fiktive Personen sind ausgeschlossen."@de ;
+  rdfs:comment "A real natural person, whether living or deceased. Organizations, software services, roles, and fictional persons are excluded."@en ;
+  rdfs:label "Person"@de ;
+  rdfs:label "Person"@en ;
+  rdfs:subClassOf conx-agent:Agent ;
+  rdfs:subClassOf foaf:Person ;
+  rdfs:subClassOf person:Person ;
+.
+
+## Datatype properties
+
+conx-person:fullName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Vollständiger, direkt ausgebbarer Name einer Person in einer gewünschten Schreibweise."@de ;
+  rdfs:comment "Complete display name of a person in a chosen form of writing."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "full name"@en ;
+  rdfs:label "vollständiger Name"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#fullName> ;
+  rdfs:seeAlso schema:name ;
+.
+
+conx-person:givenName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Primärer Vorname oder die als primäre Vornamen geführte Namensfolge einer Person."@de ;
+  rdfs:comment "Primary given name or sequence of names treated as the person's primary given names."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "given name"@en ;
+  rdfs:label "Vorname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#givenName> ;
+  rdfs:seeAlso schema:givenName ;
+.
+
+conx-person:familyName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Familien- oder Nachname einer Person."@de ;
+  rdfs:comment "Family name or surname of a person."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "family name"@en ;
+  rdfs:label "Familienname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#familyName> ;
+  rdfs:seeAlso schema:familyName ;
+.
+
+conx-person:additionalName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Weiterer Vorname, Zweitname oder zusätzliche Vornamenskomponente einer Person."@de ;
+  rdfs:comment "Additional given name, middle name, or further given-name component of a person."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "additional name"@en ;
+  rdfs:label "weiterer Vorname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso schema:additionalName ;
+.
+
+conx-person:birthName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Vollständiger Name, der für die Person bei der Geburt geführt wurde."@de ;
+  rdfs:comment "Full name held for the person at birth."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "birth name"@en ;
+  rdfs:label "Geburtsname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#birthName> ;
+.
+
+conx-person:birthDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Vollständiges Kalenderdatum der Geburt einer Person."@de ;
+  rdfs:comment "Complete calendar date on which a person was born."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "birth date"@en ;
+  rdfs:label "Geburtsdatum"@de ;
+  rdfs:range xsd:date ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#dateOfBirth> ;
+  rdfs:seeAlso schema:birthDate ;
+.
+
+conx-person:birthPlaceName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Textuelle Bezeichnung des Geburtsortes einer Person."@de ;
+  rdfs:comment "Textual designation of the place where a person was born."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "birth place name"@en ;
+  rdfs:label "Geburtsortbezeichnung"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+## Object properties
+
+conx-person:sex
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Person mit einer für den Informationsaustausch geführten Klassifikation des menschlichen Geschlechts. Die freigegebenen Werte werden im Human-Sex-Referenzvokabular gepflegt."@de ;
+  rdfs:comment "Links a person to a human-sex classification used for information interchange. Approved values are maintained in the Human Sex reference vocabulary."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "sex"@en ;
+  rdfs:label "menschliches Geschlecht"@de ;
+  rdfs:range skos:Concept ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#sex> ;
+.
+
+conx-person:gender
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Person mit einer Angabe zu ihrer Geschlechtsidentität oder sozialen beziehungsweise rechtlichen Einordnung im Anwendungskontext. Die freigegebenen Werte werden im Gender-Referenzvokabular gepflegt."@de ;
+  rdfs:comment "Links a person to information about their gender identity or social or legal classification in the application context. Approved values are maintained in the Gender reference vocabulary."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "gender"@en ;
+  rdfs:label "Gender"@de ;
+  rdfs:range skos:Concept ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#gender> ;
+.
+
+conx-person:citizenship
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Person mit einem Staat, dessen Staatsangehörigkeit sie besitzt."@de ;
+  rdfs:comment "Links a person to a state of which they are a citizen."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "citizenship"@en ;
+  rdfs:label "Staatsangehörigkeit"@de ;
+  rdfs:range conx-addr:Country ;
+  rdfs:seeAlso <http://www.w3.org/ns/person#citizenship> ;
+  rdfs:seeAlso schema:nationality ;
+.
+
+conx-person:hasIdentityEvidence
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Person mit einer externen Ressource, die Aussagen zu ihrer Identität belegt oder überprüfbar macht. Die Property behauptet weder Gültigkeit noch Vertrauenswürdigkeit oder kryptografische Verifikation des Nachweises."@de ;
+  rdfs:comment "Links a person to an external resource that provides or enables verification of evidence about their identity. The property asserts neither validity, trustworthiness, nor cryptographic verification of the evidence."@en ;
+  rdfs:domain conx-person:Person ;
+  rdfs:label "has identity evidence"@en ;
+  rdfs:label "hat Identitätsnachweis"@de ;
+.
+

@@ -1,0 +1,381 @@
+# baseURI: https://www.construct-x.org/ontology/address
+# prefix: conx-addr
+
+@prefix conx-addr: <https://www.construct-x.org/ontology/address#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/address>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Address Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Adressontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-13"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert ein strukturiertes, wiederverwendbares Modell für Adressen, kontextbezogene Adresszuordnungen und referenzierbare administrative Gebiete im Construction-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines a structured, reusable model for addresses, contextual address assignments, and referenceable administrative territories in the Construction-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-18"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <https://schema.org/PostalAddress> ;
+  dcterms:source <https://www.w3.org/TR/vcard-rdf/> ;
+  dcterms:source <https://docs.oasis-open.org/ubl/cs01-UBL-2.5/xsd/common/UBL-CommonAggregateComponents-2.5.xsd> ;
+  dcterms:title "Construct-X Address Ontology"@en ;
+  dcterms:title "Construct-X Adressontologie"@de ;
+  vann:preferredNamespacePrefix "conx-addr" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/address#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/address/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+## Classes
+
+conx-addr:Address
+  a owl:Class ;
+  rdfs:comment "Eine strukturierte Zusammenstellung von Angaben, mit denen ein postalischer oder physischer Adressbezug beschrieben wird."@de ;
+  rdfs:comment "A structured set of information describing a postal or physical address reference."@en ;
+  rdfs:label "Address"@en ;
+  rdfs:label "Adresse"@de ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:hasCountry ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:houseNumber ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:postOfficeBoxNumber ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:postalCode ;
+    ] ;
+.
+
+conx-addr:AddressAssignment
+  a owl:Class ;
+  rdfs:comment "Eine kontextbezogene Zuordnung einer Adresse zu einer anderen Ressource. Alle Angaben der Zuordnung gelten gemeinsam für alle mit ihr verknüpften Adressrollen."@de ;
+  rdfs:comment "A contextual assignment of an address to another resource. All assignment details jointly apply to every address role linked to the assignment."@en ;
+  rdfs:label "Address assignment"@en ;
+  rdfs:label "Adresszuordnung"@de ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:assignedAddress ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:addressRole ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:careOf ;
+    ] ;
+.
+
+conx-addr:AddressRole
+  a owl:Class ;
+  rdfs:comment "Eine kontrolliert gepflegte Rolle, in der eine Adresse innerhalb einer Adresszuordnung verwendet wird. Konkrete Rollen werden als Referenzdaten außerhalb dieser T-Box bereitgestellt."@de ;
+  rdfs:comment "A controlled role in which an address is used within an address assignment. Concrete roles are provided as reference data outside this T-Box."@en ;
+  rdfs:label "Address role"@en ;
+  rdfs:label "Adressrolle"@de ;
+.
+
+conx-addr:AdministrativeTerritory
+  a owl:Class ;
+  rdfs:comment "Ein politisch oder administrativ abgegrenztes Gebiet. Direkte Instanzen dieser Oberklasse werden nicht empfohlen."@de ;
+  rdfs:comment "A politically or administratively delimited territory. Direct instances of this superclass are not recommended."@en ;
+  rdfs:label "Administrative territory"@en ;
+  rdfs:label "Administratives Gebiet"@de ;
+.
+
+conx-addr:Country
+  a owl:Class ;
+  rdfs:comment "Ein souveränes oder in einem maßgeblichen Referenzsystem als Land geführtes Gebiet."@de ;
+  rdfs:comment "A territory regarded as a country by an authoritative reference system or through sovereignty."@en ;
+  rdfs:label "Country"@en ;
+  rdfs:label "Land"@de ;
+  rdfs:subClassOf conx-addr:AdministrativeTerritory ;
+.
+
+conx-addr:AdministrativeArea
+  a owl:Class ;
+  rdfs:comment "Eine Verwaltungseinheit unterhalb eines Landes oder einer anderen Verwaltungseinheit, beispielsweise ein Bundesland, eine Provinz, ein Landkreis oder eine Kommune."@de ;
+  rdfs:comment "An administrative unit below a country or another administrative unit, such as a state, province, district, or municipality."@en ;
+  rdfs:label "Administrative area"@en ;
+  rdfs:label "Verwaltungseinheit"@de ;
+  rdfs:subClassOf conx-addr:AdministrativeTerritory ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty conx-addr:broaderAdministrativeTerritory ;
+    ] ;
+.
+
+## Object properties
+
+conx-addr:hasAddressAssignment
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine beliebige identifizierbare Ressource mit einer kontextbezogenen Adresszuordnung."@de ;
+  rdfs:comment "Links any identifiable resource to a contextual address assignment."@en ;
+  rdfs:label "has address assignment"@en ;
+  rdfs:label "hat Adresszuordnung"@de ;
+  rdfs:range conx-addr:AddressAssignment ;
+.
+
+conx-addr:assignedAddress
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die Adresse einer Adresszuordnung."@de ;
+  rdfs:comment "Specifies the address of an address assignment."@en ;
+  rdfs:domain conx-addr:AddressAssignment ;
+  rdfs:label "assigned address"@en ;
+  rdfs:label "zugeordnete Adresse"@de ;
+  rdfs:range conx-addr:Address ;
+.
+
+conx-addr:addressRole
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt eine fachliche Rolle, in der die Adresse innerhalb der Zuordnung verwendet wird. Eine Zuordnung kann mehrere Rollen besitzen."@de ;
+  rdfs:comment "Specifies a business role in which the address is used within the assignment. An assignment may have multiple roles."@en ;
+  rdfs:domain conx-addr:AddressAssignment ;
+  rdfs:label "address role"@en ;
+  rdfs:label "Adressrolle"@de ;
+  rdfs:range conx-addr:AddressRole ;
+.
+
+conx-addr:hasCountry
+  a owl:ObjectProperty ;
+  rdfs:comment "Verweist auf das Land der Adresse."@de ;
+  rdfs:comment "Links an address to its country."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "has country"@en ;
+  rdfs:label "hat Land"@de ;
+  rdfs:range conx-addr:Country ;
+.
+
+conx-addr:hasAdministrativeArea
+  a owl:ObjectProperty ;
+  rdfs:comment "Verweist auf eine für die Adresse relevante Verwaltungseinheit."@de ;
+  rdfs:comment "Links an address to a relevant administrative area."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "has administrative area"@en ;
+  rdfs:label "hat Verwaltungseinheit"@de ;
+  rdfs:range conx-addr:AdministrativeArea ;
+.
+
+conx-addr:broaderAdministrativeTerritory
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Verwaltungseinheit mit dem direkt übergeordneten administrativen Gebiet oder Land."@de ;
+  rdfs:comment "Links an administrative area to its directly broader administrative territory or country."@en ;
+  rdfs:domain conx-addr:AdministrativeArea ;
+  rdfs:label "broader administrative territory"@en ;
+  rdfs:label "übergeordnetes administratives Gebiet"@de ;
+  rdfs:range conx-addr:AdministrativeTerritory ;
+.
+
+conx-addr:hasGeographicPosition
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknüpft eine Adresse optional mit einer Position aus einem externen Geomodell. Der Wertebereich bleibt in Version 0.1.0 bewusst offen."@de ;
+  rdfs:comment "Optionally links an address to a position from an external geographic model. The range intentionally remains open in version 0.1.0."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "has geographic position"@en ;
+  rdfs:label "hat geografische Position"@de ;
+.
+
+## Datatype properties of Address
+
+conx-addr:streetName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Name der Straße, des Weges oder eines vergleichbaren Verkehrsraums, ohne Hausnummer."@de ;
+  rdfs:comment "Name of the street, road, or comparable thoroughfare, without the house number."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "street name"@en ;
+  rdfs:label "Straßenname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:additionalStreetName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Zusätzliche Straßenbezeichnung zur genaueren Bestimmung der Adresse."@de ;
+  rdfs:comment "Additional street name used to identify the address more precisely."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "additional street name"@en ;
+  rdfs:label "zusätzlicher Straßenname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:houseNumber
+  a owl:DatatypeProperty ;
+  rdfs:comment "Haus-, Gebäude- oder Grundstücksnummer innerhalb der Straße."@de ;
+  rdfs:comment "House, building, or property number within the street."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "house number"@en ;
+  rdfs:label "Hausnummer"@de ;
+  rdfs:range xsd:string ;
+.
+
+conx-addr:blockName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Name eines räumlichen Blocks oder einer vergleichbaren adressbildenden Einheit."@de ;
+  rdfs:comment "Name of a spatial block or a comparable address-forming unit."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "block name"@en ;
+  rdfs:label "Blockname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:buildingName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Eigenname oder gebräuchliche Bezeichnung eines Gebäudes."@de ;
+  rdfs:comment "Proper or commonly used name of a building."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "building name"@en ;
+  rdfs:label "Gebäudename"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:buildingPart
+  a owl:DatatypeProperty ;
+  rdfs:comment "Bezeichnung eines Gebäudeteils, beispielsweise Bauteil, Trakt, Flügel oder Halle."@de ;
+  rdfs:comment "Designation of a building part, such as a section, wing, tract, or hall."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "building part"@en ;
+  rdfs:label "Gebäudeteil"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:floor
+  a owl:DatatypeProperty ;
+  rdfs:comment "Bezeichnung einer Etage oder Ebene innerhalb eines Gebäudes."@de ;
+  rdfs:comment "Designation of a floor or level within a building."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "floor"@en ;
+  rdfs:label "Etage"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:room
+  a owl:DatatypeProperty ;
+  rdfs:comment "Bezeichnung eines Raums, einer Suite oder einer vergleichbaren Einheit."@de ;
+  rdfs:comment "Designation of a room, suite, or comparable unit."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "room"@en ;
+  rdfs:label "Raum"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:internalDeliveryPoint
+  a owl:DatatypeProperty ;
+  rdfs:comment "Stabile interne Zustellstelle innerhalb eines Gebäudes oder Betriebsgeländes."@de ;
+  rdfs:comment "Stable internal delivery point within a building or operating site."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "internal delivery point"@en ;
+  rdfs:label "interne Zustellstelle"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:postOfficeBoxNumber
+  a owl:DatatypeProperty ;
+  rdfs:comment "Kennung eines Postfachs."@de ;
+  rdfs:comment "Identifier of a post office box."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "post office box number"@en ;
+  rdfs:label "Postfachnummer"@de ;
+  rdfs:range xsd:string ;
+.
+
+conx-addr:localityName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Name der Ortschaft, Stadt, Gemeinde oder eines vergleichbaren Siedlungsgebiets."@de ;
+  rdfs:comment "Name of a locality, city, municipality, or comparable settlement area."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "locality name"@en ;
+  rdfs:label "Ortsname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:citySubdivisionName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Name eines Stadt-, Orts- oder Gemeindeteils."@de ;
+  rdfs:comment "Name of a city, locality, or municipal subdivision."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "city subdivision name"@en ;
+  rdfs:label "Stadtteilname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:postalCode
+  a owl:DatatypeProperty ;
+  rdfs:comment "Postleitzahl oder vergleichbare postalische Gebietskennung."@de ;
+  rdfs:comment "Postal code or comparable postal area identifier."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "postal code"@en ;
+  rdfs:label "Postleitzahl"@de ;
+  rdfs:range xsd:string ;
+.
+
+conx-addr:plotIdentifier
+  a owl:DatatypeProperty ;
+  rdfs:comment "Externe Kennung eines Grundstücks oder Flurstücks, das mit der Adresse verbunden ist."@de ;
+  rdfs:comment "External identifier of a plot or land parcel associated with the address."@en ;
+  rdfs:domain conx-addr:Address ;
+  rdfs:label "plot identifier"@en ;
+  rdfs:label "Grundstückskennung"@de ;
+  rdfs:range xsd:string ;
+.
+
+## Datatype properties of AddressAssignment
+
+conx-addr:departmentName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Abteilung oder Organisationseinheit, für die die Adresse in dieser Zuordnung verwendet wird."@de ;
+  rdfs:comment "Department or organizational unit for which the address is used in this assignment."@en ;
+  rdfs:domain conx-addr:AddressAssignment ;
+  rdfs:label "department name"@en ;
+  rdfs:label "Abteilungsname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-addr:attentionOf
+  a owl:DatatypeProperty ;
+  rdfs:comment "Empfängerhinweis im Sinn von „zu Händen“."@de ;
+  rdfs:comment "Addressee instruction in the sense of 'for the attention of'."@en ;
+  rdfs:domain conx-addr:AddressAssignment ;
+  rdfs:label "attention of"@en ;
+  rdfs:label "zu Händen"@de ;
+  rdfs:range xsd:string ;
+.
+
+conx-addr:careOf
+  a owl:DatatypeProperty ;
+  rdfs:comment "Empfängerhinweis im Sinn von „c/o“ oder „bei“."@de ;
+  rdfs:comment "Addressee instruction in the sense of 'care of'."@en ;
+  rdfs:domain conx-addr:AddressAssignment ;
+  rdfs:label "care of"@en ;
+  rdfs:label "bei"@de ;
+  rdfs:range xsd:string ;
+.
+
+

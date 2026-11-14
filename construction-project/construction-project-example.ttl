@@ -1,3 +1,5 @@
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
 @prefix conx-proj: <https://www.construct-x.org/ontology/construction-project#> .
 @prefix conx-pt: <https://www.construct-x.org/vocab/construction-project/project-type#> .
 @prefix conx-pht: <https://www.construct-x.org/vocab/construction-project/project-phase-type#> .
@@ -8,10 +10,25 @@
 @prefix ex: <https://data.example.com/project/alpha/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# Referenzorganisationen: in diesem Entwurf bewusst untypisierte IRI-Referenzen;
-# die Typisierung (Organization/Person) erfolgt später durch die geplante
-# Core-Ontologie für Organisationen/Agenten. Für die SHACL-Prüfung genügt
-# sh:nodeKind sh:IRI auf conx-proj:member.
+# Referenzorganisationen: Agenten der Construct-X-Core-Ontologien
+# (core-ontologies/agent.ttl, core-ontologies/organization.ttl).
+# ProjectParticipation.member hat den Range conx-agent:Agent; die SHACL-Prüfung
+# nutzt sh:nodeKind sh:IRI (ohne sh:class), da SHACL mit infer='none' keine
+# Subklassen-Ergebnisse (z. B. LegalEntity -> Agent) prüft.
+
+# --- Referenzorganisationen (Core-Ontologien) ---------------------------
+
+ex:org-lindner
+    a conx-org:LegalEntity ;
+    conx-org:name "Lindner AG" .
+
+ex:org-zueblin
+    a conx-org:LegalEntity ;
+    conx-org:name "Züblin AG" .
+
+ex:org-zeppelin
+    a conx-org:LegalEntity ;
+    conx-org:name "Zeppelin Baumaschinen GmbH" .
 
 ex:project-alpha
     a conx-proj:Project ;

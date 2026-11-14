@@ -1,8 +1,8 @@
 # Handover — Construct-X Ontologien & Converter
 
-**Stand:** 2026-11-14 (Ontologie-Repo: Construction-Project + Construction-Contract 0.1.0
-Draft-Module, notification-content SHACL-SPARQL-Fix, HTML-Doku auf 20 Sektionen,
-Verifikationsskripte in `scripts/`) / 2026-11-08 (Converter-Repo: Bauposten-Auswahl +
+**Stand:** 2026-11-14 (Ontologie-Repo: 8 Core-Ontologien adoptiert (`core-ontologies/`),
+`member`-Ranges → `conx-agent:Agent`, Construction-Project + Construction-Contract 0.1.0
+Draft-Module, HTML-Doku auf 21 Sektionen, Verifikationsskripte in `scripts/`) / 2026-11-08 (Converter-Repo: Bauposten-Auswahl +
 Strikt-Modus-Toggle) / 2026-11-06 (Construction Progress Extension `cxcp` + Baufortschritt-
 Beispiel + ICDD-Container) · **Status:** alle Verifikationen PASS
 
@@ -21,6 +21,13 @@ neu angelegt werden. Sciebo synchronisiert `D:\Sciebo\…` (bzw. den jeweiligen 
   Built Asset 0.1.0, Notification Content 0.1.1, **Construction Project 0.1.0 (Draft, 2026-11-11)**,
   **Construction Contract 0.1.0 (Draft, 2026-11-11)**. Die beiden Drafts sind noch **nicht** Teil
   des JSON-LD-Kontexts (kommen mit dem nächsten Context-Bump).
+- **8 Core-Ontologien** (2026-11-14, `core-ontologies/`): agent, person, organization, address,
+  participation (**0.2.0**), contact, document, vso (sonst 0.1.0) — die „übergeordneten
+  Konzepte" des Ontologienetzwerks (Confluence Statusseite [1009549313]), **keine**
+  Domänen-Ontologien (Linking Rule greift nicht), von den Domänen direkt als Range referenziert:
+  `ContractParty.member` und `ProjectParticipation.member` → `conx-agent:Agent`; die Beispiele
+  typisieren die Organisationen als `conx-org:LegalEntity`, die ARGE als `conx-org:Organization`
+  mit drei `conx-org:Membership` (Porr/Strabag/Züblin).
 - **1 Extension** (2026-11-06): `extensions/construct-x-construction-progress/` —
   **Construction Progress Extension `cxcp` 0.1.0** (extern, baut auf IoC Process Ontology
   `w3id.org/ioc` + BOT `w3id.org/bot` auf, eigenes IRI-Schema
@@ -32,8 +39,8 @@ neu angelegt werden. Sciebo synchronisiert `D:\Sciebo\…` (bzw. den jeweiligen 
   `examples/construct-x-icdd-beispiele/` (2 ICDD-Container, ISO 21597: Baufortschritt +
   Doppelboden; der Doppelboden-Container wurde auf die aktuelle notification-content 0.1.1
   synchronisiert).
-- **104 TTL-Dateien + 51 RDF/XML-Mirrors parse-frei; SHACL 15/15 Runs conform, 0 Violations;
-  10 Negativtests verstoßen korrekt; MANIFEST ↔ `versionInfo` konsistent (54 Einträge);
+- **112 TTL-Dateien + 51 RDF/XML-Mirrors parse-frei; SHACL 15/15 Runs conform, 0 Violations;
+  10 Negativtests verstoßen korrekt; MANIFEST ↔ `versionInfo` konsistent (62 Einträge);
   keine neuen Präfix-Kollisionen** (bekannt: `dct`/`dcterms`-Kollision auf `http://purl.org/dc/terms/`,
   vorbestehend, außerhalb des Construct-X-Namenraums).
 - **JSON-LD-Kontext** `contexts/construct-x-context.jsonld` (0.1.0, `@version: 1.1`,
@@ -105,10 +112,10 @@ Repo unter `scripts/`** und laufen **aus dem Repo-Root** mit dem `.venv`-Python.
 ```powershell
 # aus dem Repo-Root; .venv muss existieren (s. §2)
 $py = ".venv\Scripts\python.exe"
-& $py scripts\verify_parse.py      # -> TTL 104 / OWL 51, keine Errors, 51 isomorphe Paare
+& $py scripts\verify_parse.py      # -> TTL 112 / OWL 51, keine Errors, 51 isomorphe Paare
 & $py scripts\verify_neg.py        # -> NEG TESTS: 10, FAIL: 0
 & $py scripts\verify_shacl.py      # -> RUNS: 15, FAIL: 0 (alle CONFORM, 0 viol)
-& $py scripts\verify_manifest.py   # -> TOTAL 54, MISSING 0, version mismatches 0
+& $py scripts\verify_manifest.py   # -> TOTAL 62, MISSING 0, version mismatches 0
 ```
 
 Details, Negativtest-Referenz A–J und erwarteter Output: `scripts/README.md`.
@@ -158,7 +165,7 @@ Achtung: Jena 4.10.0 akzeptiert das Kontext-Feld `@version` **nur** mit dem Wert
 ### 3.4 ICDD-Container-Integrität (neu, 2026-11-06) + MANIFEST-Check
 
 **MANIFEST-Check:** jetzt Teil von §3.1 (`scripts\verify_manifest.py` — erwartet
-`TOTAL 54 … MISSING: 0 … version mismatches: 0`).
+`TOTAL 62 … MISSING: 0 … version mismatches: 0`).
 
 **ICDD:** Pro `.icdd`-Container (ZIP): `Index.rdf` als RDF/XML parsen, für jede
 `ct:InternalDocument` mit `ct:checksum` den SHA-256 der `Payload documents/…`-Datei neu
@@ -216,7 +223,7 @@ Class-Dateien aus `target/` mitbenutzt).
 
 | Punkt | Status |
 |---|---|
-| **Git** | Ontologie-Repo auf GitHub (`mkoenigRUB/Construct-X-Ontologies`, `main`); Stand: Commit `1ff099f` (2026-11-13) **lokal committet, noch nicht gepusht** (1 Ahead von `origin/main`) — Push ist der nächste offene Schritt. Converter-Repo weiterhin **ohne** Git (bewusst) — dort nur Sciebo-Sync |
+| **Git** | Ontologie-Repo auf GitHub (`mkoenigRUB/Construct-X-Ontologies`, `main`); Stand: Commit `8598f56` (2026-11-14) **lokal committet, noch nicht gepusht** (3 Ahead von `origin/main`; `1ff099f` + `8598f56` + der laufende Core-Commit) — Push ist der nächste offene Schritt. Converter-Repo weiterhin **ohne** Git (bewusst) — dort nur Sciebo-Sync |
 | **Toolchains maschinenspezifisch** | Python-Venv (`.venv/` im Repo-Root), JDK, Maven müssen auf jedem Rechner neu aufgesetzt werden (§2). Die Verifikationsskripte liegen dagegen **im Repo** unter `scripts/` (2026-11-14) und sind damit sync-fähig |
 | **Kein zentrales Test-Skript** im Converter-Repo | `Converter\build.ps1` ist **kein** Ersatz (GAEB-Sandbox-Fallback, hardcodet `C:\Program Files\Java\jdk-20`, benötigt vorbefülltes `web/lib`); `test-all.ps1` existiert nicht |
 | **Parker B: selektive LV-Positions-Auswahl** | **erledigt (08.11.)**: Baum mit Checkboxen (GAEB-Tab 8084) + `POST /api/v1/positions/gaeb-boq` + `selection`-Parameter am Convert-Endpoint; Strikt-Modus-Toggle `strict=true` an beiden Reverse-Endpoints (Datenverlust → 400, Approximationen getolert, Klassifikation `ConxStrict` im SDK). Details: `Construct-X-Converters/HANDOFF.md` (2026-11-08) + `README.md` |
@@ -229,14 +236,15 @@ Class-Dateien aus `target/` mitbenutzt).
 
 | Datei | Inhalt |
 |---|---|
-| `README.md` | Repo-Überblick, Modulstand (inkl. Extension + 2 Draft-Module), JSON-LD- + SDK-Passus, 2026-11-11/12-Integration |
-| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-15-Runs, ICDD- + Jena-Abschnitt, Notes 19–37 (36 = nc-SPARQL-Fix, 37 = HTML-Sync) |
-| `AUDIT.md` | Audit-Items; 41–45 = JSON-LD-Kontext, 46–48 = SDK, 49–56 (2026-11-06) = cxcp + ICDD, 57 = Converter, 58–61 (2026-11-11) = Project/Contract-Drafts, **62–63 (2026-11-12) = nc-SPARQL-Fix + HTML-Sync** |
-| `MANIFEST.json` | zentrales Register (**54 Einträge**: 10 Domänen + 10 Link + 31 Vokabulare + `json_ld_context` + `sdk` + `extensions`) |
+| `README.md` | Repo-Überblick, Modulstand (inkl. Extension + 8 Core-Ontologien + 2 Draft-Module), JSON-LD- + SDK-Passus, 2026-11-11/12/14-Integration |
+| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-15-Runs, ICDD- + Jena-Abschnitt, Notes 19–39 (36 = nc-SPARQL-Fix, 37 = HTML-Sync, 38 = Einzelvertragssicht, 39 = Core-Ontologien) |
+| `AUDIT.md` | Audit-Items; 41–45 = JSON-LD-Kontext, 46–48 = SDK, 49–56 (2026-11-06) = cxcp + ICDD, 57 = Converter, 58–61 (2026-11-11) = Project/Contract-Drafts, 62–63 (2026-11-12) = nc-SPARQL-Fix + HTML-Sync, 64 (2026-11-14) = Einzelvertragssicht, **65 (2026-11-14) = Core-Ontologien + member-Ranges** |
+| `MANIFEST.json` | zentrales Register (**62 Einträge**: 10 Domänen + 8 Core + 10 Link + 31 Vokabulare + `json_ld_context` + `sdk` + `extensions`) |
 | `scripts/` | **Verifikationsskripte (rechnerunabhängig, 2026-11-14):** `verify_parse.py`, `verify_neg.py`, `verify_shacl.py`, `verify_manifest.py` + `README.md` mit Setup, Befehlen, erwartetem Output, Negativtest-Referenz A–J |
-| `construction-project/` | **Draft 0.1.0 (2026-11-11):** Ontologie (4 Klassen, 15 OP + 16 DP), 6 SKOS-Vokabulare, Core + Vocabularies SHACL, Beispiel, 7 OWL-Mirrors |
-| `construction-contract/` | **Draft 0.1.0 (2026-11-11):** Ontologie (4 Klassen), 4 SKOS-Vokabulare, Core + Vocabularies SHACL, Beispiel (3 Einzelverträge der Brücke-XY-Kette), 5 OWL-Mirrors — **2026-11-14: Einzelvertragssicht** (Ketten-Properties `subcontractOf`/`hasUpstreamContract` entfernt, Kette kommt im Projekt zusammen; ARGE = 1 untypisierte IRI pro Partei) |
-| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku (nur Ontologien, **20 Sektionen**, Stand 2026-11-12); **Sektion 7 = Construction Progress (CPR + cxcp)**, **Sektionen 12/13 = Construction Project / Contract (neu)**, Sektion 15 = Vokabulare (inkl. neuer Projekt-/Vertrags-Blöcke), Sektion 20 = JSON-LD |
+| `core-ontologies/` | **8 Core-Ontologien (2026-11-14):** agent/person/organization/address/participation (0.2.0)/contact/document/vso (0.1.0) — „übergeordnete Konzepte", keine Domänen (Linking Rule n/a); Referenzbasis der `member`-Ranges |
+| `construction-project/` | **Draft 0.1.0 (2026-11-11):** Ontologie (4 Klassen, 15 OP + 16 DP), 6 SKOS-Vokabulare, Core + Vocabularies SHACL, Beispiel (Agenten als `conx-org:LegalEntity`), 7 OWL-Mirrors — **2026-11-14: `member`-Range `conx-agent:Agent`** |
+| `construction-contract/` | **Draft 0.1.0 (2026-11-11):** Ontologie (4 Klassen), 4 SKOS-Vokabulare, Core + Vocabularies SHACL, Beispiel (3 Einzelverträge der Brücke-XY-Kette, ARGE = `conx-org:Organization` + 3 `Membership`), 5 OWL-Mirrors — **2026-11-14: Einzelvertragssicht** (Ketten-Properties entfernt, Kette kommt im Projekt zusammen; `member`-Range `conx-agent:Agent`, ARGE = 1 IRI pro Partei) |
+| `documentation/CONSTRUCT-X-ONTOLOGIES.html` | HTML-Doku (nur Ontologien, **21 Sektionen**, Stand 2026-11-14); **Sektion 7 = Construction Progress (CPR + cxcp)**, Sektionen 12/13 = Construction Project / Contract, **Sektion 14 = Core-Ontologien (neu, 2026-11-14)**, Sektion 16 = Vokabulare, Sektion 21 = JSON-LD |
 | `documentation/ICDD-EXAMPLES.md` | eigenständige ICDD-Dokumentation (2026-11-06): Container-Aufbau (ISO 21597), beide Beispiele, Integritätsstatus + Doppelboden-Sync-Notiz, Referenzen |
 | `extensions/construct-x-construction-progress/` | cxcp 0.1.0: `ontology/` (58 Tripel), `shapes/` (69 Tripel, 1× `sh:sparql`), `examples/` (TTL + JSON-LD + Runtime-JSON), `queries/`, README, documentation.html |
 | `examples/construct-x-baufortschritt-beispiel/` | End-to-End-Beispiel (3 Daten-Revisions, 3 Notifications, Result) |
@@ -248,13 +256,13 @@ Class-Dateien aus `target/` mitbenutzt).
 ## 7. Nächste Schritte / Wie man auf einem anderen Rechner weiterarbeitet
 
 ### Erst einmal ankommen (Checkliste)
-1. Repo per `git clone` bzw. Sciebo-Sync holen (Stand: Commit `1ff099f`, `main`).
+1. Repo per `git clone` bzw. Sciebo-Sync holen (Stand: Commit `8598f56`, `main`).
 2. Python-Venv anlegen: `python -m venv .venv` + `pip install "rdflib==7.6.0" "pySHACL==0.40.1"` (§2).
-3. **Smoke-Test:** die vier Skripte aus §3.1 ausführen — erwartet `TTL 104/OWL 51`, `NEG 10/FAIL 0`, `RUNS 15/FAIL 0`, `TOTAL 54/MISSING 0`. Damit ist die Umgebung reproduziert.
+3. **Smoke-Test:** die vier Skripte aus §3.1 ausführen — erwartet `TTL 112/OWL 51`, `NEG 10/FAIL 0`, `RUNS 15/FAIL 0`, `TOTAL 62/MISSING 0`. Damit ist die Umgebung reproduziert.
 4. Optional (nur für Jena/Converter): JDK 25 + Maven 3.9.9 in `%TEMP%\opencode\` entpacken (§2).
 
 ### Offene Fachaufgaben (nach Priorität)
-1. **Push** `main` — Commit `1ff099f` liegt nur lokal (1 Ahead von `origin/main`). `git push` ist der erste offene Schritt.
+1. **Push** `main` — die Commits ab `1ff099f` liegen nur lokal (mehrere Ahead von `origin/main`). `git push` ist der erste offene Schritt.
 2. **Draft-Module weiter ausbauen (0.2.0-Vorbereitung, nicht jetzt):**
    - Contract: Klauselhierarchie, Compensation, ContractDocument/Change, typisierte Subject→Deliverable-Referenz.
    - Project: geplante `project-*-link`-Link-Ontologien (z. B. Project↔Contract, Project↔Schedule).

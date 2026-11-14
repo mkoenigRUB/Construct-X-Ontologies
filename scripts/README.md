@@ -23,10 +23,10 @@ würde die Shapes stillschweigend verwerfen und 0 Shapes melden, s. VALIDATION.m
 
 | Skript | Zweck | Erwartetes Ergebnis |
 |---|---|---|
-| `verify_parse.py` | TTL- + RDF/XML-Parsen aller Dateien (exkl. `.venv`), Isomorphie-Check der TTL/RDF/XML-Paare | `TTL count 104`, `OWL count 51`, `TTL ERRORS none`, `OWL ERRORS none`, `ISO PAIRS 51 MISMATCH none` |
+| `verify_parse.py` | TTL- + RDF/XML-Parsen aller Dateien (exkl. `.venv`), Isomorphie-Check der TTL/RDF/XML-Paare | `TTL count 112`, `OWL count 51`, `TTL ERRORS none`, `OWL ERRORS none`, `ISO PAIRS 51 MISMATCH none` |
 | `verify_neg.py` | 10 Negativtests A–J (jeder **muss** eine Verletzung auslösen); gepinnte Eingabe-Bytes gegen Datei-Drift | `=== NEG TESTS: 10 FAIL: 0` |
 | `verify_shacl.py` | 15 SHACL-Runs (Beispiel vs. Core- + Vokabular-Profile, SKOS-Vokabulare in den Data-Graph) | `=== RUNS: 15 FAIL: 0`, alle `[ok] CONFORM (0 viol)` |
-| `verify_manifest.py` | MANIFEST.json ↔ in-file `owl:versionInfo` + Präfix-Kollisionscheck | `TOTAL entries: 54 … MISSING: 0 … version mismatches: 0` (bekannt: `COLLISION IRI http://purl.org/dc/terms/ dct dcterms` — vorbestehend, nicht Teil des Construct-X-Namenraums) |
+| `verify_manifest.py` | MANIFEST.json ↔ in-file `owl:versionInfo` + Präfix-Kollisionscheck | `TOTAL entries: 62 … MISSING: 0 … version mismatches: 0` (bekannt: `COLLISION IRI http://purl.org/dc/terms/ dct dcterms` — vorbestehend, nicht Teil des Construct-X-Namenraums) |
 
 Ablauf:
 

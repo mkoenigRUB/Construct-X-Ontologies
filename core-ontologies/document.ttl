@@ -1,0 +1,260 @@
+# baseURI: https://www.construct-x.org/ontology/document
+# prefix: conx-doc
+
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix conx-doc: <https://www.construct-x.org/ontology/document#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/document>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Document Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Dokumentontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-27"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert den fachlichen Kern fuer Dokumente, kontextbezogene Dokumentreferenzen, technische Distributionen sowie kontrollierte Dokumenttypen und Dokumentstatus im Construct-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines the semantic core for documents, contextual document references, technical distributions, and controlled document types and statuses in the Construct-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-27"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <https://www.dublincore.org/specifications/dublin-core/dcmi-terms/> ;
+  dcterms:source <https://www.w3.org/TR/vocab-dcat-3/> ;
+  dcterms:source <https://schema.org/DigitalDocument> ;
+  dcterms:source <https://xmlns.com/foaf/spec/> ;
+  dcterms:source <https://docs.oasis-open.org/ubl/cs01-UBL-2.5/> ;
+  dcterms:title "Construct-X Document Ontology"@en ;
+  dcterms:title "Construct-X Dokumentontologie"@de ;
+  vann:preferredNamespacePrefix "conx-doc" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/document#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/document/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+## Classes
+
+conx-doc:Document
+  a owl:Class ;
+  rdfs:comment "Ein dokumentartiges Informationsobjekt, das unabhaengig von einer konkreten Datei oder technischen Bereitstellung beschrieben und identifiziert werden kann."@de ;
+  rdfs:comment "A document-like information object that can be described and identified independently of a concrete file or technical distribution."@en ;
+  rdfs:label "Document"@en ;
+  rdfs:label "Dokument"@de ;
+  rdfs:seeAlso dcterms:BibliographicResource ;
+  rdfs:seeAlso foaf:Document ;
+  rdfs:seeAlso schema:DigitalDocument ;
+.
+
+conx-doc:DocumentReference
+  a owl:Class ;
+  rdfs:comment "Eine eigenstaendige, kontextbezogene Bezugnahme auf ein Dokument, eine externe Dokumentressource oder eine technische Distribution."@de ;
+  rdfs:comment "A standalone contextual reference to a document, an external document resource, or a technical distribution."@en ;
+  rdfs:label "Document reference"@en ;
+  rdfs:label "Dokumentreferenz"@de ;
+.
+
+conx-doc:DocumentDistribution
+  a owl:Class ;
+  rdfs:comment "Eine konkrete technische Auspraegung oder Bereitstellung eines Dokuments, beispielsweise als PDF-, XML- oder HTML-Ressource. Die Klasse beschreibt weder Speicherortverwaltung noch Archivierung."@de ;
+  rdfs:comment "A concrete technical representation or distribution of a document, for example as a PDF, XML, or HTML resource. The class describes neither storage management nor archiving."@en ;
+  rdfs:label "Document distribution"@en ;
+  rdfs:label "Dokumentdistribution"@de ;
+  rdfs:seeAlso dcat:Distribution ;
+.
+
+conx-doc:DocumentType
+  a owl:Class ;
+  rdfs:comment "Kontrollierter Typ eines Dokuments oder einer Dokumentreferenz. Freigegebene Werte werden im Document-Type-Referenzvokabular gepflegt."@de ;
+  rdfs:comment "Controlled type of a document or document reference. Approved values are maintained in the Document Type reference vocabulary."@en ;
+  rdfs:label "Document type"@en ;
+  rdfs:label "Dokumenttyp"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+conx-doc:DocumentStatus
+  a owl:Class ;
+  rdfs:comment "Kontrollierter dokumentbezogener Zustand. Freigegebene Werte werden im Document-Status-Referenzvokabular gepflegt; Workflowzustaende sind ausgeschlossen."@de ;
+  rdfs:comment "Controlled document-related state. Approved values are maintained in the Document Status reference vocabulary; workflow states are excluded."@en ;
+  rdfs:label "Document status"@en ;
+  rdfs:label "Dokumentstatus"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+## Object properties
+
+conx-doc:hasDocumentReference
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft eine fachliche Kontextressource mit einer eigenstaendigen Dokumentreferenz. Die Property besitzt bewusst keine harte RDFS-Domain."@de ;
+  rdfs:comment "Links a contextual resource to a standalone document reference. The property deliberately has no hard RDFS domain."@en ;
+  rdfs:label "has document reference"@en ;
+  rdfs:label "hat Dokumentreferenz"@de ;
+  rdfs:range conx-doc:DocumentReference ;
+.
+
+conx-doc:referencesDocument
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft eine Dokumentreferenz mit einem im Graph als Construct-X-Dokument modellierten Informationsobjekt. Fuer nur extern identifizierte Ressourcen kann dcterms:references verwendet werden."@de ;
+  rdfs:comment "Links a document reference to an information object modeled as a Construct-X Document in the graph. Dcterms:references may be used for resources identified only externally."@en ;
+  rdfs:domain conx-doc:DocumentReference ;
+  rdfs:label "references document"@en ;
+  rdfs:label "referenziert Dokument"@de ;
+  rdfs:range conx-doc:Document ;
+  rdfs:seeAlso dcterms:references ;
+.
+
+conx-doc:hasDistribution
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft ein Dokument oder eine Dokumentreferenz mit einer technischen Distribution. Die Property besitzt bewusst keine harte RDFS-Domain."@de ;
+  rdfs:comment "Links a document or document reference to a technical distribution. The property deliberately has no hard RDFS domain."@en ;
+  rdfs:label "has distribution"@en ;
+  rdfs:label "hat Distribution"@de ;
+  rdfs:range conx-doc:DocumentDistribution ;
+  rdfs:seeAlso dcat:distribution ;
+.
+
+conx-doc:documentType
+  a owl:ObjectProperty ;
+  rdfs:comment "Weist einem Dokument oder einer Dokumentreferenz einen kontrollierten Dokumenttyp zu. Die Property besitzt bewusst keine harte RDFS-Domain."@de ;
+  rdfs:comment "Assigns a controlled document type to a document or document reference. The property deliberately has no hard RDFS domain."@en ;
+  rdfs:label "document type"@en ;
+  rdfs:label "Dokumenttyp"@de ;
+  rdfs:range conx-doc:DocumentType ;
+  rdfs:seeAlso dcterms:type ;
+.
+
+conx-doc:documentStatus
+  a owl:ObjectProperty ;
+  rdfs:comment "Weist einem Dokument einen kontrollierten dokumentbezogenen Zustand zu. Die Property beschreibt keinen Workflow- oder Bearbeitungsstatus."@de ;
+  rdfs:comment "Assigns a controlled document-related state to a document. The property does not describe workflow or processing status."@en ;
+  rdfs:domain conx-doc:Document ;
+  rdfs:label "document status"@en ;
+  rdfs:label "Dokumentstatus"@de ;
+  rdfs:range conx-doc:DocumentStatus ;
+  rdfs:seeAlso adms:status ;
+  rdfs:seeAlso schema:creativeWorkStatus ;
+.
+
+## Datatype properties
+
+conx-doc:title
+  a owl:DatatypeProperty ;
+  rdfs:comment "Anzeigename oder fachlicher Titel eines Dokuments oder einer Dokumentreferenz."@de ;
+  rdfs:comment "Display name or semantic title of a document or document reference."@en ;
+  rdfs:label "title"@en ;
+  rdfs:label "Titel"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso dcterms:title ;
+  rdfs:seeAlso schema:name ;
+.
+
+conx-doc:description
+  a owl:DatatypeProperty ;
+  rdfs:comment "Freitextbeschreibung eines Dokuments oder einer Dokumentreferenz."@de ;
+  rdfs:comment "Free-text description of a document or document reference."@en ;
+  rdfs:label "description"@en ;
+  rdfs:label "Beschreibung"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+  rdfs:seeAlso dcterms:description ;
+  rdfs:seeAlso schema:description ;
+.
+
+conx-doc:language
+  a owl:DatatypeProperty ;
+  rdfs:comment "Sprache des Dokumentinhalts, vorzugsweise als BCP-47-Sprachkennzeichnung."@de ;
+  rdfs:comment "Language of the document content, preferably expressed as a BCP 47 language tag."@en ;
+  rdfs:label "language"@en ;
+  rdfs:label "Sprache"@de ;
+  rdfs:range xsd:string ;
+  rdfs:seeAlso dcterms:language ;
+  rdfs:seeAlso schema:inLanguage ;
+.
+
+conx-doc:version
+  a owl:DatatypeProperty ;
+  rdfs:comment "Dokumentversion oder fachliche Ausgabebezeichnung als Textwert."@de ;
+  rdfs:comment "Document version or semantic edition designation expressed as text."@en ;
+  rdfs:label "version"@en ;
+  rdfs:label "Version"@de ;
+  rdfs:range xsd:string ;
+  rdfs:seeAlso schema:version ;
+.
+
+conx-doc:created
+  a owl:DatatypeProperty ;
+  rdfs:comment "Datum oder Zeitpunkt, an dem das Dokument erzeugt wurde."@de ;
+  rdfs:comment "Date or point in time when the document was created."@en ;
+  rdfs:label "created"@en ;
+  rdfs:label "erstellt"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+  rdfs:seeAlso dcterms:created ;
+  rdfs:seeAlso schema:dateCreated ;
+.
+
+conx-doc:issued
+  a owl:DatatypeProperty ;
+  rdfs:comment "Datum oder Zeitpunkt, an dem das Dokument fachlich ausgestellt oder ausgegeben wurde."@de ;
+  rdfs:comment "Date or point in time when the document was semantically issued."@en ;
+  rdfs:label "issued"@en ;
+  rdfs:label "ausgegeben"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+  rdfs:seeAlso dcterms:issued ;
+.
+
+conx-doc:modified
+  a owl:DatatypeProperty ;
+  rdfs:comment "Datum oder Zeitpunkt der letzten bekannten inhaltlichen Aenderung des Dokuments."@de ;
+  rdfs:comment "Date or point in time of the last known content modification of the document."@en ;
+  rdfs:label "modified"@en ;
+  rdfs:label "geaendert"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+  rdfs:seeAlso dcterms:modified ;
+  rdfs:seeAlso schema:dateModified ;
+.
+
+conx-doc:validFrom
+  a owl:DatatypeProperty ;
+  rdfs:comment "Optionaler Beginn der fachlichen Gueltigkeit eines Dokuments."@de ;
+  rdfs:comment "Optional start of the semantic validity of a document."@en ;
+  rdfs:label "valid from"@en ;
+  rdfs:label "gueltig ab"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+  rdfs:seeAlso dcterms:valid ;
+  rdfs:seeAlso schema:validFrom ;
+.
+
+conx-doc:validUntil
+  a owl:DatatypeProperty ;
+  rdfs:comment "Optionales Ende der fachlichen Gueltigkeit eines Dokuments."@de ;
+  rdfs:comment "Optional end of the semantic validity of a document."@en ;
+  rdfs:label "valid until"@en ;
+  rdfs:label "gueltig bis"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+  rdfs:seeAlso dcterms:valid ;
+  rdfs:seeAlso schema:validThrough ;
+.
+
+conx-doc:fileName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Name einer konkreten Datei, die durch eine Dokumentdistribution beschrieben wird."@de ;
+  rdfs:comment "Name of a concrete file described by a document distribution."@en ;
+  rdfs:domain conx-doc:DocumentDistribution ;
+  rdfs:label "file name"@en ;
+  rdfs:label "Dateiname"@de ;
+  rdfs:range xsd:string ;
+.

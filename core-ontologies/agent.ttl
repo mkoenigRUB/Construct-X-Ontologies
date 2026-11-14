@@ -1,0 +1,53 @@
+# baseURI: https://www.construct-x.org/ontology/agent
+# prefix: conx-agent
+
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/agent>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Agent Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Agent-Ontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-25"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert die minimale gemeinsame Oberklasse für Akteure im Construct-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines the minimal common superclass for agents in the Construct-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-25"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <http://xmlns.com/foaf/spec/> ;
+  dcterms:source <https://semiceu.github.io/Core-Person-Vocabulary/releases/2.1.2/> ;
+  dcterms:title "Construct-X Agent Ontology"@en ;
+  dcterms:title "Construct-X Agent-Ontologie"@de ;
+  vann:preferredNamespacePrefix "conx-agent" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/agent#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/agent/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+conx-agent:Agent
+  a owl:Class ;
+  rdfs:comment "Eine Entität, die in einem fachlichen Kontext handeln, Verantwortung tragen oder als Herausgeber beziehungsweise Beteiligter referenziert werden kann."@de ;
+  rdfs:comment "An entity that can act, bear responsibility, or be referenced as an issuer or participant in a domain context."@en ;
+  rdfs:label "Agent"@en ;
+  rdfs:label "Akteur"@de ;
+  rdfs:seeAlso <http://data.europa.eu/m8g/Agent> ;
+  rdfs:subClassOf foaf:Agent ;
+.
+

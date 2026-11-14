@@ -1,4 +1,6 @@
+@prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
 @prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -12,8 +14,8 @@
     owl:versionInfo "0.1.0" ;
     dcterms:title "Construct-X Construction Contract Ontology"@en ;
     dcterms:title "Construct-X-Ontologie für Bauverträge"@de ;
-    dcterms:description "Describes construction contracts with their type, parties and roles, owed items, key obligations, validity period and contract value. The contract-to-project relation and typed references to deliverables are defined in a dedicated link ontology; parties are untyped IRI references pending the planned core organization/agent ontology."@en ;
-    dcterms:description "Beschreibt Bauverträge mit ihrer Vertragsart, Parteien und Rollen, geschuldeten Positionen, wesentlichen Pflichten, Laufzeit und Vertragswert. Die Verknüpfung zum Projekt und typisierte Verweise auf Liefergegenstände werden in einer dedizierten Link-Ontologie definiert; Parteien sind untypisierte IRI-Referenzen bis zur geplanten Core-Ontologie für Organisationen/Agenten."@de ;
+    dcterms:description "Describes construction contracts with their type, parties and roles, owed items, key obligations, validity period and contract value. The contract-to-project relation and typed references to deliverables are defined in a dedicated link ontology. Contract parties reference Agents of the Construct-X core agent ontology (organizations, persons, joint ventures); a joint venture / ARGE remains exactly one organization with its composition modeled via core organization memberships."@en ;
+    dcterms:description "Beschreibt Bauverträge mit ihrer Vertragsart, Parteien und Rollen, geschuldeten Positionen, wesentlichen Pflichten, Laufzeit und Vertragswert. Die Verknüpfung zum Projekt und typisierte Verweise auf Liefergegenstände werden in einer dedizierten Link-Ontologie definiert. Vertragsparteien verweisen auf Agenten der Construct-X-Core-Agenten-Ontologie (Organisationen, Personen, Joint Ventures); ein Joint Venture / eine ARGE bleibt genau eine Organisation, deren Zusammensetzung über Mitgliedschaften der Core-Organisationsontologie modelliert wird."@de ;
     dcterms:publisher <https://www.construct-x.org/id/organization/construct-x> ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-11-11"^^xsd:date ;
@@ -30,8 +32,8 @@ conx-con:Contract
     a owl:Class ;
     rdfs:label "Contract"@en ;
     skos:altLabel "Vertrag"@de ;
-    rdfs:comment "A contractual business relationship between one or more parties. Contracts are modeled in isolation (single-contract view); the aggregation of a contract chain (main/sub-contracts) into a project is done in the project context (project-contract link ontology). Special case: a party that is a joint venture / ARGE is still exactly one untyped IRI (see ContractParty.member)."@en ;
-    rdfs:comment "Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Verträge werden isoliert betrachtet (Einzelvertragssicht); das Zusammenführen einer Vertragskette (Haupt-/Nachverträge) zum Projekt erfolgt im Projekt bzw. über die project-contract Link-Ontologie. Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau eine untypisierte IRI (s. ContractParty.member)."@de ;
+    rdfs:comment "A contractual business relationship between one or more parties. Contracts are modeled in isolation (single-contract view); the aggregation of a contract chain (main/sub-contracts) into a project is done in the project context (project-contract link ontology). Special case: a party that is a joint venture / ARGE is still exactly one agent — an organization whose composition is modeled in the core organization ontology (see ContractParty.member)."@en ;
+    rdfs:comment "Ein vertragliches Geschäftsverhältnis zwischen einer oder mehreren Parteien. Verträge werden isoliert betrachtet (Einzelvertragssicht); das Zusammenführen einer Vertragskette (Haupt-/Nachverträge) zum Projekt erfolgt im Projekt bzw. über die project-contract Link-Ontologie. Spezialfall: Eine Partei, die ein Joint Venture / eine ARGE ist, bleibt genau ein Agent — eine Organisation, deren Zusammensetzung in der Core-Organisationsontologie modelliert wird (s. ContractParty.member)."@de ;
     rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
 
 conx-con:ContractParty
@@ -116,10 +118,11 @@ conx-con:isObligationOf
 conx-con:member
     a owl:ObjectProperty, owl:FunctionalProperty ;
     rdfs:domain conx-con:ContractParty ;
+    rdfs:range conx-agent:Agent ;
     rdfs:label "member"@en ;
     skos:altLabel "Mitglied"@de ;
-    rdfs:comment "The participating organization or person (also joint venture / consortium). Intended to be typed by the (planned) core organization/agent ontology; in this draft it is an untyped IRI reference."@en ;
-    rdfs:comment "Die beteiligte Organisation oder Person (auch Joint Venture / ARGE). Soll durch die (geplante) Core-Ontologie für Organisationen/Agenten typisiert werden; in diesem Entwurf eine nicht typisierte IRI-Referenz."@de ;
+    rdfs:comment "The participating organization or person (also joint venture / ARGE). References an agent of the Construct-X core agent ontology; the range is the common superclass, concrete instances are typically organizations (core organization ontology) or persons (core person ontology). A joint venture is exactly one such agent — its composition (e.g. Porr/Strabag/Zueblin) is modeled via core organization memberships, not in the contract domain."@en ;
+    rdfs:comment "Die beteiligte Organisation oder Person (auch Joint Venture / ARGE). Verweist auf einen Agenten der Construct-X-Core-Agenten-Ontologie; der Range ist die gemeinsame Oberklasse, konkrete Instanzen sind typischerweise Organisationen (Core-Organisationsontologie) oder Personen (Core-Personenontologie). Ein Joint Venture ist genau ein solcher Agent — seine Zusammensetzung (z. B. Porr/Strabag/Züblin) wird über Mitgliedschaften der Core-Organisationsontologie modelliert, nicht in der Vertragsdomäne."@de ;
     rdfs:isDefinedBy <https://www.construct-x.org/ontology/construction-contract> .
 
 conx-con:hasRole

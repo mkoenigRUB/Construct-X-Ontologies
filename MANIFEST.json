@@ -1,6 +1,6 @@
 {
   "package": "Construct-X ontologies draft",
-  "date": "2026-11-11",
+  "date": "2026-11-14",
   "domain_ontologies": {
     "construction-contract": "0.1.0",
     "construction-project": "0.1.0",
@@ -12,6 +12,16 @@
     "construction-delivery": "0.1.0",
     "built-asset": "0.1.0",
     "notification-content": "0.1.1"
+  },
+  "core_ontologies": {
+    "agent": "0.1.0",
+    "person": "0.1.0",
+    "organization": "0.1.0",
+    "address": "0.1.0",
+    "participation": "0.2.0",
+    "contact": "0.1.0",
+    "document": "0.1.0",
+    "vso": "0.1.0"
   },
   "link_ontologies": {
     "schedule-breakdown-link": "0.6.0",

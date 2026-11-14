@@ -1,0 +1,260 @@
+# baseURI: https://www.construct-x.org/ontology/contact
+# prefix: conx-contact
+
+@prefix conx-addr: <https://www.construct-x.org/ontology/address#> .
+@prefix conx-contact: <https://www.construct-x.org/ontology/contact#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://www.construct-x.org/ontology/contact>
+  a owl:Ontology ;
+  dcterms:bibliographicCitation "Construct-X Contact Ontology, version 0.1.0"@en ;
+  dcterms:bibliographicCitation "Construct-X Kontaktontologie, Version 0.1.0"@de ;
+  dcterms:contributor "Construction-X Arbeitspaket 3.4"@de ;
+  dcterms:created "2026-08-27"^^xsd:date ;
+  dcterms:creator [
+      a schema:Person ;
+      schema:email <mailto:sven.zentgraf@rub.de> ;
+      schema:identifier <https://orcid.org/0000-0001-6058-7614> ;
+      schema:memberOf [
+          schema:identifier <https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en> ;
+          schema:name "Ruhr University Bochum" ;
+        ] ;
+      schema:name "Sven Zentgraf" ;
+    ] ;
+  dcterms:description "Definiert ein wiederverwendbares Modell fuer Kontaktpunkte, Kontaktmethoden, Kommunikationskanaele, Nutzungskontexte, Zwecke und Plattformen im Construction-X-Ontologienetzwerk."@de ;
+  dcterms:description "Defines a reusable model for contact points, contact methods, communication channels, usage contexts, purposes, and platforms in the Construction-X ontology network."@en ;
+  dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+  dcterms:modified "2026-08-27"^^xsd:date ;
+  dcterms:publisher <https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1> ;
+  dcterms:source <https://docs.oasis-open.org/ubl/cs01-UBL-2.5/xsd/common/UBL-CommonAggregateComponents-2.5.xsd> ;
+  dcterms:source <https://schema.org/ContactPoint> ;
+  dcterms:source <https://www.w3.org/TR/vcard-rdf/> ;
+  dcterms:title "Construct-X Contact Ontology"@en ;
+  dcterms:title "Construct-X Kontaktontologie"@de ;
+  vann:preferredNamespacePrefix "conx-contact" ;
+  vann:preferredNamespaceUri "https://www.construct-x.org/ontology/contact#" ;
+  owl:versionIRI <https://www.construct-x.org/ontology/contact/0.1.0> ;
+  owl:versionInfo "0.1.0" ;
+.
+
+## Classes
+
+conx-contact:ContactPoint
+  a owl:Class ;
+  rdfs:comment "Kontaktblock, ueber den eine Ressource in einem bestimmten Nutzungskontext und fuer bestimmte Zwecke erreichbar ist."@de ;
+  rdfs:comment "Contact block through which a resource is reachable in a specific usage context and for specific purposes."@en ;
+  rdfs:label "Contact point"@en ;
+  rdfs:label "Kontaktpunkt"@de ;
+  rdfs:seeAlso schema:ContactPoint ;
+.
+
+conx-contact:ContactMethod
+  a owl:Class ;
+  rdfs:comment "Einzelner Kommunikationsweg innerhalb eines Kontaktpunkts. Eine Kontaktmethode besitzt genau einen Kanal und den zugehoerigen Wert, die URI oder die Adresszuordnung."@de ;
+  rdfs:comment "Single communication path within a contact point. A contact method has exactly one channel and the corresponding value, URI, or address assignment."@en ;
+  rdfs:label "Contact method"@en ;
+  rdfs:label "Kontaktmethode"@de ;
+  rdfs:seeAlso vcard:Kind ;
+.
+
+conx-contact:ContactChannel
+  a owl:Class ;
+  rdfs:comment "Kontrollierter Typ eines Kommunikationskanals. Konkrete Kanaele werden im Contact-Channel-Referenzvokabular gepflegt."@de ;
+  rdfs:comment "Controlled type of a communication channel. Concrete channels are maintained in the Contact Channel reference vocabulary."@en ;
+  rdfs:label "Contact channel"@en ;
+  rdfs:label "Kontaktkanal"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+conx-contact:ContactUsage
+  a owl:Class ;
+  rdfs:comment "Kontrollierter Nutzungskontext eines Kontaktpunkts, etwa privat, geschaeftlich oder offiziell."@de ;
+  rdfs:comment "Controlled usage context of a contact point, such as private, business, or official."@en ;
+  rdfs:label "Contact usage"@en ;
+  rdfs:label "Kontaktnutzung"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+conx-contact:ContactPurpose
+  a owl:Class ;
+  rdfs:comment "Kontrollierter fachlicher Zweck eines Kontaktpunkts, etwa allgemein, Lieferung, Rechnung, Support oder Notfall."@de ;
+  rdfs:comment "Controlled business purpose of a contact point, such as general, delivery, billing, support, or emergency."@en ;
+  rdfs:label "Contact purpose"@en ;
+  rdfs:label "Kontaktzweck"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+conx-contact:ContactPlatform
+  a owl:Class ;
+  rdfs:comment "Kontrollierte Plattform oder Dienst, auf dem eine Social-, Messenger- oder Webkontaktmethode erreichbar ist."@de ;
+  rdfs:comment "Controlled platform or service on which a social, messenger, or web contact method is reachable."@en ;
+  rdfs:label "Contact platform"@en ;
+  rdfs:label "Kontaktplattform"@de ;
+  rdfs:subClassOf skos:Concept ;
+.
+
+## Object properties
+
+conx-contact:hasContactPoint
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft einen Kontakttraeger mit einem Kontaktpunkt. Die Property besitzt bewusst keine harte RDFS-Domain, damit sie auch fuer spaetere nicht-agentische Kontakttraeger verwendet werden kann."@de ;
+  rdfs:comment "Links a contact carrier to a contact point. The property deliberately has no hard RDFS domain so it can also be used for future non-agent contact carriers."@en ;
+  rdfs:label "has contact point"@en ;
+  rdfs:label "hat Kontaktpunkt"@de ;
+  rdfs:range conx-contact:ContactPoint ;
+  owl:inverseOf conx-contact:isContactPointFor ;
+  rdfs:seeAlso schema:contactPoint ;
+.
+
+conx-contact:isContactPointFor
+  a owl:ObjectProperty ;
+  rdfs:comment "Optionale inverse Navigationsbeziehung von einem Kontaktpunkt zu einem Kontakttraeger."@de ;
+  rdfs:comment "Optional inverse navigation relationship from a contact point to a contact carrier."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "is contact point for"@en ;
+  rdfs:label "ist Kontaktpunkt fuer"@de ;
+  owl:inverseOf conx-contact:hasContactPoint ;
+.
+
+conx-contact:hasContactMethod
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft einen Kontaktpunkt mit einer konkreten Kontaktmethode."@de ;
+  rdfs:comment "Links a contact point to a concrete contact method."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "has contact method"@en ;
+  rdfs:label "hat Kontaktmethode"@de ;
+  rdfs:range conx-contact:ContactMethod ;
+.
+
+conx-contact:contactChannel
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt den Kommunikationskanal einer Kontaktmethode."@de ;
+  rdfs:comment "Specifies the communication channel of a contact method."@en ;
+  rdfs:domain conx-contact:ContactMethod ;
+  rdfs:label "contact channel"@en ;
+  rdfs:label "Kontaktkanal"@de ;
+  rdfs:range conx-contact:ContactChannel ;
+.
+
+conx-contact:contactUsage
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt den Nutzungskontext eines Kontaktpunkts."@de ;
+  rdfs:comment "Specifies the usage context of a contact point."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "contact usage"@en ;
+  rdfs:label "Kontaktnutzung"@de ;
+  rdfs:range conx-contact:ContactUsage ;
+.
+
+conx-contact:contactPurpose
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt einen fachlichen Zweck eines Kontaktpunkts."@de ;
+  rdfs:comment "Specifies a business purpose of a contact point."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "contact purpose"@en ;
+  rdfs:label "Kontaktzweck"@de ;
+  rdfs:range conx-contact:ContactPurpose ;
+.
+
+conx-contact:contactPlatform
+  a owl:ObjectProperty ;
+  rdfs:comment "Bestimmt die Plattform einer Social-, Messenger- oder Webkontaktmethode."@de ;
+  rdfs:comment "Specifies the platform of a social, messenger, or web contact method."@en ;
+  rdfs:domain conx-contact:ContactMethod ;
+  rdfs:label "contact platform"@en ;
+  rdfs:label "Kontaktplattform"@de ;
+  rdfs:range conx-contact:ContactPlatform ;
+.
+
+conx-contact:contactURI
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft eine Kontaktmethode mit einer URI, etwa einer Website oder einem Social Profile."@de ;
+  rdfs:comment "Links a contact method to a URI, such as a website or social profile."@en ;
+  rdfs:domain conx-contact:ContactMethod ;
+  rdfs:label "contact URI"@en ;
+  rdfs:label "Kontakt-URI"@de ;
+  rdfs:seeAlso vcard:hasURL ;
+.
+
+conx-contact:usesAddressAssignment
+  a owl:ObjectProperty ;
+  rdfs:comment "Verknuepft eine postalische Kontaktmethode mit einer bestehenden Construct-X-Adresszuordnung. Der direkte Verweis auf eine Adresse ist im Kontakt-MVP nicht vorgesehen."@de ;
+  rdfs:comment "Links a postal contact method to an existing Construct-X address assignment. A direct link to an address is not part of the contact MVP."@en ;
+  rdfs:domain conx-contact:ContactMethod ;
+  rdfs:label "uses address assignment"@en ;
+  rdfs:label "verwendet Adresszuordnung"@de ;
+  rdfs:range conx-addr:AddressAssignment ;
+.
+
+## Datatype properties
+
+conx-contact:contactValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "Textueller Wert einer Kontaktmethode, etwa eine E-Mail-Adresse, Telefonnummer oder ein Messenger-Handle."@de ;
+  rdfs:comment "Textual value of a contact method, such as an email address, phone number, or messenger handle."@en ;
+  rdfs:domain conx-contact:ContactMethod ;
+  rdfs:label "contact value"@en ;
+  rdfs:label "Kontaktwert"@de ;
+  rdfs:range xsd:string ;
+  rdfs:seeAlso vcard:hasEmail ;
+  rdfs:seeAlso vcard:hasTelephone ;
+.
+
+conx-contact:contactName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Anzeige- oder Funktionsname eines Kontaktpunkts, etwa Wareneingang, Bauleitung oder Rechnungsstelle."@de ;
+  rdfs:comment "Display or functional name of a contact point, such as goods receipt, site management, or billing office."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "contact name"@en ;
+  rdfs:label "Kontaktname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-contact:departmentName
+  a owl:DatatypeProperty ;
+  rdfs:comment "Textuelle Abteilungsangabe fuer einen Kontaktpunkt. Die Property modelliert keine Organisationshierarchie."@de ;
+  rdfs:comment "Textual department statement for a contact point. The property does not model an organization hierarchy."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "department name"@en ;
+  rdfs:label "Abteilungsname"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-contact:functionTitle
+  a owl:DatatypeProperty ;
+  rdfs:comment "Textuelle Funktion oder Rolle des Kontaktpunkts im Kommunikationskontext. Die Property modelliert keine Organisationsrolle."@de ;
+  rdfs:comment "Textual function or role of the contact point in the communication context. The property does not model an organizational role."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "function title"@en ;
+  rdfs:label "Funktionsbezeichnung"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
+
+conx-contact:availableLanguage
+  a owl:DatatypeProperty ;
+  rdfs:comment "Sprache, in der ein Kontaktpunkt verwendet werden kann. BCP-47-Sprachcodes werden fachlich empfohlen."@de ;
+  rdfs:comment "Language in which a contact point can be used. BCP 47 language tags are recommended."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "available language"@en ;
+  rdfs:label "verfuegbare Sprache"@de ;
+  rdfs:range xsd:string ;
+  rdfs:seeAlso schema:availableLanguage ;
+.
+
+conx-contact:availabilityNote
+  a owl:DatatypeProperty ;
+  rdfs:comment "Freitext zur Erreichbarkeit eines Kontaktpunkts."@de ;
+  rdfs:comment "Free-text note about the availability of a contact point."@en ;
+  rdfs:domain conx-contact:ContactPoint ;
+  rdfs:label "availability note"@en ;
+  rdfs:label "Erreichbarkeitshinweis"@de ;
+  rdfs:range [ a rdfs:Datatype ; owl:unionOf ( xsd:string rdf:langString ) ] ;
+.
