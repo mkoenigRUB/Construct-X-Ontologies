@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:schema="https://schema.org/"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/agent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dcterms:bibliographicCitation xml:lang="en">Construct-X Agent Ontology, version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:bibliographicCitation xml:lang="de">Construct-X Agent-Ontologie, Version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:contributor xml:lang="de">Construction-X Arbeitspaket 3.4</dcterms:contributor>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-25</dcterms:created>
+    <dcterms:creator rdf:nodeID="nf534909a62ff4b19818818100cf45624b1"/>
+    <dcterms:description xml:lang="de">Definiert die minimale gemeinsame Oberklasse für Akteure im Construct-X-Ontologienetzwerk.</dcterms:description>
+    <dcterms:description xml:lang="en">Defines the minimal common superclass for agents in the Construct-X ontology network.</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-25</dcterms:modified>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1"/>
+    <dcterms:source rdf:resource="http://xmlns.com/foaf/spec/"/>
+    <dcterms:source rdf:resource="https://semiceu.github.io/Core-Person-Vocabulary/releases/2.1.2/"/>
+    <dcterms:title xml:lang="en">Construct-X Agent Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X Agent-Ontologie</dcterms:title>
+    <vann:preferredNamespacePrefix>conx-agent</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/agent#</vann:preferredNamespaceUri>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/agent/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/agent#Agent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Eine Entität, die in einem fachlichen Kontext handeln, Verantwortung tragen oder als Herausgeber beziehungsweise Beteiligter referenziert werden kann.</rdfs:comment>
+    <rdfs:comment xml:lang="en">An entity that can act, bear responsibility, or be referenced as an issuer or participant in a domain context.</rdfs:comment>
+    <rdfs:label xml:lang="en">Agent</rdfs:label>
+    <rdfs:label xml:lang="de">Akteur</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://data.europa.eu/m8g/Agent"/>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nf534909a62ff4b19818818100cf45624b1">
+    <rdf:type rdf:resource="https://schema.org/Person"/>
+    <schema:email rdf:resource="mailto:sven.zentgraf@rub.de"/>
+    <schema:identifier rdf:resource="https://orcid.org/0000-0001-6058-7614"/>
+    <schema:memberOf rdf:nodeID="nf534909a62ff4b19818818100cf45624b2"/>
+    <schema:name>Sven Zentgraf</schema:name>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nf534909a62ff4b19818818100cf45624b2">
+    <schema:identifier rdf:resource="https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en"/>
+    <schema:name>Ruhr University Bochum</schema:name>
+  </rdf:Description>
+</rdf:RDF>

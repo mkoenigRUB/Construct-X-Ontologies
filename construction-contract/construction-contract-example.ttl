@@ -1,5 +1,7 @@
 @prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-addr: <https://www.construct-x.org/ontology/address#> .
 @prefix conx-con: <https://www.construct-x.org/ontology/construction-contract#> .
+@prefix conx-contact: <https://www.construct-x.org/ontology/contact#> .
 @prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
 @prefix conx-ct: <https://www.construct-x.org/vocab/construction-contract/contract-type#> .
 @prefix conx-crt: <https://www.construct-x.org/vocab/construction-contract/contractual-role#> .
@@ -70,6 +72,86 @@ ex:ms-arge-zueblin
     a conx-org:Membership ;
     conx-org:member ex:org-zueblin ;
     conx-org:membershipOrganization ex:jv-arge-porr-strabag-zueblin .
+
+# --- Adressen & Kontakte (Core-Ontologien) -------------------------------
+# hasAddressAssignment / hasContactPoint besitzen bewusst keine harte
+# Domain — hier angesetzt an die Referenzorganisationen (Agenten).
+
+ex:addr-db
+    a conx-addr:Address ;
+    conx-addr:streetName "Eisenbahnstraße" ;
+    conx-addr:houseNumber "1" ;
+    conx-addr:postalCode "10115" ;
+    conx-addr:localityName "Berlin" .
+
+ex:addr-arge
+    a conx-addr:Address ;
+    conx-addr:streetName "Industrieweg" ;
+    conx-addr:houseNumber "12" ;
+    conx-addr:postalCode "52064" ;
+    conx-addr:localityName "Aachen" .
+
+ex:addr-lindner
+    a conx-addr:Address ;
+    conx-addr:streetName "Bauhausstraße" ;
+    conx-addr:houseNumber "7" ;
+    conx-addr:postalCode "52068" ;
+    conx-addr:localityName "Aachen" .
+
+ex:addr-zeppelin
+    a conx-addr:Address ;
+    conx-addr:streetName "Maschinenring" ;
+    conx-addr:houseNumber "3" ;
+    conx-addr:postalCode "65183" ;
+    conx-addr:localityName "Wiesbaden" .
+
+ex:addr-asg-db
+    a conx-addr:AddressAssignment ;
+    conx-addr:assignedAddress ex:addr-db .
+
+ex:addr-asg-arge
+    a conx-addr:AddressAssignment ;
+    conx-addr:assignedAddress ex:addr-arge .
+
+ex:addr-asg-lindner
+    a conx-addr:AddressAssignment ;
+    conx-addr:assignedAddress ex:addr-lindner .
+
+ex:addr-asg-zeppelin
+    a conx-addr:AddressAssignment ;
+    conx-addr:assignedAddress ex:addr-zeppelin .
+
+ex:org-db                              conx-addr:hasAddressAssignment ex:addr-asg-db .
+ex:org-lindner                         conx-addr:hasAddressAssignment ex:addr-asg-lindner .
+ex:org-zeppelin                        conx-addr:hasAddressAssignment ex:addr-asg-zeppelin .
+ex:jv-arge-porr-strabag-zueblin        conx-addr:hasAddressAssignment ex:addr-asg-arge .
+
+ex:chan-email
+    a conx-contact:ContactChannel .
+
+ex:cp-arge-bauleitung
+    a conx-contact:ContactPoint ;
+    conx-contact:contactName "Bauleitung ARGE Brücke XY" ;
+    conx-contact:hasContactMethod ex:cm-arge-email .
+
+ex:cm-arge-email
+    a conx-contact:ContactMethod ;
+    conx-contact:contactChannel ex:chan-email ;
+    conx-contact:contactValue "bauleitung.bbrueckexy@arge.example.com" .
+
+ex:cp-db-projektleitung
+    a conx-contact:ContactPoint ;
+    conx-contact:contactName "Projektleitung" ;
+    conx-contact:departmentName "Infrastruktur" ;
+    conx-contact:hasContactMethod ex:cm-db-email .
+
+ex:cm-db-email
+    a conx-contact:ContactMethod ;
+    conx-contact:contactChannel ex:chan-email ;
+    conx-contact:contactValue "projektleitung.bbrueckexy@db.example.com" .
+
+ex:jv-arge-porr-strabag-zueblin        conx-contact:hasContactPoint ex:cp-arge-bauleitung .
+ex:org-db                              conx-contact:hasContactPoint ex:cp-db-projektleitung .
 
 ex:contract-c01
     a conx-con:Contract ;

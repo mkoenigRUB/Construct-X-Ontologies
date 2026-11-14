@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#PropertyState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="en">Represents the state of a property assignment with exactly one value and an optional unit.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Repräsentiert den konkreten Zustand einer Merkmalszuweisung mit genau einem Wert und einer optional verwendeten Einheit.</rdfs:comment>
+    <rdfs:label xml:lang="de">Merkmalszustand</rdfs:label>
+    <rdfs:label xml:lang="en">Property state</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/opm#PropertyState"/>
+    <rdfs:subClassOf rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb3"/>
+    <rdfs:subClassOf rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-06</dcterms:created>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-01</dcterms:modified>
+    <dcterms:description xml:lang="de">Definiert ein systemneutrales Referenzmodell für die Zuweisung von Merkmalsdefinitionen, die Abbildung ihrer Zustände und die Angabe der jeweils verwendeten Einheit.</dcterms:description>
+    <dcterms:description xml:lang="en">Defines a system-neutral reference model for assigning property definitions, representing their states, and specifying the unit used for each state.</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1"/>
+    <dcterms:title xml:lang="en">Construct-X Value Semantics Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X-Ontologie zur Wertsemantik</dcterms:title>
+    <vann:preferredNamespacePrefix>conx-vso</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/vso#</vann:preferredNamespaceUri>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/vso/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#AssignedProperty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Repräsentiert die Zuweisung einer Merkmalsdefinition und genau eines Merkmalszustands an ein Bezugsobjekt.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Represents the assignment of one property definition and exactly one property state to a resource.</rdfs:comment>
+    <rdfs:label xml:lang="en">Assigned property</rdfs:label>
+    <rdfs:label xml:lang="de">Zugewiesenes Merkmal</rdfs:label>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/opm#Property"/>
+    <rdfs:subClassOf rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb1"/>
+    <rdfs:subClassOf rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#hasPropertyState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a property assignment to its single property state.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Verknüpft eine Merkmalszuweisung mit ihrem einzigen Merkmalszustand.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/vso#AssignedProperty"/>
+    <rdfs:label xml:lang="en">has property state</rdfs:label>
+    <rdfs:label xml:lang="de">hat Merkmalszustand</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/vso#PropertyState"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="https://w3id.org/opm#hasPropertyState"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+    <owl:onProperty rdf:resource="https://www.construct-x.org/ontology/vso#hasPropertyReference"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#hasUsedUnit">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Gibt die Einheit an, in der der Wert eines konkreten Merkmalszustands angegeben ist.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Specifies the unit in which the value of a specific property state is expressed.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/vso#PropertyState"/>
+    <rdfs:label xml:lang="en">has used unit</rdfs:label>
+    <rdfs:label xml:lang="de">hat verwendete Einheit</rdfs:label>
+    <rdfs:range rdf:resource="http://qudt.org/schema/qudt/Unit"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb4">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+    <owl:onProperty rdf:resource="https://www.construct-x.org/ontology/vso#hasUsedUnit"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+    <owl:onProperty rdf:resource="https://www.construct-x.org/ontology/vso#hasPropertyState"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#hasPropertyReference">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a property assignment to a property definition from any property system.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Verknüpft eine Merkmalszuweisung mit genau einer Merkmalsdefinition aus einem beliebigen Property-System.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/vso#AssignedProperty"/>
+    <rdfs:label xml:lang="en">references property definition</rdfs:label>
+    <rdfs:label xml:lang="de">referenziert Merkmalsdefinition</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/vso#hasProperty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a feature of interest to a property assignment associated with it.</rdfs:comment>
+    <rdfs:comment xml:lang="de">Verknüpft ein Bezugsobjekt mit einer ihm eindeutig zugeordneten Merkmalszuweisung.</rdfs:comment>
+    <rdfs:label xml:lang="en">has property assignment</rdfs:label>
+    <rdfs:label xml:lang="de">hat Merkmalszuweisung</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/vso#AssignedProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nbee3f5d8233c4de2b10a9e3ff7c5d0adb3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+    <owl:onProperty rdf:resource="https://schema.org/value"/>
+  </rdf:Description>
+</rdf:RDF>

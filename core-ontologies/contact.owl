@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:schema="https://schema.org/"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactChannel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Kontrollierter Typ eines Kommunikationskanals. Konkrete Kanaele werden im Contact-Channel-Referenzvokabular gepflegt.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Controlled type of a communication channel. Concrete channels are maintained in the Contact Channel reference vocabulary.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact channel</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktkanal</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactPurpose">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Bestimmt einen fachlichen Zweck eines Kontaktpunkts.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Specifies a business purpose of a contact point.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">contact purpose</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktzweck</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactPurpose"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactChannel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Bestimmt den Kommunikationskanal einer Kontaktmethode.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Specifies the communication channel of a contact method.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+    <rdfs:label xml:lang="en">contact channel</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktkanal</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactChannel"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#functionTitle">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Textuelle Funktion oder Rolle des Kontaktpunkts im Kommunikationskontext. Die Property modelliert keine Organisationsrolle.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Textual function or role of the contact point in the communication context. The property does not model an organizational role.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">function title</rdfs:label>
+    <rdfs:label xml:lang="de">Funktionsbezeichnung</rdfs:label>
+    <rdfs:range rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#availableLanguage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Sprache, in der ein Kontaktpunkt verwendet werden kann. BCP-47-Sprachcodes werden fachlich empfohlen.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Language in which a contact point can be used. BCP 47 language tags are recommended.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">available language</rdfs:label>
+    <rdfs:label xml:lang="de">verfuegbare Sprache</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/availableLanguage"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactMethod">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Einzelner Kommunikationsweg innerhalb eines Kontaktpunkts. Eine Kontaktmethode besitzt genau einen Kanal und den zugehoerigen Wert, die URI oder die Adresszuordnung.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Single communication path within a contact point. A contact method has exactly one channel and the corresponding value, URI, or address assignment.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact method</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktmethode</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Anzeige- oder Funktionsname eines Kontaktpunkts, etwa Wareneingang, Bauleitung oder Rechnungsstelle.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Display or functional name of a contact point, such as goods receipt, site management, or billing office.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">contact name</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktname</rdfs:label>
+    <rdfs:range rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactValue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Textueller Wert einer Kontaktmethode, etwa eine E-Mail-Adresse, Telefonnummer oder ein Messenger-Handle.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Textual value of a contact method, such as an email address, phone number, or messenger handle.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+    <rdfs:label xml:lang="en">contact value</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktwert</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/2006/vcard/ns#hasEmail"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/2006/vcard/ns#hasTelephone"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dcterms:bibliographicCitation xml:lang="en">Construct-X Contact Ontology, version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:bibliographicCitation xml:lang="de">Construct-X Kontaktontologie, Version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:contributor xml:lang="de">Construction-X Arbeitspaket 3.4</dcterms:contributor>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-27</dcterms:created>
+    <dcterms:creator rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b1"/>
+    <dcterms:description xml:lang="de">Definiert ein wiederverwendbares Modell fuer Kontaktpunkte, Kontaktmethoden, Kommunikationskanaele, Nutzungskontexte, Zwecke und Plattformen im Construction-X-Ontologienetzwerk.</dcterms:description>
+    <dcterms:description xml:lang="en">Defines a reusable model for contact points, contact methods, communication channels, usage contexts, purposes, and platforms in the Construction-X ontology network.</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-27</dcterms:modified>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1"/>
+    <dcterms:source rdf:resource="https://docs.oasis-open.org/ubl/cs01-UBL-2.5/xsd/common/UBL-CommonAggregateComponents-2.5.xsd"/>
+    <dcterms:source rdf:resource="https://schema.org/ContactPoint"/>
+    <dcterms:source rdf:resource="https://www.w3.org/TR/vcard-rdf/"/>
+    <dcterms:title xml:lang="en">Construct-X Contact Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X Kontaktontologie</dcterms:title>
+    <vann:preferredNamespacePrefix>conx-contact</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/contact#</vann:preferredNamespaceUri>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/contact/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#hasContactPoint">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknuepft einen Kontakttraeger mit einem Kontaktpunkt. Die Property besitzt bewusst keine harte RDFS-Domain, damit sie auch fuer spaetere nicht-agentische Kontakttraeger verwendet werden kann.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a contact carrier to a contact point. The property deliberately has no hard RDFS domain so it can also be used for future non-agent contact carriers.</rdfs:comment>
+    <rdfs:label xml:lang="en">has contact point</rdfs:label>
+    <rdfs:label xml:lang="de">hat Kontaktpunkt</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/contact#isContactPointFor"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/contactPoint"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactURI">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknuepft eine Kontaktmethode mit einer URI, etwa einer Website oder einem Social Profile.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a contact method to a URI, such as a website or social profile.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+    <rdfs:label xml:lang="en">contact URI</rdfs:label>
+    <rdfs:label xml:lang="de">Kontakt-URI</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/2006/vcard/ns#hasURL"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactPoint">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Kontaktblock, ueber den eine Ressource in einem bestimmten Nutzungskontext und fuer bestimmte Zwecke erreichbar ist.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Contact block through which a resource is reachable in a specific usage context and for specific purposes.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact point</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktpunkt</rdfs:label>
+    <rdfs:seeAlso rdf:resource="https://schema.org/ContactPoint"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b8">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactUsage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Kontrollierter Nutzungskontext eines Kontaktpunkts, etwa privat, geschaeftlich oder offiziell.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Controlled usage context of a contact point, such as private, business, or official.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact usage</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktnutzung</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b7">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b9">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b10"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactPlatform">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Bestimmt die Plattform einer Social-, Messenger- oder Webkontaktmethode.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Specifies the platform of a social, messenger, or web contact method.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+    <rdfs:label xml:lang="en">contact platform</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktplattform</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactPlatform"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b12">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b13"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactPurpose">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Kontrollierter fachlicher Zweck eines Kontaktpunkts, etwa allgemein, Lieferung, Rechnung, Support oder Notfall.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Controlled business purpose of a contact point, such as general, delivery, billing, support, or emergency.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact purpose</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktzweck</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b10">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b11"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#hasContactMethod">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknuepft einen Kontaktpunkt mit einer konkreten Kontaktmethode.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a contact point to a concrete contact method.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">has contact method</rdfs:label>
+    <rdfs:label xml:lang="de">hat Kontaktmethode</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#usesAddressAssignment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknuepft eine postalische Kontaktmethode mit einer bestehenden Construct-X-Adresszuordnung. Der direkte Verweis auf eine Adresse ist im Kontakt-MVP nicht vorgesehen.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a postal contact method to an existing Construct-X address assignment. A direct link to an address is not part of the contact MVP.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactMethod"/>
+    <rdfs:label xml:lang="en">uses address assignment</rdfs:label>
+    <rdfs:label xml:lang="de">verwendet Adresszuordnung</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/address#AddressAssignment"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#departmentName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Textuelle Abteilungsangabe fuer einen Kontaktpunkt. Die Property modelliert keine Organisationshierarchie.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Textual department statement for a contact point. The property does not model an organization hierarchy.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">department name</rdfs:label>
+    <rdfs:label xml:lang="de">Abteilungsname</rdfs:label>
+    <rdfs:range rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#isContactPointFor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Optionale inverse Navigationsbeziehung von einem Kontaktpunkt zu einem Kontakttraeger.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Optional inverse navigation relationship from a contact point to a contact carrier.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">is contact point for</rdfs:label>
+    <rdfs:label xml:lang="de">ist Kontaktpunkt fuer</rdfs:label>
+    <owl:inverseOf rdf:resource="https://www.construct-x.org/ontology/contact#hasContactPoint"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#contactUsage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Bestimmt den Nutzungskontext eines Kontaktpunkts.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Specifies the usage context of a contact point.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">contact usage</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktnutzung</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/contact#ContactUsage"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b13">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b14"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b1">
+    <rdf:type rdf:resource="https://schema.org/Person"/>
+    <schema:email rdf:resource="mailto:sven.zentgraf@rub.de"/>
+    <schema:identifier rdf:resource="https://orcid.org/0000-0001-6058-7614"/>
+    <schema:memberOf rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b2"/>
+    <schema:name>Sven Zentgraf</schema:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#availabilityNote">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Freitext zur Erreichbarkeit eines Kontaktpunkts.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Free-text note about the availability of a contact point.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/contact#ContactPoint"/>
+    <rdfs:label xml:lang="en">availability note</rdfs:label>
+    <rdfs:label xml:lang="de">Erreichbarkeitshinweis</rdfs:label>
+    <rdfs:range rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b12"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b11">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b14">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/contact#ContactPlatform">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Kontrollierte Plattform oder Dienst, auf dem eine Social-, Messenger- oder Webkontaktmethode erreichbar ist.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Controlled platform or service on which a social, messenger, or web contact method is reachable.</rdfs:comment>
+    <rdfs:label xml:lang="en">Contact platform</rdfs:label>
+    <rdfs:label xml:lang="de">Kontaktplattform</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b6">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b4">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b5"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b5">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b3">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n93e0e9306f6345888f71c5eaf79e34a0b2">
+    <schema:identifier rdf:resource="https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en"/>
+    <schema:name>Ruhr University Bochum</schema:name>
+  </rdf:Description>
+</rdf:RDF>

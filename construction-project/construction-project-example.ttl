@@ -1,4 +1,6 @@
 @prefix conx-agent: <https://www.construct-x.org/ontology/agent#> .
+@prefix conx-addr: <https://www.construct-x.org/ontology/address#> .
+@prefix conx-contact: <https://www.construct-x.org/ontology/contact#> .
 @prefix conx-org: <https://www.construct-x.org/ontology/organization#> .
 @prefix conx-proj: <https://www.construct-x.org/ontology/construction-project#> .
 @prefix conx-pt: <https://www.construct-x.org/vocab/construction-project/project-type#> .
@@ -29,6 +31,40 @@ ex:org-zueblin
 ex:org-zeppelin
     a conx-org:LegalEntity ;
     conx-org:name "Zeppelin Baumaschinen GmbH" .
+
+# --- Adresse & Kontakt (Core-Ontologien) ---------------------------------
+# hasAddressAssignment / hasContactPoint besitzen bewusst keine harte
+# Domain — hier angesetzt an das Projekt (Baustellenadresse) bzw. an die
+# Generalunternehmung (Ansprechpartner).
+
+ex:addr-campus-v1
+    a conx-addr:Address ;
+    conx-addr:streetName "Universitätsstraße" ;
+    conx-addr:houseNumber "150" ;
+    conx-addr:buildingName "Gebäude V1" ;
+    conx-addr:postalCode "44780" ;
+    conx-addr:localityName "Bochum" .
+
+ex:addr-asg-site
+    a conx-addr:AddressAssignment ;
+    conx-addr:assignedAddress ex:addr-campus-v1 ;
+    conx-addr:attentionOf "Bauverwaltung Doppelboden 5. OG" .
+
+ex:project-alpha
+    conx-addr:hasAddressAssignment ex:addr-asg-site .
+
+ex:cp-lindner-bauleitung
+    a conx-contact:ContactPoint ;
+    conx-contact:contactName "Bauleitung Lindner AG" ;
+    conx-contact:functionTitle "Projektleitung" ;
+    conx-contact:hasContactMethod ex:cm-lindner-phone .
+
+ex:cm-lindner-phone
+    a conx-contact:ContactMethod ;
+    conx-contact:contactValue "+49 241 000 123" .
+
+ex:org-lindner
+    conx-contact:hasContactPoint ex:cp-lindner-bauleitung .
 
 ex:project-alpha
     a conx-proj:Project ;

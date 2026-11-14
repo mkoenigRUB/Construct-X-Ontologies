@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:schema="https://schema.org/"
+   xmlns:vann="http://purl.org/vocab/vann/"
+>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b4">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#citizenship">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknüpft eine Person mit einem Staat, dessen Staatsangehörigkeit sie besitzt.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a person to a state of which they are a citizen.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">citizenship</rdfs:label>
+    <rdfs:label xml:lang="de">Staatsangehörigkeit</rdfs:label>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/address#Country"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#citizenship"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/nationality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#birthName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Vollständiger Name, der für die Person bei der Geburt geführt wurde.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Full name held for the person at birth.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">birth name</rdfs:label>
+    <rdfs:label xml:lang="de">Geburtsname</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b15"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#birthName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#Person">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="de">Eine reale natürliche Person, unabhängig davon, ob sie lebt oder verstorben ist. Organisationen, Softwaredienste, Rollen und fiktive Personen sind ausgeschlossen.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A real natural person, whether living or deceased. Organizations, software services, roles, and fictional persons are excluded.</rdfs:comment>
+    <rdfs:label xml:lang="de">Person</rdfs:label>
+    <rdfs:label xml:lang="en">Person</rdfs:label>
+    <rdfs:subClassOf rdf:resource="https://www.construct-x.org/ontology/agent#Agent"/>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/person#Person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#fullName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Vollständiger, direkt ausgebbarer Name einer Person in einer gewünschten Schreibweise.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Complete display name of a person in a chosen form of writing.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">full name</rdfs:label>
+    <rdfs:label xml:lang="de">vollständiger Name</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b3"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#fullName"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/name"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#givenName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Primärer Vorname oder die als primäre Vornamen geführte Namensfolge einer Person.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Primary given name or sequence of names treated as the person's primary given names.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">given name</rdfs:label>
+    <rdfs:label xml:lang="de">Vorname</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b6"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#givenName"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/givenName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#birthPlaceName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Textuelle Bezeichnung des Geburtsortes einer Person.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Textual designation of the place where a person was born.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">birth place name</rdfs:label>
+    <rdfs:label xml:lang="de">Geburtsortbezeichnung</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b18"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b2">
+    <schema:identifier rdf:resource="https://www.inf.bi.ruhr-uni-bochum.de/iib/lehrstuhl/mitarbeiter/sven_zentgraf.html.en"/>
+    <schema:name>Ruhr University Bochum</schema:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <dcterms:bibliographicCitation xml:lang="en">Construct-X Person Ontology, version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:bibliographicCitation xml:lang="de">Construct-X Personenontologie, Version 0.1.0</dcterms:bibliographicCitation>
+    <dcterms:contributor xml:lang="de">Construction-X Arbeitspaket 3.4</dcterms:contributor>
+    <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-25</dcterms:created>
+    <dcterms:creator rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b1"/>
+    <dcterms:description xml:lang="de">Definiert den fachlichen Kern für reale natürliche Personen, ihre Namen, Geburtsdaten, Geschlechtsangaben, Staatsangehörigkeiten und Verweise auf Identitätsnachweise im Construction-X-Ontologienetzwerk.</dcterms:description>
+    <dcterms:description xml:lang="en">Defines the domain core for real natural persons, their names, birth data, sex and gender information, citizenships, and links to identity evidence in the Construction-X ontology network.</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-08-25</dcterms:modified>
+    <dcterms:publisher rdf:resource="https://www.construct-x.org/id/organization/ecbe8336-94ab-5c11-8220-94f260963eb2/revision/1"/>
+    <dcterms:source rdf:resource="http://www.w3.org/ns/person"/>
+    <dcterms:source rdf:resource="https://docs.oasis-open.org/ubl/cs01-UBL-2.5/xsd/common/UBL-CommonAggregateComponents-2.5.xsd"/>
+    <dcterms:source rdf:resource="https://schema.org/Person"/>
+    <dcterms:source rdf:resource="https://www.w3.org/TR/vcard-rdf/"/>
+    <dcterms:title xml:lang="en">Construct-X Person Ontology</dcterms:title>
+    <dcterms:title xml:lang="de">Construct-X Personenontologie</dcterms:title>
+    <vann:preferredNamespacePrefix>conx-person</vann:preferredNamespacePrefix>
+    <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/person#</vann:preferredNamespaceUri>
+    <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/person/0.1.0"/>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b7">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b8">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#sex">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknüpft eine Person mit einer für den Informationsaustausch geführten Klassifikation des menschlichen Geschlechts. Die freigegebenen Werte werden im Human-Sex-Referenzvokabular gepflegt.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a person to a human-sex classification used for information interchange. Approved values are maintained in the Human Sex reference vocabulary.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">sex</rdfs:label>
+    <rdfs:label xml:lang="de">menschliches Geschlecht</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#sex"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b19">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b20"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#gender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknüpft eine Person mit einer Angabe zu ihrer Geschlechtsidentität oder sozialen beziehungsweise rechtlichen Einordnung im Anwendungskontext. Die freigegebenen Werte werden im Gender-Referenzvokabular gepflegt.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a person to information about their gender identity or social or legal classification in the application context. Approved values are maintained in the Gender reference vocabulary.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">gender</rdfs:label>
+    <rdfs:label xml:lang="de">Gender</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#gender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b5">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b10">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b11"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#birthDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Vollständiges Kalenderdatum der Geburt einer Person.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Complete calendar date on which a person was born.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">birth date</rdfs:label>
+    <rdfs:label xml:lang="de">Geburtsdatum</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#dateOfBirth"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/birthDate"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b17">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#additionalName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Weiterer Vorname, Zweitname oder zusätzliche Vornamenskomponente einer Person.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Additional given name, middle name, or further given-name component of a person.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">additional name</rdfs:label>
+    <rdfs:label xml:lang="de">weiterer Vorname</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b12"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/additionalName"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b6">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b1">
+    <rdf:type rdf:resource="https://schema.org/Person"/>
+    <schema:email rdf:resource="mailto:sven.zentgraf@rub.de"/>
+    <schema:identifier rdf:resource="https://orcid.org/0000-0001-6058-7614"/>
+    <schema:memberOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b2"/>
+    <schema:name>Sven Zentgraf</schema:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#familyName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="de">Familien- oder Nachname einer Person.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Family name or surname of a person.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">family name</rdfs:label>
+    <rdfs:label xml:lang="de">Familienname</rdfs:label>
+    <rdfs:range rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b9"/>
+    <rdfs:seeAlso rdf:resource="http://www.w3.org/ns/person#familyName"/>
+    <rdfs:seeAlso rdf:resource="https://schema.org/familyName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/person#hasIdentityEvidence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="de">Verknüpft eine Person mit einer externen Ressource, die Aussagen zu ihrer Identität belegt oder überprüfbar macht. Die Property behauptet weder Gültigkeit noch Vertrauenswürdigkeit oder kryptografische Verifikation des Nachweises.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a person to an external resource that provides or enables verification of evidence about their identity. The property asserts neither validity, trustworthiness, nor cryptographic verification of the evidence.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/person#Person"/>
+    <rdfs:label xml:lang="en">has identity evidence</rdfs:label>
+    <rdfs:label xml:lang="de">hat Identitätsnachweis</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b9">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b10"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b15">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b16"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b3">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b14">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b20">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b12">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b13"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b11">
+    <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b16">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b17"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b13">
+    <rdf:first rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:rest rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b14"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b18">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+    <owl:unionOf rdf:nodeID="n53980a6200b7426aa21dfb41c3af6de9b19"/>
+  </rdf:Description>
+</rdf:RDF>

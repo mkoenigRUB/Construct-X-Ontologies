@@ -39,7 +39,7 @@ neu angelegt werden. Sciebo synchronisiert `D:\Sciebo\…` (bzw. den jeweiligen 
   `examples/construct-x-icdd-beispiele/` (2 ICDD-Container, ISO 21597: Baufortschritt +
   Doppelboden; der Doppelboden-Container wurde auf die aktuelle notification-content 0.1.1
   synchronisiert).
-- **112 TTL-Dateien + 51 RDF/XML-Mirrors parse-frei; SHACL 15/15 Runs conform, 0 Violations;
+- **112 TTL-Dateien + 59 RDF/XML-Mirrors parse-frei; SHACL 15/15 Runs conform, 0 Violations;
   10 Negativtests verstoßen korrekt; MANIFEST ↔ `versionInfo` konsistent (62 Einträge);
   keine neuen Präfix-Kollisionen** (bekannt: `dct`/`dcterms`-Kollision auf `http://purl.org/dc/terms/`,
   vorbestehend, außerhalb des Construct-X-Namenraums).
@@ -112,7 +112,7 @@ Repo unter `scripts/`** und laufen **aus dem Repo-Root** mit dem `.venv`-Python.
 ```powershell
 # aus dem Repo-Root; .venv muss existieren (s. §2)
 $py = ".venv\Scripts\python.exe"
-& $py scripts\verify_parse.py      # -> TTL 112 / OWL 51, keine Errors, 51 isomorphe Paare
+& $py scripts\verify_parse.py      # -> TTL 112 / OWL 59, keine Errors, 59 isomorphe Paare
 & $py scripts\verify_neg.py        # -> NEG TESTS: 10, FAIL: 0
 & $py scripts\verify_shacl.py      # -> RUNS: 15, FAIL: 0 (alle CONFORM, 0 viol)
 & $py scripts\verify_manifest.py   # -> TOTAL 62, MISSING 0, version mismatches 0
@@ -237,8 +237,8 @@ Class-Dateien aus `target/` mitbenutzt).
 | Datei | Inhalt |
 |---|---|
 | `README.md` | Repo-Überblick, Modulstand (inkl. Extension + 8 Core-Ontologien + 2 Draft-Module), JSON-LD- + SDK-Passus, 2026-11-11/12/14-Integration |
-| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-15-Runs, ICDD- + Jena-Abschnitt, Notes 19–39 (36 = nc-SPARQL-Fix, 37 = HTML-Sync, 38 = Einzelvertragssicht, 39 = Core-Ontologien) |
-| `AUDIT.md` | Audit-Items; 41–45 = JSON-LD-Kontext, 46–48 = SDK, 49–56 (2026-11-06) = cxcp + ICDD, 57 = Converter, 58–61 (2026-11-11) = Project/Contract-Drafts, 62–63 (2026-11-12) = nc-SPARQL-Fix + HTML-Sync, 64 (2026-11-14) = Einzelvertragssicht, **65 (2026-11-14) = Core-Ontologien + member-Ranges** |
+| `VALIDATION.md` | vollständiger Validierungsbericht; SHACL-15-Runs, ICDD- + Jena-Abschnitt, Notes 19–40 (36 = nc-SPARQL-Fix, 37 = HTML-Sync, 38 = Einzelvertragssicht, 39 = Core-Ontologien, 40 = Core-OWL-Mirrors + Beispiel-Anreicherung) |
+| `AUDIT.md` | Audit-Items; 41–45 = JSON-LD-Kontext, 46–48 = SDK, 49–56 (2026-11-06) = cxcp + ICDD, 57 = Converter, 58–61 (2026-11-11) = Project/Contract-Drafts, 62–63 (2026-11-12) = nc-SPARQL-Fix + HTML-Sync, 64 (2026-11-14) = Einzelvertragssicht, **65–66 (2026-11-14) = Core-Ontologien + member-Ranges, Core-OWls + Beispiel-Anreicherung** |
 | `MANIFEST.json` | zentrales Register (**62 Einträge**: 10 Domänen + 8 Core + 10 Link + 31 Vokabulare + `json_ld_context` + `sdk` + `extensions`) |
 | `scripts/` | **Verifikationsskripte (rechnerunabhängig, 2026-11-14):** `verify_parse.py`, `verify_neg.py`, `verify_shacl.py`, `verify_manifest.py` + `README.md` mit Setup, Befehlen, erwartetem Output, Negativtest-Referenz A–J |
 | `core-ontologies/` | **8 Core-Ontologien (2026-11-14):** agent/person/organization/address/participation (0.2.0)/contact/document/vso (0.1.0) — „übergeordnete Konzepte", keine Domänen (Linking Rule n/a); Referenzbasis der `member`-Ranges |
@@ -258,7 +258,7 @@ Class-Dateien aus `target/` mitbenutzt).
 ### Erst einmal ankommen (Checkliste)
 1. Repo per `git clone` bzw. Sciebo-Sync holen (Stand: Commit `8598f56`, `main`).
 2. Python-Venv anlegen: `python -m venv .venv` + `pip install "rdflib==7.6.0" "pySHACL==0.40.1"` (§2).
-3. **Smoke-Test:** die vier Skripte aus §3.1 ausführen — erwartet `TTL 112/OWL 51`, `NEG 10/FAIL 0`, `RUNS 15/FAIL 0`, `TOTAL 62/MISSING 0`. Damit ist die Umgebung reproduziert.
+3. **Smoke-Test:** die vier Skripte aus §3.1 ausführen — erwartet `TTL 112/OWL 59`, `NEG 10/FAIL 0`, `RUNS 15/FAIL 0`, `TOTAL 62/MISSING 0`. Damit ist die Umgebung reproduziert.
 4. Optional (nur für Jena/Converter): JDK 25 + Maven 3.9.9 in `%TEMP%\opencode\` entpacken (§2).
 
 ### Offene Fachaufgaben (nach Priorität)
