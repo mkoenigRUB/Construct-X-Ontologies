@@ -16,6 +16,7 @@
         <https://www.construct-x.org/ontology/construction-site/0.2.0> ,
         <https://www.construct-x.org/ontology/breakdown-structure/0.7.0> ;
     dcterms:title "Construct-X Site–Breakdown Link Ontology"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-22"^^xsd:date ;
     vann:preferredNamespacePrefix "conx-sbdl" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/site-breakdown-link#" .

@@ -19,6 +19,7 @@
     dcterms:title "Construct-X Built Asset–Breakdown Link Ontology"@en ;
     dcterms:title "Construct-X-Verknüpfungsontologie für Bauwerk und Gliederungsstrukturen"@de ;
     dcterms:description "Links intrinsic Built Asset structures to project-specific Location, System and Cost Breakdown Structures."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-22"^^xsd:date ;
     vann:preferredNamespacePrefix "conx-babl" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/built-asset-breakdown-link#" .

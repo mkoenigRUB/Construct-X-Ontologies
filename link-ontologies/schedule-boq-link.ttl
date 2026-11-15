@@ -17,6 +17,7 @@
     dcterms:title "Construct-X Schedule–BoQ Link Ontology"@en ;
     dcterms:title "Construct-X-Link-Ontologie zwischen Bauablauf und Leistungsverzeichnis"@de ;
     dcterms:description "Defines cross-domain relations between a Construction Schedule and Bills of Quantities, and between Quantity Splits and assigned Activities."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:modified "2026-10-21"^^xsd:date ;
     vann:preferredNamespacePrefix "conx-sbq" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/schedule-boq-link#" .

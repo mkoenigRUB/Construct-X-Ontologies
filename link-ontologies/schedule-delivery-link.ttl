@@ -16,6 +16,7 @@
         <https://www.construct-x.org/ontology/construction-schedule/0.5.0> ,
         <https://www.construct-x.org/ontology/construction-delivery/0.1.0> ;
     dcterms:title "Construct-X Schedule–Delivery Link Ontology"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-22"^^xsd:date ;
     vann:preferredNamespacePrefix "conx-sdl" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/schedule-delivery-link#" .

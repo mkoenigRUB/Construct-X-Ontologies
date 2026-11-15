@@ -14,6 +14,7 @@
     <owl:imports rdf:resource="https://www.construct-x.org/ontology/construction-delivery/0.1.0"/>
     <owl:imports rdf:resource="https://www.construct-x.org/ontology/construction-site/0.2.0"/>
     <dcterms:title xml:lang="en">Construct-X Delivery–Site Link Ontology</dcterms:title>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
     <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-10-22</dcterms:created>
     <vann:preferredNamespacePrefix>conx-dsl</vann:preferredNamespacePrefix>
     <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/delivery-site-link#</vann:preferredNamespaceUri>

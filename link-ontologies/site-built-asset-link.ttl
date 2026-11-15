@@ -18,6 +18,7 @@
     dcterms:title "Construct-X Site–Built Asset Link Ontology"@en ;
     dcterms:title "Construct-X-Verknüpfungsontologie für Baustelle und Bauwerk"@de ;
     dcterms:description "Links the temporary Construction Site production environment to the permanent Built Asset and its intrinsic spatial structure."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-22"^^xsd:date ;
     vann:preferredNamespacePrefix "conx-sbal" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/site-built-asset-link#" .

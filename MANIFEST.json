@@ -1,6 +1,6 @@
 {
   "package": "Construct-X ontologies draft",
-  "date": "2026-11-14",
+  "date": "2026-11-15",
   "domain_ontologies": {
     "construction-contract": "0.1.0",
     "construction-project": "0.1.0",

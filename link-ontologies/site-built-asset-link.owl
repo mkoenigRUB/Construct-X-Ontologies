@@ -16,16 +16,17 @@
     <dcterms:title xml:lang="en">Construct-X Site–Built Asset Link Ontology</dcterms:title>
     <dcterms:title xml:lang="de">Construct-X-Verknüpfungsontologie für Baustelle und Bauwerk</dcterms:title>
     <dcterms:description xml:lang="en">Links the temporary Construction Site production environment to the permanent Built Asset and its intrinsic spatial structure.</dcterms:description>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
     <dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-10-22</dcterms:created>
     <vann:preferredNamespacePrefix>conx-sbal</vann:preferredNamespacePrefix>
     <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/site-built-asset-link#</vann:preferredNamespaceUri>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#isLocatedInConstructionField">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#containsSiteArea">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/built-asset#BuiltAsset"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-site#ConstructionField"/>
-    <rdfs:label xml:lang="en">is located in construction field</rdfs:label>
-    <skos:altLabel xml:lang="de">liegt in Baufeld</skos:altLabel>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/built-asset#SpatialStructureElement"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-site#SiteArea"/>
+    <rdfs:label xml:lang="en">contains site area</rdfs:label>
+    <skos:altLabel xml:lang="de">enthält Baustellenfläche</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/site-built-asset-link"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#isLocatedInSpatialStructureElement">
@@ -38,12 +39,12 @@
     <rdfs:comment xml:lang="en">Associates a temporary operational Site Area with a permanent spatial structure element of the Built Asset, for example a work area located on a storey or in a tunnel section.</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/site-built-asset-link"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#containsSiteArea">
+  <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#isLocatedInConstructionField">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/built-asset#SpatialStructureElement"/>
-    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-site#SiteArea"/>
-    <rdfs:label xml:lang="en">contains site area</rdfs:label>
-    <skos:altLabel xml:lang="de">enthält Baustellenfläche</skos:altLabel>
+    <rdfs:domain rdf:resource="https://www.construct-x.org/ontology/built-asset#BuiltAsset"/>
+    <rdfs:range rdf:resource="https://www.construct-x.org/ontology/construction-site#ConstructionField"/>
+    <rdfs:label xml:lang="en">is located in construction field</rdfs:label>
+    <skos:altLabel xml:lang="de">liegt in Baufeld</skos:altLabel>
     <rdfs:isDefinedBy rdf:resource="https://www.construct-x.org/ontology/site-built-asset-link"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://www.construct-x.org/ontology/site-built-asset-link#containsBuiltAsset">
