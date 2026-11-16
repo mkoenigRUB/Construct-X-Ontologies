@@ -15,6 +15,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
     <dcterms:title xml:lang="de">Construct-X Vokabular für Objektrollen</dcterms:title>
     <dcterms:title xml:lang="en">Construct-X Subject Role Vocabulary</dcterms:title>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
     <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/notification-content/subject-role/0.1.0"/>
     <vann:preferredNamespacePrefix>conx-sr</vann:preferredNamespacePrefix>
     <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/notification-content/subject-role#</vann:preferredNamespaceUri>

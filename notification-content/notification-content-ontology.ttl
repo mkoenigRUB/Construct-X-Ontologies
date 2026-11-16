@@ -101,6 +101,7 @@ conx-nc:NotificationContent a owl:Class ;
         "Draft Construct-X business-content model for notifications. It deliberately excludes transport and routing metadata such as messageId, sender, receiver, timestamps and relatedMessageId; these remain in the external notification header (e.g. an Industry Core / Tractus-X message header)."@en ;
     dcterms:title "Construct-X Ontologie für Benachrichtigungsinhalte"@de,
         "Construct-X Notification Content Ontology"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:versionIRI <https://www.construct-x.org/ontology/notification-content/0.1.1> ;
     vann:preferredNamespacePrefix "conx-nc" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/ontology/notification-content#" ;

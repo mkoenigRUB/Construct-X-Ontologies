@@ -10,6 +10,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
     <dcterms:title xml:lang="de">Construct-X Vokabular für Aufgabentypen</dcterms:title>
     <dcterms:title xml:lang="en">Construct-X Task Type Vocabulary</dcterms:title>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
     <owl:versionIRI rdf:resource="https://www.construct-x.org/vocab/notification-content/task-type/0.1.0"/>
     <vann:preferredNamespacePrefix>conx-tt</vann:preferredNamespacePrefix>
     <vann:preferredNamespaceUri>https://www.construct-x.org/vocab/notification-content/task-type#</vann:preferredNamespaceUri>

@@ -7,6 +7,7 @@
 <https://www.construct-x.org/vocab/notification-content/subject-role> a owl:Ontology ;
     dcterms:title "Construct-X Vokabular für Objektrollen"@de,
         "Construct-X Subject Role Vocabulary"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:versionIRI <https://www.construct-x.org/vocab/notification-content/subject-role/0.1.0> ;
     vann:preferredNamespacePrefix "conx-sr" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/vocab/notification-content/subject-role#" ;

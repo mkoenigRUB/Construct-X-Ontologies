@@ -7,6 +7,7 @@
 <https://www.construct-x.org/vocab/notification-content/task-type> a owl:Ontology ;
     dcterms:title "Construct-X Vokabular für Aufgabentypen"@de,
         "Construct-X Task Type Vocabulary"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:versionIRI <https://www.construct-x.org/vocab/notification-content/task-type/0.1.0> ;
     vann:preferredNamespacePrefix "conx-tt" ;
     vann:preferredNamespaceUri "https://www.construct-x.org/vocab/notification-content/task-type#" ;

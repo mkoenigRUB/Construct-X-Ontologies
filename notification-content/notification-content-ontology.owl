@@ -13,6 +13,7 @@
     <dcterms:description xml:lang="en">Draft Construct-X business-content model for notifications. It deliberately excludes transport and routing metadata such as messageId, sender, receiver, timestamps and relatedMessageId; these remain in the external notification header (e.g. an Industry Core / Tractus-X message header).</dcterms:description>
     <dcterms:title xml:lang="de">Construct-X Ontologie für Benachrichtigungsinhalte</dcterms:title>
     <dcterms:title xml:lang="en">Construct-X Notification Content Ontology</dcterms:title>
+    <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
     <owl:versionIRI rdf:resource="https://www.construct-x.org/ontology/notification-content/0.1.1"/>
     <vann:preferredNamespacePrefix>conx-nc</vann:preferredNamespacePrefix>
     <vann:preferredNamespaceUri>https://www.construct-x.org/ontology/notification-content#</vann:preferredNamespaceUri>
